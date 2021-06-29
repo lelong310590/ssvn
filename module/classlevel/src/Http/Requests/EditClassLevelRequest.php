@@ -36,10 +36,10 @@ class EditClassLevelRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'name.required' => 'Tên lớp không được bỏ trống',
-			'slug.required' => 'Slug lớp không được bỏ trống',
+			'name.required' => 'Tên Công ty không được bỏ trống',
+			'slug.required' => 'Slug Công ty không được bỏ trống',
 			'slug.unique' => 'Slug này đã tồn tại',
-			'editor.required' => 'Người chỉnh sửa lớp không được bỏ trống'
+			'editor.required' => 'Người chỉnh sửa Công ty không được bỏ trống'
 		];
 	}
 }

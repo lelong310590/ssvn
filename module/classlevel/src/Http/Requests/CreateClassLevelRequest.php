@@ -35,10 +35,10 @@ class CreateClassLevelRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'name.required' => 'Tên lớp không được bỏ trống',
-			'slug.required' => 'Slug lớp không được bỏ trống',
-			'slug.unique' => 'Slug lớp đã được sử dụng',
-			'author.required' => 'Tác giả lớp không được bỏ trống'
+			'name.required' => 'Tên Công ty không được bỏ trống',
+			'slug.required' => 'Slug Công ty không được bỏ trống',
+			'slug.unique' => 'Slug Công ty đã được sử dụng',
+			'author.required' => 'Tác giả Công ty không được bỏ trống'
 		];
 	}
 }

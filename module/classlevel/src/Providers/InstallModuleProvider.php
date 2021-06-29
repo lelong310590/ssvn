@@ -32,23 +32,23 @@ class InstallModuleProvider extends ServiceProvider
 		$permission = [
 			[
 				'name' => 'classlevel_index',
-				'display_name' => 'Xem danh sách lớp',
-				'description' => 'Xem danh sách lớp'
+				'display_name' => 'Xem danh sách Công ty',
+				'description' => 'Xem danh sách Công ty'
 			],
 			[
 				'name' => 'classlevel_create',
-				'display_name' => 'Thêm lớp mới',
-				'description' => 'Thêm lớp mới'
+				'display_name' => 'Thêm Công ty mới',
+				'description' => 'Thêm Công ty mới'
 			],
 			[
 				'name' => 'classlevel_edit',
-				'display_name' => 'Sửa lớp',
-				'description' => 'Sửa lớp'
+				'display_name' => 'Sửa Công ty',
+				'description' => 'Sửa Công ty'
 			],
 			[
 				'name' => 'classlevel_delete',
-				'display_name' => 'Xóa lớp',
-				'description' => 'Xóa lớp'
+				'display_name' => 'Xóa Công ty',
+				'description' => 'Xóa Công ty'
 			]
 		];
 		

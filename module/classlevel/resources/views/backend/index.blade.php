@@ -26,8 +26,8 @@
         <div class="container">
             <div class="row  align-items-center justify-content-between">
                 <div class="col-11 col-sm-12 page-title">
-                    <h3><i class="fa fa-sitemap "></i> Lớp</h3>
-                    <p>Danh sách lớp</p>
+                    <h3><i class="fa fa-sitemap "></i> Công ty</h3>
+                    <p>Danh sách Công ty</p>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                     <form method="post" action="{{route('nqadmin::classlevel.create.post')}}">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Thêm lớp mới</h5>
+                                <h5 class="card-title">Thêm Công ty mới</h5>
                             </div>
                             {{csrf_field()}}
 
@@ -46,7 +46,7 @@
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label class="form-control-label">Tên lớp</label>
+                                    <label class="form-control-label">Tên Công ty</label>
                                     <input type="text"
                                            required
                                            parsley-trigger="change"
@@ -95,7 +95,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Thêm lớp mới</h5>
+                                <h5 class="card-title">Thêm Công ty mới</h5>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
@@ -145,7 +145,7 @@
                 <div class="col-sm-11">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Danh sách các lớp</h5>
+                            <h5 class="card-title">Danh sách các Công ty</h5>
                         </div>
                         <div class="card-body">
                             @if (count($errors) > 0)
@@ -161,7 +161,7 @@
                             <table class="table" id="dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>Tên lớp</th>
+                                    <th>Tên Công ty</th>
                                     <th>Slug</th>
                                     <th>Thuộc cấp</th>
                                     <th>Trạng thái</th>
