@@ -4,7 +4,7 @@ import * as api from './../api';
 import axios from 'axios';
 import QuizAdd from './quiz/QuizAdd';
 import TestAdd from './test/TestAdd';
-import {BASE_URL} from "../../const";
+import {BASE_URL} from "./../../const";
 
 class Control extends Component
 {
