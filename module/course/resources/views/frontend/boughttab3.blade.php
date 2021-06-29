@@ -116,7 +116,7 @@ use Users\Models\Users;
     <!--main-page-->
 @endsection
 @push('js')
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/4.9.11-104/tinymce.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/1mkudqklng9crolevl4317aes2au2e24j1zzu6z1oq8excw7/tinymce/4.9.11-104/tinymce.min.js"></script>
     <script>
         $('#filter_form input,select').change(function () {
             $("#filter_form").submit();

@@ -63,6 +63,6 @@
 	</div>
 	
 	<script src="{{asset('js/app.js')}}" type="text/javascript"></script>
-	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/4.9.11-104/tinymce.min.js"></script>
+	<script src="https://cdn.tiny.cloud/1/1mkudqklng9crolevl4317aes2au2e24j1zzu6z1oq8excw7/tinymce/4.9.11-104/tinymce.min.js"></script>
 </body>
 </html>

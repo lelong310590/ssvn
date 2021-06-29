@@ -9,7 +9,7 @@
     <script type="text/javascript" src="{{asset('adminux/vendor/moment/min/moment-with-locales.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('adminux/vendor/bootstrap4-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('adminux/vendor/bootstrap4-datetimepicker-master/build/js/init.js')}}"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/4.9.11-104/tinymce.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/1mkudqklng9crolevl4317aes2au2e24j1zzu6z1oq8excw7/tinymce/4.9.11-104/tinymce.min.js"></script>
     <script>
         $('#datetimepicker').datetimepicker({
             'sideBySide': true,
