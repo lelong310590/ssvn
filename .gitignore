@@ -3,7 +3,6 @@
 /public/upload
 /public/ffmpeg
 /public/filemanager
-/resources/assets/js/components/const.js
 /storage/*.key
 /vendor
 /.idea
