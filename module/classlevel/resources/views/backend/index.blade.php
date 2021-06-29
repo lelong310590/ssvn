@@ -163,7 +163,7 @@
                                 <tr>
                                     <th>Tên Công ty</th>
                                     <th>Slug</th>
-                                    <th>Thuộc cấp</th>
+{{--                                    <th>Thuộc cấp</th>--}}
                                     <th>Trạng thái</th>
                                     <th width="100">Thao tác</th>
                                 </tr>
@@ -178,7 +178,7 @@
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                         <td>{{ $d->name }}</td>
                                         <td class="center">{{ $d->slug }}</td>
-                                        <td class="center">{{$d->group}}</td>
+{{--                                        <td class="center">{{$d->group}}</td>--}}
                                         <td>
                                             <a href="{{route('nqadmin::classlevel.changeStatus.get', ['id' => $d->id])}}">
                                                 {!! conver_status($d->status) !!}
