@@ -1,0 +1,1 @@
+Xin chào {{ $user->first_name }}, Bạn đã thanh toán hóa đơn {{ $order->getOrderCode() }} trị giá {{ $order->total_price }}. Xin chờ xác nhận từ quản trị viên!

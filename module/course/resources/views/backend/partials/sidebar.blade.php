@@ -1,0 +1,10 @@
+@php
+	$actionRoute = \Route::current()->action['prefix'];
+	$check = explode('/', $actionRoute);
+	$check = end($check);
+@endphp
+
+<li class="nav-item">
+	<a href="{{route('nqadmin::course.setting.get')}}" class="nav-link"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Cấu hình Khóa đào tạo</a>
+</li>
+

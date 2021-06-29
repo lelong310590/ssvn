@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="box-title">
+        <h3 class="txt-title pull-left">{{ $title }}
+        </h3>
+        <a href="{{route('front.home.search', ['filter' => $type])}}" class="view-all pull-right">Xem tất cả</a>
+    </div>
+    <div class="list-course">
+        <div class="row">
+            @foreach($datas as $item)
+                <div class="main-course col-xs-6 col-md-2">
+                    <div class="course">
+                        <div class="img">
+                            <a href="{{ route('front.course.buy.get',['slug'=>$item->slug]) }}">
+                                <img src="{{ asset($item->getThumbnail()) }}" alt="" width="" height="">
+                            </a>
+                            <input type="hidden" id="" value="{{ $item->id }}">
+                            <a href="{{ route('front.course.buy.get',['slug'=>$item->slug]) }}" class="view-fast"><i class="fal fa-eye"></i></a>
+                        </div>
+                        <div class="content">
+                            <h4 class="txt"><a href="{{ route('front.course.buy.get',['slug'=>$item->slug]) }}">{{ $item->name }} </a></h4>
+                            <div class="box-star">
+                                <div class="pull-left">
+                                    <ul class="clearfix">
+                                        @for($i=1; $i <= 5; $i++)
+                                            @if($i<=$item->getAverageRating())
+                                                <li class="pull-left"><i class="fas fa-star"></i></li>
+                                            @endif
+                                            @if($i>$item->getAverageRating())
+                                                @if($i-$item->getAverageRating()==0.5)
+                                                    <li class="pull-left"><i class="fas fa-star-half"></i></li>
+                                                @else
+                                                    <li class="pull-left"><i class="far fa-star"></i></li>
+                                                @endif
+                                            @endif
+                                        @endfor
+                                    </ul>
+                                </div>
+                                @if(!isset($small_star))
+                                    <div class="overflow">
+                                        <p>{{ $item->getAverageRating() }} <span>({{ number_format($item->getRating->count()) }})</span></p>
+                                    </div>
+                                @endif
+                            </div>
+                            <!--box-star-->
+                            <div class="clearfix">
+                                @if($item->checkSaleAvailable())
+                                    <div class="pull-left">
+                                        <p class="price old">{{ number_format($item->getOriginal('price')) }} VNĐ</p>
+                                    </div>
+                                @endif
+                                <div class="pull-right">
+                                    <p class="price text-right">
+                                        @if($item->price==0)
+                                            <span>Miễn phí</span>
+                                        @else
+                                            <span>{{ number_format($item->price) }} </span>VNĐ
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>

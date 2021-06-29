@@ -1,0 +1,45 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "axios": "^0.17.1",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.23.0",
+        "babel-preset-stage-2": "^6.24.1",
+        "bootstrap-sass": "^3.3.7",
+        "cross-env": "^5.2.0",
+        "jquery": "^3.3.1",
+        "lodash": "^4.17.10",
+        "react": "^15.6.2",
+        "react-dom": "^15.6.2"
+    },
+    "dependencies": {
+        "@tinymce/tinymce-react": "^2.2.5",
+        "chart.js": "^1.1.1",
+        "laravel-mix": "^2.1.14",
+        "moment": "^2.22.2",
+        "react-aux": "^1.1.0",
+        "react-bootstrap": "^0.32.1",
+        "react-chartjs": "^1.2.0",
+        "react-fileupload-progress": "^0.4.1",
+        "react-owl-carousel": "^2.3.1",
+        "react-player": "^1.6.2",
+        "react-rating": "^1.2.1",
+        "react-raw-html": "^0.4.0",
+        "react-router-dom": "^4.2.2",
+        "react-sortable-hoc": "^0.6.8",
+        "react-tinymce": "^0.7.0",
+        "react-toggle-button": "^2.2.0",
+        "video.js": "^7.0.5",
+        "videojs-contrib-hls": "^5.14.1"
+    }
+}

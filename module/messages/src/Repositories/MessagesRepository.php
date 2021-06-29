@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Admin
+ * Date: 7/12/2018
+ * Time: 11:42 AM
+ */
+
+namespace Messages\Repositories;
+
+use Messages\Models\Messages;
+use Prettus\Repository\Eloquent\BaseRepository;
+
+class MessagesRepository extends BaseRepository
+{
+    public function model()
+    {
+        // TODO: Implement model() method.
+        return Messages::class;
+    }
+}

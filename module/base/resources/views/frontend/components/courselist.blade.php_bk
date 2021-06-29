@@ -1,0 +1,46 @@
+<div class="box-slide box-course box-most-viewed box-custom-course">
+    @include('nqadmin-dashboard::frontend.components.course_list_slide',['datas'=>$topAll,'title'=>'Top các Khóa đào tạobán chạy nhất', 'type' => 'mostview'])
+    <?php if(count($topAll) > 3):?>
+    <a href="javascript:void(0)" class="btn btn-default-yellow">Xem thêm</a>
+    <?php endif;?>
+</div>
+
+@if (!empty($top4))
+    <div class="box-slide box-course box-most-viewed box-custom-course">
+        @include('nqadmin-dashboard::frontend.components.course_list_slide',['datas'=>$top4,'title'=>'Top các khóa trắc nghiệm môn toán', 'type' => 'level4'])
+        <?php if(count($top4) > 3):?>
+        <a href="javascript:void(0)" class="btn btn-default-yellow">Xem thêm</a>
+        <?php endif;?>
+    </div>
+    <!--box-most-viewed-checkbox-->
+@endif
+
+<!--box-most-viewed-courses-->
+<?php if(count($top1) > 0):?>
+<div class="box-slide box-course box-secondary-school box-custom-course">
+    @include('nqadmin-dashboard::frontend.components.course_list_slide',['datas'=>$top1,'title'=>'Top các khóa trắc nghiệm môn lý', 'type' => 'level1'])
+    <?php if(count($top1) > 3):?>
+    <a href="javascript:void(0)" class="btn btn-default-yellow">Xem thêm</a>
+    <?php endif;?>
+</div>
+<?php endif;?>
+<!--box-secondary-school-->
+<?php if(count($top2) > 0):?>
+<div class="box-slide box-course box-high-school box-custom-course">
+    @include('nqadmin-dashboard::frontend.components.course_list_slide',['datas'=>$top2,'title'=>'Top các khóa trắc nghiệm môn hóa', 'type' => 'level2'])
+    <?php if(count($top2) > 3):?>
+    <a href="javascript:void(0)" class="btn btn-default-yellow">Xem thêm</a>
+    <?php endif;?>
+</div>
+<?php endif;?>
+<!--box-high-school-->
+<?php if(count($top3) > 0):?>
+<div class="box-slide box-course box-primary-school box-custom-course">
+    @include('nqadmin-dashboard::frontend.components.course_list_slide',['datas'=>$top3,'title'=>'Top các khóa trắc nghiệm môn tiếng Anh', 'type' => 'level3'])
+    <?php if(count($top3) > 3):?>
+    <a href="javascript:void(0)" class="btn btn-default-yellow">Xem thêm</a>
+    <?php endif;?>
+</div>
+<?php endif;?>
+<!--box-primary-school-->
+

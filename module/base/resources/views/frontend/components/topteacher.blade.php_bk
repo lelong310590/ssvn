@@ -1,0 +1,64 @@
+@if(count($topTeachers)>0)
+    <div class="box-teacher-top">
+        <div class="container">
+            <div class="box-title">
+                <h3 class="txt-title">Top các giáo viên có Khóa đào tạobán chạy nhất</h3>
+            </div>
+            <div class="list-teacher row">
+                @foreach($topTeachers as $teacher)
+                    <div class="main-teacher col-xs-6">
+                        <a href="{{ route('front.users.profile.get',['code'=>$teacher->getDataByKey('code_user')]) }}" class="img pull-left img-circle">
+                            @if (!empty($teacher->thumbnail))
+                                <img src="{{ asset($teacher->thumbnail) }}" alt="">
+                            @else
+                                <div class="img-user-by-name">{{ substr($teacher->first_name, 0, 1) }}</div>
+                            @endif
+                        </a>
+                        <div class="detail overflow">
+                            <div class="info">
+                                <h4 class="txt"><a href="{{ route('front.users.profile.get',['code'=>$teacher->getDataByKey('code_user')]) }}">{{ $teacher->first_name }}</a></h4>
+                                <div class="content" style="max-height: 55px; overflow: hidden; margin-bottom: 10px">
+                                    {!! nl2br(e($teacher->getDataByKey('description'))) !!}
+                                </div>
+                                <div class="result">
+                                    <ul class="clearfix">
+                                        <li class="pull-left">
+                                            <span class="pull-left number">{{number_format($teacher->getTotalStudent())}}</span>
+                                            <span class="pull-left text">Học sinh</span>
+                                        </li>
+                                        <li class="pull-left">
+                                            <span class="pull-left number">
+                                                {{$teacher->course()->where('status', 'active')->count()}}
+                                            </span>
+                                            <span class="pull-left text">Khóa đào tạo</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @php
+                                    $website = $teacher->getDataByKey('website');
+                                    $facebook = $teacher->getDataByKey('facebook');
+                                    $youtube = $teacher->getDataByKey('youtube');
+                                @endphp
+                                <ul class="clearfix list-share">
+                                    @if (!empty($website))
+                                        <li class="pull-left"><a href="{{$website}}" target="_blank"><img src="{{ asset('frontend/images/icons/world-map-global-earth-icon.svg') }}" alt="" width="" height=""></a></li>
+                                    @endif
+
+                                    @if (!empty($facebook))
+                                        <li class="pull-left"><a href="{{$facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    @endif
+
+                                    @if (!empty($youtube))
+                                        <li class="pull-left"><a href="{{$youtube}}" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                            <a href="{{ route('front.users.profile.get',['code'=>$teacher->getDataByKey('code_user')]) }}" class="btn-white">Chi tiết</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+@endif
+<!--box-teacher-top-->

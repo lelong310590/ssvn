@@ -1,0 +1,1 @@
+<a href="{{ route('front.message.create.get') }}" class="btn btn-default-yellow">Soạn tin nhắn</a>

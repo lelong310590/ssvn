@@ -1,0 +1,106 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0",
+        "bacon/bacon-qr-code": "^1.0",
+        "barryvdh/laravel-cors": "^0.11.0",
+        "barryvdh/laravel-ide-helper": "^2.4",
+        "doctrine/dbal": "^2.8",
+        "fideloper/proxy": "~3.3",
+        "gloudemans/shoppingcart": "^2.5",
+        "guzzlehttp/guzzle": "^6.3",
+        "intervention/image": "^2.4",
+        "jenssegers/agent": "^2.6",
+        "laravel/framework": "5.5.*",
+        "laravel/socialite": "^3.0",
+        "laravel/tinker": "~1.0",
+        "paragonie/constant_time_encoding": "^2.2",
+        "php-ffmpeg/php-ffmpeg": "^0.11.1",
+        "pragmarx/google2fa": "^2.0",
+        "predis/predis": "^1.1",
+        "prettus/l5-repository": "^2.6",
+        "unisharp/laravel-filemanager": "~1.8",
+        "zizaco/entrust": "5.2.x-dev"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "filp/whoops": "~2.0",
+        "fzaninotto/faker": "~1.4",
+        "laravel/dusk": "^2.0",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories",
+            "module/users/database/seeds"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Base\\": "module/base/src",
+            "Auth\\": "module/auth/src",
+            "Acl\\": "module/acl/src",
+            "Users\\": "module/users/src",
+            "Hook\\": "module/hook/src",
+            "Course\\": "module/course/src",
+            "ClassLevel\\": "module/classlevel/src",
+            "Subject\\": "module/subject/src",
+            "Level\\": "module/level/src",
+            "PriceTier\\": "module/pricetier/src",
+            "Tag\\": "module/tag/src",
+            "Media\\": "module/media/src",
+            "Cart\\": "module/cart/src",
+            "MultipleChoices\\" : "module/multiplechoices/src",
+            "Coupon\\": "module/coupon/src",
+            "Rating\\": "module/rating/src",
+            "Qa\\": "module/qa/src",
+            "Setting\\": "module/setting/src",
+            "Notify\\": "module/notify/src",
+            "Messages\\": "module/messages/src",
+            "Post\\": "module/post/src",
+            "Menu\\": "module/menu/src",
+            "Advertise\\": "module/advertise/src",
+            "Ctv\\": "module/ctv/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "laravel/dusk"
+            ]
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
+            "php artisan optimize"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}

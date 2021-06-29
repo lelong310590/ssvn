@@ -1,0 +1,1 @@
+Xin chào {{ $user->first_name }}, Khóa đào tạo{{ $course->name }} vừa có lượt mua nữa. Xin chúc mừng!

@@ -1,0 +1,54 @@
+
+
+@font-face { font-family: 'font-helveticaNeueBold'; src: url("../fonts/helvetica-neue-bold.eot"); src: local("Γÿ║"), url("../fonts/helvetica-neue-bold.woff") format("woff"), url("../fonts/helvetica-neue-bold.ttf") format("truetype"), url("../fonts/helvetica-neue-bold.svg") format("svg"); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'font-helveticaNeueLight'; src: url("../fonts/helvetica-neue-light.eot"); src: local("Γÿ║"), url("../fonts/helvetica-neue-light.woff") format("woff"), url("../fonts/helvetica-neue-light.ttf") format("truetype"), url("../fonts/helvetica-neue-light.svg") format("svg"); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'font-helveticaNeueRegular'; src: url("../fonts/helvetica-neue-regular.eot"); src: local("Γÿ║"), url("../fonts/helvetica-neue-regular.woff") format("woff"), url("../fonts/helvetica-neue-regular.ttf") format("truetype"), url("../fonts/helvetica-neue-regular.svg") format("svg"); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'font-helveticaNeueMedium'; src: url("../fonts/helvetica-neue-medium.eot"); src: local("Γÿ║"), url("../fonts/helvetica-neue-medium.woff") format("woff"), url("../fonts/helvetica-neue-medium.ttf") format("truetype"), url("../fonts/helvetica-neue-medium.svg") format("svg"); font-weight: normal; font-style: normal; }
+
+$color-white: #fff;
+$body-bg: #fff;
+$text-color: #494342;
+$text-color-default: #333;
+$color-333: #333;
+$color-666: #666;
+$color-999: #999;
+$color-border: #d7d7d7;
+$color-yellow: #ff9700;
+$color-yellow-1: #ff922e;
+$color-yellow-hover: #ff7600;
+//links
+$link-color: #169bd5;
+$link-hover-color: #416fb7;
+
+//item show
+$itemHide: 3;
+
+// Border radius
+@mixin border-radius($val: 4px) {
+  -webkit-border-radius: $val; -moz-border-radius: $val; -ms-border-radius: $val; border-radius: $val;
+}
+
+// Transition
+@mixin transition($val: $transition) {
+  transition: $val; -ms-transition: $val; -webkit-transition: $val; -moz-transition: $val;
+}
+
+@mixin box-full() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@mixin pos-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fontB{font-family: 'font-helveticaNeueBold'}
+.fontM{font-family: 'font-helveticaNeueMedium'}
+.fontR{font-family: 'font-helveticaNeueRegular'}
+.fontL{font-family: 'font-helveticaNeueLight'}

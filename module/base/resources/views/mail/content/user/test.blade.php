@@ -1,0 +1,1 @@
+Xin chào {{ $user->first_name }}, chạy thử xem thế nào ấy mà

@@ -1,0 +1,18 @@
+/*==============================================*/
+/*============map and locations css ============*/
+/*==============================================*/
+.jvectormap-container {
+  background: transparent !important; }
+
+.worldmap {
+  height: 250px; }
+
+.fullscreenmap {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%; }
+
+/*# sourceMappingURL=map_locations.css.map */

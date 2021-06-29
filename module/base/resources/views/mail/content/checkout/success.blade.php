@@ -1,0 +1,1 @@
+Xin chào {{ $user->first_name }}, hóa đơn {{ $order->getOrderCode() }} trị giá {{ $order->total_price }} đã đc xác nhận. Xin quay lại để học khoa học!
