@@ -495,7 +495,7 @@ class CourseCurriculumItemsController extends BaseController
 
         $image->move($location, $fullName);
 
-        $url = 'https://video.safecovid.com/upload/quiz_source/' . $currentYear . '/' . $currentMonth . '/' . $fullName;
+        $url = 'https://video.anticovid.com/upload/quiz_source/' . $currentYear . '/' . $currentMonth . '/' . $fullName;
 
         return $url;
     }

@@ -35,7 +35,7 @@
                 </div>
                 <div class="box-btn">
                     <p class="note">
-                        <span class="txt-bold">Lưu ý: </span>Đối với các sự cố kỹ thuật liên quan đến trang web safecovid & ứng dụng dành cho thiết bị di động hoặc các câu hỏi về hoàn lại tiền, vui lòng liên hệ với Bộ phận hỗ trợ .
+                        <span class="txt-bold">Lưu ý: </span>Đối với các sự cố kỹ thuật liên quan đến trang web anticovid & ứng dụng dành cho thiết bị di động hoặc các câu hỏi về hoàn lại tiền, vui lòng liên hệ với Bộ phận hỗ trợ .
                     </p>
                     <div class="clearfix list-btn">
                         <div class="pull-right">

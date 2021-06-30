@@ -6,7 +6,7 @@
 	<meta name="description" content="NQAdmin is a dashboard build for individual project">
 	<meta name="author" content="lelong310590">
 	<link rel="icon" href="{{ asset('adminux/favicon.ico') }}">
-	<title>safecovid Dashboard by safecovid Team</title>
+	<title>anticovid Dashboard by anticovid Team</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 </head>
 <body>

@@ -7,7 +7,7 @@
         <div class="container">
             <div class="main-search">
                 <h3 class="txt-title text-center">
-                    <span>safecovid </span>
+                    <span>anticovid </span>
                     Ra đời với sứ mệnh truyền đạt kiến thức thuộc mọi lĩnh vực đến với tất cả mọi người
                 </h3>
                 <div class="content">
@@ -24,7 +24,7 @@
     <div class="box-cooperative">
         <div class="container">
             <div class="text-center">
-                <h3 class="txt-title-teacher">Tại sao nên hợp tác cùng safecovid</h3>
+                <h3 class="txt-title-teacher">Tại sao nên hợp tác cùng anticovid</h3>
             </div>
             <div class="main-cooperative row">
                 <div class="col-xs-4">
@@ -161,7 +161,7 @@
     <div class="box-journey">
         <div class="container">
             <div class="text-center">
-                <h2 class="txt-title-teacher">Đơn giản hóa hành trình truyền cảm hứng cùng safecovid</h2>
+                <h2 class="txt-title-teacher">Đơn giản hóa hành trình truyền cảm hứng cùng anticovid</h2>
             </div>
             <div class="list-journey">
                 <div class="row">

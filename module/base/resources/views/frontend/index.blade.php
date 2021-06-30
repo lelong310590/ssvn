@@ -10,7 +10,7 @@
 	<div class="vj-downloadapp">
 		<div class="container">
 			<h3>Học từ mọi nơi</h3>
-			<p>Tham gia các khóa đào tạo khi đang di chyuển bằng ứng dụng SafeCovid — truyền trực tuyến trên máy bay, tàu điện ngầm hoặc bất cứ nơi nào bạn học tốt nhất</p>
+			<p>Tham gia các khóa đào tạo khi đang di chyuển bằng ứng dụng anticovid — truyền trực tuyến trên máy bay, tàu điện ngầm hoặc bất cứ nơi nào bạn học tốt nhất</p>
 			<a href="#" target="_blank"><img alt="Tải nội dung trên Google Play" src="https://vietjack.com/git/images/android.svg"></a>
 			<a href="#" target="_blank"><img alt="Tải nội dung trên IOS Store" src="https://vietjack.com/git/images/ios.svg"></a>
 		</div>

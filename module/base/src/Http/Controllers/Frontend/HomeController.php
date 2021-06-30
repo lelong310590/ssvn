@@ -256,7 +256,7 @@ class HomeController extends BaseController
                     $data = str_replace(' ', '+', $data);
                     $data = base64_decode($data);
                     $fileName = 'upload/quiz_source/' . $year . '/' . $month . '/' . time() . $key . '.png';
-                    $url = 'https://video.safecovid.com/' . $fileName;
+                    $url = 'https://video.anticovid.com/' . $fileName;
                     $content = str_replace($item, $url, $content);
                     file_put_contents($fileName, $data);
                 }
@@ -282,7 +282,7 @@ class HomeController extends BaseController
                     $data = str_replace(' ', '+', $data);
                     $data = base64_decode($data);
                     $fileName = 'upload/quiz_source/' . $year . '/' . $month . '/' . time() . $key . '.png';
-                    $url = 'https://video.safecovid.com/' . $fileName;
+                    $url = 'https://video.anticovid.com/' . $fileName;
                     $content = str_replace($item, $url, $content);
                     file_put_contents($fileName, $data);
                 }
@@ -308,7 +308,7 @@ class HomeController extends BaseController
                     $data = str_replace(' ', '+', $data);
                     $data = base64_decode($data);
                     $fileName = 'upload/quiz_source/' . $year . '/' . $month . '/' . time() . $key . '.png';
-                    $url = 'https://video.safecovid.com/' . $fileName;
+                    $url = 'https://video.anticovid.com/' . $fileName;
                     $content = str_replace($item, $url, $content);
                     file_put_contents($fileName, $data);
                 }

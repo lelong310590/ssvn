@@ -10,7 +10,7 @@
 <header class="main">
     <div class="container">
         <a href="javascript:void(0)" class="mb__menu-main menu-category"><i class="fas fa-bars"></i></a>
-        <a href="{{route('front.home.index.get')}}" class="logo"><img src="{{asset('frontend/images/icons/logo.png')}}" alt="safecovid" title="Khóa đào tạo" /></a>
+        <a href="{{route('front.home.index.get')}}" class="logo"><img src="{{asset('frontend/images/icons/logo.png')}}" alt="anticovid" title="Khóa đào tạo" /></a>
         <nav class="main">
             <a href="javascript:void(0)" class="mb_menu_close"><i class="fal fa-times"></i></a>
             <div class="menu">
@@ -217,7 +217,7 @@
                     </form>
                 </div>
                 <div class="right hidden-xs hidden-sm">
-                    <span class="logo text-center">safecovid</span>
+                    <span class="logo text-center">anticovid</span>
                     <p>Bằng cách đăng ký, bạn đồng ý với Điều khoản sử dụng và Chính sách Bảo mật của chúng tôi.</p>
                 </div>
             </div>
@@ -269,7 +269,7 @@
                     </form>
                 </div>
                 <div class="right hidden-xs hidden-sm">
-                    <span class="logo text-center">safecovid</span>
+                    <span class="logo text-center">anticovid</span>
                     <p>Bằng cách đăng ký, bạn đồng ý với Điều khoản sử dụng và Chính sách Bảo mật của chúng tôi.</p>
                 </div>
             </div>
@@ -303,7 +303,7 @@
                     </form>
                 </div>
                 <div class="right hidden-xs hidden-sm">
-                    <span class="logo text-center">safecovid</span>
+                    <span class="logo text-center">anticovid</span>
                     <p>Bằng cách đăng ký, bạn đồng ý với Điều khoản sử dụng và Chính sách Bảo mật của chúng tôi.</p>
                 </div>
             </div>

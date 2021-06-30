@@ -241,7 +241,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <span class="logo text-center">safecovid</span>
+                            <span class="logo text-center">anticovid</span>
                             {{--<p>Bằng cách đăng ký, bạn đồng ý với Điều khoản sử dụng và Chính sách Bảo mật của chúng tôi.</p>--}}
                         </div>
                     </div>

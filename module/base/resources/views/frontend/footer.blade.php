@@ -19,12 +19,12 @@ $classes = ClassLevel::with('subject')->get();
                             </a>
                         </li>
                         <li class="googleplus pull-left">
-                            <a href="" target="_blank" data-placement="bottom" title="safecovid @ Google+">
+                            <a href="" target="_blank" data-placement="bottom" title="anticovid @ Google+">
                                 <i class="fab fa-google-plus-g"></i>
                             </a>
                         </li>
                         <li class="youtube pull-left">
-                            <a href="https://goo.gl/Dsf8AE" target="_blank" title="Kênh Youtube SafeCovid">
+                            <a href="https://goo.gl/Dsf8AE" target="_blank" title="Kênh Youtube anticovid">
                                 <i class="fab fa-youtube"></i>
                             </a>
                         </li>
@@ -37,7 +37,7 @@ $classes = ClassLevel::with('subject')->get();
                     </li>
                     <li>
                         <label class="txt">Email</label>
-                        <a href="" class="node">safecovid@gmail.com</a>
+                        <a href="" class="node">anticovid@gmail.com</a>
                     </li>
                 </ul>
             </div>

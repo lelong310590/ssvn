@@ -58,7 +58,7 @@ class InstallModuleProvider extends ServiceProvider
 		
 		$data = [
 			[
-				'email' => 'admin@safecovid.com',
+				'email' => 'admin@anticovid.com',
 				'password' => '123456',
 				'thumbnail' => 'adminux/img/user-header.png',
 				'first_name' => 'Administrator',

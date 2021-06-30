@@ -34,13 +34,13 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade active in" id="transfer" role="tabpanel" aria-labelledby="transfer-tab">
         <div class="tab-transfer">
-            <p class="note">Từ 11/4 2013, khi nộp học phí vào tài khoản safecovid, học sinh sẽ được tặng thêm 10% giá trị tiền nạp. Để nộp học phí vào tài khoản của
-                safecovid, bạn vui lòng thực hiện các bước sau:</p>
+            <p class="note">Từ 11/4 2013, khi nộp học phí vào tài khoản anticovid, học sinh sẽ được tặng thêm 10% giá trị tiền nạp. Để nộp học phí vào tài khoản của
+                anticovid, bạn vui lòng thực hiện các bước sau:</p>
             <div class="box-step">
-                <p class="step">Bước 1: Nộp tiền/Chuyển khoản vào tài khoản ngân hàng của safecovid</p>
+                <p class="step">Bước 1: Nộp tiền/Chuyển khoản vào tài khoản ngân hàng của anticovid</p>
                 <p>1. Tên người thụ hưởng: Công ty cổ phần đầu tư và dịch vụ giao dục</p>
                 <p>2. Nội dung chuyển tiền: “Tên đăng nhập (hoặc email) của bạn + số điện thoại của bạn”</p>
-                <p>3. Số tài khoản của safecovid.com như sau:</p>
+                <p>3. Số tài khoản của anticovid.com như sau:</p>
                 <ul>
                     <li>• Số tài khoản: 0531 0025 11245 tại <a href="#">Vietcombank</a> - Chi nhánh Thành Công, Hà Nội.</li>
                     <li>• Số tài khoản: 0531 0025 11245 tại <a href="#">VP Bank</a> - Chi nhánh Trung Hòa Nhân Chính, Hà Nội.</li>
@@ -53,25 +53,25 @@
             </div>
             <div class="box-step box-noti">
                 <p class="step">Lưu ý:</p>
-                <p>- “Tên đăng nhập của bạn” là tài khoản của bạn tại safecovid.com</p>
+                <p>- “Tên đăng nhập của bạn” là tài khoản của bạn tại anticovid.com</p>
                 <p>- Trong nội dung chuyển tiền bạn bắt buộc phải điền đầy đủ thông tin “Tên đăng nhập của bạn” để tiền được chuyển đến đúng tài khoản của bạn tại
-                    safecovid.com</p>
+                    anticovid.com</p>
             </div>
         </div>
     </div>
     <div class="tab-pane fade" id="atm" role="tabpanel" aria-labelledby="atm-tab">
         <div class="tab-atm">
-            <p class="note">Từ 11/4 2013, khi nộp học phí vào tài khoản safecovid, học sinh sẽ được tặng thêm 10% giá trị tiền nạp.</p>
+            <p class="note">Từ 11/4 2013, khi nộp học phí vào tài khoản anticovid, học sinh sẽ được tặng thêm 10% giá trị tiền nạp.</p>
             <div class="box-step">
                 <p class="step">Điều kiện: Có thẻ ATM đã đăng ký dịch vụ internet banking.</p>
-                <p>safecovid hiện đã hỗ trợ thực hiện thanh toán qua 25 ngân hàng tại Việt Nam</p>
+                <p>anticovid hiện đã hỗ trợ thực hiện thanh toán qua 25 ngân hàng tại Việt Nam</p>
             </div>
             <form class="box-form-default">
                 <div class="form-group clearfix form-atm">
                     <span class="pull-left txt-1">Số tiền Cần nạp <span class="red">*</span>:</span>
                     <input type="text" class="txt-form pull-left" value="100.000.000">
                     <span class="pull-left txt-2">Đồng</span>
-                    <span class="pull-left txt-3">Tiền sẽ được nạp cho tài khoản: <a href="#"> safecovidteam@gmail.com</a> </span>
+                    <span class="pull-left txt-3">Tiền sẽ được nạp cho tài khoản: <a href="#"> anticovidteam@gmail.com</a> </span>
                 </div>
                 <a href="#" class="btn btn-small btn-default-yellow">Nạp tiền</a>
             </form>
@@ -142,7 +142,7 @@
     {{--<div class="col-xs-6">--}}
     {{--<input type="text" class="txt-form" placeholder="Nhập mã xác nhận vào đây">--}}
     {{--<p>Tiền sẽ được nạp cho tìa khoản:</p>--}}
-    {{--<a href="#"> safecovidteam@gmail.com</a>--}}
+    {{--<a href="#"> anticovidteam@gmail.com</a>--}}
     {{--</div>--}}
     {{--</div>--}}
     {{--<div class="text-center">--}}
@@ -154,11 +154,11 @@
     <div class="tab-pane fade" id="direct" role="tabpanel" aria-labelledby="direct-tab">
         <div class="tab-direct">
             <p class="p-top">Thanh toán trực tiếp (ship COD) là hình thức khách hàng đăng ký và thanh toán học phí tại nhà sau khi cung cấp thông tin và địa chỉ cho
-                safecovid. khi thanh toán qua hinh thức trực tiếp học sinh sẽ được tặng thêm 5% giá trị tiền nạp. cụ thể như sau:</p>
+                anticovid. khi thanh toán qua hinh thức trực tiếp học sinh sẽ được tặng thêm 5% giá trị tiền nạp. cụ thể như sau:</p>
             <div class="box-step">
                 <p>Bước 1: Khách hàng có nhu cầu COD gọi đường dây nóng: 1900 6933 nhấn tiếp nhánh số 2 sau đó chọn THPT hoặc THCS và TH để gặp tư vấn viên.</p>
-                <p>Bước 2: Khách hàng xác nhận các Khóa đào tạo/chuyên đề muốn đắng ký và cung cấp địa chỉ giao hàng cho safecovid</p>
-                <p>Bước 3: safecovid in và chuyển phát nhanh hóa đơn cho khách hàng.</p>
+                <p>Bước 2: Khách hàng xác nhận các Khóa đào tạo/chuyên đề muốn đắng ký và cung cấp địa chỉ giao hàng cho anticovid</p>
+                <p>Bước 3: anticovid in và chuyển phát nhanh hóa đơn cho khách hàng.</p>
                 <p>Bước 4: Khách hàng thanh toán học phí với nhân viên giao nhận.</p>
             </div>
             <div class="box-noti box-step">

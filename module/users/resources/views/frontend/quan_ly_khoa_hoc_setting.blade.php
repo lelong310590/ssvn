@@ -55,7 +55,7 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>safecovid</td>
+                                            <td>anticovid</td>
                                             <td class="text-center">
                                                 <div class="form-group form-check">
                                                     <label>
@@ -185,7 +185,7 @@
                                 <div class="box-search-management">
                                     <div class="box-search">
                                         <div class="form-group">
-                                            <input type="search" class="txt-form" placeholder="Nhập Email liên kết với một tài khoản safecovid">
+                                            <input type="search" class="txt-form" placeholder="Nhập Email liên kết với một tài khoản anticovid">
                                             <button type="submit" class="btn btn-search"> Thêm </button>
                                         </div>
                                     </div>

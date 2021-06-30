@@ -6,7 +6,7 @@
 	<meta name="description" content="Tripnchill is a dashboard build for only this project">
 	<meta name="author" content="lelong310590">
 	<link rel="icon" href="{{ asset('adminux/favicon.ico') }}">
-	<title>safecovid Dashboard by safecovid Team</title>
+	<title>anticovid Dashboard by anticovid Team</title>
 	<!-- Fontawesome icon CSS -->
 	<link rel="stylesheet" href="{{ asset('adminux/vendor/font-awesome-4.7.0/css/font-awesome.min.css') }}" type="text/css">
 	

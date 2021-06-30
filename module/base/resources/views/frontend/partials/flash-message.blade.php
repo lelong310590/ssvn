@@ -2,7 +2,7 @@
     <div class="flash-backdrop">
         <div class="flash-content">
             <span class="close-popup flash-close"><i class="far fa-times-circle"></i></span>
-            <p class="text-center flash-content-logo">safecovid</p>
+            <p class="text-center flash-content-logo">anticovid</p>
             {{ $message }}
         </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="flash-backdrop">
         <div class="flash-content">
             <span class="close-popup flash-close"><i class="far fa-times-circle"></i></span>
-            <p class="text-center flash-content-logo">safecovid</p>
+            <p class="text-center flash-content-logo">anticovid</p>
             {{ $message }}
         </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="flash-backdrop">
         <div class="flash-content">
             <span class="close-popup flash-close"><i class="far fa-times-circle"></i></span>
-            <p class="text-center flash-content-logo">safecovid</p>
+            <p class="text-center flash-content-logo">anticovid</p>
             {{ $message }}
         </div>
     </div>
@@ -32,7 +32,7 @@
     <div class="flash-backdrop">
         <div class="flash-content">
             <span class="close-popup flash-close"><i class="far fa-times-circle"></i></span>
-            <p class="text-center flash-content-logo">safecovid</p>
+            <p class="text-center flash-content-logo">anticovid</p>
             {{ $message }}
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="flash-backdrop">
         <div class="flash-content">
             <span class="close-popup flash-close"><i class="far fa-times-circle"></i></span>
-            <p class="text-center flash-content-logo">safecovid</p>
+            <p class="text-center flash-content-logo">anticovid</p>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
