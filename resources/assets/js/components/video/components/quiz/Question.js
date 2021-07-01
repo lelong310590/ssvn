@@ -448,9 +448,6 @@ class Question extends Component
                                     {this.state.dosomething ? 'Câu tiếp' : 'Bỏ qua'} <i className="fas fa-chevron-right"></i>
                                 </button>
                             )}
-                            <button className="quiz-footer-button quiz-footer-setting">
-                                <i className="fas fa-cog"></i>
-                            </button>
                             <button
                                 className="quiz-footer-button quiz-footer-setting"
                                 onClick={() => this.requestFullscreen()}

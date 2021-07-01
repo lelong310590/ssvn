@@ -281,9 +281,6 @@ class QuizExpand extends Component
                             >
                                 Tiếp tục <i className="fas fa-chevron-right"></i>
                             </button>
-                            <button className="quiz-footer-button quiz-footer-setting">
-                                <i className="fas fa-cog"></i>
-                            </button>
                         </div>
                     </footer>
                 </section>
