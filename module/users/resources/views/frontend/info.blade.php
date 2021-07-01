@@ -63,7 +63,7 @@
                                             <div class="form col-xs-7">
                                                 <select class="input-form">
                                                     @foreach($classLevel as $lv)
-                                                        <option value="{{$lv->id}}" {{$lv->id == $data->$classLevel ? 'selected' : ''}}>
+                                                        <option value="{{$lv->id}}" {{$lv->id == $data->classlevel ? 'selected' : ''}}>
                                                             {{$lv->name}} - MST: {{$lv->mst}}
                                                         </option>
                                                     @endforeach

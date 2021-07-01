@@ -6872,6 +6872,16 @@ header .right-menu .box-user .img-user {
   height: 50px;
   border-radius: 50%;
   border: 1px solid #d7d7d7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
 }
 header .right-menu .box-user .img-user img {
   width: 100%;
