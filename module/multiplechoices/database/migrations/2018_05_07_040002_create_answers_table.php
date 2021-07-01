@@ -19,7 +19,7 @@ class CreateAnswersTable extends Migration
             $table->text('reason')->nullable();
             $table->integer('question')->unsigned()->nullable();
             $table->foreign('question')->references('id')->on('questions')->onDelete('cascade');
-            $table->boolean('answer')->default(false);
+            $table->string('answer', 5)->default(false);
             $table->timestamps();
         });
     }

@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
 	protected $table = 'answers';
-	protected $guarded = [];
 	protected $fillable = [
 		'content', 'reason', 'question', 'created_at', 'answer'
 	];

@@ -96,15 +96,11 @@
                                             {{$d->created_at}}
                                         </td>
                                         <td class="center">
-                                            @if ($permissions->contains('name','user_edit'))
-                                                <a href="{{route('nqadmin::users.edit.get', ['id' => $d->id])}}" class=" btn btn-link btn-sm "><i class="fa fa-edit"></i></a>
-                                            @endif
+                                            <a href="{{route('nqadmin::users.edit.get', ['id' => $d->id])}}" class=" btn btn-link btn-sm "><i class="fa fa-edit"></i></a>
 
-                                            @if (Auth::id() != $d->id && $permissions->contains('name','user_delete'))
-                                                <a href="" class="btn btn-link btn-sm" data-toggle="confirmation" data-url="{{route('nqadmin::users.delete.get', $d->id)}}">
-                                                    <i class="fa fa-trash-o "></i>
-                                                </a>
-                                            @endif
+                                            <a href="" class="btn btn-link btn-sm" data-toggle="confirmation" data-url="{{route('nqadmin::users.delete.get', $d->id)}}">
+                                                <i class="fa fa-trash-o "></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

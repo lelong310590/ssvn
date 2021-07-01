@@ -17,7 +17,7 @@
 	</div>
 	<!--app-->
 
-	@include('nqadmin-dashboard::frontend.components.topteacher')
+{{--	@include('nqadmin-dashboard::frontend.components.topteacher')--}}
 
 	<div class="vj-statistic">
 		<div class="container">
@@ -47,7 +47,7 @@
 	</div>
 	<!--statistic-->
 
-	@include('nqadmin-dashboard::frontend.components.level')
+{{--	@include('nqadmin-dashboard::frontend.components.level')--}}
 </div>
 
 @endsection

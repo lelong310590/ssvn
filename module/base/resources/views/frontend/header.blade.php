@@ -12,28 +12,28 @@
         <a href="javascript:void(0)" class="mb__menu-main menu-category"><i class="fas fa-bars"></i></a>
         <a href="{{route('front.home.index.get')}}" class="logo"><img src="{{asset('frontend/images/icons/logo.png')}}" alt="anticovid" title="Khóa đào tạo" /></a>
         <nav class="main">
-            <a href="javascript:void(0)" class="mb_menu_close"><i class="fal fa-times"></i></a>
-            <div class="menu">
-                <ul class="menu-main">
-                    <li>
-                        <a href="javascript:void(0)">Danh mục <i class="far fa-chevron-down"></i></a>
-                        @if (Agent::isDesktop())
-                        <ul class="menu-sub">
-                            @foreach($classes as $class)
-                            <li>
-                                <h5><a href="{{ route('front.classlevel.index.get', ['slug' => $class->slug]) }}">{{ $class->name }}</a></h5>
-                                <ul>
-                                    @foreach($class->subject as $sub)
-                                        <li><a href="{{route('front.subject.index.get', ['class' => $class->slug, 'subject' => $sub->slug])}}">{{ $sub->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            @endforeach
-                        </ul>
-                        @endif
-                    </li>
-                </ul>
-            </div>
+{{--            <a href="javascript:void(0)" class="mb_menu_close"><i class="fal fa-times"></i></a>--}}
+{{--            <div class="menu">--}}
+{{--                <ul class="menu-main">--}}
+{{--                    <li>--}}
+{{--                        <a href="javascript:void(0)">Danh mục <i class="far fa-chevron-down"></i></a>--}}
+{{--                        @if (Agent::isDesktop())--}}
+{{--                        <ul class="menu-sub">--}}
+{{--                            @foreach($classes as $class)--}}
+{{--                            <li>--}}
+{{--                                <h5><a href="{{ route('front.classlevel.index.get', ['slug' => $class->slug]) }}">{{ $class->name }}</a></h5>--}}
+{{--                                <ul>--}}
+{{--                                    @foreach($class->subject as $sub)--}}
+{{--                                        <li><a href="{{route('front.subject.index.get', ['class' => $class->slug, 'subject' => $sub->slug])}}">{{ $sub->name }}</a></li>--}}
+{{--                                    @endforeach--}}
+{{--                                </ul>--}}
+{{--                            </li>--}}
+{{--                            @endforeach--}}
+{{--                        </ul>--}}
+{{--                        @endif--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </div>--}}
             <div class="support">
                 <ul>
 {{--                    <li class="vj-isteacher hidden-xs hidden-sm">--}}

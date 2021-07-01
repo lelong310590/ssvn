@@ -8,10 +8,11 @@
 		$permsArray[] = $p['name'];
 	}
 @endphp
+<li class="nav-item">
+	<a href="{{route('nqadmin::users.setting.get')}}" class="nav-link"><i class="fa fa-users" aria-hidden="true"></i> Cấu hình tài khoản</a>
+</li>
 @if (in_array('user_index', $permsArray) && in_array('user_create', $permsArray))
-	<li class="nav-item">
-		<a href="{{route('nqadmin::users.setting.get')}}" class="nav-link"><i class="fa fa-users" aria-hidden="true"></i> Cấu hình tài khoản</a>
-	</li>
+
 	{{--<li class="nav-item">--}}
 		{{--<a href="javascript:void(0)" class="menudropdown nav-link">Tài khoản <span class="badge badge-primary ml-2">{{count($userRepository->all())}}</span>--}}
 			{{--<i class="fa fa-angle-down "></i>--}}
