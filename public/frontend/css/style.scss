@@ -8707,13 +8707,17 @@ img {
 	}
 	.other-preview-list {
 		.other-preview-list-item {
-			padding: 15px;
-			background-color: #1e1e1c;
 			&:not(:last-child) {
 				border-bottom: 1px solid #3c3b37;
 			}
 			a {
 				display: flex;
+				padding: 15px;
+				background-color: #1e1e1c;
+				color: #fff;
+				&.active-preview {
+					background-color: #3c3b37;
+				}
 				.other-preview-thumbnail {
 					flex: 0 0 64px;
 					width: 64px;

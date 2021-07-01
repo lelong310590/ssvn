@@ -6731,10 +6731,6 @@ img {
   margin: 0;
   padding: 15px;
 }
-.other-preview .other-preview-list .other-preview-list-item {
-  padding: 15px;
-  background-color: #1e1e1c;
-}
 .other-preview .other-preview-list .other-preview-list-item:not(:last-child) {
   border-bottom: 1px solid #3c3b37;
 }
@@ -6742,6 +6738,12 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding: 15px;
+  background-color: #1e1e1c;
+  color: #fff;
+}
+.other-preview .other-preview-list .other-preview-list-item a.active-preview {
+  background-color: #3c3b37;
 }
 .other-preview .other-preview-list .other-preview-list-item a .other-preview-thumbnail {
   -webkit-box-flex: 0;
