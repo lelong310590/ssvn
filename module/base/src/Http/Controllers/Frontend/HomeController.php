@@ -17,6 +17,7 @@ use Course\Models\TestResult;
 use Course\Repositories\CourseLdpRepository;
 use Course\Repositories\CourseRepository;
 use Course\Repositories\TestResultRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use MultipleChoices\Models\Answer;
 use MultipleChoices\Models\Question;
@@ -32,7 +33,12 @@ use Cache;
 
 class HomeController extends BaseController
 {
-    public function getIndex(CourseRepository $courseRepository, UsersRepository $usersRepository, LevelRepository $levelRepository)
+    public function getIndex(
+        CourseRepository $courseRepository,
+        UsersRepository $usersRepository,
+        LevelRepository $levelRepository,
+        ClassLevelRepository $classLevelRepository
+    )
     {
         //top Trac nghiem
         $topCheck = $topAll = $courseRepository->scopeQuery(function ($query) {
@@ -41,12 +47,29 @@ class HomeController extends BaseController
             return $q->with('getClassLevel')->with('getSubject')->get();
         }])->get();
 
+        $currentCompany = false;
+
         //moi nhat
-        $topNews = $courseRepository->scopeQuery(function ($query) {
-            return $query->select('slug', 'name', 'price', 'id')->where('status', 'active')->orderBy('created_at', 'desc')->take(12);
-        })->with('getRating')->with(['getLdp' => function ($q) {
-            return $q->with('getClassLevel')->with('getSubject')->get();
-        }])->get();
+        if (auth('nqadmin')->check()) {
+            $classLevel = auth('nqadmin')->user();
+            $currentCompany = $classLevelRepository->find($classLevel)->first();
+            $topNews = $courseRepository->scopeQuery(function ($query) {
+                return $query->select('slug', 'name', 'price', 'id')
+                    ->where('status', 'active')
+                    ->orderBy('created_at', 'desc')
+                    ->take(12);
+            })
+            ->with('getRating')
+            ->with(['getLdp' => function ($q) {
+                return $q->with('getClassLevel')->with('getSubject')->get();
+            }])
+            ->whereHas('getClassLevel', function ($q) use ($classLevel) {
+                $q->where('classlevel.id', $classLevel);
+            })
+            ->get();
+        } else {
+            $topNews = [];
+        }
 
         //duoc mua nhieu nhat
         $topAll = $courseRepository->scopeQuery(function ($query) {
@@ -73,7 +96,7 @@ class HomeController extends BaseController
 //        })->with('getRating')->with('getLdp')->get();
 
         //top giao vien
-        $topTeacher = $usersRepository->scopeQuery(function ($query) {
+        $topTeachers = $usersRepository->scopeQuery(function ($query) {
             return $query->select('id', 'thumbnail', 'first_name', 'last_name')->where('status', 'active')
                 ->where('position', 'giao_vien')
                 ->orderBy('sold_course', 'desc')
@@ -87,14 +110,10 @@ class HomeController extends BaseController
             })->all();
         });
 
-        return view('nqadmin-dashboard::frontend.index', [
-            'topAll' => $topAll,
-            'topCheck' => $topCheck,
-            'topCourse' => $topCourse,
-            'topNews' => $topNews,
-            'topTeachers' => $topTeacher,
-            'level' => $level
-        ]);
+        return view('nqadmin-dashboard::frontend.index', compact(
+            'topAll', 'topCheck', 'topCourse', 'topNews', 'topTeachers',
+            'level', 'currentCompany'
+        ));
     }
 
     public function loadquickview(Request $request, CourseRepository $courseRepository,

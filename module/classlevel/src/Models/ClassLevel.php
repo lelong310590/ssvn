@@ -20,7 +20,7 @@ class ClassLevel extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'name', 'slug', 'group', 'seo_title', 'seo_description', 'seo_keywords', 'author', 'editor', 'status', 'publish',
-        'updated_at', 'created_at'
+        'updated_at', 'created_at', 'mst'
     ];
 
     /**
@@ -73,5 +73,10 @@ class ClassLevel extends Model
     public function course()
     {
         return $this->belongsToMany(Course::class, 'course_ldp', 'classlevel', 'course_id');
+    }
+
+    public function getUsers()
+    {
+        return $this->belongsTo(Users::class, 'classlevel', 'id');
     }
 }

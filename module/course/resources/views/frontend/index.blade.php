@@ -135,7 +135,7 @@
 
 {{--                        @include('nqadmin-course::frontend.indexdetail.rating')--}}
                         <!--box-review-->
-                        @include('nqadmin-course::frontend.indexdetail.relateteacher')
+{{--                        @include('nqadmin-course::frontend.indexdetail.relateteacher')--}}
                     </div>
                 </div>
             </div>

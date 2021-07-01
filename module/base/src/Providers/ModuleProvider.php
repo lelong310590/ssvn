@@ -8,6 +8,7 @@
 
 namespace Base\Providers;
 
+use ClassLevel\Models\ClassLevel;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Base\Supports\Helper;
@@ -50,6 +51,14 @@ class ModuleProvider extends ServiceProvider
             $this->app->singleton('sale_system', function ($app) use ($sale) {
                 return $sale;
             });
+        }
+
+        if (Schema::hasTable('classlevel')) {
+            $allClassLevel = ClassLevel::where('status', 'active')
+                ->orderBy('name', 'desc')
+                ->get();
+
+            View::share('allClassLevel', $allClassLevel);
         }
     }
 

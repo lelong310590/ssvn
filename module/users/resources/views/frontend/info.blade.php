@@ -59,6 +59,10 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            <label class="txt-label col-xs-3 text-right">Giới tính</label>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Website</label>
                                             @include('nqadmin-users::frontend.components.info.text',['name'=>'website','type'=>'full'])
                                         </div>
@@ -82,37 +86,37 @@
                                     </div>
                                     <!--box-image-update-->
 
-                                    <div class="box-additional-information">
-                                        <h4 class="txt-title">Thông tin bổ sung</h4>
+{{--                                    <div class="box-additional-information">--}}
+{{--                                        <h4 class="txt-title">Thông tin bổ sung</h4>--}}
 
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Thành phố</label>
-                                            @include('nqadmin-users::frontend.components.info.select_api',['name'=>'city','options'=>$data->city])
-                                        </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label class="txt-label col-xs-3 text-right">Thành phố</label>--}}
+{{--                                            @include('nqadmin-users::frontend.components.info.select_api',['name'=>'city','options'=>$data->city])--}}
+{{--                                        </div>--}}
 
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Quận/Huyện</label>
-                                            @include('nqadmin-users::frontend.components.info.select_api',['name'=>'province','options'=>$data->province])
-                                        </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label class="txt-label col-xs-3 text-right">Quận/Huyện</label>--}}
+{{--                                            @include('nqadmin-users::frontend.components.info.select_api',['name'=>'province','options'=>$data->province])--}}
+{{--                                        </div>--}}
 
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Công ty</label>
-                                            @include('nqadmin-users::frontend.components.info.select',['name'=>'class','options'=>config('meta.class')])
-                                        </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label class="txt-label col-xs-3 text-right">Công ty</label>--}}
+{{--                                            @include('nqadmin-users::frontend.components.info.select',['name'=>'class','options'=>config('meta.class')])--}}
+{{--                                        </div>--}}
 
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Tên công ty</label>
-                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'class_name'])
-                                        </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label class="txt-label col-xs-3 text-right">Tên công ty</label>--}}
+{{--                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'class_name'])--}}
+{{--                                        </div>--}}
 
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Trường</label>
-                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'class_school'])
-                                        </div>
-                                    </div>
-                                    <!--box-additional-information-->
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label class="txt-label col-xs-3 text-right">Trường</label>--}}
+{{--                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'class_school'])--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <!--box-additional-information-->--}}
 
-                                    @include('nqadmin-users::frontend.components.info.giao_vien')
+{{--                                    @include('nqadmin-users::frontend.components.info.giao_vien')--}}
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default-yellow">Cập nhật thông tin</button>
                                     </div>

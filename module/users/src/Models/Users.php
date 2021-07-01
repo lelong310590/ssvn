@@ -11,6 +11,7 @@ namespace Users\Models;
 use Advertise\Models\Advertise;
 use Advertise\Models\AdvertiseUser;
 use Cart\Models\OrderDetail;
+use ClassLevel\Models\ClassLevel;
 use Course\Models\Course;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,8 @@ class Users extends Authenticatable
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'username', 'email', 'password', 'thumbnail', 'first_name', 'last_name', 'phone', 'status', 'sex', 'created_at', 'updated_at', 'sold_course'
+        'username', 'email', 'password', 'thumbnail', 'first_name', 'last_name', 'phone', 'status', 'sex', 'created_at', 'updated_at', 'sold_course',
+        'classlevel'
     ];
 
     protected $hidden = [
@@ -195,6 +197,11 @@ class Users extends Authenticatable
         $exam = $this->getExam()->where('exam_id', $course_id)->get();
         $check = $exam->isNotEmpty() ? true : false;
         return $check;
+    }
+
+    public function getClassLevel()
+    {
+        return $this->hasOne(ClassLevel::class, 'classlevel', 'id');
     }
 
 }

@@ -1,6 +1,5 @@
 <a class="info-user clearfix" href="{{route('front.users.info.get')}}">
     <div class="img pull-left">
-
         @if (!empty(Auth::user()->thumbnail))
             <img src="{{ asset(Auth::user()->thumbnail) }}" alt="" class="round-image">
         @else

@@ -67,16 +67,16 @@ function textCounter(field,cnt, maxlimit) {
 
 }
 
-$(document).ready(function () {
-    $('.btn-popup').click(function() {
-        var loginBox = $(this).attr('href');
-        $(loginBox).fadeIn(300);
-        return false;
-    });
+    $(document).ready(function () {
+        $('.btn-popup').click(function() {
+            var loginBox = $(this).attr('href');
+            $(loginBox).fadeIn(300);
+            return false;
+        });
 
-    $('body').click(function () {
-        $('.box-search .box-dropdown, .box-view-fast, .box-dropdown-single .form-dropdown, header .box-search .box-dropdown').hide();
-});
+        $('body').click(function () {
+            $('.box-search .box-dropdown, .box-view-fast, .box-dropdown-single .form-dropdown, header .box-search .box-dropdown').hide();
+    });
 
     $('.box-search .txt-form, .main-course .course .bottom-course a.view-fast, .box-view-fast, .box-dropdown-single .show-txt, .header .main-menu-header, header .box-search, .box-popup-opportunity .box-search ').click(function (event) {
         event.stopPropagation();

@@ -86,7 +86,6 @@
 
 <script src="{{asset('frontend/js/jquery-1.10.2.min.js')}}"></script>
 <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-
 @yield('js')
 @yield('js-init')
 @stack('js')

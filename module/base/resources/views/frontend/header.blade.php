@@ -66,7 +66,7 @@
 {{--                    <div class="pull-left box-notification hidden-xs hidden-sm">--}}
 {{--                        @include('nqadmin-dashboard::frontend.components.header.dropdown.notification.list')--}}
 {{--                    </div>--}}
-                    <!--box-notification-->
+{{--                    <!--box-notification-->--}}
 
                     <div class="pull-left box-user hidden-xs hidden-sm">
                         <div class="img-user">
@@ -199,13 +199,21 @@
                         {{ csrf_field() }}
                         <div class="box-form-default">
                             <div class="form-group">
-                                <input type="text" class="input-form" name="first_name" placeholder="Tên đầy đủ" required>
+                                <input type="text" class="input-form" name="first_name" placeholder="Tên đầy đủ" required/>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="input-form" name="email" placeholder="Email" required>
+                                <input type="email" class="input-form" name="email" placeholder="Email" required/>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="input-form" name="password" placeholder="Password" required>
+                                <input type="password" class="input-form" name="password" placeholder="Password" required/>
+                            </div>
+                            <div class="form-group">
+                                <select class="input-form" name="classlevel">
+                                    <option value="">-- Chọn đơn vị ---</option>
+                                    @foreach($allClassLevel as $lv)
+                                        <option value="{{$lv->id}}">{{$lv->name}} - MST: {{$lv->mst}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="clearfix box-btn text-center">
                                 <button type="submit" class="btn btn-default-yellow btn-small">Đăng ký</button>

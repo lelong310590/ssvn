@@ -72,6 +72,18 @@
                                     >
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="form-control-label">Mã số thuế</label>
+                                    <input type="text"
+                                           required
+                                           parsley-trigger="change"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           name="mst"
+                                           value="{{old('mst')}}"
+                                    >
+                                </div>
+
                                 <input type="hidden" name="parent" value="0">
 
 {{--                                <div class="form-group">--}}
@@ -163,7 +175,7 @@
                                 <tr>
                                     <th>Tên Công ty</th>
                                     <th>Slug</th>
-{{--                                    <th>Thuộc cấp</th>--}}
+                                    <th>MST</th>
                                     <th>Trạng thái</th>
                                     <th width="100">Thao tác</th>
                                 </tr>
@@ -178,6 +190,7 @@
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                         <td>{{ $d->name }}</td>
                                         <td class="center">{{ $d->slug }}</td>
+                                        <td class="center">{{ $d->mst }}</td>
 {{--                                        <td class="center">{{$d->group}}</td>--}}
                                         <td>
                                             <a href="{{route('nqadmin::classlevel.changeStatus.get', ['id' => $d->id])}}">

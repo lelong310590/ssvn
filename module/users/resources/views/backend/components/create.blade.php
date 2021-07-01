@@ -108,6 +108,16 @@
 										<option value="other" {{ (old('sex') == 'other') ? 'selected' : '' }}>Khác</option>
 									</select>
 								</div>
+
+								<div class="form-group">
+									<label class="form-control-label">Thành viên của đơn vị</label>
+									<select class="custom-select form-control" name="classlevel">
+										<option value="">-- Chọn đơn vị ---</option>
+										@foreach($classLevel as $c)
+											<option value="{{$c->id}}" {{ (old('classLevel') == $c->id) ? 'selected' : '' }}>{{$c->name}} - MST: {{$c->mst}}</option>
+										@endforeach
+									</select>
+								</div>
 								
 								<div class="form-group">
 									<label class="form-control-label">Vai trò</label>

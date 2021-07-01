@@ -59,7 +59,6 @@ class AuthController extends BaseController
             if (isset($request->newsletter)) {
                 $request->merge(['newsletter' => 'active']);
             }
-            //dd($request->except('_token'));
             $user = Users::create($request->except('_token'));
             Mail::to($user)->queue(new CreateUser($user));
             $usersMetaRepository->create([

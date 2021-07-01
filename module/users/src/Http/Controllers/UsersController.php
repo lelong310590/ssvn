@@ -12,6 +12,7 @@ use Barryvdh\Debugbar\Controllers\BaseController;
 use Base\Supports\FlashMessage;
 use Cart\Repositories\OrderDetailsRepository;
 use Cart\Repositories\OrdersRepository;
+use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Repositories\CurriculumProgressRepository;
 use MultipleChoices\Repositories\QuestionRepository;
 use Users\Http\Requests\UserCreateRequest;
@@ -56,11 +57,15 @@ class UsersController extends BaseController
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function getCreate(RoleRepository $roleRepository)
+	public function getCreate(RoleRepository $roleRepository, ClassLevelRepository $classLevelRepository)
 	{
+        $classLevel = $classLevelRepository->findWhere([
+            'status' => 'active'
+        ]);
 		$role = $roleRepository->all();
 		return view('nqadmin-users::backend.components.create', [
-			'role' => $role
+			'role' => $role,
+            'classLevel' => $classLevel
 		]);
 	}
 	

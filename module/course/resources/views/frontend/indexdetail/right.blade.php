@@ -139,7 +139,7 @@
                     <p><i class="far fa-clock"></i><span class="txt">Thời gian:</span> {{ secToHR($duration) }}</p>
                 @endif
 
-                <p><i class="fas fa-suitcase"></i><span class="txt">Trình độ:</span> {{ isset($level->name)?$level->name:'' }}</p>
+{{--                <p><i class="fas fa-suitcase"></i><span class="txt">Trình độ:</span> {{ isset($level->name)?$level->name:'' }}</p>--}}
 
                 @if ($course->type == 'normal')
                     <p><i class="fas fa-book"></i><span class="txt">Bài giảng:</span> {{ $course->getCurriculumVideo() }} bài </p>
