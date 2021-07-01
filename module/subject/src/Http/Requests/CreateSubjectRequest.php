@@ -26,7 +26,6 @@ class CreateSubjectRequest extends FormRequest
 			'name' => 'required',
 			'slug' => 'required|unique:subject,slug',
 			'author' => 'required',
-			'icon' => 'required'
 		];
 	}
 	
@@ -40,7 +39,6 @@ class CreateSubjectRequest extends FormRequest
 			'slug.required' => 'Slug Chứng chỉ không được bỏ trống',
 			'slug.unique' => 'Slug Chứng chỉ đã được sử dụng',
 			'author.required' => 'Tác giả Chứng chỉ không được bỏ trống',
-			'icon.required' => 'Icon cho Chứng chỉ không được bỏ trống'
 		];
 	}
 }

@@ -11,14 +11,14 @@
             </div>
         </div>
 
-        <div class="box-list">
-            <h3 class="txt-title">Các khóa bán chạy </h3>
-            <div class="list-course-other">
-                @foreach($top as $c)
-                    @include('nqadmin-course::frontend.components.course.relate',['data'=>$c])
-                @endforeach
-            </div>
-        </div>
+{{--        <div class="box-list">--}}
+{{--            <h3 class="txt-title">Các khóa bán chạy </h3>--}}
+{{--            <div class="list-course-other">--}}
+{{--                @foreach($top as $c)--}}
+{{--                    @include('nqadmin-course::frontend.components.course.relate',['data'=>$c])--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 
     <div class="text-center">

@@ -22,6 +22,6 @@
         <div class="pull-left number-user">
             <i class="fas fa-user"></i> {{ $data->getTotalStudent() }}
         </div>
-        @include('nqadmin-course::frontend.components.course.price-stand',['item'=>$data])
+{{--        @include('nqadmin-course::frontend.components.course.price-stand',['item'=>$data])--}}
     </div>
 </div>

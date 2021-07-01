@@ -27,7 +27,6 @@ class EditSubjectRequest extends FormRequest
 			'name' => 'required',
 			'slug' => 'required|unique:subject,slug,'.$id.',id',
 			'editor' => 'required',
-			'icon' => 'required'
 		];
 	}
 	
@@ -41,7 +40,6 @@ class EditSubjectRequest extends FormRequest
 			'slug.required' => 'Slug Chứng chỉ không được bỏ trống',
 			'slug.unique' => 'Slug Chứng chỉ đã được sử dụng',
 			'editor.required' => 'Người chính sửa không được bỏ trống',
-			'icon.required' => 'Icon cho Chứng chỉ không được bỏ trống'
 		];
 	}
 }

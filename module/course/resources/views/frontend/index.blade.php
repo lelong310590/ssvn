@@ -33,18 +33,18 @@
                                         <li class="box-star pull-left">
                                             @include('nqadmin-course::frontend.components.course.star',['item'=>$course])
                                         </li>
-                                        <li class="pull-left">{{ $course->getTotalStudent() }} sinh viên ghi danh</li>
-                                        <li class="pull-left">Được tạo bởi: <a
-                                                    href="{{ route('front.users.profile.get',['code'=>$course->owner->getDataByKey('code_user')]) }}">{{ $course->owner->first_name }}</a></li>
+                                        <li class="pull-left">{{ $course->getTotalStudent() }} học viên đăng ký</li>
+{{--                                        <li class="pull-left">Được tạo bởi: <a--}}
+{{--                                                    href="{{ route('front.users.profile.get',['code'=>$course->owner->getDataByKey('code_user')]) }}">{{ $course->owner->first_name }}</a></li>--}}
                                         <li class="pull-left">Cập nhật lần cuối: {{ $course->updated_at->format('d-m-Y') }}</li>
-                                        <li class="pull-left">Cấp độ: {{ !empty($course->getLdp->getLevel) ? $course->getLdp->getLevel->name : '' }}</li>
+{{--                                        <li class="pull-left">Cấp độ: {{ !empty($course->getLdp->getLevel) ? $course->getLdp->getLevel->name : '' }}</li>--}}
                                         @if (!empty($course->getLdp->getClassLevel))
                                         <li class="pull-left">
                                             @php
                                                 $classLevelName = $course->getLdp->getClassLevel->name;
                                                 $classLevelSlug = $course->getLdp->getClassLevel->slug;
                                             @endphp
-                                            Trình độ: <a href="{{route('front.classlevel.index.get', $classLevelSlug)}}">{{ $classLevelName }}</a>
+                                            Đơn vị chủ quản: <a href="{{route('front.classlevel.index.get', $classLevelSlug)}}">{{ $classLevelName }}</a>
                                         </li>
                                         @endif
                                     </ul>
@@ -130,10 +130,10 @@
                         </div>
                         @endif
 
-                        @include('nqadmin-course::frontend.indexdetail.teacher')
+{{--                        @include('nqadmin-course::frontend.indexdetail.teacher')--}}
                         <!--box-info-->
 
-                        @include('nqadmin-course::frontend.indexdetail.rating')
+{{--                        @include('nqadmin-course::frontend.indexdetail.rating')--}}
                         <!--box-review-->
                         @include('nqadmin-course::frontend.indexdetail.relateteacher')
                     </div>

@@ -68,8 +68,6 @@
 								<div class="form-group">
 									<label class="form-control-label">Icon </label>
 									<input type="text"
-									       required
-									       parsley-trigger="change"
 									       class="form-control"
 									       autocomplete="off"
 									       name="icon"
