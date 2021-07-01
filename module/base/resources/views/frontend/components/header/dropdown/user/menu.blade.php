@@ -2,24 +2,24 @@
     <div class="notification clearfix">
         <a href="{{ route('front.users.my_course.get') }}">
             <i class="fas fa-shopping-cart pull-left"></i>
-            <p class="overflow">Khóa đào tạocủa tôi</p>
+            <p class="overflow">Khóa đào tạo của tôi</p>
         </a>
     </div>
 </div>
 
-<div class="messenger clearfix">
-    <a href="{{ route('front.message.index.get') }}">
-        <i class="far fa-comments pull-left"></i>
-        <p class="overflow">Tin nhắn của tôi</p>
-    </a>
-</div>
+{{--<div class="messenger clearfix">--}}
+{{--    <a href="{{ route('front.message.index.get') }}">--}}
+{{--        <i class="far fa-comments pull-left"></i>--}}
+{{--        <p class="overflow">Tin nhắn của tôi</p>--}}
+{{--    </a>--}}
+{{--</div>--}}
 
-<div class="history clearfix">
-    <a href="{{ route('front.users.history.get') }}">
-        <i class="fas fa-history pull-left"></i>
-        <p class="overflow">Lịch sử mua hàng</p>
-    </a>
-</div>
+{{--<div class="history clearfix">--}}
+{{--    <a href="{{ route('front.users.history.get') }}">--}}
+{{--        <i class="fas fa-history pull-left"></i>--}}
+{{--        <p class="overflow">Lịch sử mua hàng</p>--}}
+{{--    </a>--}}
+{{--</div>--}}
 
 <div class="mobile">
     <div class="notification clearfix">

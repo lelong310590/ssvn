@@ -131,61 +131,60 @@
                     </a>
                 @endif
 
-                @if ($course->type != 'exam')
-                <div class="clearfix box-star-change">
-                    <div class="box-star pull-left">
-                        @include('nqadmin-course::frontend.components.course.only_star',['item'=>$course->getYourRating()])
-                    </div>
+{{--                @if ($course->type != 'exam')--}}
+{{--                <div class="clearfix box-star-change">--}}
+{{--                    <div class="box-star pull-left">--}}
+{{--                        @include('nqadmin-course::frontend.components.course.only_star',['item'=>$course->getYourRating()])--}}
+{{--                    </div>--}}
 
+{{--                    <div class="overflow">--}}
+{{--                        <a href="#ratingform" class="btn-change-star" data-toggle="modal">Chỉnh sửa xếp hạng</a>--}}
+{{--                        <div class="modal fade" id="ratingform">--}}
+{{--                            <div class="modal-dialog">--}}
+{{--                                <div class="modal-content">--}}
+{{--                                    <div class="modal-header" style="background: #ffa477; color: #fff">--}}
+{{--                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #fff; opacity: 1">&times;--}}
+{{--                                        </button>--}}
+{{--                                        <h4 class="modal-title">Đánh giá {{($course->type == 'exam') ? 'bài thi' : 'Khóa đào tạo'}}</h4>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="modal-body">--}}
+{{--                                        <form style="margin-top: 15px" id="filter_form" class="box-form-default" method="post" action="{{ route('front.course.rating.post') }}">--}}
+{{--                                            <p>Mời bạn đánh giá chất lượng {{($course->type == 'exam') ? 'bài thi' : 'Khóa đào tạo'}} này</p>--}}
+{{--                                            {{ csrf_field() }}--}}
+{{--                                            <div class="box-choose box-rate">--}}
+{{--                                                @for($i=1; $i<=5; $i++)--}}
+{{--                                                    <div class="form-group form-check clearfix">--}}
+{{--                                                        <label class="pull-left">--}}
+{{--                                                            <input type="radio" name="rate" value="{{ $i }}" {{ $rating_num==$i?'checked':'' }}>--}}
+{{--                                                            <span class="icon"><i class="far fa-square"></i></span>--}}
+{{--                                                        </label>--}}
+{{--                                                        <div class="box-star pull-left" style="margin-left: 20px">--}}
+{{--                                                            <ul class="clearfix">--}}
+{{--                                                                @for($j=1; $j<=$i; $j++)--}}
+{{--                                                                    <li class="pull-left"><i class="fas fa-star"></i></li>--}}
+{{--                                                                @endfor--}}
+{{--                                                            </ul>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                @endfor--}}
 
-                    <div class="overflow">
-                        <a href="#ratingform" class="btn-change-star" data-toggle="modal">Chỉnh sửa xếp hạng</a>
-                        <div class="modal fade" id="ratingform">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header" style="background: #ffa477; color: #fff">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #fff; opacity: 1">&times;
-                                        </button>
-                                        <h4 class="modal-title">Đánh giá {{($course->type == 'exam') ? 'bài thi' : 'Khóa đào tạo'}}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form style="margin-top: 15px" id="filter_form" class="box-form-default" method="post" action="{{ route('front.course.rating.post') }}">
-                                            <p>Mời bạn đánh giá chất lượng {{($course->type == 'exam') ? 'bài thi' : 'Khóa đào tạo'}} này</p>
-                                            {{ csrf_field() }}
-                                            <div class="box-choose box-rate">
-                                                @for($i=1; $i<=5; $i++)
-                                                    <div class="form-group form-check clearfix">
-                                                        <label class="pull-left">
-                                                            <input type="radio" name="rate" value="{{ $i }}" {{ $rating_num==$i?'checked':'' }}>
-                                                            <span class="icon"><i class="far fa-square"></i></span>
-                                                        </label>
-                                                        <div class="box-star pull-left" style="margin-left: 20px">
-                                                            <ul class="clearfix">
-                                                                @for($j=1; $j<=$i; $j++)
-                                                                    <li class="pull-left"><i class="fas fa-star"></i></li>
-                                                                @endfor
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                @endfor
-
-                                                <div class="form-group">
-                                                    <label>Nội dung đánh giá của bạn: </label>
-                                                    <textarea name="contentt" class="form-control" placeholder="Viết đánh giá">{{ $rating_cont }}</textarea>
-                                                </div>
-                                                <input type="hidden" name="id" value="{{ $course->id }}">
-                                                <div class="text-center">
-                                                    <input type="submit" class="btn btn-default" value="Đánh giá">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div><!-- /.modal -->
-                    </div>
-                </div>
-                @endif
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label>Nội dung đánh giá của bạn: </label>--}}
+{{--                                                    <textarea name="contentt" class="form-control" placeholder="Viết đánh giá">{{ $rating_cont }}</textarea>--}}
+{{--                                                </div>--}}
+{{--                                                <input type="hidden" name="id" value="{{ $course->id }}">--}}
+{{--                                                <div class="text-center">--}}
+{{--                                                    <input type="submit" class="btn btn-default" value="Đánh giá">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+{{--                                </div><!-- /.modal-content -->--}}
+{{--                            </div><!-- /.modal-dialog -->--}}
+{{--                        </div><!-- /.modal -->--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                @endif--}}
 
                 @if ($course->type != 'exam')
                 <div class="box-progress">

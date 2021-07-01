@@ -46,7 +46,7 @@ $classes = ClassLevel::with('subject')->get();
                     <div class="col-md-5">
                         <h4>Thông tin</h4>
                         <ul>
-                            <li><a href="/danh-sach-khoa-hoc">Danh sách Khóa đào tạo</a></li>
+{{--                            <li><a href="/danh-sach-khoa-hoc">Danh sách Khóa đào tạo</a></li>--}}
                             <li><a href="/cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li>
                             <li><a href="/bai-viet">Thông tin hữu ích</a></li>
                         </ul>
@@ -55,7 +55,7 @@ $classes = ClassLevel::with('subject')->get();
                         <h4>Giới thiệu</h4>
                         <ul>
                             <li><a href="/gioi-thieu" class="hover-color-green">Giới thiệu</a></li>
-                            <li><a href="/tuyen-dung" class="hover-color-green">Tuyển dụng</a></li>
+{{--                            <li><a href="/tuyen-dung" class="hover-color-green">Tuyển dụng</a></li>--}}
                             <li><a href="/dao-tao-doanh-nghiep" class="hover-color-green">Đào tạo doanh nghiệp</a></li>
                         </ul>
                     </div>
@@ -81,7 +81,7 @@ $classes = ClassLevel::with('subject')->get();
 <!--footer-->
 
 <div class="copyright text-center">
-    2021 © All Rights Reserved.
+    Bản quyền thuộc về AntiCovid © 2021
 </div>
 
 <div class="box-view-fast">

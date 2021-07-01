@@ -26,7 +26,7 @@
         <div class="border-eee">
             <div class="main">
                 <div class="clearfix list">
-                    <h3 class="txt-top">Thông báo từ giáo viên</h3>
+                    <h3 class="txt-top">Thông báo từ khóa đào tạo</h3>
                 </div>
                 @foreach($answers as $a)
                     <div class="clearfix list">

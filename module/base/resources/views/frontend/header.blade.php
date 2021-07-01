@@ -57,15 +57,15 @@
                         {{--</div>--}}
                     {{--</li>--}}
 
-                    @include('nqadmin-dashboard::frontend.components.header.dropdown.cart.list')
+{{--                    @include('nqadmin-dashboard::frontend.components.header.dropdown.cart.list')--}}
 
                 </ul>
             </div>
             <div class="user right-menu hidden-xs hidden-sm">
                 @if(Auth::check())
-                    <div class="pull-left box-notification hidden-xs hidden-sm">
-                        @include('nqadmin-dashboard::frontend.components.header.dropdown.notification.list')
-                    </div>
+{{--                    <div class="pull-left box-notification hidden-xs hidden-sm">--}}
+{{--                        @include('nqadmin-dashboard::frontend.components.header.dropdown.notification.list')--}}
+{{--                    </div>--}}
                     <!--box-notification-->
 
                     <div class="pull-left box-user hidden-xs hidden-sm">

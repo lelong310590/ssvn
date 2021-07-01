@@ -67,35 +67,35 @@
 					</a>
 				</div>
 				
-				<div class="col-md-8 col-lg-8 col-xl-4">
-					<a class="activity-block primary" href="{{route('nqadmin::level.index.get')}}">
-						<div class="media">
-							<div class="media-body">
-								<h5>Quản trị trình độ</h5>
-							</div>
-						</div>
-						<br>
-						<div class="media">
-							<div class="media-body"><span class="progress-heading">Xem danh sách, thêm, sửa, xóa trình độ</span></div>
-						</div>
-						<i class="bg-icon text-center fa fa-level-up"></i>
-					</a>
-				</div>
+{{--				<div class="col-md-8 col-lg-8 col-xl-4">--}}
+{{--					<a class="activity-block primary" href="{{route('nqadmin::level.index.get')}}">--}}
+{{--						<div class="media">--}}
+{{--							<div class="media-body">--}}
+{{--								<h5>Quản trị trình độ</h5>--}}
+{{--							</div>--}}
+{{--						</div>--}}
+{{--						<br>--}}
+{{--						<div class="media">--}}
+{{--							<div class="media-body"><span class="progress-heading">Xem danh sách, thêm, sửa, xóa trình độ</span></div>--}}
+{{--						</div>--}}
+{{--						<i class="bg-icon text-center fa fa-level-up"></i>--}}
+{{--					</a>--}}
+{{--				</div>--}}
 				
-				<div class="col-md-8 col-lg-8 col-xl-4">
-					<a class="activity-block danger" href="{{route('nqadmin::pricetier.index.get')}}">
-						<div class="media">
-							<div class="media-body">
-								<h5>Quản trị tầng giá</h5>
-							</div>
-						</div>
-						<br>
-						<div class="media">
-							<div class="media-body"><span class="progress-heading">Xem danh sách, thêm, sửa, xóa tầng giá</span></div>
-						</div>
-						<i class="bg-icon text-center fa fa-dollar"></i>
-					</a>
-				</div>
+{{--				<div class="col-md-8 col-lg-8 col-xl-4">--}}
+{{--					<a class="activity-block danger" href="{{route('nqadmin::pricetier.index.get')}}">--}}
+{{--						<div class="media">--}}
+{{--							<div class="media-body">--}}
+{{--								<h5>Quản trị tầng giá</h5>--}}
+{{--							</div>--}}
+{{--						</div>--}}
+{{--						<br>--}}
+{{--						<div class="media">--}}
+{{--							<div class="media-body"><span class="progress-heading">Xem danh sách, thêm, sửa, xóa tầng giá</span></div>--}}
+{{--						</div>--}}
+{{--						<i class="bg-icon text-center fa fa-dollar"></i>--}}
+{{--					</a>--}}
+{{--				</div>--}}
 
 				<div class="col-md-8 col-lg-8 col-xl-4">
 					<a class="activity-block primary" href="{{route('nqadmin::course.enable.list')}}">

@@ -20,32 +20,32 @@
             @endif
         </p>
         <h4><a href="{{ route('front.course.buy.get',['slug'=>$item->slug]) }}">{{ $item->name }}</a></h4>
-        <div class="pro-bottom">
+{{--        <div class="pro-bottom">--}}
 
-            @if($item->checkSaleAvailable())
-                <div class="pull-left">
-                    <p class="price old">{{ number_format($item->getOriginal('price')) }} VNĐ</p>
-                </div>
-            @endif
-            <div class="pull-right">
-                <p class="price text-right">
-                    @if($item->price==0)
-                        <span>Miễn phí</span>
-                    @else
-                        <span>{{ number_format($item->price) }} </span>VNĐ
-                    @endif
-                </p>
-            </div>
+{{--            @if($item->checkSaleAvailable())--}}
+{{--                <div class="pull-left">--}}
+{{--                    <p class="price old">{{ number_format($item->getOriginal('price')) }} VNĐ</p>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+{{--            <div class="pull-right">--}}
+{{--                <p class="price text-right">--}}
+{{--                    @if($item->price==0)--}}
+{{--                        <span>Miễn phí</span>--}}
+{{--                    @else--}}
+{{--                        <span>{{ number_format($item->price) }} </span>VNĐ--}}
+{{--                    @endif--}}
+{{--                </p>--}}
+{{--            </div>--}}
 
-            {{--<span class="star-line">--}}
-                {{--<span class="active"></span>--}}
-                {{--<span></span>--}}
-                {{--<span></span>--}}
-            {{--</span>--}}
+{{--            --}}{{--<span class="star-line">--}}
+{{--                --}}{{--<span class="active"></span>--}}
+{{--                --}}{{--<span></span>--}}
+{{--                --}}{{--<span></span>--}}
+{{--            --}}{{--</span>--}}
 
-            {{--<span class="pro-view"><i class="far fa-user-tie"></i> 5</span>--}}
-            {{--<span class="pro-buy"><i class="far fa-trophy"></i> 2</span>--}}
-        </div>
+{{--            --}}{{--<span class="pro-view"><i class="far fa-user-tie"></i> 5</span>--}}
+{{--            --}}{{--<span class="pro-buy"><i class="far fa-trophy"></i> 2</span>--}}
+{{--        </div>--}}
         <ul class="pro-hover">
             <li><h4><a href="#">{{ $item->name }}</a></h4></li>
             <li class="pro-des">

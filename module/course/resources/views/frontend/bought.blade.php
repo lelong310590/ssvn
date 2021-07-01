@@ -39,11 +39,10 @@ use Illuminate\Support\Facades\DB;
                         <h3 class="txt-title-home">Về {{($course->type == 'exam') ? 'bài thi' : 'Khóa đào tạo'}} này</h3>
                         <p class="text-home">{{ nl2br(e(isset($course->getLdp->excerpt)?$course->getLdp->excerpt:'')) }}</p>
                         <div class="content-about-course">
-
                             @if ($course->type != 'exam')
                                 <div class="list clearfix">
                                 <div class="left pull-left">
-                                    <p>Bởi các con số</p>
+                                    <p>Thông tin cơ bản về khóa đào tạo</p>
                                 </div>
                                 <div class="right overflow">
                                     <div class="row">
@@ -58,7 +57,7 @@ use Illuminate\Support\Facades\DB;
                                             }
                                             ?>
                                             @isset($course->getLdp->classlevel)
-                                                <p>Cấp độ kỹ năng: {{ $classLevel->name }} </p>
+                                                <p>Khóa đào tạo dành cho đơn vị: {{ $classLevel->name }} </p>
                                             @endisset
                                         </div>
                                         <div class="col-xs-4">
@@ -69,7 +68,7 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                         <div class="col-xs-4">
                                             <?php $hs = DB::table('order_details')->where('course_id', $course->id)->distinct('customer')->count() ?>
-                                            <p>{{ $hs }} sinh viên</p>
+                                            <p>{{ $hs }} học viên</p>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +101,6 @@ use Illuminate\Support\Facades\DB;
                                     @if(!empty($course->getTarget))
                                         <?php $target = json_decode($course->getTarget)->target ?>
                                         @isset($target->who)
-
                                             @if (!empty($target->who))
                                                 <h5>Ai nên tham gia {{($course->type == 'exam') ? 'bài thi' : 'Khóa đào tạo'}}</h5>
                                                 <ul class="list-check">
@@ -123,33 +121,33 @@ use Illuminate\Support\Facades\DB;
                                             @endif
                                         @endisset
                                     @endif
-                                    <a href="javascript:void(0)" class="less"><i class="fas fa-chevron-down"></i></a>
+{{--                                    <a href="javascript:void(0)" class="less"><i class="fas fa-chevron-down"></i></a>--}}
                                 </div>
                             </div>
 
-                            <div class="list clearfix">
-                                <div class="left pull-left">
-                                    <p>Giảng viên</p>
-                                </div>
-                                <div class="right overflow">
-                                    @php
-                                        $code = $course->owner->getDataByKey('code_user');
-                                    @endphp
-                                    <div class="clearfix box-info">
-                                        <a href="{{ route('front.users.profile.get',['code' => $code ])}}" class="img pull-left">
-                                            <img src="{{asset(isset($course->owner->thumbnail)?$course->owner->thumbnail:'')}}">
-                                            <i class="fas fa-file-image"></i>
-                                        </a>
-                                        <div class="overflow">
-                                            <h4 class="name"><a href="{{ route('front.users.profile.get',['code' => $code ])}}">{{ $course->owner->first_name }}</a></h4>
-                                            <p>{{ $course->owner->position }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="content" style="white-space: pre-line;">
-                                        {!! nl2br(e($course->owner->getDataByKey('description'))) !!}
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="list clearfix">--}}
+{{--                                <div class="left pull-left">--}}
+{{--                                    <p>Giảng viên</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="right overflow">--}}
+{{--                                    @php--}}
+{{--                                        $code = $course->owner->getDataByKey('code_user');--}}
+{{--                                    @endphp--}}
+{{--                                    <div class="clearfix box-info">--}}
+{{--                                        <a href="{{ route('front.users.profile.get',['code' => $code ])}}" class="img pull-left">--}}
+{{--                                            <img src="{{asset(isset($course->owner->thumbnail)?$course->owner->thumbnail:'')}}">--}}
+{{--                                            <i class="fas fa-file-image"></i>--}}
+{{--                                        </a>--}}
+{{--                                        <div class="overflow">--}}
+{{--                                            <h4 class="name"><a href="{{ route('front.users.profile.get',['code' => $code ])}}">{{ $course->owner->first_name }}</a></h4>--}}
+{{--                                            <p>{{ $course->owner->position }}</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="content" style="white-space: pre-line;">--}}
+{{--                                        {!! nl2br(e($course->owner->getDataByKey('description'))) !!}--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                     <!--box-about-course-->

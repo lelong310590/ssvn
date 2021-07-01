@@ -3,7 +3,7 @@
         <div class="list-resources {{ $cur->id==$lecture->parent_section?'show-all':'' }}">
             <div class="top-resources">
                 <div class="left">
-                    <h4 class="title">Section: {{ $loop->iteration	 }} </h4>
+                    <h4 class="title">Học phần: {{ $loop->iteration }} </h4>
                     <p class="name">{{ $cur->name }}</p>
                 </div>
                 <div class="right">
