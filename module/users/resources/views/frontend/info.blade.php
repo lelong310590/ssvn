@@ -59,7 +59,16 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Giới tính</label>
+                                            <label class="txt-label col-xs-3 text-right">Công ty</label>
+                                            <div class="form col-xs-7">
+                                                <select class="input-form">
+                                                    @foreach($classLevel as $lv)
+                                                        <option value="{{$lv->id}}" {{$lv->id == $data->$classLevel ? 'selected' : ''}}>
+                                                            {{$lv->name}} - MST: {{$lv->mst}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-group row">

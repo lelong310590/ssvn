@@ -71,6 +71,7 @@
                                     <th>Avatar</th>
                                     <th>Email</th>
                                     <th>Vai trò</th>
+                                    <th width="150">Là đại diện doanh nghiệp ?</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tham gia </th>
                                     <th width="120">Thao tác</th>
@@ -89,6 +90,13 @@
                                         </td>
                                         <td>{{ $d->email }}</td>
                                         <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>
+                                        <td class="center text-center">
+                                            @if ($d->is_enterprise == 1)
+                                                <i class="fa fa-check " style="color: green"></i>
+                                            @else
+                                                <i class="fa fa-times " style="color: red"></i>
+                                            @endif
+                                        </td>
                                         <td class="center">
                                             {!! conver_status($d->status) !!}
                                         </td>

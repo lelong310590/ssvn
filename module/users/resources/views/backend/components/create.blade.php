@@ -118,6 +118,14 @@
 										@endforeach
 									</select>
 								</div>
+
+								<div class="form-group">
+									<label class="form-control-label">Là tài khoản doanh nghiệp ?</label>
+									<select class="custom-select form-control" name="is_enterprise">
+										<option value="0">Không</option>
+										<option value="1">Có</option>
+									</select>
+								</div>
 								
 								<div class="form-group">
 									<label class="form-control-label">Vai trò</label>

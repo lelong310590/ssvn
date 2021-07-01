@@ -411,4 +411,9 @@ class Course extends Model
     {
         return $this->belongsToMany(Users::class, 'exam_user', 'exam_id', 'user_id');
     }
+
+    public function getCompany()
+    {
+        return $this->hasOne(ClassLevel::class, 'id', 'classlevel');
+    }
 }

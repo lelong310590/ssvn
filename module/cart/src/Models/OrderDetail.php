@@ -17,7 +17,17 @@ use Users\Models\Users;
 class OrderDetail extends Model
 {
     protected $table = 'order_details';
-    protected $fillable = ['order_id', 'course_id', 'author', 'customer', 'price', 'base_price', 'coupon_id', 'status', 'last_curriculum_id'];
+    protected $fillable = [
+        'order_id',
+        'course_id',
+        'author',
+        'customer',
+        'price',
+        'base_price',
+        'coupon_id',
+        'status',
+        'last_curriculum_id'
+    ];
 
     /**
      * Relation 1 - 1 with Order

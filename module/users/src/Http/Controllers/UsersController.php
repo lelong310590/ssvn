@@ -107,14 +107,21 @@ class UsersController extends BaseController
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function getEdit($id, RoleRepository $roleRepository)
+	public function getEdit(
+	    $id,
+        RoleRepository $roleRepository,
+        ClassLevelRepository $classLevelRepository
+    )
 	{
-		
+		$classLevel = $classLevelRepository->findWhere([
+		    'status' => 'active'
+        ]);
 		$user = $this->users->find($id);
 		$roles = $roleRepository->all();
 		return view('nqadmin-users::backend.components.edit', [
 			'data' => $user,
-			'role' => $roles
+			'role' => $roles,
+            'classLevel' => $classLevel
 		]);
 	}
 	
@@ -129,8 +136,10 @@ class UsersController extends BaseController
 			} else {
 				$data = $request->except(['_token', 'email']);
 			}
+
 			$user = $this->users->update($data, $id);
 			$user->roles()->sync($data['role']);
+
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 		} catch (\Exception $e) {
 			Debugbar::addThrowable($e->getMessage());

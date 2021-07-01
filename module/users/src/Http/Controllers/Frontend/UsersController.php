@@ -15,6 +15,7 @@ use Barryvdh\Debugbar\Controllers\BaseController;
 use Base\Supports\FlashMessage;
 use Cart\Models\Order;
 use Cart\Models\OrderDetail;
+use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Models\Course;
 use Course\Models\CurriculumProgress;
 use GuzzleHttp\Exception\GuzzleException;
@@ -39,7 +40,7 @@ use Carbon\Carbon;
 
 class UsersController extends BaseController
 {
-    public function getInfo()
+    public function getInfo(ClassLevelRepository  $classLevelRepository)
     {
         $users = \Auth::user();
 
@@ -54,8 +55,14 @@ class UsersController extends BaseController
         $users->load('data');
         $users->city = $city;
         $users->province = $province;
+
+        $classLevel = $classLevelRepository->findWhere([
+            'status' => 'active'
+        ]);
+
         return view('nqadmin-users::frontend.info', [
-            'data' => $users
+            'data' => $users,
+            'classLevel' => $classLevel
         ]);
     }
 
@@ -75,6 +82,7 @@ class UsersController extends BaseController
         $input = $request->except('_token');
         $users = \Auth::user();
         $code_user = $users->getDataByKey('code_user');
+
         if ($code_user == null) {
             while (true) {
                 $code = explode('@', $users->email)[0] . strtolower(str_random(3)) . $users->id;
@@ -92,6 +100,7 @@ class UsersController extends BaseController
             ];
             UsersMeta::insert($insert);
         }
+
         foreach ($input as $key => $value) {
             if ($key == 'first_name') {
                 if ($value != '') {
@@ -453,7 +462,7 @@ class UsersController extends BaseController
                             'author_id' => \Auth::id(),
                             'course_id' => $course->id,
                             'title' => $request->title,
-                            'content' => $request->content,
+                            'content' => $request->get('content'),
                             'type' => 'normal',
                         ]);
                         $students = $course->getStudents();

@@ -38,50 +38,50 @@
 					<i class="bg-icon text-center fa fa-users"></i>
 				</a>
 			</div>
-			<div class="col-md-8 col-lg-8 col-xl-4">
-				<a class="activity-block warning" href="{{route('nqadmin::role.index.get')}}">
-					<div class="media">
-						<div class="media-body">
-							<h5>Danh sách các vai trò</h5>
-						</div>
-					</div>
-					<br>
-					<div class="media">
-						<div class="media-body"><span class="progress-heading">Danh sách các vai trò trong hệ thống</span></div>
-					</div>
-					<i class="bg-icon text-center fa fa-empire"></i>
-				</a>
-			</div>
-			
-			<div class="col-md-8 col-lg-8 col-xl-4">
-				<a class="activity-block warning" href="{{route('nqadmin::role.create.get')}}">
-					<div class="media">
-						<div class="media-body">
-							<h5>Thêm vai trò mới</h5>
-						</div>
-					</div>
-					<br>
-					<div class="media">
-						<div class="media-body"><span class="progress-heading">Thêm mới vai trò người dùng</span></div>
-					</div>
-					<i class="bg-icon text-center fa fa-empire"></i>
-				</a>
-			</div>
-			
-			<div class="col-md-8 col-lg-8 col-xl-4">
-				<a class="activity-block primary" href="{{route('nqadmin::permission.index.get')}}">
-					<div class="media">
-						<div class="media-body">
-							<h5>Danh sách quyền</h5>
-						</div>
-					</div>
-					<br>
-					<div class="media">
-						<div class="media-body"><span class="progress-heading">Danh sách các quyền trong hệ thống</span></div>
-					</div>
-					<i class="bg-icon text-center fa fa-key"></i>
-				</a>
-			</div>
+{{--			<div class="col-md-8 col-lg-8 col-xl-4">--}}
+{{--				<a class="activity-block warning" href="{{route('nqadmin::role.index.get')}}">--}}
+{{--					<div class="media">--}}
+{{--						<div class="media-body">--}}
+{{--							<h5>Danh sách các vai trò</h5>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+{{--					<br>--}}
+{{--					<div class="media">--}}
+{{--						<div class="media-body"><span class="progress-heading">Danh sách các vai trò trong hệ thống</span></div>--}}
+{{--					</div>--}}
+{{--					<i class="bg-icon text-center fa fa-empire"></i>--}}
+{{--				</a>--}}
+{{--			</div>--}}
+{{--			--}}
+{{--			<div class="col-md-8 col-lg-8 col-xl-4">--}}
+{{--				<a class="activity-block warning" href="{{route('nqadmin::role.create.get')}}">--}}
+{{--					<div class="media">--}}
+{{--						<div class="media-body">--}}
+{{--							<h5>Thêm vai trò mới</h5>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+{{--					<br>--}}
+{{--					<div class="media">--}}
+{{--						<div class="media-body"><span class="progress-heading">Thêm mới vai trò người dùng</span></div>--}}
+{{--					</div>--}}
+{{--					<i class="bg-icon text-center fa fa-empire"></i>--}}
+{{--				</a>--}}
+{{--			</div>--}}
+{{--			--}}
+{{--			<div class="col-md-8 col-lg-8 col-xl-4">--}}
+{{--				<a class="activity-block primary" href="{{route('nqadmin::permission.index.get')}}">--}}
+{{--					<div class="media">--}}
+{{--						<div class="media-body">--}}
+{{--							<h5>Danh sách quyền</h5>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+{{--					<br>--}}
+{{--					<div class="media">--}}
+{{--						<div class="media-body"><span class="progress-heading">Danh sách các quyền trong hệ thống</span></div>--}}
+{{--					</div>--}}
+{{--					<i class="bg-icon text-center fa fa-key"></i>--}}
+{{--				</a>--}}
+{{--			</div>--}}
 		</div>
 	</div>
 </div>

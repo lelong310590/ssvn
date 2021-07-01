@@ -129,6 +129,25 @@
 									<option value="other" {{ ($data->sex == 'other') ? 'selected' : '' }}>Khác</option>
 								</select>
 							</div>
+
+							<div class="form-group">
+								<label class="form-control-label">Thành viên của đơn vị</label>
+								<select class="custom-select form-control" name="classlevel">
+									<option value="">-- Chọn đơn vị ---</option>
+									@foreach($classLevel as $c)
+										<option value="{{$c->id}}" {{ ($data->classlevel == $c->id) ? 'selected' : '' }}>{{$c->name}} - MST: {{$c->mst}}</option>
+									@endforeach
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label class="form-control-label">Là tài khoản doanh nghiệp ?</label>
+								<select class="custom-select form-control" name="is_enterprise">
+									<option value="0" {{$data->is_enterprise == 0 ? 'selected' : ''}}>Không</option>
+									<option value="1" {{$data->is_enterprise == 1 ? 'selected' : ''}}>Có</option>
+								</select>
+							</div>
+
 							@if (Auth::id() != $data->id)
 								@php
 									$currentRole = !empty($data->roles()->first()) ? $data->roles()->first()->id : 0;

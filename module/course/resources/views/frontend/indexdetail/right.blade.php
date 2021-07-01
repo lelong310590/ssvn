@@ -36,7 +36,7 @@
 
                     @if (!empty($freeCurri))
                         <div class="other-preview">
-                            <p class="other-preview-title">Các bài học miễn phí</p>
+                            <p class="other-preview-title">Các nội dung trong khóa học</p>
                             <div class="other-preview-list">
                                 <div class="other-preview-list-item">
                                     <a href="javascript:;" data-link="{{$videoBaseUrl.$videoUrl}}" class="active-preview">

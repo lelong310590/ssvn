@@ -25,9 +25,15 @@ use Cache;
 
 class CourseBuyController extends BaseController
 {
-    public function getIndex($slug, CourseRepository $courseRepository, LevelRepository $levelRepository,
-                             CourseCurriculumItemsRepository $courseCurriculumItemsRepository, Request $request,
-                             QuestionRepository $questionRepository, RatingRepository $ratingRepository)
+    public function getIndex(
+        $slug,
+        CourseRepository $courseRepository,
+        LevelRepository $levelRepository,
+        CourseCurriculumItemsRepository $courseCurriculumItemsRepository,
+        Request $request,
+        QuestionRepository $questionRepository,
+        RatingRepository $ratingRepository
+    )
     {
 
         $course = Cache::remember('singleCourse-'.$slug, 60 * 60 * 24, function () use ($courseRepository, $slug) {

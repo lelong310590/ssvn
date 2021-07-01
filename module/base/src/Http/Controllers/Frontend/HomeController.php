@@ -59,14 +59,16 @@ class HomeController extends BaseController
                     ->orderBy('created_at', 'desc')
                     ->take(12);
             })
+            ->whereHas('getClassLevel', function ($q) use ($classLevel) {
+                $q->where('classlevel.id', $classLevel->classlevel);
+            })
             ->with('getRating')
             ->with(['getLdp' => function ($q) {
                 return $q->with('getClassLevel')->with('getSubject')->get();
             }])
-            ->whereHas('getClassLevel', function ($q) use ($classLevel) {
-                $q->where('classlevel.id', $classLevel);
-            })
+
             ->get();
+
         } else {
             $topNews = [];
         }
