@@ -74,6 +74,11 @@ function textCounter(field,cnt, maxlimit) {
             return false;
         });
 
+        $('#switch-login').click(function() {
+            $('#register-box').hide();
+            $('#login-box').show();
+        });
+
         $('body').click(function () {
             $('.box-search .box-dropdown, .box-view-fast, .box-dropdown-single .form-dropdown, header .box-search .box-dropdown').hide();
     });

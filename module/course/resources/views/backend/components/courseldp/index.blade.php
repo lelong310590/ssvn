@@ -69,6 +69,7 @@
             <div class="form-group">
                 <label class="form-control-label"><b>Khóa đào tạo thuộc về công ty</b></label>
                 <select class="select2 form-control" name="classlevel">
+                    <option value="">Tất cả các công ty</option>
                     @if (!empty($ldp))
                         @foreach($classLevels as $s)
                             <option value="{{$s->id}}" {{ ($ldp->classlevel == $s->id) ? 'selected' : '' }}>{{$s->name}}</option>

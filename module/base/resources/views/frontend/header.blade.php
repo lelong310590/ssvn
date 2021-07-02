@@ -99,22 +99,10 @@
                     <div class="form-user">
                         @include('nqadmin-dashboard::frontend.components.header.dropdown.user.info')
                     </div>
-                    <div class="menu-category">
-                        <div class="label-menu">
-                            Danh mục
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
                     <div class="form-user">
                         @include('nqadmin-dashboard::frontend.components.header.dropdown.user.menu')
                     </div>
                 @else
-                    <div class="menu-category">
-                        <div class="label-menu">
-                            Danh mục
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
                     <div class="form-user">
                         <div class="sign-in clearfix">
                             <a href="#login-box" class="btn-popup">

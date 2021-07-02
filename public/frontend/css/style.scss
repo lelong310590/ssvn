@@ -911,7 +911,7 @@ img {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 999;
+	z-index: 0;
 	display: none;
 }
 
@@ -8677,7 +8677,7 @@ img {
 	margin: 11px 0 !important
 }
 
-.clickModalPreview {
+.box-info-course {
 	.box-img {
 		position: relative;
 		.overlay-preview {

@@ -8,13 +8,6 @@
                 <h2>Các chương trình đào tạo mới nhất về tuyên truyền & phòng chống đại dịch Covid 19</h2>
                 <h4 class="text-center">Dành riêng cho các công ty, ban ngành, tổ chức, và đoàn thể</h4>
             @endif
-
-            @if (!auth('nqadmin')->check())
-                <h4 class="text-center">Đăng ký ngay để tham gia chương trình</h4>
-                <a class="btn vj-btn btn-popup" href="#register-box">
-                    Đăng ký
-                </a>
-            @endif
         </div>
 
 {{--        <div class="tabs">--}}

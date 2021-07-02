@@ -31,7 +31,7 @@
 
 <header class="navbar-fixed">
 	<nav class="navbar navbar-toggleable-md sign-in-header">
-		<div class="sidebar-left">  <a class="navbar-brand imglogo" href="index.html"></a> </div>
+		<div class="sidebar-left">  <a class="navbar-brand imglogo" href="{{route('front.home.index.get')}}"></a> </div>
 		<div class="col"></div>
 		<div class="sidebar-right pull-right" >
 			<ul class="navbar-nav  justify-content-end">
@@ -66,7 +66,7 @@
 		<br>
 	</div>
 	<footer class="footer-content row  justify-content-between align-items-center">
-		<div class="col-sm-8">Phát triển bởi <a href="mailto:longlengoc90@gmail.com" target="_blank" class="">longlengoc90@gmail.com</a></div>
+		<div class="col-sm-8">Phát triển bởi <a href="#" target="_blank" class="">ONEBIT VIETNAM</a></div>
 		<div class="col-sm-8 text-right"><a href="#" target="_blank" class="text-white">Chính sách</a> | <a href="#" target="_blank" class="text-white">Điều khoản sử dụng</a> </div>
 	</footer>
 </div>

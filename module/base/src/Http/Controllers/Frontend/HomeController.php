@@ -61,6 +61,8 @@ class HomeController extends BaseController
             })
             ->whereHas('getClassLevel', function ($q) use ($classLevel) {
                 $q->where('classlevel.id', $classLevel->classlevel);
+            })->orWhereHas('getClassLevel', function($or) use ($classLevel) {
+                $or->where('course_ldp.classlevel', null);
             })
             ->with('getRating')
             ->with(['getLdp' => function ($q) {
@@ -70,7 +72,17 @@ class HomeController extends BaseController
             ->get();
 
         } else {
-            $topNews = [];
+            $topNews = $courseRepository->scopeQuery(function ($query) {
+                return $query->select('slug', 'name', 'price', 'id')
+                    ->where('status', 'active')
+                    ->orderBy('created_at', 'desc')
+                    ->take(12);
+            })
+                ->with('getRating')
+                ->with(['getLdp' => function ($q) {
+                    return $q->with('getClassLevel')->with('getSubject')->get();
+                }])
+                ->get();
         }
 
         //duoc mua nhieu nhat
