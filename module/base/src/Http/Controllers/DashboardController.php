@@ -120,11 +120,16 @@ class DashboardController extends BaseController
         $companyId = $request->get('companyId');
 
         $courseInCompany = $courseRepository->with('getLdp')
-            ->whereHas('getLdp', function ($r) use ($companyId) {
-                $r->where('course_ldp.classlevel', 1);
-            })->scopeQuery(function ($q) {
+            ->scopeQuery(function ($q) {
                 return $q->where('status', 'active');
-            })->get();
+            })
+            ->whereHas('getLdp', function ($r) use ($companyId) {
+                $r->where('course_ldp.classlevel', $companyId);
+            })
+            ->orWhereHas('getLdp', function ($or) {
+                $or->where('course_ldp.classlevel', null);
+            })
+            ->get();
 
         $html = '';
 

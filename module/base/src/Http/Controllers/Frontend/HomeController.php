@@ -61,7 +61,7 @@ class HomeController extends BaseController
             })
             ->whereHas('getClassLevel', function ($q) use ($classLevel) {
                 $q->where('classlevel.id', $classLevel->classlevel);
-            })->orWhereHas('getClassLevel', function($or) use ($classLevel) {
+            })->orWhereHas('getClassLevel', function($or) {
                 $or->where('course_ldp.classlevel', null);
             })
             ->with('getRating')
