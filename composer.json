@@ -23,6 +23,7 @@
         "pragmarx/google2fa": "^2.0",
         "predis/predis": "^1.1",
         "prettus/l5-repository": "^2.6",
+        "spatie/browsershot": "3.4",
         "unisharp/laravel-filemanager": "~1.8",
         "zizaco/entrust": "5.2.x-dev"
     },

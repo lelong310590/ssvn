@@ -110,6 +110,9 @@ Route::group(['namespace' => 'Frontend'], function (Router $router) {
         ->name('nqadmin::course.lecture.learn')
         ->middleware('check-course', 'check-exam');
 
+    //Chứng chỉ
+    $router->get('/khoa-hoc/in-chung-chi', 'CertificateController@createCertificate')
+        ->name('nqadmin::course.certificate.get');
 
     //Tạo Khóa đào tạo
     $router->get('khoa-hoc/tao-khoa-hoc', 'CourseController@createCourse')

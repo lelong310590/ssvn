@@ -28,12 +28,12 @@ use Illuminate\Support\Facades\DB;
                 @include('nqadmin-course::frontend.components.box-filtered')
                 <!--box-filtered-->
 
-                    @if ($course->type != 'exam')
-                    <div class="box-active">
-                        @include('nqadmin-course::frontend.components.tab1.box-active')
-                    </div>
-                    <!--box-active-->
-                    @endif
+{{--                    @if ($course->type != 'exam')--}}
+{{--                    <div class="box-active">--}}
+{{--                        @include('nqadmin-course::frontend.components.tab1.box-active')--}}
+{{--                    </div>--}}
+{{--                    <!--box-active-->--}}
+{{--                    @endif--}}
 
                     <div class="box-about-course">
                         <h3 class="txt-title-home">Về {{($course->type == 'exam') ? 'bài thi' : 'Khóa đào tạo'}} này</h3>

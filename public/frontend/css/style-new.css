@@ -2968,6 +2968,23 @@ footer .list-unstyled li {
 	display: block;
 }
 
+.certificate-toolbar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.certificate-toolbar a {
+	width: 25px;
+	height: 25px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 15px
+}
+
 .social-icons li a i {
 	line-height: 30px;
 	text-align: center;
@@ -3720,5 +3737,10 @@ footer .list-unstyled li {
 		font-weight: 400;
 		padding-bottom: 25px;
 		line-height: 1.5;
+	}
+
+	#previewPromo .modal-header {
+		width: 100% !important;
+		margin: 0 !important;
 	}
 }

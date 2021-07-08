@@ -82,6 +82,9 @@ Route::group(['namespace' => 'Frontend'], function (Router $router) {
         $router->get('notification', 'UsersController@getNotification')
             ->name('front.users.notification.get')->middleware('auth');
 
+        $router->get('certificate', 'UsersController@getCertificate')
+            ->name('front.users.certificate.get')->middleware('auth');
+
         $router->get('history', 'UsersController@getHistory')
             ->name('front.users.history.get')->middleware('auth');
 

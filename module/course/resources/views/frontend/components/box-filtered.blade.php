@@ -9,15 +9,15 @@
             </a>
         </li>
 
-        @if ($course->type != 'exam')
-        <li class="pull-left">
-            <a href="{{ route('front.course.buy.get',['tab'=>3,'slug'=>$course->slug]) }}" class="{{ request('tab')==3?'active':'' }}">
-                Hỏi đáp Khóa đào tạo
-            </a>
-        </li>
-        <li class="pull-left">
-            <a href="{{ route('front.course.buy.get',['tab'=>4,'slug'=>$course->slug]) }}" class="{{ request('tab')==4?'active':'' }}">Thông báo</a>
-        </li>
-        @endif
+{{--        @if ($course->type != 'exam')--}}
+{{--        <li class="pull-left">--}}
+{{--            <a href="{{ route('front.course.buy.get',['tab'=>3,'slug'=>$course->slug]) }}" class="{{ request('tab')==3?'active':'' }}">--}}
+{{--                Hỏi đáp Khóa đào tạo--}}
+{{--            </a>--}}
+{{--        </li>--}}
+{{--        <li class="pull-left">--}}
+{{--            <a href="{{ route('front.course.buy.get',['tab'=>4,'slug'=>$course->slug]) }}" class="{{ request('tab')==4?'active':'' }}">Thông báo</a>--}}
+{{--        </li>--}}
+{{--        @endif--}}
     </ul>
 </div>

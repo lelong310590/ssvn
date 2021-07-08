@@ -18,6 +18,7 @@ use Cart\Models\OrderDetail;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Models\Course;
 use Course\Models\CurriculumProgress;
+use Course\Repositories\CertificateRepository;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use function GuzzleHttp\Promise\all;
@@ -647,5 +648,18 @@ class UsersController extends BaseController
         } else {
             return redirect(route('home'));
         }
+    }
+
+    public function getCertificate(
+        CertificateRepository $certificateRepository
+    )
+    {
+        $user = auth('nqadmin')->id();
+
+        $certificates = $certificateRepository->with('course')->scopeQuery(function ($q) use ($user) {
+            return $q->where('user_id', $user);
+        })->paginate(15);
+
+        return view('nqadmin-course::frontend.certificate_list', compact('certificates'));
     }
 }

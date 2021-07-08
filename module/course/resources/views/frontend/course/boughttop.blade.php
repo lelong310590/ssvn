@@ -201,8 +201,8 @@
                                         <span>{{ $course->getCurriculum->where('type', '!=', 'section')->where('status', 'active')->count() }}</span> mục hoàn thành
                                     </p>
                                 @endif
-                                @if($course->getCountFinishItem() > 0)
-                                    <a onclick="$('#confirm_reset_progress').show();return false;" href="#" class="overflow">Đặt lại tiến độ</a>
+                                @if($course->getCountFinishItem() == $course->getCurriculum->where('type', '!=', 'section')->where('status', 'active')->count())
+                                    <a href="{{route('nqadmin::course.certificate.get', ['course_id' => $course->id, 'download' => true])}}" class="overflow">In chứng chỉ</a>
                                 @endif
                             </div>
                         </div>
