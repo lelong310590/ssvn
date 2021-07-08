@@ -62,7 +62,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-xs-12 col-md-3">
                                             <div class="stats-item">
                                                 <i class="fab fa-leanpub"></i>
-                                                <p> Các khóa học: <b>{{$courses}}</b></p>
+                                                <p> Các khóa đào tạo: <b>{{$courses}}</b></p>
                                             </div>
                                         </div>
                                         @endif
@@ -108,7 +108,7 @@ use Illuminate\Support\Facades\DB;
                                                         </div>
                                                         <div class="col-xs-5">
                                                             <div class="stat-detail-item-stats">
-                                                                <p>Tổng số lao động tham gia khóa học:</p>
+                                                                <p>Tổng số lao động tham gia khóa đào tạo:</p>
                                                                 <h4 style="color: red">{{$course->getOrderDetail != null ? $course->getOrderDetail->count() : 0}}</h4>
                                                                 <p>Tổng số lao động đã hoàn thành khóa đạo tạo:</p>
                                                                 <h4 style="color: green">{{$course->certificate->count()}}</h4>
@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\DB;
                                                                     $registeredEmployers = $course->getOrderDetail->count();
                                                                     $completedEmployers = $course->certificate->count();
                                                                 @endphp
-                                                                <p>Tỷ lệ lao động tham gia khóa học:</p>
+                                                                <p>Tỷ lệ lao động tham gia khóa đào tạo:</p>
                                                                 <h4>
                                                                     @if (round($registeredEmployers/$totalEmployers * 100, 0) > 100)
                                                                         100%
@@ -129,7 +129,7 @@ use Illuminate\Support\Facades\DB;
                                                                         {{round($registeredEmployers/$totalEmployers * 100, 0)}}%
                                                                     @endif
                                                                 </h4>
-                                                                <p>Tỷ lệ lao động hoàn thành khóa học: </p>
+                                                                <p>Tỷ lệ lao động hoàn thành khóa đào tạo: </p>
                                                                 <h4>
                                                                     {{$registeredEmployers == 0 ? 0 : round($completedEmployers/$registeredEmployers * 100, 0).'%'}}
                                                                 </h4>
