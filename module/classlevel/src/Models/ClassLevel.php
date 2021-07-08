@@ -77,6 +77,6 @@ class ClassLevel extends Model
 
     public function getUsers()
     {
-        return $this->belongsTo(Users::class, 'classlevel', 'id');
+        return $this->hasMany(Users::class, 'classlevel', 'id');
     }
 }

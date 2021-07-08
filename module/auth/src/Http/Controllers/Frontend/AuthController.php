@@ -64,7 +64,9 @@ class AuthController extends BaseController
             $usersMetaRepository->create([
                 'users_id' => $user->id,
                 'meta_key' => 'autoplay',
-                'meta_value' => true
+                'meta_value' => true,
+                'status' => 'active',
+                'hard_role' => 1
             ]);
             auth()->login($user);
             return redirect()->to('/');

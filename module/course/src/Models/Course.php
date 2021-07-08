@@ -146,7 +146,7 @@ class Course extends Model
         return $this->hasMany(Advertise::class, 'course_id');
     }
 
-    function getOrderDetail()
+    public function getOrderDetail()
     {
         return $this->hasMany(OrderDetail::class, 'course_id');
     }
@@ -415,5 +415,10 @@ class Course extends Model
     public function getCompany()
     {
         return $this->hasOne(ClassLevel::class, 'id', 'classlevel');
+    }
+
+    public function certificate()
+    {
+        return $this->hasMany(Certificate::class, 'course_id', 'id');
     }
 }

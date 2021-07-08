@@ -397,15 +397,22 @@ class CourseCurriculumItemsController extends BaseController
         return $course;
     }
 
-    public function getAllQuestions(Request $request, QuestionRepository $questionRepository, TestResultRepository $testResultRepository)
+    public function getAllQuestions(
+        Request $request,
+        QuestionRepository $questionRepository,
+        TestResultRepository $testResultRepository
+    )
     {
         $lecture = $request->get('lectureid');
         $userid = $request->get('userid');
-        $questions = $questionRepository->with('getAnswer')
+        $questions = $questionRepository
+            ->with(['getAnswer' => function($r) {
+                $r->inRandomOrder();
+            }])
             ->orderBy('index', 'asc')
-            ->findWhere([
-                'curriculum_item' => $lecture['id']
-            ]);
+            ->scopeQuery(function ($q) use ($lecture) {
+                return $q->where('curriculum_item', $lecture['id']);
+            })->inRandomOrder()->get();
 
         $result = $testResultRepository->findWhere([
             'owner' => $userid,

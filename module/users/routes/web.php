@@ -57,6 +57,9 @@ Route::group(['namespace' => 'Frontend'], function (Router $router) {
         $router->get('info', 'UsersController@getInfo')
             ->name('front.users.info.get')->middleware('auth');
 
+        $router->get('thong-ke', 'UsersController@getStat')
+            ->name('fronts.user.stat.get')->middleware('auth');
+
         // POST Lấy thông tin quân huyện, khi thay đổi thành phố Ajax
         $router->post('province', 'UsersController@postProvince')
             ->name('front.users.province.post')->middleware('auth');

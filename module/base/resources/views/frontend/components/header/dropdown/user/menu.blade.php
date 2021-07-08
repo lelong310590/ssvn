@@ -21,21 +21,25 @@
 {{--    </a>--}}
 {{--</div>--}}
 
-<div class="mobile">
-    <div class="notification clearfix">
-        <a href="{{ route('front.users.notification.get') }}">
-            <i class="far fa-bell pull-left"></i>
-            <p class="overflow">Thông báo</p>
-        </a>
-    </div>
-</div>
+{{--<div class="notification clearfix">--}}
+{{--    <a href="{{ route('front.users.notification.get') }}">--}}
+{{--        <i class="far fa-bell pull-left"></i>--}}
+{{--        <p class="overflow">Thông báo</p>--}}
+{{--    </a>--}}
+{{--</div>--}}
 
-<div class="support clearfix">
-    <a href="#">
-        <i class="far fa-question-circle pull-left"></i>
-        <p class="overflow">Trợ giúp</p>
-    </a>
-</div>
+@if (Auth::check())
+    @php $hardRole = Auth::user()->hard_role @endphp
+    @if (intval($hardRole) > 1)
+        <div class="sign-out clearfix">
+            <a href="{{ route('fronts.user.stat.get') }}">
+                <i class="fas fa-chart-bar pull-left"></i>
+                <p class="overflow">Thống kê</p>
+            </a>
+        </div>
+    @endif
+@endif
+
 <div class="sign-out clearfix">
     <a href="{{ route('front.logout.get') }}">
         <i class="far fa-share-square pull-left"></i>

@@ -141,10 +141,12 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-control-label">Là tài khoản doanh nghiệp ?</label>
-								<select class="custom-select form-control" name="is_enterprise">
-									<option value="0" {{$data->is_enterprise == 0 ? 'selected' : ''}}>Không</option>
-									<option value="1" {{$data->is_enterprise == 1 ? 'selected' : ''}}>Có</option>
+								<label class="form-control-label">Phân quyền cứng ?</label>
+								<select class="custom-select form-control" name="hard_role">
+									<option value="1" {{$data->hard_rol == '1' ? 'selected' : ''}}>Học viên</option>
+									<option value="2" {{$data->hard_rol == '2' ? 'selected' : ''}}>Quản lý cấp đơn vị</option>
+									<option value="3" {{$data->hard_rol == '3' ? 'selected' : ''}}>Quản lý cấp sở</option>
+									<option value="4" {{$data->hard_rol == '4' ? 'selected' : ''}}>Quản lý cấp bộ</option>
 								</select>
 							</div>
 

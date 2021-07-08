@@ -86,6 +86,12 @@ $classes = ClassLevel::with('subject')->get();
 
 <div class="mobile-fixed-bar hidden-md hidden-lg">
     @if (Auth::check())
+        <a href="{{route('front.users.certificate.get')}}">
+            <i class="fa fa-certificate" aria-hidden="true"></i>
+            <span>Chứng chỉ</span>
+        </a>
+    @endif
+    @if (Auth::check())
         <a href="{{route('front.users.info.get')}}">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
             <span>Tài khoản</span>

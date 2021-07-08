@@ -120,10 +120,12 @@
 								</div>
 
 								<div class="form-group">
-									<label class="form-control-label">Là tài khoản doanh nghiệp ?</label>
-									<select class="custom-select form-control" name="is_enterprise">
-										<option value="0">Không</option>
-										<option value="1">Có</option>
+									<label class="form-control-label">Phân quyền cứng ?</label>
+									<select class="custom-select form-control" name="hard_role">
+										<option value="1">Học viên</option>
+										<option value="2">Quản lý cấp đơn vị</option>
+										<option value="3">Quản lý cấp sở</option>
+										<option value="4">Quản lý cấp bộ</option>
 									</select>
 								</div>
 								

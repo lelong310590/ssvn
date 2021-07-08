@@ -662,4 +662,60 @@ class UsersController extends BaseController
 
         return view('nqadmin-course::frontend.certificate_list', compact('certificates'));
     }
+
+    public function getStat(
+        Request $request,
+        ClassLevelRepository $classLevelRepository,
+        CourseRepository $courseRepository,
+        CertificateRepository $certificateRepository,
+        UsersRepository $usersRepository
+    )
+    {
+        $user = auth('nqadmin')->user();
+        if (intval($user->hard_role) < 1) {
+            return redirect()->back()->withErrors('Bạn không có quyền xem nội dung này');
+        }
+
+        $courseInCompany = [];
+        $selectedCompany = false;
+        $company = $classLevelRepository->findWhere([
+            'status' => 'active'
+        ]);
+
+        $certificates = $certificateRepository->count();
+
+        $courses = $courseRepository->findWhere([
+            'status' => 'active'
+        ])->count();
+
+        $employers = $usersRepository->findWhere([
+            'status' => 'active',
+        ])->count();
+
+        if ($request->get('company') != null) {
+            $currentCompany = $request->get('company');
+            $selectedCompany = $classLevelRepository->with('getUsers')->find($currentCompany);
+            $courseInCompany = $courseRepository
+                ->with('getLdp')
+                ->with('certificate')
+                ->whereHas('getLdp', function ($r) use ($currentCompany) {
+                    $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
+                })
+                ->with('getOrderDetail', function ($r) {
+                    $r->distinct('customer');
+                })
+                ->scopeQuery(function ($q) use ($currentCompany) {
+                    return $q->where('status', 'active');
+                })->get();
+        }
+
+        return view('nqadmin-users::frontend.stat', compact(
+            'company',
+            'courseInCompany',
+            'selectedCompany',
+            'certificates',
+            'courses',
+            'employers'
+        ));
+    }
 }

@@ -27,6 +27,6 @@ class HookProvider extends ServiceProvider
 
     private function booted()
     {
-        add_action('nqadmin-register-menu', [CartHook::class, 'handle'], 50);
+//        add_action('nqadmin-register-menu', [CartHook::class, 'handle'], 50);
     }
 }

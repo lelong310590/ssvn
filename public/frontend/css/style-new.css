@@ -3299,6 +3299,62 @@ footer .list-unstyled li {
 	color: #fff;
 }
 
+.stat-title {
+	font-weight: 700;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.stats-item {
+	border-radius: 4px;
+	padding: 15px;
+	border: 1px solid #d7d7d7
+}
+
+.stats-item i {
+	font-size: 30px;
+	margin-bottom: 15px;
+}
+
+.stats-tool {
+	margin-top: 25px
+}
+
+.stat-detail-item {
+	padding: 15px;
+	border: 1px solid #d7d7d7;
+	margin: 15px 0
+}
+
+.stat-detail-item-course-thumbnail {
+	padding-right: 15px;
+	border-right: 1px solid #eee
+}
+
+.stat-detail-item-course-thumbnail p {
+	margin: 10px 0 0;
+	padding: 0
+}
+
+.stat-detail-item-stats p {
+	font-size: 12px
+}
+
+.stat-detail-item-stats h4 {
+	font-weight: 700;
+}
+
+.stat-detail-company-info {
+	background: #eee;
+	border-radius: 4px;
+	padding: 15px
+}
+
+.stat-detail-company-info p {
+	margin: 0;
+	padding: 0;
+}
+
 @media all and (max-width: 1023px) {
 	header.main .logo img {
 		width: 150px;
