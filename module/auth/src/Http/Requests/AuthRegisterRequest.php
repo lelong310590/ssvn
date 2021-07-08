@@ -21,7 +21,7 @@ class AuthRegisterRequest extends FormRequest
     {
         return [
             'first_name' => 'required',
-            'email' => 'email|required|min:5|unique:users,email',
+            'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/', 'unique:users'],
             'password' => 'required',
         ];
     }
@@ -30,12 +30,11 @@ class AuthRegisterRequest extends FormRequest
     {
         return [
             'first_name.required' => 'Tên không được bỏ trống',
-            'email.required' => 'Email không được bỏ trống',
-            'email.min' => 'Độ dài tối thiểu cho tên đăng nhập là 5 ký tự',
+            'phone.required' => 'Số điện thoại không được bỏ trống',
+            'phone.regex' => 'Số điện thoại đúng',
+            'phone.unique' => 'Số điện thoại đã tồn tại',
             'password.required' => 'Mật khẩu không được bỏ trống',
-            'email.email' => 'Email sai định dạng',
             'name.required' => 'Tên đăng nhập không được bỏ trống',
-            'email.unique' => 'Email đã tồn tại'
         ];
     }
 }

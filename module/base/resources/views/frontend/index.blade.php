@@ -8,6 +8,9 @@
 	@include('nqadmin-dashboard::frontend.components.courselist')
 
 	<div class="vj-downloadapp">
+		<div class="container">
+			<img src="{{asset('frontend/images/download-app.jpg')}}" alt="" class="img-responsive">
+		</div>
 {{--		<div class="container">--}}
 {{--			<h3>Học từ mọi nơi</h3>--}}
 {{--			<p>Tham gia các khóa đào tạo khi đang di chyuển bằng ứng dụng anticovid — truyền trực tuyến trên máy bay, tàu điện ngầm hoặc bất cứ nơi nào bạn học tốt nhất</p>--}}

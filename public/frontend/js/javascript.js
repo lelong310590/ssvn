@@ -79,6 +79,11 @@ function textCounter(field,cnt, maxlimit) {
             $('#login-box').show();
         });
 
+        $('.switch-register').click(function() {
+            $('#login-box').hide();
+            $('#register-box').show();
+        });
+
         $('body').click(function () {
             $('.box-search .box-dropdown, .box-view-fast, .box-dropdown-single .form-dropdown, header .box-search .box-dropdown').hide();
     });

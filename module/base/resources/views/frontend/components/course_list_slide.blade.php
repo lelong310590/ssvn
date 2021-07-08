@@ -46,27 +46,27 @@
 {{--            --}}{{--<span class="pro-view"><i class="far fa-user-tie"></i> 5</span>--}}
 {{--            --}}{{--<span class="pro-buy"><i class="far fa-trophy"></i> 2</span>--}}
 {{--        </div>--}}
-        <ul class="pro-hover">
-            <li><h4><a href="#">{{ $item->name }}</a></h4></li>
-            <li class="pro-des">
-                {{str_limit(strip_tags($description), 150, '..')}}
-            </li>
-            <li><a href="{{ route('front.course.buy.get',['slug'=>$item->slug]) }}" class="btn vj-btn vj-more">Chi tiết</a></li>
-            <li class="pro-star">
-                @for($i=1; $i <= 5; $i++)
-                    @if($i<=$item->getAverageRating())
-                        <i class="fas fa-star"></i>
-                    @endif
-                    @if($i>$item->getAverageRating())
-                        @if($i-$item->getAverageRating()==0.5)
-                            <i class="fas fa-star-half"></i>
-                        @else
-                            <i class="far fa-star"></i>
-                        @endif
-                    @endif
-                @endfor
-            </li>
-        </ul>
+{{--        <ul class="pro-hover">--}}
+{{--            <li><h4><a href="#">{{ $item->name }}</a></h4></li>--}}
+{{--            <li class="pro-des">--}}
+{{--                {{str_limit(strip_tags($description), 150, '..')}}--}}
+{{--            </li>--}}
+{{--            <li><a href="{{ route('front.course.buy.get',['slug'=>$item->slug]) }}" class="btn vj-btn vj-more">Chi tiết</a></li>--}}
+{{--            <li class="pro-star">--}}
+{{--                @for($i=1; $i <= 5; $i++)--}}
+{{--                    @if($i<=$item->getAverageRating())--}}
+{{--                        <i class="fas fa-star"></i>--}}
+{{--                    @endif--}}
+{{--                    @if($i>$item->getAverageRating())--}}
+{{--                        @if($i-$item->getAverageRating()==0.5)--}}
+{{--                            <i class="fas fa-star-half"></i>--}}
+{{--                        @else--}}
+{{--                            <i class="far fa-star"></i>--}}
+{{--                        @endif--}}
+{{--                    @endif--}}
+{{--                @endfor--}}
+{{--            </li>--}}
+{{--        </ul>--}}
     </li>
     @endforeach
 </ul>

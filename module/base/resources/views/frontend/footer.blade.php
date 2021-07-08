@@ -84,6 +84,26 @@ $classes = ClassLevel::with('subject')->get();
     Bản quyền thuộc về AntiCovid © 2021
 </div>
 
+<div class="mobile-fixed-bar hidden-md hidden-lg">
+    @if (Auth::check())
+        <a href="{{route('front.users.info.get')}}">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+            <span>Tài khoản</span>
+        </a>
+    @endif
+    <a href="{{route('front.home.index.get')}}">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>Trang chủ</span>
+    </a>
+
+    @if (Auth::check())
+        <a href="{{route('front.users.notification.get')}}">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            <span>Thông báo</span>
+        </a>
+    @endif
+</div>
+
 <div class="box-view-fast">
 
 </div>

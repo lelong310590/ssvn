@@ -20,7 +20,7 @@ class AuthLoginRequest extends FormRequest
 	public function rules()
 	{
 		return [
-            'email' => 'email|required',
+            'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
 			'password' => 'required'
 		];
 	}
@@ -28,9 +28,9 @@ class AuthLoginRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'email.required' => 'Tên đăng nhập không được bỏ trống',
+            'phone.required' => 'Số điện thoại không được bỏ trống',
+            'phone.regex' => 'Số điện thoại đúng',
 			'password.required' => 'Mật khẩu không được bỏ trống',
-            'email.email'=>'Email sai định dạng',
 		];
 	}
 }

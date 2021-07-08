@@ -49,52 +49,39 @@ class HomeController extends BaseController
 
         $currentCompany = false;
         //moi nhat
-//        if (auth('nqadmin')->check()) {
-//            $classLevel = auth('nqadmin')->user();
-//            $currentCompany = $classLevelRepository->find($classLevel)->first();
-//            $topNews = $courseRepository->scopeQuery(function ($query) {
-//                return $query->select('slug', 'name', 'price', 'id')
-//                    ->where('status', 'active')
-//                    ->orderBy('created_at', 'desc')
-//                    ->take(12);
-//            })
-//            ->whereHas('getClassLevel', function ($q) use ($classLevel) {
-//                $q->where('classlevel.id', $classLevel->classlevel);
-//            })->orWhereHas('getClassLevel', function($or) {
-//                $or->where('course_ldp.classlevel', null);
-//            })
-//            ->with('getRating')
-//            ->with(['getLdp' => function ($q) {
-//                return $q->with('getClassLevel')->with('getSubject')->get();
-//            }])
-//
-//            ->get();
-//
-//        } else {
-//            $topNews = $courseRepository->scopeQuery(function ($query) {
-//                return $query->select('slug', 'name', 'price', 'id')
-//                    ->where('status', 'active')
-//                    ->orderBy('created_at', 'desc')
-//                    ->take(12);
-//            })
-//                ->with('getRating')
-//                ->with(['getLdp' => function ($q) {
-//                    return $q->with('getClassLevel')->with('getSubject')->get();
-//                }])
-//                ->get();
-//        }
-
-        $topNews = $courseRepository->scopeQuery(function ($query) {
-            return $query->select('slug', 'name', 'price', 'id')
-                ->where('status', 'active')
-                ->orderBy('created_at', 'desc')
-                ->take(12);
-        })
+        if (auth('nqadmin')->check()) {
+            $classLevel = auth('nqadmin')->user();
+            $currentCompany = $classLevelRepository->find($classLevel)->first();
+            $topNews = $courseRepository
             ->with('getRating')
             ->with(['getLdp' => function ($q) {
                 return $q->with('getClassLevel')->with('getSubject')->get();
             }])
+            ->scopeQuery(function ($query) {
+                return $query->select('slug', 'name', 'price', 'id')
+                    ->where('status', 'active')
+                    ->orderBy('created_at', 'desc')
+                    ->take(12);
+            })
+            ->whereHas('getClassLevel', function ($q) use ($classLevel) {
+                $q->where('classlevel.id', $classLevel->classlevel)
+                ->orWhere('course_ldp.classlevel', null);
+            })
             ->get();
+
+        } else {
+            $topNews = $courseRepository->scopeQuery(function ($query) {
+                return $query->select('slug', 'name', 'price', 'id')
+                    ->where('status', 'active')
+                    ->orderBy('created_at', 'desc')
+                    ->take(12);
+            })
+                ->with('getRating')
+                ->with(['getLdp' => function ($q) {
+                    return $q->with('getClassLevel')->with('getSubject')->get();
+                }])
+                ->get();
+        }
 
         //duoc mua nhieu nhat
         $topAll = $courseRepository->scopeQuery(function ($query) {

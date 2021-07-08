@@ -36,6 +36,7 @@ class TestOpenContent extends Component
                 </div>
                 <div className="add-content-wrapper">
                     <ul className="add-content-wrapper-list text-center">
+                        {1 === 0 &&
                         <li className="content-type-selector quiz-selector">
                             <button
                                 onClick={() => this.handleOpenQuizAdd(value, true)}
@@ -45,18 +46,20 @@ class TestOpenContent extends Component
                                 <p className="">Một đáp án</p>
                             </button>
                         </li>
-
-                        {1 === 0 &&
-                            <li className="content-type-selector quiz-selector">
-                                <button
-                                    onClick={() => this.handleMultiQForm(value, true)}
-                                >
-                                    <i className="fa fa-file-text-o content-type-icon"></i>
-                                    <i className="fa fa-file-text-o content-type-icon-hover"></i>
-                                    <span className="">Nhiều đáp án</span>
-                                </button>
-                            </li>
                         }
+
+
+                        <li className="content-type-selector quiz-selector">
+                            <button
+                                onClick={() => this.handleMultiQForm(value, true)}
+                            >
+                                <i className="fa fa-file-text-o content-type-icon"></i>
+                                <i className="fa fa-file-text-o content-type-icon-hover"></i>
+                                {/*<p className="">Nhiều đáp án</p>*/}
+                                <p className="">Tạo câu hỏi</p>
+                            </button>
+                        </li>
+
                     </ul>
                 </div>
             </div>

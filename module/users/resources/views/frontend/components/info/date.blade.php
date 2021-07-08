@@ -3,7 +3,7 @@ $meta_value = $data->data->where('meta_key', $name)->first();
 $date = $meta_value ? $meta_value->meta_value : '0-0-0';
 $date = explode('-', $date);
 ?>
-<div class="form col-xs-7">
+<div class="form col-xs-12 col-md-7">
     <div class="box-select pull-left">
         <input type="hidden" name="{{ $name }}[]" class="{{ $name }}_value" value="{{ $date[0] }}">
         <span class="txt-find input-form width85 {{ $name }}_show">{{ $date[0]?$date[0]:'Ngày' }}</span>

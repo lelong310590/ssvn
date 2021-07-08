@@ -50,7 +50,7 @@ trait Auth
 	protected function sendFailedLoginResponse(Request $request)
 	{
 		throw ValidationException::withMessages([
-			$this->username() => 'Tài khoản hoặc mật khẩu không đúng',
+			$this->username() => 'Thông tin đăng nhập không chính xác',
 		]);
 	}
 	
@@ -81,7 +81,7 @@ trait Auth
 	 */
 	public function username()
 	{
-		return 'email';
+		return 'phone';
 	}
 
 }

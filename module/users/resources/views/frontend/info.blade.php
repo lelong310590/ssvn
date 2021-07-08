@@ -32,7 +32,7 @@
                                         <h4 class="txt-title">Cập nhật thông tin cá nhân</h4>
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Họ và tên</label>
-                                            <div class="form col-xs-7">
+                                            <div class="form col-xs-12 col-md-7">
                                                 <input type="text" class="input-form" value="{{ $data->first_name }}"
                                                        name="first_name">
                                             </div>
@@ -60,7 +60,7 @@
 
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Công ty</label>
-                                            <div class="form col-xs-7">
+                                            <div class="form col-xs-12 col-md-7">
                                                 <select class="input-form">
                                                     @foreach($classLevel as $lv)
                                                         <option value="{{$lv->id}}" {{$lv->id == $data->classlevel ? 'selected' : ''}}>

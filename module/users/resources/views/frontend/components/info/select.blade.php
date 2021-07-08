@@ -10,7 +10,7 @@ if ($name == 'position') {
 }
 
 ?>
-<div class="form col-xs-7">
+<div class="form col-xs-12 col-md-7">
     <div class="box-select">
         <input type="hidden" name="{{ $name }}[]" class="{{ $name }}_value" value="{{ $key=$meta_value?$meta_value->meta_value:'' }}">
         <span class="txt-find input-form {{ isset($type)?'width120':0 }} {{ $name }}_show">{{ isset($options[$key])?$options[$key]:'Chọn' }}</span>

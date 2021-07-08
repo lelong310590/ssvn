@@ -20,7 +20,7 @@ class AuthRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'email' => 'required|min:5',
+			'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
 			'password' => 'required'
 		];
 	}
@@ -28,8 +28,9 @@ class AuthRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'email.required' => 'Tên đăng nhập không được bỏ trống',
-			'email.min' => 'Độ dài tối thiểu cho tên đăng nhập là 5 ký tự',
+			'phone.required' => 'Số điện thoại không được bỏ trống',
+			'phone.regex' => 'Số điện thoại đúng',
+			'phone.unique' => 'Số điện thoại đã tồn tại',
 			'password.required' => 'Mật khẩu không được bỏ trống'
 		];
 	}

@@ -55,7 +55,7 @@
 			@endif
 			
 			<label  class="sr-only">Tài khoản</label>
-			<input type="text" class="form-control" placeholder="Email" name="email">
+			<input type="phone" class="form-control" placeholder="Số điện thoại" name="phone">
 			<br>
 			<label class="sr-only">Mật khẩu</label>
 			<input type="password" class="form-control" placeholder="Mật khẩu" name="password">

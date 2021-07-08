@@ -9,66 +9,75 @@
 
 <header class="main">
     <div class="container">
-        <a href="javascript:void(0)" class="mb__menu-main menu-category"><i class="fas fa-bars"></i></a>
-        <a href="{{route('front.home.index.get')}}" class="logo"><img src="{{asset('frontend/images/icons/logo.png')}}" alt="anticovid" title="Khóa đào tạo" /></a>
+        <div class="header-wrapper">
+            <a href="{{route('front.home.index.get')}}" class="logo">
+                <img src="{{asset('frontend/images/icons/logo.png')}}" alt="anticovid" title="Khóa đào tạo" />
+            </a>
+
+            @if (!Auth::check())
+            <div class="mobile-action hidden-md hidden-lg">
+                <a href="#login-box" class="btn-link btn-popup">Đăng nhập</a>
+            </div>
+            @endif
+        </div>
         <nav class="main">
-{{--            <a href="javascript:void(0)" class="mb_menu_close"><i class="fal fa-times"></i></a>--}}
-{{--            <div class="menu">--}}
-{{--                <ul class="menu-main">--}}
-{{--                    <li>--}}
-{{--                        <a href="javascript:void(0)">Danh mục <i class="far fa-chevron-down"></i></a>--}}
-{{--                        @if (Agent::isDesktop())--}}
-{{--                        <ul class="menu-sub">--}}
-{{--                            @foreach($classes as $class)--}}
-{{--                            <li>--}}
-{{--                                <h5><a href="{{ route('front.classlevel.index.get', ['slug' => $class->slug]) }}">{{ $class->name }}</a></h5>--}}
-{{--                                <ul>--}}
-{{--                                    @foreach($class->subject as $sub)--}}
-{{--                                        <li><a href="{{route('front.subject.index.get', ['class' => $class->slug, 'subject' => $sub->slug])}}">{{ $sub->name }}</a></li>--}}
-{{--                                    @endforeach--}}
-{{--                                </ul>--}}
-{{--                            </li>--}}
-{{--                            @endforeach--}}
-{{--                        </ul>--}}
-{{--                        @endif--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
+            {{--            <a href="javascript:void(0)" class="mb_menu_close"><i class="fal fa-times"></i></a>--}}
+            {{--            <div class="menu">--}}
+            {{--                <ul class="menu-main">--}}
+            {{--                    <li>--}}
+            {{--                        <a href="javascript:void(0)">Danh mục <i class="far fa-chevron-down"></i></a>--}}
+            {{--                        @if (Agent::isDesktop())--}}
+            {{--                        <ul class="menu-sub">--}}
+            {{--                            @foreach($classes as $class)--}}
+            {{--                            <li>--}}
+            {{--                                <h5><a href="{{ route('front.classlevel.index.get', ['slug' => $class->slug]) }}">{{ $class->name }}</a></h5>--}}
+            {{--                                <ul>--}}
+            {{--                                    @foreach($class->subject as $sub)--}}
+            {{--                                        <li><a href="{{route('front.subject.index.get', ['class' => $class->slug, 'subject' => $sub->slug])}}">{{ $sub->name }}</a></li>--}}
+            {{--                                    @endforeach--}}
+            {{--                                </ul>--}}
+            {{--                            </li>--}}
+            {{--                            @endforeach--}}
+            {{--                        </ul>--}}
+            {{--                        @endif--}}
+            {{--                    </li>--}}
+            {{--                </ul>--}}
+            {{--            </div>--}}
             <div class="support">
                 <ul>
-{{--                    <li class="vj-isteacher hidden-xs hidden-sm">--}}
-{{--                        <a href="{{Auth::check() ? 'javascript:;' : route('front.home.trothanhgiaovien')}}">--}}
-{{--                            {{Auth::check() ? 'Giáo viên' : 'Trở thành giáo viên'}}--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    {{--                    <li class="vj-isteacher hidden-xs hidden-sm">--}}
+                    {{--                        <a href="{{Auth::check() ? 'javascript:;' : route('front.home.trothanhgiaovien')}}">--}}
+                    {{--                            {{Auth::check() ? 'Giáo viên' : 'Trở thành giáo viên'}}--}}
+                    {{--                        </a>--}}
+                    {{--                    </li>--}}
 
                     {{--<li class="vj-search">--}}
-                        {{--<form method="get" action="{{ route('front.home.search') }}">--}}
-                        {{--<label class="btn-search">--}}
-                            {{--<input class="search-ipt" type="text" name="q" value="{{ request('q') }}" autocomplete="off"/>--}}
-                            {{--<button type="submit" class="btn btn-search">--}}
-                                {{--<i class="fal fa-search"></i>--}}
-                            {{--</button>--}}
-                        {{--</label>--}}
-                        {{--</form>--}}
+                    {{--<form method="get" action="{{ route('front.home.search') }}">--}}
+                    {{--<label class="btn-search">--}}
+                    {{--<input class="search-ipt" type="text" name="q" value="{{ request('q') }}" autocomplete="off"/>--}}
+                    {{--<button type="submit" class="btn btn-search">--}}
+                    {{--<i class="fal fa-search"></i>--}}
+                    {{--</button>--}}
+                    {{--</label>--}}
+                    {{--</form>--}}
 
-                        {{--<div class="box-dropdown" id="search_dropdown">--}}
+                    {{--<div class="box-dropdown" id="search_dropdown">--}}
 
-                        {{--</div>--}}
+                    {{--</div>--}}
                     {{--</li>--}}
 
-{{--                    @include('nqadmin-dashboard::frontend.components.header.dropdown.cart.list')--}}
+                    {{--                    @include('nqadmin-dashboard::frontend.components.header.dropdown.cart.list')--}}
 
                 </ul>
             </div>
-            <div class="user right-menu hidden-xs hidden-sm">
+            <div class="user right-menu">
                 @if(Auth::check())
-{{--                    <div class="pull-left box-notification hidden-xs hidden-sm">--}}
-{{--                        @include('nqadmin-dashboard::frontend.components.header.dropdown.notification.list')--}}
-{{--                    </div>--}}
-{{--                    <!--box-notification-->--}}
+                    {{--                    <div class="pull-left box-notification hidden-xs hidden-sm">--}}
+                    {{--                        @include('nqadmin-dashboard::frontend.components.header.dropdown.notification.list')--}}
+                    {{--                    </div>--}}
+                    {{--                    <!--box-notification-->--}}
 
-                    <div class="pull-left box-user hidden-xs hidden-sm">
+                    <div class="pull-left box-user">
                         <div class="img-user">
                             @include('nqadmin-users::frontend.components.user.thumbnail',['user'=>Auth::user()])
                         </div>
@@ -170,19 +179,6 @@
             <div class="popup-register">
                 <div class="left">
                     <h3 class="txt-popup">Đăng ký</h3>
-                    <div class="login-other text-center">
-                        <a href="{{ route('front.sociallogin.redirect',['social'=>'google']) }}" class="google">
-                            <i class="fab fa-google"></i>
-                            Với Google
-                        </a>
-                        <a href="{{ route('front.sociallogin.redirect',['social'=>'facebook']) }}" class="facebook">
-                            <i class="fab fa-facebook-square"></i>
-                            Với Facebook
-                        </a>
-                    </div>
-                    <div class="text-change-login text-center">
-                        <p><span>Hoặc</span></p>
-                    </div>
                     <form class="form-signin1 full_side text-white" action="{{ route('front.register.post') }}" method="post">
                         {{ csrf_field() }}
                         <div class="box-form-default">
@@ -190,10 +186,10 @@
                                 <input type="text" class="input-form" name="first_name" placeholder="Tên đầy đủ" required/>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="input-form" name="email" placeholder="Email" required/>
+                                <input type="phone" class="input-form" name="phone" placeholder="Số điện thoại" required/>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="input-form" name="password" placeholder="Password" required/>
+                                <input type="password" class="input-form" name="password" placeholder="Mật khẩu" required/>
                             </div>
                             <div class="form-group">
                                 <select class="input-form" name="classlevel">
@@ -230,27 +226,14 @@
             <div class="popup-login">
                 <div class="left">
                     <h3 class="txt-popup">Đăng nhập</h3>
-                    <div class="login-other text-center">
-                        <a href="{{ route('front.sociallogin.redirect',['social'=>'google']) }}" class="google">
-                            <i class="fab fa-google"></i>
-                            Với Google
-                        </a>
-                        <a href="{{ route('front.sociallogin.redirect',['social'=>'facebook']) }}" class="facebook">
-                            <i class="fab fa-facebook-square"></i>
-                            Với Facebook
-                        </a>
-                    </div>
-                    <div class="text-change-login text-center">
-                        <p><span>Hoặc</span></p>
-                    </div>
                     <form class="form-signin1 full_side text-white" action="{{ route('front.login.post') }}" method="post">
                         {{ csrf_field() }}
                         <div class="box-form-default">
                             <div class="form-group">
-                                <input type="text" class="input-form" placeholder="Email" name="email">
+                                <input type="phone" class="input-form" placeholder="Số điện thoại" name="phone">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="input-form" placeholder="Password" name="password">
+                                <input type="password" class="input-form" placeholder="Mật khẩu" name="password">
                             </div>
                             <div class="clearfix box-btn text-center">
                                 <button type="submit" class="btn btn-default-yellow btn-small">Đăng nhập</button>

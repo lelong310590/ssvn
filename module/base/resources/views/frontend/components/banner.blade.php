@@ -1,6 +1,7 @@
-<div class="banner">
-    <div class="container">
+<div class="container">
+    <div class="banner">
         <div class="banner-wrap text-center">
+            <img src="{{asset('frontend/images/banner-bg.jpg')}}" alt="" class="img-responsive">
 {{--            <h1>Kênh thông tin tuyên truyền và chia sẻ kiến thức về phòng chống đại dịch COVID 19</h1>--}}
 {{--            <p class="text-center">Dành cho các tổ chức, công ty, ban ngành và đoàn thể</p>--}}
         </div>
