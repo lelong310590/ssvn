@@ -670,7 +670,7 @@ header nav .menu .menu-main > li:hover > a {
 }
 
 .product-list ul:not(.pro-hover) > li .pro-lbl {
-	padding: 0 12px 12px;
+	padding: 0;
 }
 
 .product-list ul:not(.pro-hover) > li .pro-lbl .btn {
@@ -2468,7 +2468,11 @@ header nav .menu .menu-main > li:hover > a {
 }
 
 .product-list ul:not(.pro-hover) > li .pro-lbl {
-	padding: 0 12px 12px;
+	padding: 0;
+}
+
+.pro-lbl .vj-btn {
+	white-space: normal!important;
 }
 
 .product-list ul:not(.pro-hover) > li .pro-lbl .btn {
