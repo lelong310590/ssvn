@@ -96,12 +96,12 @@ class TestResultController extends BaseController
                     $converDf[] = $df->id;
                 }
 
+                // Kiem tra dap an
                 if ($answers == $converDf) {
                     $correct = true;
                 } else {
                     $wrong = true;
                 }
-
 
             } else {
                 $defaultAnwsers = $answerRepository->findWhere([

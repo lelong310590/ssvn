@@ -49,7 +49,8 @@ use Illuminate\Support\Facades\DB;
                                                         <a href="{{ asset($c->image) }}" download="true">
                                                             <i class="fa fa-cloud-download" aria-hidden="true"></i>
                                                         </a>
-                                                        <a href="{{ asset($c->image) }}" target="_blank">
+
+                                                        <a data-fancybox="single" href="{{ asset($c->image) }}">
                                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                                         </a>
                                                     </div>
@@ -74,3 +75,11 @@ use Illuminate\Support\Facades\DB;
     <!--main-page-->
 
 @endsection
+
+@push('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
+@endpush
+
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+@endpush

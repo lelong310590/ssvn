@@ -50,8 +50,8 @@ class HomeController extends BaseController
         $currentCompany = false;
         //moi nhat
         if (auth('nqadmin')->check()) {
-            $classLevel = auth('nqadmin')->user();
-            $currentCompany = $classLevelRepository->find($classLevel)->first();
+            $classLevel = auth('nqadmin')->user()->classlevel;
+            $currentCompany = $classLevel != null ? $classLevelRepository->find($classLevel) : false;
             $topNews = $courseRepository
             ->with('getRating')
             ->with(['getLdp' => function ($q) {
@@ -64,7 +64,7 @@ class HomeController extends BaseController
                     ->take(12);
             })
             ->whereHas('getClassLevel', function ($q) use ($classLevel) {
-                $q->where('classlevel.id', $classLevel->classlevel)
+                $q->where('classlevel.id', $classLevel)
                 ->orWhere('course_ldp.classlevel', null);
             })
             ->get();

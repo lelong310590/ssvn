@@ -2468,7 +2468,7 @@ header nav .menu .menu-main > li:hover > a {
 }
 
 .product-list ul:not(.pro-hover) > li .pro-lbl {
-	padding: 0;
+	padding: 0 10px;
 }
 
 .pro-lbl .vj-btn {
@@ -2491,6 +2491,7 @@ header nav .menu .menu-main > li:hover > a {
 	font-size: 14px;
 	padding: 0 12px;
 	line-height: 20px;
+	margin-top: 15px
 }
 
 .product-list ul:not(.pro-hover) > li .pro-bottom {
@@ -3228,6 +3229,10 @@ footer .list-unstyled li {
 	display: block;
 	font-weight: 300;
 	margin: 0;
+}
+
+.box-course-other {
+	margin-bottom: 40px;
 }
 
 .vj-widgets ul li + li {

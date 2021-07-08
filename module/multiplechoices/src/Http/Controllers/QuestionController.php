@@ -85,7 +85,7 @@ class QuestionController extends BaseController
             if ($ans['content'] != null) {
                 $answerRepository->create([
                     'content' => $ans['content'],
-                    'check' => $ans['check'],
+                    'answer' => $ans['check'],
                     'question' => $question->id
                 ]);
             }
