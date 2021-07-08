@@ -122,7 +122,13 @@ use Illuminate\Support\Facades\DB;
                                                                     $completedEmployers = $course->certificate->count();
                                                                 @endphp
                                                                 <p>Tỷ lệ lao động tham gia khóa học:</p>
-                                                                <h4>{{round($registeredEmployers/$totalEmployers * 100, 0)}}%</h4>
+                                                                <h4>
+                                                                    @if (round($registeredEmployers/$totalEmployers * 100, 0) > 100)
+                                                                        100%
+                                                                    @else
+                                                                        {{round($registeredEmployers/$totalEmployers * 100, 0)}}%
+                                                                    @endif
+                                                                </h4>
                                                                 <p>Tỷ lệ lao động hoàn thành khóa học: </p>
                                                                 <h4>
                                                                     {{$registeredEmployers == 0 ? 0 : round($completedEmployers/$registeredEmployers * 100, 0).'%'}}
