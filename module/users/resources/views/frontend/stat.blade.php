@@ -123,7 +123,9 @@ use Illuminate\Support\Facades\DB;
                                                                 @endphp
                                                                 <p>Tỷ lệ lao động tham gia khóa đào tạo:</p>
                                                                 <h4>
-                                                                    @if (round($registeredEmployers/$totalEmployers * 100, 0) > 100)
+                                                                    @if ($totalEmployers == 0)
+                                                                        0%
+                                                                    @elseif (round($registeredEmployers/$totalEmployers * 100, 0) > 100)
                                                                         100%
                                                                     @else
                                                                         {{round($registeredEmployers/$totalEmployers * 100, 0)}}%

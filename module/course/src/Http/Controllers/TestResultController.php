@@ -96,8 +96,16 @@ class TestResultController extends BaseController
                     $converDf[] = $df->id;
                 }
 
+                $tempNum = count($converDf);
                 // Kiem tra dap an
-                if ($answers == $converDf) {
+                $start = 0;
+                foreach ($answers as $a) {
+                    if (in_array($a, $converDf)) {
+                        $start += 1;
+                    }
+                }
+
+                if ($start >= $tempNum) {
                     $correct = true;
                 } else {
                     $wrong = true;

@@ -68,6 +68,7 @@
                                 <tr>
                                     <th>Avatar</th>
                                     <th>Email</th>
+                                    <th>Số điện thoại</th>
                                     <th>Vai trò</th>
                                     <th width="150">Là đại diện doanh nghiệp ?</th>
                                     <th>Trạng thái</th>
@@ -87,6 +88,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $d->email }}</td>
+                                        <td>{{ $d->phone }}</td>
                                         <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>
                                         <td class="center text-center">
                                             @if ($d->is_enterprise == 1)
