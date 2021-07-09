@@ -110,7 +110,7 @@ use Illuminate\Support\Facades\DB;
                                                             <div class="stat-detail-item-stats">
                                                                 <p>Tổng số lao động tham gia khóa đào tạo:</p>
                                                                 <h4 style="color: red">{{$course->getOrderDetail != null ? $course->getOrderDetail->count() : 0}}</h4>
-                                                                <p>Tổng số lao động đã hoàn thành khóa đạo tạo:</p>
+                                                                <p>Tổng số lao động đã hoàn thành khóa đạo tạo <i>(đã cấp chứng chỉ)</i>:</p>
                                                                 <h4 style="color: green">{{$course->certificate->count()}}</h4>
                                                             </div>
                                                         </div>

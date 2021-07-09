@@ -32,7 +32,6 @@ class UserEditRequest extends FormRequest
 		return [
 			're_password' => 'same:password',
 			'first_name' => 'required',
-			'last_name' => 'required'
 		];
 	}
 	
@@ -44,7 +43,6 @@ class UserEditRequest extends FormRequest
 		return [
 			're_password.same' => 'Mật khẩu nhắc lại không trùng',
 			'first_name.required' => 'Họ không được bỏ trống',
-			'last_name.required' => 'Tên và tên đệm không được bỏ trống'
 		];
 	}
 }

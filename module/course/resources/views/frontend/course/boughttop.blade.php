@@ -202,7 +202,7 @@
                                     </p>
                                 @endif
                                 @if($course->getCountFinishItem() == $course->getCurriculum->where('type', '!=', 'section')->where('status', 'active')->count())
-                                    <a href="{{route('nqadmin::course.certificate.get', ['course_id' => $course->id, 'download' => true])}}" class="overflow">Xem chứng chỉ</a>
+                                    <a href="{{route('nqadmin::course.certificate.get', ['course_id' => $course->id, 'download' => true])}}" class="overflow">Nhận chứng chỉ</a>
                                 @endif
                             </div>
                         </div>

@@ -88,6 +88,12 @@ Route::group(['namespace' => 'Frontend'], function (Router $router) {
         $router->get('certificate', 'UsersController@getCertificate')
             ->name('front.users.certificate.get')->middleware('auth');
 
+        $router->get('employers', 'UsersController@getEmployers')
+            ->name('front.users.employers.get')->middleware('auth');
+
+        $router->post('employers', 'UsersController@postEmployers')
+            ->name('front.users.employers.post')->middleware('auth');
+
         $router->get('history', 'UsersController@getHistory')
             ->name('front.users.history.get')->middleware('auth');
 

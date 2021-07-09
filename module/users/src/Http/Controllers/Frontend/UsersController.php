@@ -13,6 +13,7 @@ use Advertise\Models\AdvertiseCourse;
 use Advertise\Models\AdvertiseUser;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Base\Supports\FlashMessage;
+use Botble\Ecommerce\Import\ProductImport;
 use Cart\Models\Order;
 use Cart\Models\OrderDetail;
 use ClassLevel\Repositories\ClassLevelRepository;
@@ -21,6 +22,8 @@ use Course\Models\CurriculumProgress;
 use Course\Repositories\CertificateRepository;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Maatwebsite\Excel\Facades\Excel;
+use Users\Import\UsersImport;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -724,5 +727,38 @@ class UsersController extends BaseController
             'courses',
             'employers'
         ));
+    }
+
+    public function getEmployers(
+        UsersRepository $usersRepository
+    )
+    {
+        $master = auth('nqadmin')->user();
+        $company = $master->classlevel;
+        $employers = $usersRepository->scopeQuery(function ($q) use ($company) {
+            return $q->where('classlevel', $company)->where('status', 'active')->where('hard_role', '1');
+        })->paginate(20);
+
+        return view('nqadmin-users::frontend.employers', compact(
+            'employers'
+        ));
+    }
+
+    public function postEmployers(
+        Request $request
+    )
+    {
+        try {
+            Excel::toCollection(
+                new UsersImport(),
+                $request->file('excel_file')
+            );
+            return redirect()->back()->with([
+                'message' => 'Nhập dữ liệu thành công'
+            ]);
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->withErrors('Có lỗi xảy ra khi import dữ liệu');
+        }
     }
 }
