@@ -38,7 +38,12 @@ use Illuminate\Support\Facades\DB;
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <div class="form-group">
-                                                <input type="file" class="form-control" name="excel_file" placeholder="Input...">
+                                                <input
+                                                    type="file"
+                                                    class="form-control"
+                                                    name="excel_file"
+                                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                                >
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
