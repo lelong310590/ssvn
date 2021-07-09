@@ -59,13 +59,13 @@ use Illuminate\Support\Facades\DB;
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        @foreach($employers as $e)
+                                    @foreach($employers as $e)
+                                        <tr>
                                             <td>EM-{{1000000 + $e->id}}</td>
                                             <td>{{$e->first_name}}</td>
                                             <td>{{$e->phone}}</td>
-                                        @endforeach
-                                    </tr>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
