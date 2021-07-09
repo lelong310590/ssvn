@@ -33,13 +33,13 @@ class LogSuccessfulLogin
     {
         $user = $event->user;
 
-        Cart::restore($user->email);
+        Cart::restore($user->phone);
         foreach (Cart::content() as $item) {
             $course = Course::find($item->id);
             if ($course->checkBought()) {
                 Cart::remove($item->rowId);
             }
         }
-        Cart::store(\Auth::user()->email);
+        Cart::store(\Auth::user()->phone);
     }
 }

@@ -2,10 +2,8 @@
     <div class="products tab-custom">
         <div class="text-center">
             @if ($currentCompany != false)
-                <h2>Các chương trình đào tạo mới nhất về tuyên truyền & phòng chống đại dịch Covid 19</h2>
                 <h4 class="text-center">Dành riêng cho cán bộ công nhân viên của {{$currentCompany->name}}</h4>
             @else
-                <h2>Các chương trình đào tạo mới nhất về tuyên truyền & phòng chống đại dịch Covid 19</h2>
                 <h4 class="text-center">Dành riêng cho các công ty, ban ngành, tổ chức, và đoàn thể</h4>
             @endif
         </div>

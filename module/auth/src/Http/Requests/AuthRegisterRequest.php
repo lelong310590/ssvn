@@ -23,6 +23,7 @@ class AuthRegisterRequest extends FormRequest
             'first_name' => 'required',
             'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/', 'unique:users'],
             'password' => 'required',
+            'classlevel' => 'required'
         ];
     }
 
@@ -35,6 +36,7 @@ class AuthRegisterRequest extends FormRequest
             'phone.unique' => 'Số điện thoại đã tồn tại',
             'password.required' => 'Mật khẩu không được bỏ trống',
             'name.required' => 'Tên đăng nhập không được bỏ trống',
+            'classlevel.required' => 'Đơn vị không được bỏ trống'
         ];
     }
 }

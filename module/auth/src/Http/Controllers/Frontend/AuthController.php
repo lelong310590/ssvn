@@ -59,6 +59,9 @@ class AuthController extends BaseController
             if (isset($request->newsletter)) {
                 $request->merge(['newsletter' => 'active']);
             }
+            $request->merge([
+                'hard_role' => 1
+            ]);
             $user = Users::create($request->except('_token'));
             Mail::to($user)->queue(new CreateUser($user));
             $usersMetaRepository->create([
@@ -66,7 +69,7 @@ class AuthController extends BaseController
                 'meta_key' => 'autoplay',
                 'meta_value' => true,
                 'status' => 'active',
-                'hard_role' => 1
+
             ]);
             auth()->login($user);
             return redirect()->to('/');
