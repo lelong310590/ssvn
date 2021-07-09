@@ -62,7 +62,7 @@ use Illuminate\Support\Facades\DB;
                                     @foreach($employers as $e)
                                         <tr>
                                             <td>EM-{{1000000 + $e->id}}</td>
-                                            <td>{{$e->first_name}}</td>
+                                            <td>{{$e->first_name}} {{$e->last_name}}</td>
                                             <td>{{$e->phone}}</td>
                                         </tr>
                                     @endforeach
