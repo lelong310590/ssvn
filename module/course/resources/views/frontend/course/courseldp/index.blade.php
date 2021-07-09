@@ -126,7 +126,7 @@
                                     <div class="row">
                                         <div class="col-sm-5">
                                             <div class="form-group">
-                                                <label class="form-control-label"><b>Khóa đào tạo thuộc về môn</b></label>
+                                                <label class="form-control-label"><b>Chứng chỉ cho khóa đào tạo</b></label>
                                                 <select class="select2 form-control" name="subject" id="select2">
                                                     @if (!empty($ldp))
                                                         @foreach($subjects as $s)
