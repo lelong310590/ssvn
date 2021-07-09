@@ -112,7 +112,7 @@
 
                 <div class="box-favorite-course box-course-user">
                     <div class="content-favorite-course">
-                        <h3 class="title">Các Khóa đào tạocủa tôi</h3>
+                        <h3 class="title">Các Khóa đào tạo của tôi</h3>
                         <div class="row list-favorite-course">
                             @foreach($user->course as $course)
                                 @include('nqadmin-course::frontend.components.main-course-stand',['data'=>$course])

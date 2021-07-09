@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\DB;
                 </div>
                 <div class="right-user col-xs-10">
                     <div class="text-center title-page">
-                        <h3 class="txt">Khóa đào tạocủa tôi</h3>
+                        <h3 class="txt">Khóa đào tạo của tôi</h3>
                     </div>
                     <div class="box-my-course box-course">
                     @include('nqadmin-users::frontend.components.my_course.filter')

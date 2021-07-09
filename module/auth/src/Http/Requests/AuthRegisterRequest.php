@@ -32,7 +32,7 @@ class AuthRegisterRequest extends FormRequest
         return [
             'first_name.required' => 'Tên không được bỏ trống',
             'phone.required' => 'Số điện thoại không được bỏ trống',
-            'phone.regex' => 'Số điện thoại đúng',
+            'phone.regex' => 'Số điện thoại không đúng',
             'phone.unique' => 'Số điện thoại đã tồn tại',
             'password.required' => 'Mật khẩu không được bỏ trống',
             'name.required' => 'Tên đăng nhập không được bỏ trống',
