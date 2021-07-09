@@ -142,6 +142,7 @@ class Question extends Component
             dosomething: true
         });
         let {questions} = this.props;
+
         let answerInQuestion = answers[q];
 
         if (type !== 'multi') {

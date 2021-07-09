@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		
-		<form method="post">
+		<form method="post" autocomplete="off">
 			
 			@if (count($errors) > 0)
 				@foreach($errors->all() as $e)
@@ -117,6 +117,7 @@
 								       class="form-control"
 								       value="{{$data->phone}}"
 								       name="phone"
+									   disabled
 								>
 							</div>
 							

@@ -73,7 +73,11 @@ class TestResultController extends BaseController
         }
     }
 
-    public function checkAnswer(Request $request, QuestionRepository $questionRepository, AnswerRepository $answerRepository)
+    public function checkAnswer(
+        Request $request,
+        QuestionRepository $questionRepository,
+        AnswerRepository $answerRepository
+    )
     {
         try {
             $correct = false;
@@ -85,23 +89,19 @@ class TestResultController extends BaseController
             $question = $questionRepository->find($questionid);
 
             if ($question->type == 'multi') {
-                $defaultAnwsers = $answerRepository->findWhere([
-                    'answer' => 'Y',
-                    'question' => $questionid
-                ], ['id'])->all();
+                $defaultAnwsers = $answerRepository->scopeQuery(function ($q) use ($questionid) {
+                    return $q->where('answer', 'Y')->where('question', $questionid)->pluck('id');
+                })->get();
 
-                //Xu ly lai mang dap an
-                $converDf = [];
-                foreach ($defaultAnwsers as $df) {
-                    $converDf[] = $df->id;
-                }
-
-                $tempNum = count($converDf);
+                $tempNum = count($defaultAnwsers);
                 // Kiem tra dap an
                 $start = 0;
-                foreach ($answers as $a) {
-                    if (in_array($a, $converDf)) {
-                        $start += 1;
+
+                if (count($answers) == $tempNum) {
+                    foreach ($answers as $a) {
+                        if (in_array($a, $defaultAnwsers)) {
+                            $start += 1;
+                        }
                     }
                 }
 

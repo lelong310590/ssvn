@@ -717,6 +717,29 @@ class UsersController extends BaseController
                 ->scopeQuery(function ($q) use ($currentCompany) {
                     return $q->where('status', 'active');
                 })->get();
+        } elseif (intval($user->hard_role) == 2) {
+            $currentCompany = $user->classlevel;
+
+            $selectedCompany = $classLevelRepository->with('getUsers')->find($currentCompany);
+
+            $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
+                return $q->where('classlevel', $currentCompany)->pluck('id');
+            })->get();
+
+            $courseInCompany = $courseRepository
+                ->with('getLdp')
+                ->with('certificate', function ($r) use ($userInCompany) {
+                    $r->whereIn('user_id', $userInCompany);
+                })
+                ->whereHas('getLdp', function ($r) use ($currentCompany) {
+                    $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
+                })
+                ->with('getOrderDetail', function ($r) use ($userInCompany) {
+                    $r->whereIn('user_id', $userInCompany)->distinct('customer');
+                })
+                ->scopeQuery(function ($q) use ($currentCompany) {
+                    return $q->where('status', 'active');
+                })->get();
         }
 
         return view('nqadmin-users::frontend.stat', compact(

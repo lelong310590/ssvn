@@ -35,9 +35,10 @@ use Illuminate\Support\Facades\DB;
 
                             <div class="content-my-course">
                                 <div class="stats-wrapper">
+                                    @if (Auth::guard('nqadmin')->user()->hard_role > 2)
                                     <div class="stat-title">Thông số tổng quan</div>
                                     <div class="row">
-                                        @if (Auth::guard('nqadmin')->user()->hard_role > 2)
+
                                         <div class="col-xs-12 col-md-3">
                                             <div class="stats-item">
                                                 <i class="far fa-building"></i>
@@ -65,10 +66,11 @@ use Illuminate\Support\Facades\DB;
                                                 <p> Các khóa đào tạo: <b>{{$courses}}</b></p>
                                             </div>
                                         </div>
-                                        @endif
                                     </div>
+                                    @endif
                                     
                                     <div class="stats-tool">
+                                        @if (Auth::guard('nqadmin')->user()->hard_role > 2)
                                         <div class="stat-title">Thông số chi tiết</div>
                                         <form action="">
                                             <div class="row">
@@ -88,6 +90,7 @@ use Illuminate\Support\Facades\DB;
                                                 </div>
                                             </div>
                                         </form>
+                                        @endif
 
                                         <div class="stat-detail-wrapper">
                                             @if ($selectedCompany)
@@ -96,6 +99,7 @@ use Illuminate\Support\Facades\DB;
                                                 <p>Tổng số lao động đăng ký: <b>{{$selectedCompany->getUsers != null ? $selectedCompany->getUsers->count() : 0}}</b></p>
                                             </div>
                                             @endif
+
                                             @foreach($courseInCompany as $course)
                                             <div class="stat-detail-item">
                                                 <div class="stat-detail-item-course">
