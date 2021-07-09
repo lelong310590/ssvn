@@ -411,8 +411,8 @@ class CourseCurriculumItemsController extends BaseController
             }])
             ->orderBy('index', 'asc')
             ->scopeQuery(function ($q) use ($lecture) {
-                return $q->where('curriculum_item', $lecture['id']);
-            })->inRandomOrder()->get();
+                return $q->where('curriculum_item', $lecture['id'])->inRandomOrder();
+            })->get();
 
         $result = $testResultRepository->findWhere([
             'owner' => $userid,

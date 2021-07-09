@@ -753,11 +753,11 @@ class UsersController extends BaseController
                 new UsersImport(),
                 $request->file('excel_file')
             );
+
             return redirect()->back()->with([
-                'message' => 'Nhập dữ liệu thành công'
+                'success' => 'Nhập dữ liệu thành công'
             ]);
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->back()->withErrors('Có lỗi xảy ra khi import dữ liệu');
         }
     }

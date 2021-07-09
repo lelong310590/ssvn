@@ -12,8 +12,6 @@
 
     @php
         $user = Auth::user();
-        $roles = $user->load('roles.perms');
-        $permissions = $roles->roles->first()->perms;
     @endphp
 
     <div class="wrapper-content">
