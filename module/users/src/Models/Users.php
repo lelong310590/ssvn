@@ -12,6 +12,7 @@ use Advertise\Models\Advertise;
 use Advertise\Models\AdvertiseUser;
 use Cart\Models\OrderDetail;
 use ClassLevel\Models\ClassLevel;
+use Course\Models\Certificate;
 use Course\Models\Course;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
@@ -204,4 +205,8 @@ class Users extends Authenticatable
         return $this->hasOne(ClassLevel::class, 'classlevel', 'id');
     }
 
+    public function getCertificate()
+    {
+        return $this->hasMany(Certificate::class, 'user_id', 'id');
+    }
 }

@@ -68,6 +68,35 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                     </div>
                                     @endif
+
+                                    @if (Auth::guard('nqadmin')->user()->hard_role > 2)
+                                        <div class="all-records">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-condensed table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th width="50">Công ty</th>
+                                                        <th width="20%">Tổng lao động</th>
+                                                        <th width="20%">Lao động đạt chứng chỉ</th>
+                                                        <th width="10%" class="text-center">Đạt tỷ lệ</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($allCompany as $ac)
+                                                        <tr>
+                                                            <td>{{$ac->name}}</td>
+                                                            <td>{{$ac->getUsers->count()}}</td>
+                                                            <td>{{$ac->getCertificate->count()}}</td>
+                                                            <td class="text-center">
+                                                                <b>{{$ac->getUsers->count() == 0 ? '0%' : round($ac->getCertificate->count()/$ac->getUsers->count()*100).'%'}}</b>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    @endif
                                     
                                     <div class="stats-tool">
                                         @if (Auth::guard('nqadmin')->user()->hard_role > 2)

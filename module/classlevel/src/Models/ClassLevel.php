@@ -8,6 +8,7 @@
 
 namespace ClassLevel\Models;
 
+use Course\Models\Certificate;
 use Course\Models\Course;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -78,5 +79,10 @@ class ClassLevel extends Model
     public function getUsers()
     {
         return $this->hasMany(Users::class, 'classlevel', 'id');
+    }
+
+    public function getCertificate()
+    {
+        return $this->belongsToMany(Certificate::class, (new Users())->getTable(), 'classlevel', 'id');
     }
 }

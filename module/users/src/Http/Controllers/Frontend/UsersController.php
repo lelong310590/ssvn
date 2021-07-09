@@ -743,7 +743,9 @@ class UsersController extends BaseController
         }
 
         if (intval($user->hard_role) > 2) {
-            $allCompany = [];
+            $allCompany = $classLevelRepository->with('getUsers')
+                ->with('getCertificate')
+                ->paginate(20);
         } else {
             $allCompany = [];
         }
@@ -754,7 +756,8 @@ class UsersController extends BaseController
             'selectedCompany',
             'certificates',
             'courses',
-            'employers'
+            'employers',
+            'allCompany'
         ));
     }
 

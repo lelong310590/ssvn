@@ -3128,6 +3128,10 @@ footer .list-unstyled li {
 	right: -18px;
 }
 
+.all-records {
+	margin-top: 30px
+}
+
 .wrap__page {
 	display: -ms-flexbox;
 	display: -webkit-flex;
