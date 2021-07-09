@@ -26,7 +26,7 @@ $date = explode('-', $date);
         <input type="hidden" name="{{ $name }}[]" class="{{ $name }}_value" value="{{ $date[2] }}">
         <span class="txt-find input-form width85 {{ $name }}_show">{{ $date[2]?$date[2]:'Năm' }}</span>
         <ul class="list-select">
-            @for($i=2010;$i<=2020;$i++)
+            @for($i=1930;$i<=2020;$i++)
                 <li class="{{ $name }}" rel="{{ $i }}" data-value="{{ $i }}">{{ $i }}</li>
             @endfor
         </ul>
