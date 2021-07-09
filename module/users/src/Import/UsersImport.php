@@ -21,7 +21,7 @@ class UsersImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row)
         {
             $check = Users::where('phone', $row['phone'])->get();
-            if ($check == null) {
+            if ($check->count() == 0) {
                 Users::create([
                     'phone' => $row['phone'],
                     'password' => $row['password'],
