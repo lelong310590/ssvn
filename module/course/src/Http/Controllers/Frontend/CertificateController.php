@@ -46,8 +46,7 @@ class CertificateController extends BaseController
 
             $course = $courseRepository->with(['getLdp' => function ($q) {
                 return $q->with('getClassLevel')
-                    ->with('getSubject')
-                    ->where('course.status', 'active');
+                    ->with('getSubject');
             }])->find($course_id);
 
             $borwser = new Browsershot();
