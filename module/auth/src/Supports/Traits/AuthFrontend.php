@@ -97,7 +97,7 @@ trait AuthFrontend
 	 */
 	public function username()
 	{
-		return 'email';
+		return 'phone';
 	}
 
 }

@@ -325,6 +325,10 @@ function textCounter(field,cnt, maxlimit) {
     if ($('.datetimepicker') > 0) {
         $('.datetimepicker').datetimepicker();
     }
+
+    $('body').on('click', '.flash-close', function () {
+        $('.flash-backdrop').hide();
+    })
 });
 
 
