@@ -10,6 +10,7 @@
 namespace Course\Http\Controllers\Frontend;
 
 use Barryvdh\Debugbar\Controllers\BaseController;
+use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Repositories\CourseRepository;
 use Course\Repositories\CertificateRepository;
 use Illuminate\Http\Request;
@@ -21,11 +22,14 @@ class CertificateController extends BaseController
     public function createCertificate(
         Request $request,
         CertificateRepository $certificateRepository,
-        CourseRepository $courseRepository
+        CourseRepository $courseRepository,
+        ClassLevelRepository $classLevelRepository
     )
     {
         $course_id = $request->get('course_id');
         $user = auth('nqadmin')->user();
+
+        $company = $classLevelRepository->find($user->classlevel);
 
         $certificate = $certificateRepository->findWhere([
             'course_id' => $course_id,
@@ -47,7 +51,7 @@ class CertificateController extends BaseController
             $borwser = new Browsershot();
 
             $html = view('nqadmin-course::frontend.certificate', compact(
-                'user', 'certificate', 'course'
+                'user', 'certificate', 'course', 'company'
             ));
 
             $borwser->html($html)
