@@ -52,20 +52,21 @@ class HomeController extends BaseController
         if (auth('nqadmin')->check()) {
             $classLevel = auth('nqadmin')->user()->classlevel;
             $currentCompany = $classLevel != null ? $classLevelRepository->find($classLevel) : false;
+
             $topNews = $courseRepository
             ->with('getRating')
-            ->with(['getLdp' => function ($q) {
-                return $q->with('getClassLevel')->with('getSubject')->get();
+            ->with(['getLdp' => function ($q) use ($classLevel) {
+                return $q->with('getClassLevel')
+                    ->with('getSubject')
+                    ->where('course_ldp.classlevel', $classLevel)
+                    ->orWhere('course_ldp.classlevel', null)
+                    ->get();
             }])
             ->scopeQuery(function ($query) {
                 return $query->select('slug', 'name', 'price', 'id')
                     ->where('status', 'active')
                     ->orderBy('created_at', 'desc')
                     ->take(12);
-            })
-            ->whereHas('getClassLevel', function ($q) use ($classLevel) {
-                $q->where('classlevel.id', $classLevel)
-                ->orWhere('course_ldp.classlevel', null);
             })
             ->get();
 
