@@ -73,7 +73,7 @@
                 <p style="font-weight: 700">Sở y tế tỉnh Bình Dương</p>
                 <p>Số CER-{{1000000 + $certificate->id}}</p>
             </div>
-            <div class="certificate-block">
+            <div class="certificate-block" style="font-size: 18px">
                 <p>Cộng hòa xã hội chủ nghĩa Việt Nam</p>
                 <p>Độc lập - Tự do - Hạnh phúc</p>
             </div>
@@ -81,7 +81,7 @@
         <div class="certificate-main">
             <h1 class="text-center text-uppercase" style="color: red; font-weight: 900;">Giấy chứng nhận đào tạo</h1>
             <div class="certificate-info">
-                <p>Tên cơ sở đào tạo: <span style="color: green; text-transform: uppercase; font-size: 23px; margin-left: 25px;">Sở y tế tỉnh Bình Dương</span></p>
+{{--                <p>Tên cơ sở đào tạo: <span style="color: green; text-transform: uppercase; font-size: 23px; margin-left: 25px;">Sở y tế tỉnh Bình Dương</span></p>--}}
                 <p>Chứng nhận: <b style="margin-left: 25px">{{$user->sex == 'male' ? 'Ông' : 'Bà'}} {{$user->first_name}}</b></p>
                 <p>Đơn vị: <b style="margin-left: 25px">{{$company != null ? $company->name : ''}}</b></p>
                 <p>Đã hoàn thành khóa huấn luyện đào tạo:</p>
