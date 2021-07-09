@@ -20,7 +20,7 @@ class UsersImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row)
         {
-            $check = Users::where('phone', $row['phone']);
+            $check = Users::where('phone', $row['phone'])->get();
             if ($check == null) {
                 Users::create([
                     'phone' => $row['phone'],
@@ -28,7 +28,9 @@ class UsersImport implements ToCollection, WithHeadingRow
                     'first_name' => $row['first_name'],
                     'sex' => $row['sex'],
                     'email' => $row['email'],
-                    'classlevel' => $row['classlevel']
+                    'classlevel' => $row['classlevel'],
+                    'hard_role' => '1',
+                    'status' => 'active'
                 ]);
             }
         }

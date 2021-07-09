@@ -38,10 +38,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Bạn là</label>
-                                            @include('nqadmin-users::frontend.components.info.select',['name'=>'position','options'=>config('meta.position'),'type'=>'small'])
-                                        </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label class="txt-label col-xs-3 text-right">Bạn là</label>--}}
+{{--                                            @include('nqadmin-users::frontend.components.info.select',['name'=>'position','options'=>config('meta.position'),'type'=>'small'])--}}
+{{--                                        </div>--}}
 
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Ngày sinh</label>

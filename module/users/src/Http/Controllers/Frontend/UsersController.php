@@ -772,7 +772,7 @@ class UsersController extends BaseController
     )
     {
         try {
-            Excel::toCollection(
+            Excel::import(
                 new UsersImport(),
                 $request->file('excel_file')
             );
