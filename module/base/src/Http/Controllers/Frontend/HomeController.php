@@ -70,6 +70,8 @@ class HomeController extends BaseController
             })
             ->get();
 
+            dd($topNews);
+
         } else {
             $topNews = $courseRepository->scopeQuery(function ($query) {
                 return $query->select('slug', 'name', 'price', 'id')

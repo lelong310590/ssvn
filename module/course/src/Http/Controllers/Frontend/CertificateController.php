@@ -45,12 +45,17 @@ class CertificateController extends BaseController
             ]);
 
             $course = $courseRepository->scopeQuery(function ($query) {
-                return $query->with('getLdp')->where('status', 'active');
+                return $query
+                    ->with('getLdp')
+                    ->with('getSubject')
+                    ->where('status', 'active');
             })->find($course_id);
 
             $borwser = new Browsershot();
 
-            $html = view('nqadmin-course::frontend.certificate', compact(
+            $template = $course->getLdp->getSubject != null ? $course->getLdp->getSubject->template : 'nqadmin-course::frontend.certificate';
+
+            $html = view($template, compact(
                 'user', 'certificate', 'course', 'company'
             ));
 

@@ -19,7 +19,7 @@ class Subject extends Model
 	protected $guarded = [];
 	protected $fillable = [
 		'name', 'slug', 'icon', 'seo_title', 'seo_keywords', 'seo_description', 'author', 'editor', 'published_at',
-		'created_at', 'updated_at'
+		'created_at', 'updated_at', 'template'
 	];
 	
 	/**

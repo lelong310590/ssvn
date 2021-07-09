@@ -20,7 +20,7 @@
         .certificate {
 	        height: 793.7px;
 	        width: 1122.52px;
-            background-image: url({{asset('frontend/images/certificate-bg-2.jpg')}});
+            background-image: url({{asset('frontend/images/certificate.jpg')}});
             background-size: cover;
             background-position: top left;
             padding: 37mm;

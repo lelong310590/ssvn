@@ -79,6 +79,19 @@
 									       id="icon"
 									>
 								</div>
+
+								<div class="form-group">
+									<label class="form-control-label">Phôi Chứng chỉ</label>
+									<input type="hidden" name="template" value="nqadmin-course::frontend.certificate">
+									<div class="select-certificate-wrapper">
+										<div class="certificate-item active" data-value="nqadmin-course::frontend.certificate">
+											<img src="{{asset('frontend/images/certificate.jpg')}}" alt="" class="img-responsive" width="120px">
+										</div>
+										<div class="certificate-item" data-value="nqadmin-course::frontend.certificate2">
+											<img src="{{asset('frontend/images/certificate-bg-2.jpg')}}" alt="" class="img-responsive" width="120px">
+										</div>
+									</div>
+								</div>
 								
 								<div class="form-group">
 									<label class="form-control-label">Chứng chỉ dành cho các công ty </label>
@@ -215,3 +228,16 @@
 	
 	@include('nqadmin-dashboard::backend.components.icon')
 @endsection
+
+@push('js')
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('body').on('click', '.certificate-item', function () {
+				$('.certificate-item').removeClass('active');
+				$(this).addClass('active');
+				let value = $(this).attr('data-value');
+				$('input[name="template"]').val(value);
+			});
+		});
+	</script>
+@endpush

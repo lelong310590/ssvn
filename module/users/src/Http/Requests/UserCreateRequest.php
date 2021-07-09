@@ -25,6 +25,7 @@ class UserCreateRequest extends FormRequest
     {
         return [
 	        'email' => 'required|email|unique:users,email',
+            'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/', 'unique:users'],
 	        'password' => 'required|min:6',
 	        're_password' => 'required|same:password',
 	        'first_name' => 'required',
@@ -46,7 +47,10 @@ class UserCreateRequest extends FormRequest
             're_password.required' => 'Mật khẩu nhập lại không được bỏ trống',
 		    're_password.same' => 'Mật khẩu nhắc lại không trùng',
 		    'first_name.required' => 'Họ không được bỏ trống',
-		    'last_name.required' => 'Tên và tên đệm không được bỏ trống'
+		    'last_name.required' => 'Tên và tên đệm không được bỏ trống',
+            'phone.required' => 'Số điện thoại không được bỏ trống',
+            'phone.regex' => 'Số điện thoại không đúng',
+            'phone.unique' => 'Số điện thoại đã tồn tại'
 	    ];
     }
 }

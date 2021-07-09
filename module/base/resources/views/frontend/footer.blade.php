@@ -85,6 +85,10 @@ $classes = ClassLevel::with('subject')->get();
 </div>
 
 <div class="mobile-fixed-bar hidden-md hidden-lg">
+    <a href="{{route('front.home.index.get')}}">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>Trang chủ</span>
+    </a>
     @if (Auth::check())
         <a href="{{route('front.users.certificate.get')}}">
             <i class="fa fa-certificate" aria-hidden="true"></i>
@@ -97,11 +101,6 @@ $classes = ClassLevel::with('subject')->get();
             <span>Tài khoản</span>
         </a>
     @endif
-    <a href="{{route('front.home.index.get')}}">
-        <i class="fa fa-home" aria-hidden="true"></i>
-        <span>Trang chủ</span>
-    </a>
-
     @if (Auth::check())
         <a href="{{route('front.users.notification.get')}}">
             <i class="fa fa-bell" aria-hidden="true"></i>

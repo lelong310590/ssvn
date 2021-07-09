@@ -28,7 +28,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Danh sách tài khoản
-                                <a href="{{route('nqadmin::users.index.get')}}" class="btn btn-primary pull-right">
+                                <a href="{{route('nqadmin::users.create.get')}}" class="btn btn-primary pull-right">
                                     <i class="fa fa-plus" aria-hidden="true"></i> Thêm tài khoản
                                 </a>
                             </h5>

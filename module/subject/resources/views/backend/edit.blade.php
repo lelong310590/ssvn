@@ -92,7 +92,6 @@
 								<div class="form-group">
 									<label class="form-control-label">Icon </label>
 									<input type="text"
-									       required
 									       parsley-trigger="change"
 									       class="form-control"
 									       autocomplete="off"
@@ -104,6 +103,19 @@
 									       style="cursor: pointer"
 									       id="icon"
 									>
+								</div>
+
+								<div class="form-group">
+									<label class="form-control-label">Phôi Chứng chỉ</label>
+									<input type="hidden" name="template" value="{{$data->template}}">
+									<div class="select-certificate-wrapper">
+										<div class="certificate-item {{$data->template == 'nqadmin-course::frontend.certificate' ? 'active' : ''}}" data-value="nqadmin-course::frontend.certificate">
+											<img src="{{asset('frontend/images/certificate.jpg')}}" alt="" class="img-responsive" width="120px">
+										</div>
+										<div class="certificate-item {{$data->template == 'nqadmin-course::frontend.certificate2' ? 'active' : ''}}" data-value="nqadmin-course::frontend.certificate2">
+											<img src="{{asset('frontend/images/certificate-bg-2.jpg')}}" alt="" class="img-responsive" width="120px">
+										</div>
+									</div>
 								</div>
 								
 							</div>
@@ -237,3 +249,16 @@
 	
 	@include('nqadmin-dashboard::backend.components.icon')
 @endsection
+
+@push('js')
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('body').on('click', '.certificate-item', function () {
+				$('.certificate-item').removeClass('active');
+				$(this).addClass('active');
+				let value = $(this).attr('data-value');
+				$('input[name="template"]').val(value);
+			});
+		});
+	</script>
+@endpush
