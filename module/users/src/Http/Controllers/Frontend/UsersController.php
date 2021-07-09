@@ -706,13 +706,13 @@ class UsersController extends BaseController
             $courseInCompany = $courseRepository
                 ->with('getLdp')
                 ->with('certificate', function ($r) use ($userInCompany) {
-                    $r->whereIn('user_id', $userInCompany);
+                    $r->whereIn('certificate.user_id', $userInCompany);
                 })
                 ->whereHas('getLdp', function ($r) use ($currentCompany) {
                     $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
                 })
                 ->with('getOrderDetail', function ($r) use ($userInCompany) {
-                    $r->whereIn('user_id', $userInCompany)->distinct('customer');
+                    $r->whereIn('order_id.customer', $userInCompany)->distinct('customer');
                 })
                 ->scopeQuery(function ($q) use ($currentCompany) {
                     return $q->where('status', 'active');
@@ -729,17 +729,23 @@ class UsersController extends BaseController
             $courseInCompany = $courseRepository
                 ->with('getLdp')
                 ->with('certificate', function ($r) use ($userInCompany) {
-                    $r->whereIn('user_id', $userInCompany);
+                    $r->whereIn('certificate.user_id', $userInCompany);
                 })
                 ->whereHas('getLdp', function ($r) use ($currentCompany) {
                     $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
                 })
                 ->with('getOrderDetail', function ($r) use ($userInCompany) {
-                    $r->whereIn('user_id', $userInCompany)->distinct('customer');
+                    $r->whereIn('order_id.customer', $userInCompany)->distinct('customer');
                 })
                 ->scopeQuery(function ($q) use ($currentCompany) {
                     return $q->where('status', 'active');
                 })->get();
+        }
+
+        if (intval($user->hard_role) > 2) {
+            $allCompany = [];
+        } else {
+            $allCompany = [];
         }
 
         return view('nqadmin-users::frontend.stat', compact(

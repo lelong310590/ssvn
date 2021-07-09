@@ -44,12 +44,11 @@ class CertificateController extends BaseController
                 'image' => $imageLink
             ]);
 
-            $course = $courseRepository->scopeQuery(function ($query) {
-                return $query
-                    ->with('getLdp')
+            $course = $courseRepository->with(['getLdp' => function ($q) {
+                return $q->with('getClassLevel')
                     ->with('getSubject')
                     ->where('status', 'active');
-            })->find($course_id);
+            }])->find($course_id);
 
             $borwser = new Browsershot();
 
