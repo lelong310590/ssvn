@@ -122,10 +122,18 @@
 								<div class="form-group">
 									<label class="form-control-label">Phân quyền cứng ?</label>
 									<select class="custom-select form-control" name="hard_role">
-										<option value="1">Học viên</option>
-										<option value="2">Quản lý cấp đơn vị</option>
-										<option value="3">Quản lý cấp sở</option>
-										<option value="4">Quản lý cấp bộ</option>
+										<option value="1" {{old('hard_role') == '1' ? 'selected' : ''}}>Học viên</option>
+										<option value="2" {{old('hard_role') == '2' ? 'selected' : ''}}>Quản lý cấp đơn vị</option>
+										<option value="3" {{old('hard_role') == '3' ? 'selected' : ''}}>Quản lý cấp sở</option>
+										<option value="4" {{old('hard_role') == '4' ? 'selected' : ''}}>Quản lý cấp bộ</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label class="form-control-label">Là tài khoản doanh nghiệp ?</label>
+									<select class="custom-select form-control" name="is_enterprise">
+										<option value="0" {{old('is_enterprise') == '0' ? 'selected' : ''}}>Không</option>
+										<option value="1" {{old('is_enterprise') == '1' ? 'selected' : ''}}>Có</option>
 									</select>
 								</div>
 								
