@@ -97,7 +97,7 @@ class TestResultController extends BaseController
                 // Kiem tra dap an
                 $start = 0;
 
-                if (count($answers) == $tempNum) {
+                if (count($answers) >= $tempNum) {
                     foreach ($answers as $a) {
                         if (in_array($a, $defaultAnwsers)) {
                             $start += 1;

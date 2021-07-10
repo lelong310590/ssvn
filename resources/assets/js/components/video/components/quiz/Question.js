@@ -136,7 +136,7 @@ class Question extends Component
         })
     };
 
-    changeAnswer = (q, index, type = '') => {
+    changeAnswer = (q, index, type = '', value = null) => {
         let {answers, choosenAnswer, start, multiAnswer} = this.state;
         this.setState({
             dosomething: true
@@ -153,30 +153,34 @@ class Question extends Component
 
         if (type === 'multi') {
             let currentValue = answerInQuestion[index].answer;
+
             answerInQuestion[index].answer = (currentValue === 'N') ? 'Y' : 'N';
             if (currentValue === 'N') {
-                multiAnswer.push(answerInQuestion[index].id);
+                multiAnswer.push(value);
                 this.setState({multiAnswer})
             } else {
-                let idx = multiAnswer.indexOf(answerInQuestion[index].id);
+                let idx = multiAnswer.indexOf(value);
                 if (idx >= 0) {
                     multiAnswer.splice(idx, 1);
                     this.setState({multiAnswer})
                 }
-
                 //console.log(multiAnswer);
             }
+
         } else {
             answerInQuestion[index].answer = 'Y';
         }
 
+
         this.setState({answers});
         this.addQuestionToAnsweredList(questions[start].id);
 
-        axios.post(api.CHECK_ANSWER, {
+        let axiosData = {
             question: questions[start].id,
             answers: (type !== 'multi') ? answerInQuestion[index].id : multiAnswer,
-        })
+        }
+
+        axios.post(api.CHECK_ANSWER, axiosData)
         .then((resp) => {
             if (resp.status === 200) {
                 let {tableSheet} = this.state;
@@ -361,7 +365,7 @@ class Question extends Component
                                 name="answer"
                                 checked={answers[start][index].answer === 'Y'}
                                 value={value.id}
-                                onChange={() => this.changeAnswer(start, index, questions[start].type)}
+                                onChange={() => this.changeAnswer(start, index, questions[start].type, value.id)}
                             />
                             <span className="cr"><i className="cr-icon fas fa-circle"></i></span>
                             <RawHtml.div>{value.content}</RawHtml.div>
