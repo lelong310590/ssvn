@@ -702,8 +702,6 @@ class UsersController extends BaseController
                 $q->where('hard_role', 1);
             }])->find($currentCompany);
 
-            dd($selectedCompany);
-
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
                 return $q->where('classlevel', $currentCompany)->where('is_enterprise', '!=', 1)->where('hard_role', 1)->pluck('id');
             })->get();
