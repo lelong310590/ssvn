@@ -10,13 +10,6 @@
 
 @section('content')
 
-    @php
-        $user = Auth::user();
-        $roles = $user->load('roles.perms');
-        $permissions = $roles->roles->first()->perms;
-        $type = Request::get('type');
-    @endphp
-
     <div class="wrapper-content">
         <div class="container">
             <div class="row  align-items-center justify-content-between">
@@ -82,15 +75,11 @@
                                             {!! conver_status($d->status) !!}
                                         </td>
                                         <td class="center">
-                                            @if ($permissions->contains('name','post_edit'))
-                                                <a href="{{route('nqadmin::post.edit.get', ['id' => $d->id, 'type' => $type])}}" class=" btn btn-link btn-sm "><i class="fa fa-edit"></i></a>
-                                            @endif
+                                            <a href="{{route('nqadmin::post.edit.get', ['id' => $d->id, 'type' => $type])}}" class=" btn btn-link btn-sm "><i class="fa fa-edit"></i></a>
 
-                                            @if ($permissions->contains('name','post_delete'))
-                                                <a href="javascript:;" class="btn btn-link btn-sm" data-toggle="confirmation" data-url="{{route('nqadmin::post.delete.get', $d->id)}}">
-                                                    <i class="fa fa-trash-o "></i>
-                                                </a>
-                                            @endif
+                                            <a href="javascript:;" class="btn btn-link btn-sm" data-toggle="confirmation" data-url="{{route('nqadmin::post.delete.get', $d->id)}}">
+                                                <i class="fa fa-trash-o "></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
