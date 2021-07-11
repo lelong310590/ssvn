@@ -47,8 +47,7 @@ class LevelController extends BaseController
 			$this->repository->create($input);
 			return redirect()->back()->with(FlashMessage::returnMessage('create'));
 		} catch (\Exception $e) {
-			Debugbar::addThrowable($e->getMessage());
-			return redirect()->back()->withErrors(config('messages.error'));
+			return redirect()->back()->withErrors($e->getMessage());
 		}
 	}
 	
@@ -79,8 +78,7 @@ class LevelController extends BaseController
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 			
 		} catch (\Exception $e) {
-			Debugbar::addThrowable($e->getMessage());
-			return redirect()->back()->withErrors(config('messages.error'));
+			return redirect()->back()->withErrors($e->getMessage());
 		}
 	}
 	

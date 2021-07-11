@@ -104,6 +104,7 @@ class DashboardController extends BaseController
 
     public function testMail($id)
     {
+        return view('nqadmin-dashboard::mail.content.user.test');
         $user = Users::find($id);
         Mail::to($user)->send(new TestMail($user));
     }
