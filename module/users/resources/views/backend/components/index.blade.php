@@ -88,7 +88,7 @@
                                                 <img src="{{ asset('adminux/img/user-header.png') }}" alt="{{ $d->email }}" class="gridpic">
                                             @endif
                                         </td>
-                                        <td>{{ $d->getClassLevel->name }}</td>
+                                        <td>{{ $d->getClassLevel == null ? '' : $d->getClassLevel->name }}</td>
                                         <td>{{ $d->email }}</td>
                                         <td>{{ $d->phone }}</td>
 {{--                                        <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>--}}
