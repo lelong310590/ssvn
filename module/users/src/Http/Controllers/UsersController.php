@@ -103,7 +103,6 @@ class UsersController extends BaseController
 			return redirect()->route('nqadmin::users.index.get')->with(FlashMessage::returnMessage('create'));
 			
 		} catch (\Exception $e) {
-			Debugbar::addThrowable($e->getMessage());
 			return redirect()->back()->withErrors(config('messages.error'));
 		}
 	}
@@ -166,6 +165,7 @@ class UsersController extends BaseController
         $orderDetailsRepository->deleteWhere(['customer' => $id]);
         $ordersRepository->deleteWhere(['customer' => $id]);
         $curriculumProgressRepository->deleteWhere(['student' => $id]);
+
 		return getDelete($id, $this->users);
 	}
 

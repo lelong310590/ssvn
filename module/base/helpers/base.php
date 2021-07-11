@@ -119,8 +119,7 @@ if (!function_exists('getDelete')) {
             $repository->delete($id);
             return redirect()->back()->with(FlashMessage::returnMessage('delete'));
         } catch (\Exception $e) {
-            Debugbar::addThrowable($e);
-            return redirect()->back()->withErrors(config('messages.error'));
+            return redirect()->back()->withErrors($e->getMessage());
         }
     }
 }
