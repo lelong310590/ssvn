@@ -76,8 +76,8 @@ use Illuminate\Support\Facades\DB;
                             </div>
 
                             <div class="vj-paging">
-                                <span>Có tổng số {{ $course->lastPage() }} trang tìm thấy</span>
-                                {{ $course->appends(request()->input())->render('vendor.pagination.default') }}
+                                <span>Có tổng số {{ $employers->lastPage() }} trang tìm thấy</span>
+                                {{ $employers->appends(request()->input())->render('vendor.pagination.default') }}
                             </div>
                         </div>
                         <!--box-my-course-->
