@@ -100,7 +100,7 @@ $classes = ClassLevel::with('subject')->get();
             <span>Tài khoản</span>
         </a>
         <a href="{{route('front::post.get', 'cau-hoi-thuong-gap')}}">
-            <i class="fa fa-bell" aria-hidden="true"></i>
+            <i class="fa fa-question" aria-hidden="true"></i>
             <span>Hướng dẫn</span>
         </a>
     @else
@@ -114,7 +114,7 @@ $classes = ClassLevel::with('subject')->get();
             <span>Tài khoản</span>
         </a>
         <a href="#login-box" class="btn-popup">
-            <i class="fa fa-bell" aria-hidden="true"></i>
+            <i class="fa fa-question" aria-hidden="true"></i>
             <span>Hướng dẫn</span>
         </a>
     @endif

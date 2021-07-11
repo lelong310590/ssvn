@@ -93,7 +93,6 @@
                 @else
                     <h6 class="not-login"><i class="fal fa-user"></i></h6>
                     <ul>
-                        <li><a href="#register-box" type="button" class="btn vj-btn btn-popup">Đăng ký</a></li>
                         <li><a href="#login-box" class="btn-link btn-popup">Đăng nhập</a></li>
                     </ul>
                 @endif
@@ -275,9 +274,7 @@
                             <div class="clearfix box-btn text-center">
                                 <button type="submit" class="btn btn-default-yellow btn-small">Lấy lại mật khẩu</button>
                             </div>
-                            <div class="bottom text-center">
-                                <p>Bạn chưa có tài khoản? <a href="javascript:;" class="switch-register">Đăng ký</a></p>
-                            </div>
+
                         </div>
                     </form>
                 </div>

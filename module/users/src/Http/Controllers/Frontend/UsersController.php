@@ -697,7 +697,9 @@ class UsersController extends BaseController
 
         if ($request->get('company') != null) {
             $currentCompany = $request->get('company');
-            $selectedCompany = $classLevelRepository->with('getUsers')->find($currentCompany);
+            $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) {
+                $q->where('is_enterprise', '!=', 1)->where('hard_role', 1);
+            }])->find($currentCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
                 return $q->where('classlevel', $currentCompany)->where('is_enterprise', '!=', 1)->where('hard_role', 1)->pluck('id');
