@@ -60,19 +60,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label">Slug</label>
-                                    <input type="text"
-                                           required
-                                           parsley-trigger="change"
-                                           class="form-control"
-                                           autocomplete="off"
-                                           name="slug"
-                                           value="{{old('slug')}}"
-                                           id="input_slug"
-                                    >
-                                </div>
-
-                                <div class="form-group">
                                     <label class="form-control-label">Mã số thuế</label>
                                     <input type="text"
                                            required
@@ -81,6 +68,30 @@
                                            autocomplete="off"
                                            name="mst"
                                            value="{{old('mst')}}"
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Số điện thoại</label>
+                                    <input type="text"
+                                           required
+                                           parsley-trigger="change"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           name="phone"
+                                           value="{{old('phone')}}"
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Email</label>
+                                    <input type="text"
+                                           required
+                                           parsley-trigger="change"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           name="email"
+                                           value="{{old('email')}}"
                                     >
                                 </div>
 
@@ -101,6 +112,19 @@
                                         <option value="active" {{ (old('status') == 'active') ? 'selected' : '' }}>Kích hoạt</option>
                                         <option value="disable" {{ (old('status') == 'disable') ? 'selected' : '' }}>Lưu nháp</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Slug</label>
+                                    <input type="text"
+                                           required
+                                           parsley-trigger="change"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           name="slug"
+                                           value="{{old('slug')}}"
+                                           id="input_slug"
+                                    >
                                 </div>
                             </div>
                         </div>

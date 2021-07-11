@@ -1,24 +1,23 @@
 <?php
 /**
- * UsersImport.php
+ * EmployerImport.php
  * Created by: trainheartnet
- * Created at: 09/07/2021
+ * Created at: 11/07/2021
  * Contact me at: longlengoc90@gmail.com
  */
 
 
-namespace Users\Import;
+namespace ClassLevel\Import;
 
+use DB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Users\Models\Users;
-use DB;
 
-class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
+class EmployerImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
-
     public $classLevel = null;
 
     public function __construct($classLevel)

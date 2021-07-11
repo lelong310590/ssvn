@@ -25,7 +25,9 @@ class CreateClassLevelRequest extends FormRequest
 		return [
 			'name' => 'required',
 			'slug' => 'required|unique:classlevel,slug',
-			'author' => 'required'
+			'author' => 'required',
+			'email' => 'email',
+            'phone' => ['regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
 		];
 	}
 	
@@ -38,7 +40,9 @@ class CreateClassLevelRequest extends FormRequest
 			'name.required' => 'Tên Công ty không được bỏ trống',
 			'slug.required' => 'Slug Công ty không được bỏ trống',
 			'slug.unique' => 'Slug Công ty đã được sử dụng',
-			'author.required' => 'Tác giả Công ty không được bỏ trống'
+			'author.required' => 'Tác giả Công ty không được bỏ trống',
+            'phone.regex' => 'Số điện thoại không đúng',
+            'email.email' => 'Định dạng Email không đúng',
 		];
 	}
 }

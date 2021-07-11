@@ -30,6 +30,9 @@ Route::group(['prefix' => $adminRoute], function(Router $router) use ($adminRout
 		
 		$router->get( 'change-status/{id}', 'ClassLevelController@changeStatus' )
 		       ->name( 'nqadmin::classlevel.changeStatus.get' );
+
+		$router->post('import-employer', 'ClassLevelController@importEmployer')
+            ->name( 'nqadmin::classlevel.import' );
 	});
 });
 

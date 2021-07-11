@@ -9,11 +9,17 @@
 namespace ClassLevel\Http\Controllers;
 
 use Barryvdh\Debugbar\Controllers\BaseController;
+use Base\Mail\CreateUserWhenCreateCompany;
 use ClassLevel\Http\Requests\EditClassLevelRequest;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Base\Supports\FlashMessage;
 use DebugBar;
 use ClassLevel\Http\Requests\CreateClassLevelRequest;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Users\Import\UsersImport;
+use Users\Repositories\UsersRepository;
+use Mail;
 
 class ClassLevelController extends BaseController
 {
@@ -40,14 +46,42 @@ class ClassLevelController extends BaseController
 	 *
 	 * @return $this|\Illuminate\Http\RedirectResponse
 	 */
-	public function postCreate(CreateClassLevelRequest $request)
+	public function postCreate(
+	    CreateClassLevelRequest $request,
+        UsersRepository $usersRepository
+    )
 	{
 		try {
 			$input = $request->except('_token');
-			$this->repository->create($input);
+			$classLevel = $this->repository->create($input);
+
+			$phone = $request->get('phone');
+			$email = $request->get('email');
+			$checkAvaiable = $usersRepository->scopeQuery(function ($q) use ($phone, $email) {
+			    return $q->where('phone', $phone)->orWhere('email', $email);
+            })->get();
+
+			if ($checkAvaiable->count() > 0) {
+			    return redirect()->withErrors(config('messages.success_create_class_level_error_user'));
+            } else {
+			    $password = random_string(10);
+			    $user = $usersRepository->create([
+			        'phone' => $phone,
+                    'email' => $request->get('email'),
+                    'first_name' => $request->get('name'),
+                    'password' => $password,
+                    'sex' => 'other',
+                    'status' => 'active',
+                    'classlevel' => $classLevel->id,
+                    'is_enterprise' => 1,
+                    'hard_role' => 2
+                ]);
+
+                Mail::to($user)->queue(new CreateUserWhenCreateCompany($user, $password));
+            }
+
 			return redirect()->back()->with(FlashMessage::returnMessage('create'));
 		} catch (\Exception $e) {
-			Debugbar::addThrowable($e->getMessage());
 			return redirect()->back()->withErrors(config('messages.error'));
 		}
 	}
@@ -103,4 +137,24 @@ class ClassLevelController extends BaseController
 	{
 		return changeStatus($id, $this->repository);
 	}
+
+	public function importEmployer(
+	    Request $request
+    )
+    {
+        try {
+            $classlevel = $request->get('classlevel');
+
+            Excel::import(
+                new UsersImport($classlevel),
+                $request->file('excel_file')
+            );
+
+            return redirect()->back()->with([
+                'success' => 'Nhập dữ liệu thành công'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors('Có lỗi xảy ra khi import dữ liệu');
+        }
+    }
 }

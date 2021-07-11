@@ -36,3 +36,12 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRou
             ->name('nqadmin::post.delete.get');
     });
 });
+
+//Frontend
+Route::group(['namespace' => 'Frontend'], function (Router $router) use ($moduleRoute) {
+    $router->group(['prefix' => $moduleRoute], function (Router $router) use ($moduleRoute) {
+        $router->get('{slug}', 'PostController@getPost')
+            ->name('front::post.get');
+    });
+
+});

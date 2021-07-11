@@ -37,21 +37,7 @@
 						<i class="bg-icon text-center fa fa-graduation-cap"></i>
 					</a>
 				</div>
-				<div class="col-md-8 col-lg-8 col-xl-4">
-					<a class="activity-block warning" href="{{route('nqadmin::classlevel.index.get')}}">
-						<div class="media">
-							<div class="media-body">
-								<h5>Quản trị Công ty</h5>
-							</div>
-						</div>
-						<br>
-						<div class="media">
-							<div class="media-body"><span class="progress-heading">Xem danh sách, thêm, sửa, xóa Công ty</span></div>
-						</div>
-						<i class="bg-icon text-center fa fa-sitemap"></i>
-					</a>
-				</div>
-				
+
 				<div class="col-md-8 col-lg-8 col-xl-4">
 					<a class="activity-block danger" href="{{route('nqadmin::subject.index.get')}}">
 						<div class="media">

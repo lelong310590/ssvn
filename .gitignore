@@ -20,3 +20,4 @@ public/js/*
 public/frontend/css/style.scss.orig
 module/base/resources/views/frontend/master.blade.php.orig
 module/course/resources/views/frontend/lecture/video.blade.php.orig
+storage/framework/laravel-excel

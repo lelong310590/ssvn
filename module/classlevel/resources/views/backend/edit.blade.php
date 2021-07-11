@@ -34,6 +34,35 @@
                 </div>
             </div>
 
+            <div class="card">
+                <div class="card-header">
+                    Nhập dữ liệu nhân sự
+                </div>
+                <div class="card-body">
+                    <form action="{{route('nqadmin::classlevel.import')}}" method="post" role="form" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <input type="hidden" name="classlevel" value="{{$data->id}}">
+                                    <input
+                                            type="file"
+                                            class="form-control"
+                                            name="excel_file"
+                                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary" style="min-height: 41.5px">Nhập dữ liệu</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
             <form method="post">
                 @if (count($errors) > 0)
                     @foreach($errors->all() as $e)

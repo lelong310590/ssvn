@@ -31,6 +31,7 @@ class CreateUser extends Mailable
      */
     public function build()
     {
-        return $this->subject('Đăng ký tài khoản thành công!')->view('nqadmin-dashboard::mail.content.user.create');
+        return $this->subject('Đăng ký tài khoản thành công!')
+            ->view('nqadmin-dashboard::mail.content.user.create');
     }
 }

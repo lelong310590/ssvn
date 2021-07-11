@@ -781,8 +781,11 @@ class UsersController extends BaseController
     )
     {
         try {
+
+            $user = auth('nqadmin')->user();
+
             Excel::import(
-                new UsersImport(),
+                new UsersImport($user->classlevel),
                 $request->file('excel_file')
             );
 
