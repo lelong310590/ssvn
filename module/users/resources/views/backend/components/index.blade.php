@@ -40,7 +40,7 @@
 
                                     <li class="nav-item ml-2">
                                         <div class="input-group">
-                                            <input type="text" name="email" class="form-control" aria-label="" placeholder="Nhập email">
+                                            <input type="text" name="phone" class="form-control" aria-label="" placeholder="Nhập SĐT">
                                         </div>
                                     </li>
 

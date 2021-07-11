@@ -57,8 +57,9 @@ class ClassLevelController extends BaseController
 			$input = $request->except('_token');
 			$phone = $request->get('phone');
 			$email = $request->get('email');
+
 			$checkAvaiable = $usersRepository->scopeQuery(function ($q) use ($phone, $email) {
-			    return $q->where('phone', $phone)->orWhere('email', $email);
+			    return $q->where('phone', $phone);
             })->get();
 
 			if ($checkAvaiable->count() > 0) {

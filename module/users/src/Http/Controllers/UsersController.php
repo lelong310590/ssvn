@@ -41,10 +41,10 @@ class UsersController extends BaseController
 	 */
 	public function getIndex(Request $request)
 	{
-        if($request->get('email')){
-            $email = $request->get('email');
-            $users = $this->users->with('getClassLevel')->scopeQuery(function($e) use($email){
-                return $e->where(['email'=>$email]);
+        if($request->get('phone')){
+            $phone = $request->get('phone');
+            $users = $this->users->with('getClassLevel')->scopeQuery(function($e) use($phone){
+                return $e->where(['phone' => $phone]);
             })->orderBy('created_at', 'desc')->paginate(25);
         }else {
             $users = $this->users
