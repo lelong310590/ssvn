@@ -37,7 +37,7 @@ $classes = ClassLevel::with('subject')->get();
                     </li>
                     <li>
                         <label class="txt">Email</label>
-                        <a href="" class="node">anticovid@gmail.com</a>
+                        <a href="mailto:vn.anticovid19@gmail.com" class="node">vn.anticovid19@gmail.com</a>
                     </li>
                 </ul>
             </div>
@@ -99,9 +99,9 @@ $classes = ClassLevel::with('subject')->get();
             <i class="fa fa-user-circle" aria-hidden="true"></i>
             <span>Tài khoản</span>
         </a>
-        <a href="{{route('front.users.notification.get')}}">
+        <a href="{{route('front::post.get', 'cau-hoi-thuong-gap')}}">
             <i class="fa fa-bell" aria-hidden="true"></i>
-            <span>Thông báo</span>
+            <span>Hướng dẫn</span>
         </a>
     @else
         <a href="#login-box" class="btn-popup">
@@ -115,7 +115,7 @@ $classes = ClassLevel::with('subject')->get();
         </a>
         <a href="#login-box" class="btn-popup">
             <i class="fa fa-bell" aria-hidden="true"></i>
-            <span>Thông báo</span>
+            <span>Hướng dẫn</span>
         </a>
     @endif
 </div>
