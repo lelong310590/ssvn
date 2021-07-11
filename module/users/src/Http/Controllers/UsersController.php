@@ -52,7 +52,7 @@ class UsersController extends BaseController
                 ->with('roles')
                 ->with('getClassLevel')
                 ->orderBy('created_at', 'desc')
-                ->paginate(25);
+                ->paginate(20);
 
         }
 
@@ -148,8 +148,7 @@ class UsersController extends BaseController
 
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 		} catch (\Exception $e) {
-			Debugbar::addThrowable($e->getMessage());
-			return redirect()->back()->withErrors(config('messages.error'));
+			return redirect()->back()->withErrors($e->getMessage());
 		}
 	}
 	

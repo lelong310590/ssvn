@@ -58,15 +58,18 @@ use Illuminate\Support\Facades\DB;
                                 <table class="table table-hover table-striped table-bordered">
                                     <thead>
                                     <tr>
-                                        <th width="100">Mã nhân sự</th>
+                                        <th width="100">STT</th>
                                         <th>Họ và tên</th>
                                         <th>Số điện thoại</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                        $i = $employers->perPage() * ($employers->currentPage() - 1) + 1
+                                    @endphp
                                     @foreach($employers as $e)
                                         <tr>
-                                            <td>EM-{{1000000 + $e->id}}</td>
+                                            <td>{{$i++}}</td>
                                             <td>{{$e->first_name}} {{$e->last_name}}</td>
                                             <td>{{$e->phone}}</td>
                                         </tr>
@@ -76,7 +79,6 @@ use Illuminate\Support\Facades\DB;
                             </div>
 
                             <div class="vj-paging">
-                                <span>Có tổng số {{ $employers->lastPage() }} trang tìm thấy</span>
                                 {{ $employers->appends(request()->input())->render('vendor.pagination.default') }}
                             </div>
                         </div>

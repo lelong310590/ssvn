@@ -66,7 +66,7 @@
                             <table class="table table-bordered" id="#">
                                 <thead>
                                 <tr>
-                                    <th>Avatar</th>
+                                    <th width="50">STT</th>
                                     <th width="200">Đơn vị</th>
                                     <th width="200">Họ và tên</th>
                                     <th width="200">Email</th>
@@ -80,15 +80,13 @@
                                 </thead>
                                 <tbody>
 
+                                @php
+                                    $i = $data->perPage() * ($data->currentPage() - 1) + 1
+                                @endphp
+
                                 @foreach($data as $d)
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
-                                        <td>
-                                            @if ($d->thumbnail != null)
-                                                <img src="{{ asset($d->thumbnail) }}" alt="{{ $d->email }}" class="gridpic">
-                                            @else
-                                                <img src="{{ asset('adminux/img/user-header.png') }}" alt="{{ $d->email }}" class="gridpic">
-                                            @endif
-                                        </td>
+                                        <td>{{$i++}}</td>
                                         <td>{{ $d->getClassLevel == null ? '' : $d->getClassLevel->name }}</td>
                                         <td>{{ $d->first_name }} {{$d->last_name}}</td>
                                         <td>{{ $d->email }}</td>

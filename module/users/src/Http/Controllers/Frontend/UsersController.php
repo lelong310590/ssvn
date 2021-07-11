@@ -770,7 +770,7 @@ class UsersController extends BaseController
         $company = $master->classlevel;
         $employers = $usersRepository->scopeQuery(function ($q) use ($company) {
             return $q->where('classlevel', $company)->where('status', 'active')->where('hard_role', '1');
-        })->paginate(20);
+        })->orderBy('first_name', 'asc')->paginate(20);
 
         return view('nqadmin-users::frontend.employers', compact(
             'employers'
