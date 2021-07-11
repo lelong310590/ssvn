@@ -14,6 +14,7 @@ use Cart\Repositories\OrderDetailsRepository;
 use Cart\Repositories\OrdersRepository;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Repositories\CurriculumProgressRepository;
+use Course\Repositories\TestResultRepository;
 use MultipleChoices\Repositories\QuestionRepository;
 use Users\Http\Requests\UserCreateRequest;
 use Users\Http\Requests\UserEditRequest;
@@ -157,14 +158,18 @@ class UsersController extends BaseController
 	 *
 	 * @return $this|\Illuminate\Http\RedirectResponse
 	 */
-	public function getDelete($id, OrderDetailsRepository $orderDetailsRepository,
-                              OrdersRepository $ordersRepository,
-                              CurriculumProgressRepository $curriculumProgressRepository
+	public function getDelete(
+	    $id,
+        OrderDetailsRepository $orderDetailsRepository,
+        OrdersRepository $ordersRepository,
+        CurriculumProgressRepository $curriculumProgressRepository,
+        TestResultRepository $testResultRepository
     )
 	{
         $orderDetailsRepository->deleteWhere(['customer' => $id]);
         $ordersRepository->deleteWhere(['customer' => $id]);
         $curriculumProgressRepository->deleteWhere(['student' => $id]);
+        $testResultRepository->deleteWhere(['owner' => $id]);
 
 		return getDelete($id, $this->users);
 	}
