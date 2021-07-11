@@ -27,7 +27,7 @@ class CreateClassLevelRequest extends FormRequest
 			'slug' => 'required|unique:classlevel,slug',
 			'author' => 'required',
 			'email' => 'email',
-            'phone' => ['regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
+            'phone' => ['regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/', 'unique:users,phone'],
 		];
 	}
 	
@@ -42,6 +42,7 @@ class CreateClassLevelRequest extends FormRequest
 			'slug.unique' => 'Slug Công ty đã được sử dụng',
 			'author.required' => 'Tác giả Công ty không được bỏ trống',
             'phone.regex' => 'Số điện thoại không đúng',
+            'phone.unique' => 'Số điện thoại này đã được sử dụng',
             'email.email' => 'Định dạng Email không đúng',
 		];
 	}

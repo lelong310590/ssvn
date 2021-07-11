@@ -112,12 +112,12 @@ class TestResultController extends BaseController
                 }
 
             } else {
-                $defaultAnwsers = $answerRepository->findWhere([
+                $correctAnswer = $answerRepository->findWhere([
                     'answer' => 'Y',
                     'question' => $questionid
                 ], ['id'])->first();
 
-                if ($answers == $defaultAnwsers->id) {
+                if ($answers == $correctAnswer->id) {
                     $correct = true;
                 } else {
                     $wrong = true;

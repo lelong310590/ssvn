@@ -8,4 +8,5 @@
  */
 return [
 	'admin_route' => env('SOURCE_ADMIN_ROUTE', 'admincp'),
+    'default_password' => 'anticovid19'
 ];

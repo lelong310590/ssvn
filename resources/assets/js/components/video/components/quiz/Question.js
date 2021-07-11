@@ -177,7 +177,7 @@ class Question extends Component
 
         let axiosData = {
             question: questions[start].id,
-            answers: (type !== 'multi') ? answerInQuestion[index].id : multiAnswer,
+            answers: (type !== 'multi') ? value : multiAnswer,
         }
 
         axios.post(api.CHECK_ANSWER, axiosData)

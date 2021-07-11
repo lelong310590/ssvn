@@ -138,7 +138,7 @@ class QuizQuestionCreate extends Component
                     <div className="answer-check">
                         <label className="custom-control custom-radio">
                             <input 
-                                type="z"
+                                type="radio"
                                 className="custom-control-input" 
                                 name="answer"
                                 checked={this.state.checkAnswer === i } 

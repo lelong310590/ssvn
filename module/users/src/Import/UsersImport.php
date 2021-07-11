@@ -28,6 +28,7 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
 
     public function collection(Collection $rows)
     {
+        $password = config('base.default_password');
         DB::beginTransaction();
         try {
             foreach ($rows as $row)
@@ -37,10 +38,10 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
                 if ($check->count() == 0) {
                     DB::table('users')->insert([
                         'phone' => $value[1],
-                        'password' => $value[2],
-                        'first_name' => $value[3],
-                        'sex' => $value[4],
-                        'email' => $value[5],
+                        'password' => $password,
+                        'first_name' => $value[2],
+                        'sex' => $value[3],
+                        'email' => $value[4],
                         'classlevel' => $this->classLevel,
                         'hard_role' => 1,
                         'status' => 'active'

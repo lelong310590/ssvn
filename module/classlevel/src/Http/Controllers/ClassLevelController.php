@@ -53,8 +53,6 @@ class ClassLevelController extends BaseController
 	{
 		try {
 			$input = $request->except('_token');
-			$classLevel = $this->repository->create($input);
-
 			$phone = $request->get('phone');
 			$email = $request->get('email');
 			$checkAvaiable = $usersRepository->scopeQuery(function ($q) use ($phone, $email) {
@@ -64,7 +62,8 @@ class ClassLevelController extends BaseController
 			if ($checkAvaiable->count() > 0) {
 			    return redirect()->withErrors(config('messages.success_create_class_level_error_user'));
             } else {
-			    $password = random_string(10);
+                $classLevel = $this->repository->create($input);
+			    $password = config('base.default_password');
 			    $user = $usersRepository->create([
 			        'phone' => $phone,
                     'email' => $request->get('email'),
