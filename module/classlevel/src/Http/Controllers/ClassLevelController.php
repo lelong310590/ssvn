@@ -84,7 +84,7 @@ class ClassLevelController extends BaseController
 
 			return redirect()->back()->with(FlashMessage::returnMessage('create'));
 		} catch (\Exception $e) {
-			return redirect()->back()->withErrors(config('messages.error'));
+			return redirect()->back()->withErrors($e->getMessage());
 		}
 	}
 	
