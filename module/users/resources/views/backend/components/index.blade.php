@@ -67,12 +67,13 @@
                                 <thead>
                                 <tr>
                                     <th>Avatar</th>
-                                    <th width="400">Đơn vị</th>
-                                    <th>Email</th>
+                                    <th width="200">Đơn vị</th>
+                                    <th width="200">Họ và tên</th>
+                                    <th width="200">Email</th>
                                     <th>Số điện thoại</th>
 {{--                                    <th>Vai trò</th>--}}
                                     <th width="150">Là đại diện doanh nghiệp ?</th>
-                                    <th>Trạng thái</th>
+                                    <th width="150">Trạng thái</th>
                                     <th>Ngày tham gia </th>
                                     <th width="120">Thao tác</th>
                                 </tr>
@@ -89,6 +90,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $d->getClassLevel == null ? '' : $d->getClassLevel->name }}</td>
+                                        <td>{{ $d->first_name }} {{$d->last_name}}</td>
                                         <td>{{ $d->email }}</td>
                                         <td>{{ $d->phone }}</td>
 {{--                                        <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>--}}
