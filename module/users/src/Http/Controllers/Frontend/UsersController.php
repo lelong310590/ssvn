@@ -703,7 +703,7 @@ class UsersController extends BaseController
             }])->find($currentCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
-                return $q->where('classlevel', $currentCompany)->where('is_enterprise', '!=', 1)->where('hard_role', 1)->pluck('id');
+                return $q->where('classlevel', $currentCompany)->where('hard_role', 1)->pluck('id');
             })->get();
 
             $courseInCompany = $courseRepository
@@ -728,7 +728,7 @@ class UsersController extends BaseController
             }])->find($currentCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany, $user) {
-                return $q->where('id', '!=', $user->id)->where('is_enterprise', '!=', 1)->where('classlevel', $currentCompany)->pluck('id');
+                return $q->where('id', '!=', $user->id)->where('classlevel', $currentCompany)->pluck('id');
             })->get();
 
             $courseInCompany = $courseRepository
