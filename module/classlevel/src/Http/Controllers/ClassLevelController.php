@@ -62,7 +62,7 @@ class ClassLevelController extends BaseController
             })->get();
 
 			if ($checkAvaiable->count() > 0) {
-			    return redirect()->withErrors(config('messages.success_create_class_level_error_user'));
+			    return redirect()->back()->withErrors(config('messages.success_create_class_level_error_user'));
             } else {
                 $classLevel = $this->repository->create($input);
 			    $password = random_string(10);
@@ -115,7 +115,6 @@ class ClassLevelController extends BaseController
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 			
 		} catch (\Exception $e) {
-			Debugbar::addThrowable($e->getMessage());
 			return redirect()->back()->withErrors(config('messages.error'));
 		}
 	}
