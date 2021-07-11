@@ -45,9 +45,9 @@
                     <a role="button" data-toggle="collapse" data-parent="#{{$s->slug}}" href="#collapse-{{$s->id}}" aria-expanded="true" aria-controls="collapse-{{$s->id}}">
                         <span class="lesson-name"><b>{{$s->name}}</b></span>
                         @if ($course->type == 'test')
-                            <span class="lesson-total"><b>{{$total}} câu hỏi</b></span>
+                            <span class="lesson-total"><b>- ({{$total}} câu hỏi)</b></span>
                         @else
-                            <span class="lesson-total"><b>{{$total}} bài học</b></span>
+                            <span class="lesson-total"><b>- ({{$total}} bài học)</b></span>
                         @endif
                         {{--<span class="lesson-time">{{secToHR($allDuration, true)}}</span>--}}
                     </a>

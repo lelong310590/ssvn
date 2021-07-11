@@ -697,10 +697,13 @@ class UsersController extends BaseController
 
         if ($request->get('company') != null) {
             $currentCompany = $request->get('company');
-            $selectedCompany = $classLevelRepository->with('getUsers')->find($currentCompany);
+
+            $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) use ($user) {
+                $q->where('is_enterprise', '!=', 1);
+            }])->find($currentCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
-                return $q->where('classlevel', $currentCompany)->pluck('id');
+                return $q->where('classlevel', $currentCompany)->where('is_enterprise', '!=', 1)->pluck('id');
             })->get();
 
             $courseInCompany = $courseRepository
@@ -720,10 +723,12 @@ class UsersController extends BaseController
         } elseif (intval($user->hard_role) == 2) {
             $currentCompany = $user->classlevel;
 
-            $selectedCompany = $classLevelRepository->with('getUsers')->find($currentCompany);
+            $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) use ($user) {
+                $q->where('id', '!=', $user->id)->where('is_enterprise', '!=', 1);
+            }])->find($currentCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany, $user) {
-                return $q->where('id', '!=', $user->id)->where('classlevel', $currentCompany)->pluck('id');
+                return $q->where('id', '!=', $user->id)->where('is_enterprise', '!=', 1)->where('classlevel', $currentCompany)->pluck('id');
             })->get();
 
             $courseInCompany = $courseRepository
