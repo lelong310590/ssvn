@@ -120,12 +120,12 @@
                             </a>
                         </div>
 
-                        <div class="login clearfix">
-                            <a href="#register-box" class="btn-popup">
-                                <i class="far fa-registered pull-left"></i>
-                                <p class="overflow">Đăng ký</p>
-                            </a>
-                        </div>
+{{--                        <div class="login clearfix">--}}
+{{--                            <a href="#register-box" class="btn-popup">--}}
+{{--                                <i class="far fa-registered pull-left"></i>--}}
+{{--                                <p class="overflow">Đăng ký</p>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
 
                     </div>
                 @endif
@@ -169,53 +169,53 @@
     @endif
 
 </header>
-<!--end header-->
-<div class="box-popup box-popup-login" id="register-box">
-    <div class="main-popup">
-        <div class="header-popup">
-            <span class="close-popup"></span>
-        </div>
-        <div class="content-popup">
-            <div class="popup-register">
-                <div class="left">
-                    <h3 class="txt-popup">Đăng ký</h3>
-                    <form class="form-signin1 full_side text-white" action="{{ route('front.register.post') }}" method="post">
-                        {{ csrf_field() }}
-                        <div class="box-form-default">
-                            <div class="form-group">
-                                <input type="text" class="input-form" name="first_name" placeholder="Tên đầy đủ" required/>
-                            </div>
-                            <div class="form-group">
-                                <input type="phone" class="input-form" name="phone" placeholder="Số điện thoại" required/>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="input-form" name="password" placeholder="Mật khẩu" required/>
-                            </div>
-                            <div class="form-group">
-                                <select class="input-form" name="classlevel">
-                                    <option value="">-- Chọn đơn vị ---</option>
-                                    @foreach($allClassLevel as $lv)
-                                        <option value="{{$lv->id}}">{{$lv->name}} - MST: {{$lv->mst}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="clearfix box-btn text-center">
-                                <button type="submit" class="btn btn-default-yellow btn-small">Đăng ký</button>
-                            </div>
-                            <div class="bottom text-center">
-                                <p>Bạn đã có tài khoản? <a href="javascript:;" id="switch-login">Đăng nhập</a></p>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="right hidden-xs hidden-sm">
-                    <span class="logo text-center">anticovid</span>
-                    <p>Bằng cách đăng ký, bạn đồng ý với Điều khoản sử dụng và Chính sách Bảo mật của chúng tôi.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--<!--end header-->--}}
+{{--<div class="box-popup box-popup-login" id="register-box">--}}
+{{--    <div class="main-popup">--}}
+{{--        <div class="header-popup">--}}
+{{--            <span class="close-popup"></span>--}}
+{{--        </div>--}}
+{{--        <div class="content-popup">--}}
+{{--            <div class="popup-register">--}}
+{{--                <div class="left">--}}
+{{--                    <h3 class="txt-popup">Đăng ký</h3>--}}
+{{--                    <form class="form-signin1 full_side text-white" action="{{ route('front.register.post') }}" method="post">--}}
+{{--                        {{ csrf_field() }}--}}
+{{--                        <div class="box-form-default">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <input type="text" class="input-form" name="first_name" placeholder="Tên đầy đủ" required/>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <input type="phone" class="input-form" name="phone" placeholder="Số điện thoại" required/>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <input type="password" class="input-form" name="password" placeholder="Mật khẩu" required/>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <select class="input-form" name="classlevel">--}}
+{{--                                    <option value="">-- Chọn đơn vị ---</option>--}}
+{{--                                    @foreach($allClassLevel as $lv)--}}
+{{--                                        <option value="{{$lv->id}}">{{$lv->name}} - MST: {{$lv->mst}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                            <div class="clearfix box-btn text-center">--}}
+{{--                                <button type="submit" class="btn btn-default-yellow btn-small">Đăng ký</button>--}}
+{{--                            </div>--}}
+{{--                            <div class="bottom text-center">--}}
+{{--                                <p>Bạn đã có tài khoản? <a href="javascript:;" id="switch-login">Đăng nhập</a></p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--                <div class="right hidden-xs hidden-sm">--}}
+{{--                    <span class="logo text-center">anticovid</span>--}}
+{{--                    <p>Bằng cách đăng ký, bạn đồng ý với Điều khoản sử dụng và Chính sách Bảo mật của chúng tôi.</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 <div class="box-popup box-popup-login" id="login-box">
     <div class="main-popup">
@@ -242,7 +242,7 @@
                                 <a href="javascript:;" id="switch-forget-password">Quên mật khẩu?</a>
                             </div>
                             <div class="bottom text-center">
-                                <p>Bạn chưa có tài khoản? <a href="javascript:;" class="switch-register">Đăng ký</a></p>
+                                <p>Bạn chưa có tài khoản? Hãy liên hệ với cơ quan chủ quản để đăng ký</p>
                             </div>
                         </div>
                     </form>

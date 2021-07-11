@@ -33,7 +33,7 @@
             <p style="text-align: center">Cùng chung tay đổi lùi đại dịch Covid 19</p>
         </div>
         <div class="mail-content" style="padding: 25px">
-            <p>Xin chào ! {{$user->first_name}} {{$user->last_name}}</p>
+            <p style="font-style: 15px; font-weight: 700">Xin chào ! {{$user->first_name}} {{$user->last_name}}</p>
             <p>Thông tin dùng để đăng nhập hệ thống của bạn là:</p>
             <p style="font-size: 13px; font-style: italic">Tài khoản: <b>{{$user->phone}}</b></p>
             <p style="font-size: 13px; font-style: italic">Mật khẩu: <b>{{$password}}</b></p>

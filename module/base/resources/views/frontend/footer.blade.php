@@ -94,15 +94,26 @@ $classes = ClassLevel::with('subject')->get();
             <i class="fa fa-certificate" aria-hidden="true"></i>
             <span>Chứng chỉ</span>
         </a>
-    @endif
-    @if (Auth::check())
+
         <a href="{{route('front.users.info.get')}}">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
             <span>Tài khoản</span>
         </a>
-    @endif
-    @if (Auth::check())
         <a href="{{route('front.users.notification.get')}}">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            <span>Thông báo</span>
+        </a>
+    @else
+        <a href="#login-box" class="btn-popup">
+            <i class="fa fa-certificate" aria-hidden="true"></i>
+            <span>Chứng chỉ</span>
+        </a>
+
+        <a href="#login-box" class="btn-popup">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+            <span>Tài khoản</span>
+        </a>
+        <a href="#login-box" class="btn-popup">
             <i class="fa fa-bell" aria-hidden="true"></i>
             <span>Thông báo</span>
         </a>
