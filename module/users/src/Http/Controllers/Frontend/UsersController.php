@@ -693,13 +693,16 @@ class UsersController extends BaseController
 
         $employers = $usersRepository->findWhere([
             'status' => 'active',
+            'hard_role' => 1
         ])->count();
 
         if ($request->get('company') != null) {
             $currentCompany = $request->get('company');
             $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) {
-                $q->where('is_enterprise', '!=', 1)->where('hard_role', 1);
+                $q->where('hard_role', 1);
             }])->find($currentCompany);
+
+            dd($selectedCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
                 return $q->where('classlevel', $currentCompany)->where('is_enterprise', '!=', 1)->where('hard_role', 1)->pluck('id');
@@ -723,7 +726,7 @@ class UsersController extends BaseController
             $currentCompany = $user->classlevel;
 
             $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) use ($user) {
-                $q->where('id', '!=', $user->id)->where('is_enterprise', '!=', 1)->where('hard_role', 1);
+                $q->where('id', '!=', $user->id)->where('hard_role', 1);
             }])->find($currentCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany, $user) {

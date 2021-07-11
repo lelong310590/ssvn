@@ -93,7 +93,8 @@
                 @else
                     <h6 class="not-login"><i class="fal fa-user"></i></h6>
                     <ul>
-                        <li><a href="#login-box" class="btn-link btn-popup">Đăng nhập</a></li>
+{{--                        <li><a href="#register-box" type="button" class="btn vj-btn btn-popup">Đăng ký</a></li>--}}
+                        <li><a href="#login-box" type="button" class="btn vj-btn btn-popup">Đăng nhập</a></li>
                     </ul>
                 @endif
             </div>
