@@ -2491,7 +2491,8 @@ header nav .menu .menu-main > li:hover > a {
 	font-size: 14px;
 	padding: 0 12px;
 	line-height: 20px;
-	margin-top: 15px
+	margin-top: 15px;
+	font-weight: 700;
 }
 
 .product-list ul:not(.pro-hover) > li .pro-bottom {
