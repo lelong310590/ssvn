@@ -27,7 +27,7 @@ class CreateUserWhenCreateCompany extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, $password)
+    public function __construct($user, $password)
     {
         $this->user = $user;
         $this->password = $password;
