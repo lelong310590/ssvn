@@ -38,7 +38,7 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
                 if ($check->count() == 0) {
                     DB::table('users')->insert([
                         'phone' => $value[1],
-                        'password' => $password,
+                        'password' => bcrypt($password),
                         'first_name' => $value[2],
                         'sex' => $value[3],
                         'email' => $value[4],
