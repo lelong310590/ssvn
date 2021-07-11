@@ -9,7 +9,9 @@
 namespace ClassLevel\Http\Controllers;
 
 use Barryvdh\Debugbar\Controllers\BaseController;
+use Base\Jobs\SendMail;
 use Base\Mail\CreateUserWhenCreateCompany;
+use Carbon\Carbon;
 use ClassLevel\Http\Requests\EditClassLevelRequest;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Base\Supports\FlashMessage;
@@ -63,7 +65,7 @@ class ClassLevelController extends BaseController
 			    return redirect()->withErrors(config('messages.success_create_class_level_error_user'));
             } else {
                 $classLevel = $this->repository->create($input);
-			    $password = config('base.default_password');
+			    $password = random_string(10);
 			    $user = $usersRepository->create([
 			        'phone' => $phone,
                     'email' => $request->get('email'),
@@ -76,7 +78,8 @@ class ClassLevelController extends BaseController
                     'hard_role' => 2
                 ]);
 
-                Mail::to($user)->queue(new CreateUserWhenCreateCompany($user, $password));
+//			    SendMail::dispatch($user, $password)->delay(Carbon::now()->addMinute(1));
+                Mail::to($user)->send(new CreateUserWhenCreateCompany($user, $password));
             }
 
 			return redirect()->back()->with(FlashMessage::returnMessage('create'));

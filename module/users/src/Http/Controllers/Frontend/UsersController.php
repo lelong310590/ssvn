@@ -705,15 +705,15 @@ class UsersController extends BaseController
 
             $courseInCompany = $courseRepository
                 ->with('getLdp')
-                ->with('certificate', function ($r) use ($userInCompany) {
-                    $r->whereIn('certificate.user_id', $userInCompany);
-                })
                 ->whereHas('getLdp', function ($r) use ($currentCompany) {
                     $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
                 })
-                ->with('getOrderDetail', function ($r) use ($userInCompany) {
-                    $r->whereIn('order_id.customer', $userInCompany)->distinct('customer');
-                })
+                ->with(['certificate' => function($r) use ($userInCompany) {
+                    return $r->whereIn('certificate.user_id', $userInCompany)->get();
+                }])
+                ->with(['getOrderDetail' => function($c) use ($userInCompany) {
+                    return $c->whereIn('order_details.customer', $userInCompany)->distinct('customer')->get();
+                }])
                 ->scopeQuery(function ($q) use ($currentCompany) {
                     return $q->where('status', 'active');
                 })->get();
@@ -722,21 +722,22 @@ class UsersController extends BaseController
 
             $selectedCompany = $classLevelRepository->with('getUsers')->find($currentCompany);
 
-            $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
-                return $q->where('classlevel', $currentCompany)->pluck('id');
+            $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany, $user) {
+                return $q->where('id', '!=', $user->id)->where('classlevel', $currentCompany)->pluck('id');
             })->get();
 
             $courseInCompany = $courseRepository
                 ->with('getLdp')
-                ->with('certificate', function ($r) use ($userInCompany) {
-                    $r->whereIn('certificate.user_id', $userInCompany);
-                })
                 ->whereHas('getLdp', function ($r) use ($currentCompany) {
                     $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
                 })
-                ->with('getOrderDetail', function ($r) use ($userInCompany) {
-                    $r->whereIn('order_id.customer', $userInCompany)->distinct('customer');
-                })
+                ->with(['certificate' => function($r) use ($userInCompany) {
+                    return $r->whereIn('certificate.user_id', $userInCompany)->get();
+                }])
+                ->with(['getOrderDetail' => function($c) use ($userInCompany) {
+                    return $c->whereIn('order_details.customer', $userInCompany)->distinct('customer')->get();
+                }])
+
                 ->scopeQuery(function ($q) use ($currentCompany) {
                     return $q->where('status', 'active');
                 })->get();

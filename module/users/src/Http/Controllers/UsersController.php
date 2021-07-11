@@ -43,12 +43,18 @@ class UsersController extends BaseController
 	{
         if($request->get('email')){
             $email = $request->get('email');
-            $users = $this->users->scopeQuery(function($e) use($email){
+            $users = $this->users->with('getClassLevel')->scopeQuery(function($e) use($email){
                 return $e->where(['email'=>$email]);
-            })->paginate(10);
+            })->orderBy('created_at', 'desc')->paginate(25);
         }else {
-            $users = $this->users->with('roles')->orderBy('created_at', 'desc')->paginate(25);
+            $users = $this->users
+                ->with('roles')
+                ->with('getClassLevel')
+                ->orderBy('created_at', 'desc')
+                ->paginate(25);
+
         }
+
 		return view('nqadmin-users::backend.components.index', [
 			'data' => $users
 		]);

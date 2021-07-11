@@ -67,9 +67,10 @@
                                 <thead>
                                 <tr>
                                     <th>Avatar</th>
+                                    <th width="400">Đơn vị</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
-                                    <th>Vai trò</th>
+{{--                                    <th>Vai trò</th>--}}
                                     <th width="150">Là đại diện doanh nghiệp ?</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tham gia </th>
@@ -87,9 +88,10 @@
                                                 <img src="{{ asset('adminux/img/user-header.png') }}" alt="{{ $d->email }}" class="gridpic">
                                             @endif
                                         </td>
+                                        <td>{{ $d->getClassLevel->name }}</td>
                                         <td>{{ $d->email }}</td>
                                         <td>{{ $d->phone }}</td>
-                                        <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>
+{{--                                        <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>--}}
                                         <td class="center text-center">
                                             @if ($d->is_enterprise == 1)
                                                 <i class="fa fa-check " style="color: green"></i>

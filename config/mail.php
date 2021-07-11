@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'support@vietjack.com'),
-        'name' => env('MAIL_FROM_NAME', 'Vietjack'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@anticovid.com'),
+        'name' => env('MAIL_FROM_NAME', 'AntiCovid'),
     ],
 
     /*
@@ -119,5 +119,4 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
-
 ];

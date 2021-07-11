@@ -202,7 +202,7 @@ class Users extends Authenticatable
 
     public function getClassLevel()
     {
-        return $this->hasOne(ClassLevel::class, 'classlevel', 'id');
+        return $this->hasOne(ClassLevel::class, 'id', 'classlevel');
     }
 
     public function getCertificate()
