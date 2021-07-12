@@ -232,7 +232,10 @@
                             <div class="form-group">
                                 <input type="phone" class="input-form" placeholder="Số điện thoại" name="phone">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group form-password">
+                                <div class="show-password">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </div>
                                 <input type="password" class="input-form" placeholder="Mật khẩu" name="password">
                             </div>
                             <div class="clearfix box-btn text-center">

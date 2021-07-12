@@ -715,7 +715,7 @@ class UsersController extends BaseController
                     return $r->whereIn('certificate.user_id', $userInCompany)->get();
                 }])
                 ->with(['getOrderDetail' => function($c) use ($userInCompany) {
-                    return $c->whereIn('order_details.customer', $userInCompany)->distinct('customer')->get();
+                    return $c->whereIn('order_details.customer', $userInCompany)->get();
                 }])
                 ->scopeQuery(function ($q) use ($currentCompany) {
                     return $q->where('status', 'active');
@@ -728,7 +728,7 @@ class UsersController extends BaseController
             }])->find($currentCompany);
 
             $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany, $user) {
-                return $q->where('id', '!=', $user->id)->where('classlevel', $currentCompany)->pluck('id');
+                return $q->where('id', '!=', $user->id)->where('hard_role', 1)->where('classlevel', $currentCompany)->pluck('id');
             })->get();
 
             $courseInCompany = $courseRepository

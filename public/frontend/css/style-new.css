@@ -3368,6 +3368,19 @@ footer .list-unstyled li {
 	padding: 0
 }
 
+.form-password {
+	position: relative;
+}
+
+.form-password .show-password {
+	position: absolute;
+	top: 0;
+	right: 15px;
+	z-index: 9;
+	margin-top: 15px;
+	color: #797979;
+}
+
 .stat-detail-item-stats p {
 	font-size: 12px
 }

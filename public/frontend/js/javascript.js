@@ -329,6 +329,15 @@ function textCounter(field,cnt, maxlimit) {
     $('body').on('click', '.flash-close', function () {
         $('.flash-backdrop').hide();
     })
+
+    $('body').on('click', '.show-password', function () {
+        let formPassword = $('input[name="password"]');
+        if (formPassword.attr('type') == 'password') {
+            formPassword.attr('type', 'text')
+        } else {
+            formPassword.attr('type', 'password')
+        }
+    })
 });
 
 
