@@ -1,23 +1,14 @@
-<div class="container">
-    <div class="banner">
-        <div class="banner-wrap text-center">
-            <img src="{{asset('frontend/images/banner-bg.jpg')}}" alt="" class="img-responsive">
-{{--            <h1>Kênh thông tin tuyên truyền và chia sẻ kiến thức về phòng chống đại dịch COVID 19</h1>--}}
-{{--            <p class="text-center">Dành cho các tổ chức, công ty, ban ngành và đoàn thể</p>--}}
+<div class="main-banner">
+    <div class="hotline">
+
+    </div>
+    <div class="container">
+        <div class="banner-inner">
+            <div class="banner-inner-content">
+                <h1>Cùng chung tay đẩy lùi đại dịch COVID-19 </h1>
+                <p>Kêu gọi mọi người dân cùng nhau thực hiện việc chung sống an toàn với dịch bệnh</p>
+            </div>
         </div>
-{{--        <div class="main-search">--}}
-{{--            <form method="get" action="{{ route('front.home.search') }}">--}}
-{{--                <label>--}}
-{{--                    <select class="search-select" name="type">--}}
-{{--                        <option value="normal">Khóa đào tạo</option>--}}
-{{--                        <option value="test">Trắc nghiệm</option>--}}
-{{--                    </select>--}}
-{{--                    <i class="far fa-chevron-down"></i>--}}
-{{--                </label>--}}
-{{--                <input type="text" class="search-input" placeholder="Nhập từ khóa..." name="q"/>--}}
-{{--                <button class="btn-link"><i class="fal fa-search"></i></button>--}}
-{{--            </form>--}}
-{{--        </div>--}}
     </div>
 </div>
-<!--banner-->
+

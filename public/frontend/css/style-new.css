@@ -3443,6 +3443,40 @@ footer .list-unstyled li {
 	cursor:pointer
 }
 
+.main-banner {
+	background-image: url(../images/covid-banner.jpg);
+	background-position: center center;
+	background-size: cover;
+}
+
+.banner-inner {
+	min-height: 600px;
+	display: flex;
+	justify-content: center;
+	color: #fff;
+	flex-direction: column;
+}
+
+.banner-inner-content {
+	max-width: 600px;
+	line-height: 1.5;
+}
+
+.banner-inner-content h1 {
+	font-weight: 900;
+	font-size: 40px;
+	margin-bottom: 25px;
+	line-height: 1.5;
+}
+
+.banner-inner-content p {
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 12px 30px 13px;
+	border-radius: 30px;
+}
+
+
+
 @media all and (max-width: 1023px) {
 	header.main .logo img {
 		width: 150px;

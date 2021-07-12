@@ -278,7 +278,6 @@
                             <div class="clearfix box-btn text-center">
                                 <button type="submit" class="btn btn-default-yellow btn-small">Lấy lại mật khẩu</button>
                             </div>
-
                         </div>
                     </form>
                 </div>
