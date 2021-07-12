@@ -1,7 +1,4 @@
 <div class="main-banner">
-    <div class="hotline">
-
-    </div>
     <div class="container">
         <div class="banner-inner">
             <div class="banner-inner-content">
@@ -11,4 +8,3 @@
         </div>
     </div>
 </div>
-
