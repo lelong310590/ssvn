@@ -19,7 +19,7 @@ class ModuleProvider extends ServiceProvider
 {
     public function boot()
     {
-        Schema::defaultStringLength(255);
+        Schema::defaultStringLength(191);
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'nqadmin-dashboard');
 
