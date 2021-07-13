@@ -230,7 +230,7 @@
                         {{ csrf_field() }}
                         <div class="box-form-default">
                             <div class="form-group">
-                                <input type="phone" class="input-form" placeholder="Số điện thoại" name="phone">
+                                <input type="text" class="input-form" placeholder="Số CMND/CCCD" name="citizen_identification">
                             </div>
                             <div class="form-group form-password">
                                 <div class="show-password">

@@ -83,6 +83,7 @@
             <div class="certificate-info">
                 <p><span style="color: green; text-transform: uppercase; font-size: 23px; margin-left: 154px;">Sở y tế tỉnh Bình Dương</span></p>
                 <p>Chứng nhận: <b style="margin-left: 25px">{{$user->sex == 'male' ? 'Ông' : 'Bà'}} {{$user->first_name}} {{$user->last_name}}</b></p>
+                <p>Ngày sinh: <b style="margin-left: 25px">{{$user->dob->format('d/m/Y')}}</b></p>
                 <p>Đơn vị: <b style="margin-left: 25px">{{$company != null ? $company->name : ''}}</b></p>
                 <p>Đã hoàn thành khóa huấn luyện đào tạo:</p>
                 <p class="text-center text-uppercase" style="font-size: 18px">{{$course->name}}</p>

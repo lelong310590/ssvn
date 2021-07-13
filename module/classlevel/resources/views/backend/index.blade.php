@@ -34,6 +34,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <form method="post" action="{{route('nqadmin::classlevel.create.post')}}">
+
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Thêm Công ty mới</h5>
@@ -46,7 +47,7 @@
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label class="form-control-label">Tên Công ty</label>
+                                    <label class="form-control-label">Tên Công ty <span class="text-danger">*</span></label>
                                     <input type="text"
                                            required
                                            parsley-trigger="change"
@@ -60,7 +61,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label">Mã số thuế</label>
+                                    <label class="form-control-label">Mã số thuế <span class="text-danger">*</span></label>
                                     <input type="text"
                                            required
                                            parsley-trigger="change"
@@ -72,7 +73,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label">Số điện thoại</label>
+                                    <label class="form-control-label">Số điện thoại <span class="text-danger">*</span></label>
                                     <input type="text"
                                            required
                                            parsley-trigger="change"
@@ -84,7 +85,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label">Email</label>
+                                    <label class="form-control-label">Email liên hệ <span class="text-danger">*</span></label>
                                     <input type="text"
                                            required
                                            parsley-trigger="change"
@@ -125,6 +126,68 @@
                                            value="{{old('slug')}}"
                                            id="input_slug"
                                     >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Thông tin người đại diện</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-control-label">CCCD/CMND <span class="text-danger">*</span></label>
+                                    <input type="text"
+                                           class="form-control"
+                                           value="{{old('citizen_identification')}}"
+                                           name="citizen_identification"
+                                           required
+                                    >
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Họ <span class="text-danger">*</span></label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   required
+                                                   data-parsley-pattern="[a-zA-Z0-9\s]+"
+                                                   name="first_name"
+                                                   value="{{old('first_name')}}"
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Tên và tên đệm <span class="text-danger">*</span></label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   required
+                                                   data-parsley-pattern="[a-zA-Z0-9\s]+"
+                                                   name="last_name"
+                                                   value="{{old('last_name')}}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="example-date-input" class="form-control-label">Ngày/Tháng/Năm sinh <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="date" value="{{old('dob')}}" name="dob" id="example-date-input">
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <label class="form-control-label">Giới tính</label>
+                                        <select class="custom-select form-control" name="sex">
+                                            <option value="male" {{ (old('sex') == 'male') ? 'selected' : '' }}>Nam</option>
+                                            <option value="female" {{ (old('sex') == 'female') ? 'selected' : '' }}>Nữ</option>
+                                            <option value="other" {{ (old('sex') == 'other') ? 'selected' : '' }}>Khác</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

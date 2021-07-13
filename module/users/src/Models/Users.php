@@ -10,6 +10,7 @@ namespace Users\Models;
 
 use Advertise\Models\Advertise;
 use Advertise\Models\AdvertiseUser;
+use Carbon\Carbon;
 use Cart\Models\OrderDetail;
 use ClassLevel\Models\ClassLevel;
 use Course\Models\Certificate;
@@ -32,21 +33,53 @@ class Users extends Authenticatable
 
     protected $fillable = [
         'username', 'email', 'password', 'thumbnail', 'first_name', 'last_name', 'phone', 'status', 'sex', 'created_at', 'updated_at', 'sold_course',
-        'classlevel', 'is_enterprise', 'hard_role'
+        'classlevel', 'is_enterprise', 'hard_role', 'citizen_identification', 'dob', 'manager'
     ];
 
     protected $hidden = [
         'password', 'remember_token', 'google2fa_secret'
     ];
 
+    protected $dates = ['created_at', 'updated_at', 'dob'];
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
     }
 
+    public function setDobAttribute($value)
+    {
+        $this->attributes['dob'] = Carbon::parse($value);
+    }
+
+    public function getSexAttribute($value)
+    {
+        $sex = 'Khác';
+        switch ($value) {
+            case 'male':
+                $sex = 'Nam';
+                break;
+            case 'female':
+                $sex = 'Nữ';
+                break;
+            case 'other':
+                $sex = 'Khác';
+                break;
+            default:
+                $sex = 'Khác';
+        }
+
+        return $sex;
+    }
+
     public function setUsernameAttribute($value)
     {
         $this->attributes['username'] = str_slug($value, '_');
+    }
+
+    public function getOldAttribute()
+    {
+        return Carbon::now()->diffInYears($this->dob);
     }
 
     //Big block of caching functionality.

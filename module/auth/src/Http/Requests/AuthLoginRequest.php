@@ -20,7 +20,7 @@ class AuthLoginRequest extends FormRequest
 	public function rules()
 	{
 		return [
-            'phone' => 'required',
+            'citizen_identification' => 'required|min:9|max:12',
 			'password' => 'required'
 		];
 	}
@@ -28,8 +28,10 @@ class AuthLoginRequest extends FormRequest
 	public function messages()
 	{
 		return [
-            'phone.required' => 'Số điện thoại không được bỏ trống',
-			'password.required' => 'Mật khẩu không được bỏ trống',
-		];
+            'citizen_identification.required' => 'Số CCCD/CMND không được bỏ trống',
+            'citizen_identification.min' => 'Số CMND/CCCD không hợp lệ',
+            'citizen_identification.max' => 'Số CMND/CCCD không hợp lệ',
+            'password.required' => 'Mật khẩu không được bỏ trống',
+        ];
 	}
 }

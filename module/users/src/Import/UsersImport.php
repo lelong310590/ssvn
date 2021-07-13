@@ -9,6 +9,7 @@
 
 namespace Users\Import;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
@@ -19,11 +20,11 @@ use DB;
 class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
 
-    public $classLevel = null;
+    public $user = null;
 
-    public function __construct($classLevel)
+    public function __construct($user)
     {
-        $this->classLevel = $classLevel;
+        $this->user = $user;
     }
 
     public function collection(Collection $rows)
@@ -34,17 +35,34 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
             foreach ($rows as $row)
             {
                 $value = array_values($row->toArray());
-                $check = Users::where('phone', $value[1])->get();
+                $check = Users::where('citizen_identification', $value[1])->get();
+                $sex = 'male';
+                switch ($value[4]) {
+                    case 'Nam':
+                        $sex = 'male';
+                        break;
+                    case 'Nữ':
+                        $sex = 'female';
+                        break;
+                    case 'Khác':
+                        $sex = 'other';
+                        break;
+                    default:
+                        $sex = 'other';
+                }
                 if ($check->count() == 0) {
                     DB::table('users')->insert([
-                        'phone' => $value[1],
+                        'citizen_identification' => $value[1],
+                        'phone' => $value[2],
                         'password' => bcrypt($password),
-                        'first_name' => $value[2],
-                        'sex' => $value[3],
-                        'email' => $value[4],
-                        'classlevel' => $this->classLevel,
+                        'first_name' => $value[3],
+                        'sex' => $sex,
+                        'dob' => Carbon::parse($value[5]),
+                        'email' => $value[6],
+                        'classlevel' => $this->user->classLevel,
                         'hard_role' => 1,
-                        'status' => 'active'
+                        'status' => 'active',
+                        'manager' => $this->user->id
                     ]);
                 }
             }

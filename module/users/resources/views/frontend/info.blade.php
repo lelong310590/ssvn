@@ -30,11 +30,28 @@
                                 <div class="box-form-default">
                                     <div class="box-update-information">
                                         <h4 class="txt-title">Cập nhật thông tin cá nhân</h4>
+
                                         <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Họ và tên</label>
+                                            <label class="txt-label col-xs-3 text-right">Số CCCD/CMND</label>
+                                            <div class="form col-xs-12 col-md-7">
+                                                <input type="text" class="input-form" value="{{ $data->citizen_identification }}"
+                                                       name="citizen_identification" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="txt-label col-xs-3 text-right">Họ</label>
                                             <div class="form col-xs-12 col-md-7">
                                                 <input type="text" class="input-form" value="{{ $data->first_name }}"
                                                        name="first_name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="txt-label col-xs-3 text-right">Tên và tên đệm</label>
+                                            <div class="form col-xs-12 col-md-7">
+                                                <input type="text" class="input-form" value="{{ $data->last_name }}"
+                                                       name="last_name">
                                             </div>
                                         </div>
 
@@ -45,23 +62,40 @@
 
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Ngày sinh</label>
-                                            @include('nqadmin-users::frontend.components.info.date',['name'=>'dob'])
+                                            <div class="form col-xs-7">
+                                                <input type="date" class="input-form" name="dob" value="{{ $data->dob->format('Y-m-d')  }}">
+                                            </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Giới tính</label>
-                                            @include('nqadmin-users::frontend.components.info.select',['name'=>'sex','options'=>config('meta.sex'),'type'=>'small'])
+                                            <div class="form col-xs-7">
+                                                <select class="input-form" name="sex">
+                                                    <option value="male" {{ ($data->sex == 'male') ? 'selected' : '' }}>Nam</option>
+                                                    <option value="female" {{ ($data->sex == 'female') ? 'selected' : '' }}>Nữ</option>
+                                                    <option value="other" {{ ($data->sex == 'other') ? 'selected' : '' }}>Khác</option>
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Số điện thoại</label>
-                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'phone','options'=>config('meta.contact'),'type'=>'small'])
+                                            <div class="form col-xs-7">
+                                                <input type="text" class="input-form" name="phone" value="{{ $data->phone  }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="txt-label col-xs-3 text-right">Địa chỉ Email</label>
+                                            <div class="form col-xs-7">
+                                                <input type="email" class="input-form" name="email" value="{{ $data->email  }}">
+                                            </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Công ty</label>
                                             <div class="form col-xs-12 col-md-7">
-                                                <select class="input-form">
+                                                <select class="input-form" disabled>
                                                     @foreach($classLevel as $lv)
                                                         <option value="{{$lv->id}}" {{$lv->id == $data->classlevel ? 'selected' : ''}}>
                                                             {{$lv->name}} - MST: {{$lv->mst}}
@@ -69,21 +103,6 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Website</label>
-                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'website','type'=>'full'])
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Facebook</label>
-                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'facebook','type'=>'full'])
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="txt-label col-xs-3 text-right">Youtube</label>
-                                            @include('nqadmin-users::frontend.components.info.text',['name'=>'youtube','type'=>'full'])
                                         </div>
                                     </div>
                                     <!--box-update-information-->

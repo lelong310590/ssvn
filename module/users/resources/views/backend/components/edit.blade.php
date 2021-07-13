@@ -52,81 +52,148 @@
 							</h5>
 						</div>
 						<div class="card-body">
+
 							<div class="form-group">
-								<label class="form-control-label">Địa chỉ Email</label>
-								<input type="email"
-								       required
-								       parsley-trigger="change"
-								       class="form-control"
-								       autocomplete="off"
-								       name="email"
-								       value="{{$data->email}}"
-								       disabled
-								>
-							</div>
-							
-							<div class="form-group">
-								<label class="form-control-label">Đổi mật khẩu</label>
-								<input type="password"
-								       class="form-control"
-								       autocomplete="off"
-								       data-parsley-minlength="6"
-								       name="password"
-								       id="password"
-								       placeholder="******"
-								>
-							</div>
-							
-							<div class="form-group">
-								<label class="form-control-label">Nhập lại mật khẩu</label>
-								<input data-parsley-equalto="#password"
-								       type="password"
-								       class="form-control"
-								       id="re_password"
-								       autocomplete="off"
-								       data-parsley-minlength="6"
-								       name="re_password"
-								       placeholder="******"
-								>
-							</div>
-							
-							<div class="form-group">
-								<label class="form-control-label">Họ</label>
+								<label class="form-control-label">CCCD/CMND <span class="text-danger">*</span></label>
 								<input type="text"
-								       class="form-control"
-								       required
-								       data-parsley-pattern="[a-zA-Z0-9\s]+"
-								       name="first_name"
-								       value="{{$data->first_name}}"
+									   class="form-control"
+									   value="{{$data->citizen_identification}}"
+									   name="citizen_identification"
+									   required
 								>
 							</div>
-							
-							<div class="form-group">
-								<label class="form-control-label">Tên và tên đệm</label>
-								<input type="text"
-								       class="form-control"
-								       data-parsley-pattern="[a-zA-Z0-9\s]+"
-								       name="last_name"
-								       value="{{$data->last_name}}"
-								>
+
+							<div class="row">
+								<div class="col-8">
+									<div class="form-group">
+										<label class="form-control-label">Đổi mật khẩu</label>
+										<input type="password"
+											   class="form-control"
+											   autocomplete="off"
+											   data-parsley-minlength="6"
+											   name="password"
+											   id="password"
+											   placeholder="******"
+										>
+									</div>
+								</div>
+								<div class="col-8">
+									<div class="form-group">
+										<label class="form-control-label">Nhập lại mật khẩu</label>
+										<input data-parsley-equalto="#password"
+											   type="password"
+											   class="form-control"
+											   id="re_password"
+											   autocomplete="off"
+											   data-parsley-minlength="6"
+											   name="re_password"
+											   placeholder="******"
+										>
+									</div>
+								</div>
 							</div>
-							
-							<div class="form-group">
-								<label class="form-control-label">Số điện thoại</label>
-								<input type="text"
-								       class="form-control"
-								       value="{{$data->phone}}"
-								       name="phone"
-									   disabled
-								>
+
+							<div class="row">
+								<div class="col-8">
+									<div class="form-group">
+										<label class="form-control-label">Họ <span class="text-danger">*</span></label>
+										<input type="text"
+											   class="form-control"
+											   required
+											   data-parsley-pattern="[a-zA-Z0-9\s]+"
+											   name="first_name"
+											   value="{{$data->first_name}}"
+										>
+									</div>
+								</div>
+
+								<div class="col-8">
+									<div class="form-group">
+										<label class="form-control-label">Tên và tên đệm <span class="text-danger">*</span></label>
+										<input type="text"
+											   class="form-control"
+											   data-parsley-pattern="[a-zA-Z0-9\s]+"
+											   name="last_name"
+											   value="{{$data->last_name}}"
+										>
+									</div>
+								</div>
 							</div>
-							
+
+							<div class="row">
+								<div class="col-8">
+									<div class="form-group">
+										<label class="form-control-label">Địa chỉ Email</label>
+										<input type="email"
+											   parsley-trigger="change"
+											   class="form-control"
+											   autocomplete="off"
+											   name="email"
+											   value="{{$data->email}}"
+										>
+									</div>
+								</div>
+
+								<div class="col-8">
+									<div class="form-group">
+										<label class="form-control-label">Số điện thoại <span class="text-danger">*</span></label>
+										<input type="text"
+											   class="form-control"
+											   value="{{$data->phone}}"
+											   name="phone"
+										>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-8">
+									<div class="form-group">
+										<label for="example-date-input" class="form-control-label">Ngày/Tháng/Năm sinh <span class="text-danger">*</span></label>
+										<input class="form-control" type="date" value="{{$data->dob != null ? $data->dob->format('Y-m-d') : ''}}" name="dob">
+									</div>
+								</div>
+								<div class="col-8">
+									<label class="form-control-label">Giới tính</label>
+									<select class="custom-select form-control" name="sex">
+										<option value="male" {{ ($data->sex == 'male') ? 'selected' : '' }}>Nam</option>
+										<option value="female" {{ ($data->sex == 'female') ? 'selected' : '' }}>Nữ</option>
+										<option value="other" {{ ($data->sex == 'other') ? 'selected' : '' }}>Khác</option>
+									</select>
+								</div>
+							</div>
+
+{{--							@if (Auth::id() != $data->id)--}}
+{{--								@php--}}
+{{--									$currentRole = !empty($data->roles()->first()) ? $data->roles()->first()->id : 0;--}}
+{{--								@endphp--}}
+{{--							<div class="form-group">--}}
+{{--								<label class="form-control-label">Vai trò</label>--}}
+{{--								<select class="custom-select form-control" name="role">--}}
+{{--									@foreach($role as $r)--}}
+{{--										<option value="{{$r->id}}" {{ ($currentRole == $r->id) ? 'selected' : '' }}>--}}
+{{--											{{$r->display_name}}--}}
+{{--										</option>--}}
+{{--									@endforeach--}}
+{{--								</select>--}}
+{{--							</div>--}}
+{{--							@else--}}
+{{--								<input type="hidden" value="{{$data->roles()->first()->id}}" name="role">--}}
+{{--							@endif--}}
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-4">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">Thao tác</h5>
+						</div>
+						<div class="card-body">
 							<div class="form-group">
-								<label class="form-control-label">Giới tính</label>
-								<select class="custom-select form-control" name="sex">
-									<option value="male" {{ ($data->sex == 'male') ? 'selected' : '' }}>Nam</option>
-									<option value="female" {{ ($data->sex == 'female') ? 'selected' : '' }}>Nữ</option>
-									<option value="other" {{ ($data->sex == 'other') ? 'selected' : '' }}>Khác</option>
+								<select class="custom-select form-control" name="status">
+									<option value="active" {{ ($data->status == 'active') ? 'selected' : '' }}>Kích hoạt</option>
+									<option value="disable" {{ ($data->status == 'disable') ? 'selected' : '' }}>Lưu nháp</option>
 								</select>
 							</div>
 
@@ -150,45 +217,14 @@
 								</select>
 							</div>
 
-							<div class="form-group">
-								<label class="form-control-label">Là tài khoản doanh nghiệp ?</label>
-								<select class="custom-select form-control" name="is_enterprise">
-									<option value="0" {{$data->is_enterprise == 0 ? 'selected' : ''}}>Không</option>
-									<option value="1" {{$data->is_enterprise == 1 ? 'selected' : ''}}>Có</option>
-								</select>
-							</div>
+{{--							<div class="form-group">--}}
+{{--								<label class="form-control-label">Là tài khoản doanh nghiệp ?</label>--}}
+{{--								<select class="custom-select form-control" name="is_enterprise">--}}
+{{--									<option value="0" {{$data->is_enterprise == 0 ? 'selected' : ''}}>Không</option>--}}
+{{--									<option value="1" {{$data->is_enterprise == 1 ? 'selected' : ''}}>Có</option>--}}
+{{--								</select>--}}
+{{--							</div>--}}
 
-							@if (Auth::id() != $data->id)
-								@php
-									$currentRole = !empty($data->roles()->first()) ? $data->roles()->first()->id : 0;
-								@endphp
-							<div class="form-group">
-								<label class="form-control-label">Vai trò</label>
-								<select class="custom-select form-control" name="role">
-									@foreach($role as $r)
-										<option value="{{$r->id}}" {{ ($currentRole == $r->id) ? 'selected' : '' }}>
-											{{$r->display_name}}
-										</option>
-									@endforeach
-								</select>
-							</div>
-							@else
-								<input type="hidden" value="{{$data->roles()->first()->id}}" name="role">
-							@endif
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-sm-4">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Thao tác</h5>
-						</div>
-						<div class="card-body">
-							<select class="custom-select form-control" name="status">
-								<option value="active" {{ ($data->status == 'active') ? 'selected' : '' }}>Kích hoạt</option>
-								<option value="disable" {{ ($data->status == 'disable') ? 'selected' : '' }}>Lưu nháp</option>
-							</select>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary" style="margin-top: 20px">Lưu lại</button>
 							</div>

@@ -15,7 +15,7 @@
         <li><a href="{{ route('front.users.my_course.get') }}" class="{{ strpos(url()->full(), route('front.users.my_course.get')) !== false?'active':'' }}">Khóa đào tạo</a></li>
 {{--        <li><a href="{{ route('front.users.notification.get') }}" class="{{ strpos(url()->full(), route('front.users.notification.get')) !== false?'active':'' }}">Thông báo</a></li>--}}
         <li><a href="{{ route('front.users.certificate.get') }}" class="{{ strpos(url()->full(), route('front.users.certificate.get')) !== false?'active':'' }}">Chứng chỉ</a></li>
-        @if (auth('nqadmin')->user()->is_enterprise == 1 && auth('nqadmin')->user()->hard_role > 1)
+        @if (auth('nqadmin')->user()->hard_role == 2 || auth('nqadmin')->user()->hard_role == 3)
             <li><a href="{{ route('front.users.employers.get') }}" class="{{ strpos(url()->full(), route('front.users.employers.get')) !== false?'active':'' }}">Người lao động</a></li>
         @endif
 {{--        <li><a href="{{ route('front.users.history.get') }}" class="{{ strpos(url()->full(), route('front.users.history.get')) !== false?'active':'' }}">Lịch sử mua hàng</a></li>--}}

@@ -49,8 +49,18 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-xs-3">
                                             <button type="submit" class="btn btn-primary">Nhập dữ liệu</button>
                                         </div>
+
+                                        <div class="col-xs-6">
+                                            <div class="text-right download-excel">
+                                                <a href="{{asset('frontend/files/xample_file.xlsx')}}" download=""><i class="far fa-file-excel"></i> Tải file mẫu</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
+                            </div>
+
+                            <div class="count-employer mt-4 mb-4">
+                                <p>Số nhân sự dưới quyền quản lý: <b>{{$employers->count()}}</b></p>
                             </div>
 
                             <!--top-my-course-->
@@ -60,6 +70,8 @@ use Illuminate\Support\Facades\DB;
                                     <tr>
                                         <th width="100">STT</th>
                                         <th>Họ và tên</th>
+                                        <th>Số CMND/CCCD</th>
+                                        <th>Tuổi</th>
                                         <th>Số điện thoại</th>
                                     </tr>
                                     </thead>
@@ -71,6 +83,8 @@ use Illuminate\Support\Facades\DB;
                                         <tr>
                                             <td>{{$i++}}</td>
                                             <td>{{$e->first_name}} {{$e->last_name}}</td>
+                                            <td>{{$e->citizen_identification}}</td>
+                                            <td>{{$e->old}}</td>
                                             <td>{{$e->phone}}</td>
                                         </tr>
                                     @endforeach

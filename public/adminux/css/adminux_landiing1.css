@@ -68,13 +68,13 @@ nav .navbar-collapse li.nav-item a:hover{  background: #eaecf4}
 @media screen and ( max-width:1019px) {
     .navbar-collapse{background: #000000}
     .banner{ height: 550px;}
-    h3{ 0.9rem}
+
     .display-1{ font-size: 3rem;}
     .display-4{ font-size: 1.25rem}
     .display-3 { font-size: 2.25rem;}    
     .lead {font-size: 1rem;}
     .section {padding-top: 80px;  padding-bottom: 80px;}
-    nav.navbar{ display: block; padding: }
+    nav.navbar{ display: block;}
     .navbar-collapse{ position: fixed; top: 80px; background: rgba(0, 0, 0, 0.6); left: 0; padding: 20px;}
     .copyright{ line-height: 30px; text-align: center !important; padding: 10px 15px;}
 }

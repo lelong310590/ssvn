@@ -32,6 +32,11 @@ class UserEditRequest extends FormRequest
 		return [
 			're_password' => 'same:password',
 			'first_name' => 'required',
+            'email' => 'email',
+            'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
+            'last_name' => 'required',
+            'citizen_identification' => 'required|min:10|max:12|unique:users,citizen_identification,'. $this->id,
+            'dob' => 'required',
 		];
 	}
 	
@@ -43,6 +48,16 @@ class UserEditRequest extends FormRequest
 		return [
 			're_password.same' => 'Mật khẩu nhắc lại không trùng',
 			'first_name.required' => 'Họ không được bỏ trống',
+            'email.email' => 'Định dạng Email không đúng',
+            're_password.required' => 'Mật khẩu nhập lại không được bỏ trống',
+            'last_name.required' => 'Tên và tên đệm không được bỏ trống',
+            'phone.required' => 'Số điện thoại không được bỏ trống',
+            'phone.regex' => 'Số điện thoại không đúng',
+            'citizen_identification.required' => 'CMND/CCCD không được bỏ trống',
+            'citizen_identification.min' => 'Số CMND/CCCD không hợp lệ',
+            'citizen_identification.max' => 'Số CMND/CCCD không hợp lệ',
+            'citizen_identification.unique' => 'Số CMND/CCCD này đã tồn tại',
+            'dob.requỉed' => 'Ngày sinh không được bỏ trống'
 		];
 	}
 }

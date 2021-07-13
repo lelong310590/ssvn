@@ -15,13 +15,11 @@ use Cart\Repositories\OrdersRepository;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Repositories\CurriculumProgressRepository;
 use Course\Repositories\TestResultRepository;
-use MultipleChoices\Repositories\QuestionRepository;
 use Users\Http\Requests\UserCreateRequest;
 use Users\Http\Requests\UserEditRequest;
 use Illuminate\Http\Request;
 use Users\Repositories\UsersMetaRepository;
 use Users\Repositories\UsersRepository;
-use Debugbar;
 
 class UsersController extends BaseController
 {
@@ -42,10 +40,12 @@ class UsersController extends BaseController
 	 */
 	public function getIndex(Request $request)
 	{
-        if($request->get('phone')){
-            $phone = $request->get('phone');
-            $users = $this->users->with('getClassLevel')->scopeQuery(function($e) use($phone){
-                return $e->where(['phone' => $phone]);
+        if($request->get('keyword')){
+            $keyword = $request->get('keyword');
+            $users = $this->users->with('getClassLevel')->scopeQuery(function($e) use($keyword){
+                return $e->where('phone', 'LIKE', '%'.$keyword.'%')
+                    ->orWhere('first_name', 'LIKE', '%'.$keyword.'%')
+                    ->orWhere('citizen_identification', 'LIKE', '%'.$keyword.'%');
             })->orderBy('created_at', 'desc')->paginate(25);
         }else {
             $users = $this->users
@@ -89,12 +89,8 @@ class UsersController extends BaseController
 		try {
 			$data = $request->except(['_token', 'continue_edit']);
 			$user = $this->users->create($data);
-			$user->roles()->sync($data['role']);
-            $usersMetaRepository->create([
-                'users_id' => $user->id,
-                'meta_key' => 'autoplay',
-                'meta_value' => true
-            ]);
+//			$user->roles()->sync($data['role']);
+
 			if ($request->has('continue_edit')) {
 				return redirect()->route('nqadmin::users.edit.get', [
 					'id' => $user->id
@@ -104,7 +100,7 @@ class UsersController extends BaseController
 			return redirect()->route('nqadmin::users.index.get')->with(FlashMessage::returnMessage('create'));
 			
 		} catch (\Exception $e) {
-			return redirect()->back()->withErrors(config('messages.error'));
+			return redirect()->back()->withErrors($e->getMessage());
 		}
 	}
 	
@@ -144,7 +140,7 @@ class UsersController extends BaseController
 			}
 
 			$user = $this->users->update($data, $id);
-			$user->roles()->sync($data['role']);
+//			$user->roles()->sync($data['role']);
 
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 		} catch (\Exception $e) {

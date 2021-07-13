@@ -41,18 +41,22 @@ class DashboardController extends BaseController
         $courseInMonth = $courseRepository->getCourseInMonth();
 
         $user = auth('nqadmin')->user();
-        $roles = $user->load('roles.perms');
-        $currentRole = $roles->roles->first()->name;
-        if ($currentRole == 'administrator') {
-            $classLevel = $classLevelRepository->findWhere([
-                'status' => 'active'
-            ]);
-        } else {
-            $classLevel = $classLevelRepository->findWhere([
-                'status' => 'active',
-                'id' => $user->classlevel
-            ]);
-        }
+//        $roles = $user->load('roles.perms');
+//        $currentRole = $roles->roles->first()->name;
+//        if ($currentRole == 'administrator') {
+//            $classLevel = $classLevelRepository->findWhere([
+//                'status' => 'active'
+//            ]);
+//        } else {
+//            $classLevel = $classLevelRepository->findWhere([
+//                'status' => 'active',
+//                'id' => $user->classlevel
+//            ]);
+//        }
+
+        $classLevel = $classLevelRepository->findWhere([
+            'status' => 'active'
+        ]);
 
         $detail = [];
         $companyId = $request->get('company_id');

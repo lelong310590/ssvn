@@ -16,7 +16,6 @@ $moduleRoute = 'dashboard';
 Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
     $router->group(['prefix' => $moduleRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
         $router->get('index', 'DashboardController@getIndex')->name('nqadmin::dashboard.index.get');
-
         $router->get('/sendmail/{id}', 'DashboardController@testMail');
     });
 });

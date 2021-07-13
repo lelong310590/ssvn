@@ -55,22 +55,22 @@ class ClassLevelController extends BaseController
 	{
 		try {
 			$input = $request->except('_token');
-			$phone = $request->get('phone');
-			$email = $request->get('email');
+			$citizenIdentification = $request->get('citizen_identification');
 
-			$checkAvaiable = $usersRepository->scopeQuery(function ($q) use ($phone, $email) {
-			    return $q->where('phone', $phone);
+			$checkAvaiable = $usersRepository->scopeQuery(function ($q) use ($citizenIdentification) {
+			    return $q->where('citizen_identification', $citizenIdentification);
             })->get();
 
 			if ($checkAvaiable->count() > 0) {
-			    return redirect()->back()->withErrors(config('messages.success_create_class_level_error_user'));
+			    return redirect()->back()->withErrors('Mã CMND/CCCD này đã được sử dụng');
             } else {
                 $classLevel = $this->repository->create($input);
-			    $password = random_string(10);
+			    $password = random_string(6);
 			    $user = $usersRepository->create([
-			        'phone' => $phone,
+			        'phone' => $request->get('phone'),
                     'email' => $request->get('email'),
-                    'first_name' => $request->get('name'),
+                    'first_name' => $request->get('first_name'),
+                    'last_name' => $request->get('last_name'),
                     'password' => $password,
                     'sex' => 'other',
                     'status' => 'active',

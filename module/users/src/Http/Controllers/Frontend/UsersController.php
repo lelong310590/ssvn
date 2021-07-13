@@ -81,9 +81,11 @@ class UsersController extends BaseController
         return response()->json($province, 200);
     }
 
-    public function postUpdateInfo(Request $request)
+    public function postUpdateInfo(
+        Request $request,
+        UsersRepository $usersRepository
+    )
     {
-        $input = $request->except('_token');
         $users = \Auth::user();
         $code_user = $users->getDataByKey('code_user');
 
@@ -105,46 +107,14 @@ class UsersController extends BaseController
             UsersMeta::insert($insert);
         }
 
-        foreach ($input as $key => $value) {
-            if ($key == 'first_name') {
-                if ($value != '') {
-                    $users->first_name = $value;
-                    $users->save();
-                }
-                continue;
-            }
-
-            if ($key == 'position') {
-                if ($value[0] != '') {
-                    $users->position = $value[0];
-                    $users->save();
-                }
-                continue;
-            }
-
-            if ($key == 'dob') {
-                $value[0] = $value[0] . '-' . $value[1] . '-' . $value[2];
-                $value[1] = $value[3];
-            }
-
-            $meta = $users->data()->where('meta_key', $key)->first();
-            if ($meta) {
-                $meta->meta_value = $value[0];
-                $meta->status = $value[1];
-                $meta->save();
-            } else {
-                if ($value[0]) {
-                    $insert = [
-                        'users_id' => $users->id,
-                        'meta_key' => $key,
-                        'meta_value' => $value[0],
-                        'status' => $value[1],
-                        'created_at' => date('Y-m-d H:i:s'),
-                    ];
-                    UsersMeta::insert($insert);
-                }
-            }
-        }
+        $usersRepository->update([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'dob' => $request->get('dob'),
+            'sex' => $request->get('sex'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email'),
+        ], auth('nqadmin')->id());
 
         return redirect()->back()->with(FlashMessage::returnMessage('create'));
     }
@@ -720,7 +690,8 @@ class UsersController extends BaseController
                 ->scopeQuery(function ($q) use ($currentCompany) {
                     return $q->where('status', 'active');
                 })->get();
-        } elseif (intval($user->hard_role) == 2) {
+        } elseif (intval($user->hard_role) == 2 || intval($user->hard_role) == 3) {
+
             $currentCompany = $user->classlevel;
 
             $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) use ($user) {
@@ -756,6 +727,7 @@ class UsersController extends BaseController
             $allCompany = [];
         }
 
+
         return view('nqadmin-users::frontend.stat', compact(
             'company',
             'courseInCompany',
@@ -773,9 +745,18 @@ class UsersController extends BaseController
     {
         $master = auth('nqadmin')->user();
         $company = $master->classlevel;
-        $employers = $usersRepository->scopeQuery(function ($q) use ($company) {
-            return $q->where('classlevel', $company)->where('status', 'active')->where('hard_role', '1');
-        })->orderBy('first_name', 'asc')->paginate(20);
+
+        $hardRole = $master->hard_role;
+
+        if ($hardRole == 2) {
+            $employers = $usersRepository->scopeQuery(function ($q) use ($company, $master) {
+                return $q->where('classlevel', $company)->where('manager', $master->id)->where('status', 'active')->where('hard_role', '1');
+            })->orderBy('first_name', 'asc')->paginate(20);
+        } else {
+            $employers = $usersRepository->scopeQuery(function ($q) use ($company) {
+                return $q->where('classlevel', $company)->where('status', 'active')->where('hard_role', '1');
+            })->orderBy('first_name', 'asc')->paginate(20);
+        }
 
         return view('nqadmin-users::frontend.employers', compact(
             'employers'
@@ -791,7 +772,7 @@ class UsersController extends BaseController
             $user = auth('nqadmin')->user();
 
             Excel::import(
-                new UsersImport($user->classlevel),
+                new UsersImport($user),
                 $request->file('excel_file')
             );
 

@@ -24,12 +24,14 @@ class UserCreateRequest extends FormRequest
     public function rules()
     {
         return [
-	        'email' => 'required|email|unique:users,email',
-            'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/', 'unique:users'],
+	        'email' => 'email',
+            'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
 	        'password' => 'required|min:6',
 	        're_password' => 'required|same:password',
 	        'first_name' => 'required',
-	        'last_name' => 'required'
+	        'last_name' => 'required',
+            'citizen_identification' => 'required|min:9|max:12|unique:users,citizen_identification',
+            'dob' => 'required',
         ];
     }
 	
@@ -39,9 +41,7 @@ class UserCreateRequest extends FormRequest
     public function messages()
     {
 	    return [
-		    'email.required' => 'Email không được bỏ trống',
 		    'email.email' => 'Định dạng Email không đúng',
-		    'email.unique' => 'Email này đã được sử dụng',
 		    'password.required' => 'Mật khẩu không được bỏ trống',
 		    'password.min' => 'Mật khẩu tối thiểu là 6 ký tự',
             're_password.required' => 'Mật khẩu nhập lại không được bỏ trống',
@@ -50,7 +50,11 @@ class UserCreateRequest extends FormRequest
 		    'last_name.required' => 'Tên và tên đệm không được bỏ trống',
             'phone.required' => 'Số điện thoại không được bỏ trống',
             'phone.regex' => 'Số điện thoại không đúng',
-            'phone.unique' => 'Số điện thoại đã tồn tại'
+            'citizen_identification.required' => 'CMND/CCCD không được bỏ trống',
+            'citizen_identification.min' => 'Số CMND/CCCD không hợp lệ',
+            'citizen_identification.max' => 'Số CMND/CCCD không hợp lệ',
+            'citizen_identification.unique' => 'Số CMND/CCCD này đã tồn tại',
+            'dob.requỉed' => 'Ngày sinh không được bỏ trống'
 	    ];
     }
 }

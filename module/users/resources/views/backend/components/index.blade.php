@@ -37,13 +37,11 @@
                             <form method="get">
                                 <h6 class="card-title pull-left">Tìm kiếm</h6>
                                 <ul class="nav nav-pills card-header-pills pull-left ml-2">
-
                                     <li class="nav-item ml-2">
                                         <div class="input-group">
-                                            <input type="text" name="phone" class="form-control" aria-label="" placeholder="Nhập SĐT">
+                                            <input type="text" name="keyword" class="form-control" aria-label="" placeholder="Nhập SĐT, hoặc tên, CMND/CCCD" value="{{request()->get('keyword')}}">
                                         </div>
                                     </li>
-
                                     <li class="nav-item">
                                         <button class="btn btn-sm btn-primary "><i class="fa fa-search"></i> <span class="text">Tìm kiếm</span></button>
                                     </li>
@@ -69,12 +67,12 @@
                                     <th width="50">STT</th>
                                     <th width="200">Đơn vị</th>
                                     <th width="200">Họ và tên</th>
-                                    <th width="200">Email</th>
-                                    <th>Số điện thoại</th>
-{{--                                    <th>Vai trò</th>--}}
-                                    <th width="150">Là đại diện doanh nghiệp ?</th>
+                                    <th width="200">CMND/CCCD</th>
+                                    <th width="150">Số điện thoại</th>
+                                    <th width="100">Giới tính</th>
+                                    <th width="150">Tuổi</th>
                                     <th width="150">Trạng thái</th>
-                                    <th>Ngày tham gia </th>
+                                    <th width="100">Ngày khởi tạo </th>
                                     <th width="120">Thao tác</th>
                                 </tr>
                                 </thead>
@@ -86,19 +84,32 @@
 
                                 @foreach($data as $d)
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
-                                        <td>{{$i++}}</td>
+                                        <td class="text-center">{{$i++}}</td>
                                         <td>{{ $d->getClassLevel == null ? '' : $d->getClassLevel->name }}</td>
-                                        <td>{{ $d->first_name }} {{$d->last_name}}</td>
-                                        <td>{{ $d->email }}</td>
-                                        <td>{{ $d->phone }}</td>
-{{--                                        <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>--}}
-                                        <td class="center text-center">
-                                            @if ($d->is_enterprise == 1)
-                                                <i class="fa fa-check " style="color: green"></i>
+                                        <td>
+                                            <p>{{ $d->first_name }} {{$d->last_name}}</p>
+                                            @if ($d->hard_role == 1)
+                                                <span class="status success">Người dùng</span>
+                                            @elseif ($d->hard_role == 2)
+                                                <span class="status info">Quản lý</span>
+                                            @elseif ($d->hard_role == 3)
+                                                <span class="status default">Chủ doanh nghiệp</span>
+                                            @elseif ($d->hard_role == 4)
+                                                <span class="status warning">Quản lý cấp sở</span>
+                                            @elseif ($d->hard_role == 5)
+                                                <span class="status danger">Quản lý cấp bộ</span>
                                             @else
-                                                <i class="fa fa-times " style="color: red"></i>
+                                                <span class="status success">Vận hành</span>
                                             @endif
                                         </td>
+                                        <td>{{ $d->citizen_identification }}</td>
+                                        <td>{{ $d->phone }}</td>
+                                        <td>{{ $d->sex }}</td>
+                                        <td>
+                                            <p>Ngày sinh {{$d->dob != null ? $d->dob->format('d/m/Y') : 'Chưa khai báo'}}</p>
+                                            <p>Tuổi: {{ $d->old }}</p>
+                                        </td>
+{{--                                        <td class="center">{{ $d->roles->isNotEmpty() ? $d->roles->first()->display_name : 'Người dùng' }}</td>--}}
                                         <td class="center">
                                             {!! conver_status($d->status) !!}
                                         </td>

@@ -9,6 +9,7 @@
 
 namespace ClassLevel\Import;
 
+use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -27,19 +28,36 @@ class EmployerImport implements ToCollection, WithHeadingRow, WithChunkReading
 
     public function collection(Collection $rows)
     {
+        $password = config('base.default_password');
         DB::beginTransaction();
         try {
             foreach ($rows as $row)
             {
                 $value = array_values($row->toArray());
-                $check = Users::where('phone', $value[1])->get();
+                $check = Users::where('citizen_identification', $value[1])->get();
+                $sex = 'male';
+                switch ($value[4]) {
+                    case 'Nam':
+                        $sex = 'male';
+                        break;
+                    case 'Nữ':
+                        $sex = 'female';
+                        break;
+                    case 'Khác':
+                        $sex = 'other';
+                        break;
+                    default:
+                        $sex = 'other';
+                }
                 if ($check->count() == 0) {
                     DB::table('users')->insert([
-                        'phone' => $value[1],
-                        'password' => $value[2],
+                        'citizen_identification' => $value[1],
+                        'phone' => $value[2],
+                        'password' => bcrypt($password),
                         'first_name' => $value[3],
-                        'sex' => $value[4],
-                        'email' => $value[5],
+                        'sex' => $sex,
+                        'dob' => Carbon::parse($value[5]),
+                        'email' => $value[6],
                         'classlevel' => $this->classLevel,
                         'hard_role' => 1,
                         'status' => 'active'
