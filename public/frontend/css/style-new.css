@@ -3830,8 +3830,8 @@ footer .list-unstyled li {
 @media screen and (max-width: 768px) {
 
 	#previewPromo .modal-dialog {
-		width: 100%;
-		margin: 0;
+		width: 100%!important;
+		margin: 0!important;
 	}
 
 	.curriculum-navigation-button {
