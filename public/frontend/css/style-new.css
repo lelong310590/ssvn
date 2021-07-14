@@ -3475,6 +3475,8 @@ footer .list-unstyled li {
 	border-radius: 30px;
 }
 
+
+
 .download-excel a {
 	font-size: 15px;
 }
@@ -3826,6 +3828,11 @@ footer .list-unstyled li {
 }
 
 @media screen and (max-width: 768px) {
+
+	#previewPromo .modal-dialog {
+		width: 100%;
+		margin: 0;
+	}
 
 	.curriculum-navigation-button {
 		margin-top: 45px;
