@@ -34,6 +34,15 @@
                 </div>
             </div>
 
+            @if (count($errors) > 0)
+                @foreach($errors->all() as $e)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Lỗi!</strong> {{$e}}
+                    </div>
+                @endforeach
+            @endif
+
             <div class="card">
                 <div class="card-header">
                     Nhập dữ liệu nhân sự
@@ -56,8 +65,11 @@
 
                             <div class="col-4">
                                 <div class="form-group">
-                                    <select class="form-control">
-                                        <option value=""></option>
+                                    <select class="form-control" style="height: 42px" name="manager">
+                                        <option value="">-- Chọn người phụ trách --</option>
+                                        @foreach($owner as $o)
+                                            <option value="{{$o->id}}">{{$o->first_name}} - {{$o->last_name}} | CMND/CCCD: {{$o->citizen_identification}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -71,14 +83,6 @@
             </div>
 
             <form method="post">
-                @if (count($errors) > 0)
-                    @foreach($errors->all() as $e)
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <strong>Lỗi!</strong> {{$e}}
-                        </div>
-                    @endforeach
-                @endif
 
                 {!! \Base\Supports\FlashMessage::renderMessage('edit') !!}
                 {!! \Base\Supports\FlashMessage::renderMessage('create') !!}

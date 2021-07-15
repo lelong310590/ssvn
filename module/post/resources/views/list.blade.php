@@ -46,35 +46,35 @@
                     </a>
                 </div>
 
-                <div class="col-md-8 col-lg-8 col-xl-4">
-                    <a class="activity-block warning" href="{{route('nqadmin::post.index.get', ['type' => 'page'])}}">
-                        <div class="media">
-                            <div class="media-body">
-                                <h5>Trang tĩnh</h5>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="media">
-                            <div class="media-body"><span class="progress-heading">Danh sách trang tĩnh</span></div>
-                        </div>
-                        <i class="bg-icon text-center fa fa-list-ul"></i>
-                    </a>
-                </div>
+{{--                <div class="col-md-8 col-lg-8 col-xl-4">--}}
+{{--                    <a class="activity-block warning" href="{{route('nqadmin::post.index.get', ['type' => 'page'])}}">--}}
+{{--                        <div class="media">--}}
+{{--                            <div class="media-body">--}}
+{{--                                <h5>Trang tĩnh</h5>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <br>--}}
+{{--                        <div class="media">--}}
+{{--                            <div class="media-body"><span class="progress-heading">Danh sách trang tĩnh</span></div>--}}
+{{--                        </div>--}}
+{{--                        <i class="bg-icon text-center fa fa-list-ul"></i>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
 
-                <div class="col-md-8 col-lg-8 col-xl-4">
-                    <a class="activity-block warning" href="{{route('nqadmin::post.create.get', ['type' => 'page'])}}">
-                        <div class="media">
-                            <div class="media-body">
-                                <h5>Thêm trang tĩnh</h5>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="media">
-                            <div class="media-body"><span class="progress-heading">Thêm trang tĩnh</span></div>
-                        </div>
-                        <i class="bg-icon text-center fa fa-edit"></i>
-                    </a>
-                </div>
+{{--                <div class="col-md-8 col-lg-8 col-xl-4">--}}
+{{--                    <a class="activity-block warning" href="{{route('nqadmin::post.create.get', ['type' => 'page'])}}">--}}
+{{--                        <div class="media">--}}
+{{--                            <div class="media-body">--}}
+{{--                                <h5>Thêm trang tĩnh</h5>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <br>--}}
+{{--                        <div class="media">--}}
+{{--                            <div class="media-body"><span class="progress-heading">Thêm trang tĩnh</span></div>--}}
+{{--                        </div>--}}
+{{--                        <i class="bg-icon text-center fa fa-edit"></i>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>

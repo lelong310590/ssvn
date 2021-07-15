@@ -14,6 +14,7 @@ use Base\Mail\CreateUserWhenCreateCompany;
 use Base\Repositories\ProvincesRepository;
 use Carbon\Carbon;
 use ClassLevel\Http\Requests\EditClassLevelRequest;
+use ClassLevel\Http\Requests\ImportEmployerRequest;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Base\Supports\FlashMessage;
 use DebugBar;
@@ -115,7 +116,8 @@ class ClassLevelController extends BaseController
         $provinces = $provincesRepository->all();
         $owner = $usersRepository->findWhere([
             'status' => 'active',
-            'hard_role' => 3
+            'hard_role' => 3,
+            'classlevel' => $id
         ]);
 
 		return view('nqadmin-classlevel::backend.edit', [
@@ -171,14 +173,15 @@ class ClassLevelController extends BaseController
 	}
 
 	public function importEmployer(
-	    Request $request
+	    ImportEmployerRequest $request
     )
     {
         try {
             $classlevel = $request->get('classlevel');
+            $manager = $request->get('manager');
 
             Excel::import(
-                new UsersImport($classlevel),
+                new UsersImport($classlevel, $manager),
                 $request->file('excel_file')
             );
 

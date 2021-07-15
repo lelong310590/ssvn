@@ -139,7 +139,7 @@ class UsersController extends BaseController
 				$data = $request->except(['_token', 'email']);
 			}
 
-			$user = $this->users->update($data, $id);
+			$this->users->update($data, $id);
 //			$user->roles()->sync($data['role']);
 
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));

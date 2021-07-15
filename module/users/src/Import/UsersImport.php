@@ -20,11 +20,14 @@ use DB;
 class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
 
-    public $user = null;
+    public $classlevel = null;
 
-    public function __construct($user)
+    public $manager = null;
+
+    public function __construct($classlevel, $manager)
     {
-        $this->user = $user;
+        $this->classlevel = $classlevel;
+        $this->manager = $manager;
     }
 
     public function collection(Collection $rows)
@@ -59,10 +62,10 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
                         'sex' => $sex,
                         'dob' => Carbon::parse($value[5]),
                         'email' => $value[6],
-                        'classlevel' => $this->user->classLevel,
+                        'classlevel' => $this->classLevel,
                         'hard_role' => 1,
                         'status' => 'active',
-                        'manager' => $value['7']
+                        'manager' => $this->manager
                     ]);
                 }
             }

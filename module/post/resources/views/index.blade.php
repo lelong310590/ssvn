@@ -10,6 +10,10 @@
 
 @section('content')
 
+    @php
+        $type = request()->get('type');
+    @endphp
+
     <div class="wrapper-content">
         <div class="container">
             <div class="row  align-items-center justify-content-between">
@@ -24,11 +28,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">{{$type == 'post' ? 'Bài viết' : 'Trang tĩnh'}}
-                                @if ($permissions->contains('name','post_create'))
-                                    <a href="{{route('nqadmin::post.create.get', ['type' => $type])}}" class="btn btn-primary pull-right">
-                                        <i class="fa fa-plus" aria-hidden="true"></i> Add new {{$type == 'post' ? 'Bài viết' : 'Trang tĩnh'}}
-                                    </a>
-                                @endif
+                                <a href="{{route('nqadmin::post.create.get', ['type' => $type])}}" class="btn btn-primary pull-right">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới {{$type == 'post' ? 'Bài viết' : 'Trang tĩnh'}}
+                                </a>
                             </h5>
                         </div>
                         <div class="card-body">
@@ -56,10 +58,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
-                                @php
-                                    $type = request()->get('type');
-                                @endphp
 
                                 @foreach($data as $d)
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">

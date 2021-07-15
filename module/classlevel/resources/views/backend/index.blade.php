@@ -298,9 +298,8 @@
                                 <thead>
                                 <tr>
                                     <th>Tên Công ty</th>
-                                    <th>Slug</th>
-                                    <th>MST</th>
-                                    <th>Trạng thái</th>
+                                    <th width="150">MST</th>
+                                    <th width="100">Trạng thái</th>
                                     <th width="100">Thao tác</th>
                                 </tr>
                                 </thead>
@@ -313,7 +312,6 @@
                                 @foreach($data as $d)
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                         <td>{{ $d->name }}</td>
-                                        <td class="center">{{ $d->slug }}</td>
                                         <td class="center">{{ $d->mst }}</td>
 {{--                                        <td class="center">{{$d->group}}</td>--}}
                                         <td>
