@@ -57,10 +57,14 @@
                                 </thead>
                                 <tbody>
 
+                                @php
+                                    $type = request()->get('type');
+                                @endphp
+
                                 @foreach($data as $d)
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                         <td>{{$d->id}}</td>
-                                        @if (request()->get('type') == 'post')
+                                        @if ($type == 'post')
                                         <td>
                                             @if (!empty($d->thumbnail))
                                                 <img src="{{ asset($d->thumbnail) }}" alt="{{ $d->email }}" class="img-fluid">
