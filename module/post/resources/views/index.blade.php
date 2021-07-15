@@ -60,7 +60,7 @@
                                 @foreach($data as $d)
                                     <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                         <td>{{$d->id}}</td>
-                                        @if ($type == 'post')
+                                        @if (request()->get('type') == 'post')
                                         <td>
                                             @if (!empty($d->thumbnail))
                                                 <img src="{{ asset($d->thumbnail) }}" alt="{{ $d->email }}" class="img-fluid">

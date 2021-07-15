@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\DB;
                                         </div>
 
                                         <div class="col-xs-12 col-md-6">
-                                            <div class="chart-age">
+                                            <div class="chart-sex">
                                                 <canvas id="chart-sex"></canvas>
                                                 <div class="chart-label text-center" style="margin-top: 15px">
                                                     <p><b>Giới tính</b></p>

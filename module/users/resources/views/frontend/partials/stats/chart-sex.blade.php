@@ -3,13 +3,17 @@
 		jQuery(document).ready(function ($) {
 			const dataChartSex = {
 				labels: [
-					'Red',
-					'Blue',
-					'Yellow'
+					'Nam',
+					'Nữ',
+					'Khác'
 				],
 				datasets: [{
 					label: 'My First Dataset',
-					data: [300, 50, 100],
+					data: [
+						@foreach($sexGroup as $age)
+							{{$age}},
+						@endforeach
+					],
 					backgroundColor: [
 						'rgb(255, 99, 132)',
 						'rgb(54, 162, 235)',

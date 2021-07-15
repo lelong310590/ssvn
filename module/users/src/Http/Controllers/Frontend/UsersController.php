@@ -674,6 +674,65 @@ class UsersController extends BaseController
         $district = $request->get('district');
         $ward = $request->get('ward');
 
+        $rangeAge = $this->getRangeAge();
+        $sexGroup = $this->getRangeSex();
+
+        return view('nqadmin-users::frontend.stat', compact(
+            'company',
+            'courseInCompany',
+            'certificates',
+            'courses',
+            'employers',
+            'provinces',
+            'rangeAge',
+            'sexGroup'
+        ));
+    }
+
+    public function getRangeSex()
+    {
+        $filter = [
+            'Nam' => 'Nam',
+            'Nữ' => 'Nữ',
+            'Khác' => 'Khác'
+        ];
+        $gender = Users::get()
+            ->map(function ($user) use ($filter) {
+                $sex = $user->sex;
+                foreach ($filter as $key => $value) {
+                    if ($value == $sex) {
+                        $user->gender = $key;
+                    }
+                }
+
+                return $user;
+            })
+            ->mapToGroups(function ($user, $key) {
+                return [
+                    $user->gender => $user
+                ];
+            })
+            ->map(function ($group) {
+                return count($group);
+            })->toArray();
+
+        $sexGroup = [];
+        foreach ($filter as $k => $s) {
+            if (!isset($gender[$k])) {
+                $sexGroup[$k] = 0;
+            } else {
+                $sexGroup[$k] = $gender[$k];
+            }
+        }
+
+        return $sexGroup;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRangeAge()
+    {
         $ranges = [
             '18-24' => 24,
             '25-35' => 35,
@@ -715,15 +774,7 @@ class UsersController extends BaseController
             }
         }
 
-        return view('nqadmin-users::frontend.stat', compact(
-            'company',
-            'courseInCompany',
-            'certificates',
-            'courses',
-            'employers',
-            'provinces',
-            'rangeAge'
-        ));
+        return $rangeAge;
     }
 
     public function getEmployers(

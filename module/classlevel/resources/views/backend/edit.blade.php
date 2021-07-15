@@ -54,6 +54,14 @@
                                 </div>
                             </div>
 
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-2">
                                 <button type="submit" class="btn btn-primary" style="min-height: 41.5px">Nhập dữ liệu</button>
                             </div>
@@ -133,17 +141,17 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-control-label">Người đại điện pháp luật <span class="text-danger">*</span></label>
-                                    <select name="ward" id="ward-id" class="form-control" required>
-                                        <option value=""> -- Chọn người đại diện --</option>
-                                        @foreach($owner as $o)
-                                            <option value="{{$o->id}}" {{$o->citizen_identification == $data->owner_cid ? 'selected' : ''}}>
-                                                {{$o->first_name}} {{ $o->user_name  }} - CCCD/CMND: {{ $o->citizen_identification }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="form-control-label">Người đại điện pháp luật <span class="text-danger">*</span></label>--}}
+{{--                                    <select name="ward" id="ward-id" class="form-control" required>--}}
+{{--                                        <option value=""> -- Chọn người đại diện --</option>--}}
+{{--                                        @foreach($owner as $o)--}}
+{{--                                            <option value="{{$o->id}}" {{$o->citizen_identification == $data->owner_cid ? 'selected' : ''}}>--}}
+{{--                                                {{$o->first_name}} {{ $o->last_name  }} - CCCD/CMND: {{ $o->citizen_identification }}--}}
+{{--                                            </option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
 
                                 <div class="alert alert-info">
                                     <p><b>Địa chỉ: </b></p>
