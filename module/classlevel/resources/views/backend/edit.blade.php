@@ -34,34 +34,33 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    Nhập dữ liệu nhân sự
-                </div>
-                <div class="card-body">
-                    <form action="{{route('nqadmin::classlevel.import')}}" method="post" role="form" enctype="multipart/form-data">
-                        {{csrf_field()}}
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input type="hidden" name="classlevel" value="{{$data->id}}">
-                                    <input
-                                            type="file"
-                                            class="form-control"
-                                            name="excel_file"
-                                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                    >
-                                </div>
-                            </div>
+{{--            <div class="card">--}}
+{{--                <div class="card-header">--}}
+{{--                    Nhập dữ liệu nhân sự--}}
+{{--                </div>--}}
+{{--                <div class="card-body">--}}
+{{--                    <form action="{{route('nqadmin::classlevel.import')}}" method="post" role="form" enctype="multipart/form-data">--}}
+{{--                        {{csrf_field()}}--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-4">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <input type="hidden" name="classlevel" value="{{$data->id}}">--}}
+{{--                                    <input--}}
+{{--                                            type="file"--}}
+{{--                                            class="form-control"--}}
+{{--                                            name="excel_file"--}}
+{{--                                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"--}}
+{{--                                    >--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary" style="min-height: 41.5px">Nhập dữ liệu</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
+{{--                            <div class="col-2">--}}
+{{--                                <button type="submit" class="btn btn-primary" style="min-height: 41.5px">Nhập dữ liệu</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <form method="post">
                 @if (count($errors) > 0)
@@ -118,14 +117,85 @@
                                     >
                                 </div>
 
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="form-control-label">Thuộc khối</label>--}}
-{{--                                    <select class="custom-select form-control" name="group">--}}
-{{--                                        <option value="primary" {{ ($data->getOriginal('group') == 'primary') ? 'selected' : '' }}>Tiểu học</option>--}}
-{{--                                        <option value="secondary" {{ ($data->getOriginal('group') == 'secondary') ? 'selected' : '' }}>Trung học cơ sở</option>--}}
-{{--                                        <option value="high" {{ ($data->getOriginal('group') == 'high') ? 'selected' : '' }}>Trung học phổ thông</option>--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Mã số thuế <span class="text-danger">*</span></label>
+                                            <input type="text"
+                                                   required
+                                                   parsley-trigger="change"
+                                                   class="form-control"
+                                                   autocomplete="off"
+                                                   name="mst"
+                                                   value="{{$data->mst}}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Người đại điện pháp luật <span class="text-danger">*</span></label>
+                                    <select name="ward" id="ward-id" class="form-control" required>
+                                        <option value=""> -- Chọn người đại diện --</option>
+                                        @foreach($owner as $o)
+                                            <option value="{{$o->id}}" {{$o->citizen_identification == $data->owner_cid ? 'selected' : ''}}>
+                                                {{$o->first_name}} {{ $o->user_name  }} - CCCD/CMND: {{ $o->citizen_identification }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="alert alert-info">
+                                    <p><b>Địa chỉ: </b></p>
+                                    <p>{{$data->fulladdress}}</p>
+                                </div>
+                                <div class="form-group has-success">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               class="custom-control-input"
+                                               name="change_address"
+                                               id="change-address-button"
+                                               {{old('change_address') != null ? 'checked' : ''}}
+                                        >
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">
+                                            Sửa địa chỉ
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div id="change-address" style="display: none">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Tỉnh / Thành phố <span class="text-danger">*</span></label>
+                                        <select name="province" id="provinces-id" class="form-control">
+                                            <option value="">-- Chọn Tỉnh / Thành phố</option>
+                                            @foreach($provinces as $province)
+                                                <option value="{{$province->id}}" {{$data->province == $province->id ? 'selected' : ''}}>{{$province->province_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label">Quận / Huyện <span class="text-danger">*</span></label>
+                                        <select name="district" id="district-id" class="form-control"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label">Phường / Xã <span class="text-danger">*</span></label>
+                                        <select name="ward" id="ward-id" class="form-control"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label">Địa chỉ <span class="text-danger">*</span></label>
+                                        <input type="text"
+                                               parsley-trigger="change"
+                                               class="form-control"
+                                               autocomplete="off"
+                                               name="address"
+                                               value="{{$data->address}}"
+                                        >
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -233,3 +303,56 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			const provinceSelect = $('#provinces-id');
+			const districtSelect = $('#district-id');
+			const wardSelect = $('#ward-id');
+			const body = $('body');
+
+			body.on('change', '#provinces-id', function () {
+				$.ajax({
+					url: '{{route('ajax.get-districts')}}',
+					type: 'GET',
+					data: {
+						provinceId: $(this).val(),
+					},
+					success: function( response ) {
+						districtSelect.html(response.html);
+						wardSelect.empty();
+					},
+					error: function( err ) {
+
+					}
+				});
+			})
+
+			body.on('change', '#district-id', function () {
+				$.ajax({
+					url: '{{route('ajax.get-wards')}}',
+					type: 'GET',
+					data: {
+						districtId: $(this).val(),
+					},
+					success: function( response ) {
+						wardSelect.html(response.html);
+					},
+					error: function( err ) {
+
+					}
+				});
+			})
+
+            body.on('click', '#change-address-button', function () {
+	            if($(this).is(":checked")){
+		            $('#change-address').show();
+	            }
+	            else if($(this).is(":not(:checked)")){
+		            $('#change-address').hide();
+	            }
+            });
+		})
+    </script>
+@endpush

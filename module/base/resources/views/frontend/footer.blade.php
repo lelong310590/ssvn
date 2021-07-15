@@ -9,7 +9,7 @@ $classes = ClassLevel::with('subject')->get();
         <div class="row">
             <div class="col-md-3">
                 <a href="{{route('front.home.index.get')}}" class="logo pull-left" style="margin-bottom: 25px">
-                    <img src="{{asset('frontend/images/logo-white.png')}}" alt="" width="" height="">
+                    <img src="{{asset('frontend/images/logo-white.png')}}" alt="" width="200px" height="">
                 </a>
                 <div class="social-icons-top">
                     <ul class="social-icons clearfix">

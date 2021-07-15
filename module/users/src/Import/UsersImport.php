@@ -62,7 +62,7 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
                         'classlevel' => $this->user->classLevel,
                         'hard_role' => 1,
                         'status' => 'active',
-                        'manager' => $this->user->id
+                        'manager' => $value['7']
                     ]);
                 }
             }

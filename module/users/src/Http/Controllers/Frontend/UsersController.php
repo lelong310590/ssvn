@@ -12,6 +12,8 @@ use Advertise\Models\Advertise;
 use Advertise\Models\AdvertiseCourse;
 use Advertise\Models\AdvertiseUser;
 use Barryvdh\Debugbar\Controllers\BaseController;
+use Base\Models\Provinces;
+use Base\Repositories\ProvincesRepository;
 use Base\Supports\FlashMessage;
 use Botble\Ecommerce\Import\ProductImport;
 use Cart\Models\Order;
@@ -641,16 +643,16 @@ class UsersController extends BaseController
         ClassLevelRepository $classLevelRepository,
         CourseRepository $courseRepository,
         CertificateRepository $certificateRepository,
-        UsersRepository $usersRepository
+        UsersRepository $usersRepository,
+        ProvincesRepository $provincesRepository
     )
     {
         $user = auth('nqadmin')->user();
-        if (intval($user->hard_role) < 1) {
+        if (intval($user->hard_role) < 2) {
             return redirect()->back()->withErrors('Bạn không có quyền xem nội dung này');
         }
 
         $courseInCompany = [];
-        $selectedCompany = false;
         $company = $classLevelRepository->findWhere([
             'status' => 'active'
         ]);
@@ -666,76 +668,61 @@ class UsersController extends BaseController
             'hard_role' => 1
         ])->count();
 
-        if ($request->get('company') != null) {
-            $currentCompany = $request->get('company');
-            $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) {
-                $q->where('hard_role', 1);
-            }])->find($currentCompany);
+        $provinces = $provincesRepository->all();
 
-            $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany) {
-                return $q->where('classlevel', $currentCompany)->where('hard_role', 1)->pluck('id');
-            })->get();
+        $province = $request->get('province');
+        $district = $request->get('district');
+        $ward = $request->get('ward');
 
-            $courseInCompany = $courseRepository
-                ->with('getLdp')
-                ->whereHas('getLdp', function ($r) use ($currentCompany) {
-                    $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
-                })
-                ->with(['certificate' => function($r) use ($userInCompany) {
-                    return $r->whereIn('certificate.user_id', $userInCompany)->get();
-                }])
-                ->with(['getOrderDetail' => function($c) use ($userInCompany) {
-                    return $c->whereIn('order_details.customer', $userInCompany)->get();
-                }])
-                ->scopeQuery(function ($q) use ($currentCompany) {
-                    return $q->where('status', 'active');
-                })->get();
-        } elseif (intval($user->hard_role) == 2 || intval($user->hard_role) == 3) {
+        $ranges = [
+            '18-24' => 24,
+            '25-35' => 35,
+            '36-45' => 45,
+            '46-55' => 55,
+            '55-60' => 60,
+            '60+' => 61
+        ];
 
-            $currentCompany = $user->classlevel;
+        $ageGroup = Users::get()
+            ->map(function ($user) use ($ranges) {
+                $age = Carbon::parse($user->dob)->age;
+                foreach($ranges as $key => $breakpoint)
+                {
+                    if ($breakpoint >= $age)
+                    {
+                        $user->range = $key;
+                        break;
+                    }
+                }
 
-            $selectedCompany = $classLevelRepository->with(['getUsers' => function($q) use ($user) {
-                $q->where('id', '!=', $user->id)->where('hard_role', 1);
-            }])->find($currentCompany);
+                return $user;
+            })
+            ->mapToGroups(function ($user, $key) {
+                return [
+                    $user->range => $user
+                ];
+            })
+            ->map(function ($group) {
+                return count($group);
+            })->toArray();
 
-            $userInCompany = $usersRepository->scopeQuery(function ($q) use ($currentCompany, $user) {
-                return $q->where('id', '!=', $user->id)->where('hard_role', 1)->where('classlevel', $currentCompany)->pluck('id');
-            })->get();
-
-            $courseInCompany = $courseRepository
-                ->with('getLdp')
-                ->whereHas('getLdp', function ($r) use ($currentCompany) {
-                    $r->where('course_ldp.classlevel', $currentCompany)->orWhere('course_ldp.classlevel', null);
-                })
-                ->with(['certificate' => function($r) use ($userInCompany) {
-                    return $r->whereIn('certificate.user_id', $userInCompany)->get();
-                }])
-                ->with(['getOrderDetail' => function($c) use ($userInCompany) {
-                    return $c->whereIn('order_details.customer', $userInCompany)->distinct('customer')->get();
-                }])
-
-                ->scopeQuery(function ($q) use ($currentCompany) {
-                    return $q->where('status', 'active');
-                })->get();
+        $rangeAge = [];
+        foreach ($ranges as $k => $age) {
+            if (!isset($ageGroup[$k])) {
+                $rangeAge[$k] = 0;
+            } else {
+                $rangeAge[$k] = $ageGroup[$k];
+            }
         }
-
-        if (intval($user->hard_role) > 2) {
-            $allCompany = $classLevelRepository->with('getUsers')
-                ->with('getCertificate')
-                ->paginate(20);
-        } else {
-            $allCompany = [];
-        }
-
 
         return view('nqadmin-users::frontend.stat', compact(
             'company',
             'courseInCompany',
-            'selectedCompany',
             'certificates',
             'courses',
             'employers',
-            'allCompany'
+            'provinces',
+            'rangeAge'
         ));
     }
 

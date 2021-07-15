@@ -60,33 +60,70 @@
                                     >
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-control-label">Mã số thuế <span class="text-danger">*</span></label>
-                                    <input type="text"
-                                           required
-                                           parsley-trigger="change"
-                                           class="form-control"
-                                           autocomplete="off"
-                                           name="mst"
-                                           value="{{old('mst')}}"
-                                    >
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Mã số thuế <span class="text-danger">*</span></label>
+                                            <input type="text"
+                                                   required
+                                                   parsley-trigger="change"
+                                                   class="form-control"
+                                                   autocomplete="off"
+                                                   name="mst"
+                                                   value="{{old('mst')}}"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Số điện thoại <span class="text-danger">*</span></label>
+                                            <input type="text"
+                                                   required
+                                                   parsley-trigger="change"
+                                                   class="form-control"
+                                                   autocomplete="off"
+                                                   name="phone"
+                                                   value="{{old('phone')}}"
+                                            >
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label">Số điện thoại <span class="text-danger">*</span></label>
+                                    <label class="form-control-label">Tỉnh / Thành phố <span class="text-danger">*</span></label>
+                                    <select name="province" id="provinces-id" class="form-control" required>
+                                        <option value="">-- Chọn Tỉnh / Thành phố</option>
+                                        @foreach($provinces as $province)
+                                            <option value="{{$province->id}}">{{$province->province_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Quận / Huyện <span class="text-danger">*</span></label>
+                                    <select name="district" id="district-id" class="form-control" required></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Phường / Xã <span class="text-danger">*</span></label>
+                                    <select name="ward" id="ward-id" class="form-control" required></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Địa chỉ <span class="text-danger">*</span></label>
                                     <input type="text"
                                            required
                                            parsley-trigger="change"
                                            class="form-control"
                                            autocomplete="off"
-                                           name="phone"
-                                           value="{{old('phone')}}"
+                                           name="address"
+                                           value="{{old('address')}}"
                                     >
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label">Email liên hệ <span class="text-danger">*</span></label>
-                                    <input type="text"
+                                    <input type="email"
                                            required
                                            parsley-trigger="change"
                                            class="form-control"
@@ -308,3 +345,47 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+	    jQuery(document).ready(function ($) {
+	    	const provinceSelect = $('#provinces-id');
+	    	const districtSelect = $('#district-id');
+	    	const wardSelect = $('#ward-id');
+	    	const body = $('body');
+
+		    body.on('change', '#provinces-id', function () {
+			    $.ajax({
+				    url: '{{route('ajax.get-districts')}}',
+				    type: 'GET',
+				    data: {
+					    provinceId: $(this).val(),
+                    },
+				    success: function( response ) {
+					    districtSelect.html(response.html);
+					    wardSelect.empty();
+				    },
+				    error: function( err ) {
+
+				    }
+			    });
+            })
+
+		    body.on('change', '#district-id', function () {
+			    $.ajax({
+				    url: '{{route('ajax.get-wards')}}',
+				    type: 'GET',
+				    data: {
+					    districtId: $(this).val(),
+				    },
+				    success: function( response ) {
+					    wardSelect.html(response.html);
+				    },
+				    error: function( err ) {
+
+				    }
+			    });
+		    })
+        })
+    </script>
+@endpush

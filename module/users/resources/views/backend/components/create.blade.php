@@ -180,6 +180,7 @@
 										<option value="3" {{old('hard_role') == '3' ? 'selected' : ''}}>Chủ đơn vị</option>
 										<option value="4" {{old('hard_role') == '4' ? 'selected' : ''}}>Quản lý cấp Sở</option>
 										<option value="5" {{old('hard_role') == '5' ? 'selected' : ''}}>Quản lý cấp Bộ</option>
+										<option value="5" {{old('hard_role') == '99' ? 'selected' : ''}}>Vận hành viên</option>
 									</select>
 								</div>
 

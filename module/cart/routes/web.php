@@ -13,7 +13,7 @@ $adminRoute = config('base.admin_route');
 $moduleRoute = 'checkout';
 
 Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
-    $router->group(['prefix' => $moduleRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
+    $router->group(['prefix' => $moduleRoute, 'middleware' => 'verfiry-admin'], function (Router $router) use ($adminRoute, $moduleRoute) {
         $router->get('/', 'CartController@getSetting')
             ->name('nqadmin::checkout.setting.get');
 

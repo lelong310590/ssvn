@@ -211,7 +211,8 @@ header.main .container {
 
 header.main .logo {
 	display: inline-block;
-	margin: 15px 0 22px;
+	margin: 15px 0;
+	width: 170px;
 }
 
 header nav.main {
@@ -2005,11 +2006,6 @@ header.main .container {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-}
-
-header.main .logo {
-	display: inline-block;
-	margin: 15px 0 22px;
 }
 
 header nav.main {
@@ -3825,6 +3821,14 @@ footer .list-unstyled li {
 		text-align: left;
 		margin-top: 3px;
 	}
+}
+
+.filter {
+	margin-top: 35px
+}
+
+.result-wrapper {
+	margin-top: 35px;
 }
 
 @media screen and (max-width: 768px) {

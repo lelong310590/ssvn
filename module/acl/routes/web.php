@@ -12,7 +12,7 @@ $adminRoute = config('base.admin_route');
 $moduleRoute = 'acl';
 
 Route::group(['prefix' => $adminRoute.'/'.$moduleRoute], function(Router $router) use ($adminRoute, $moduleRoute) {
-	$router->group(['prefix' => 'role'], function(Router $router) {
+	$router->group(['prefix' => 'role', 'middleware' => 'verfiry-admin'], function(Router $router) {
 		$router->get('index', 'RoleController@getIndex')
 		       ->name('nqadmin::role.index.get')
 		       ->middleware('permission:role_index');

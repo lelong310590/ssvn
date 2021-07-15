@@ -10,14 +10,21 @@ namespace Base\Http\Controllers;
 
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Base\Mail\TestMail;
+use Base\Models\Districts;
+use Base\Models\Provinces;
+use Base\Models\Wards;
+use Base\Repositories\DistrictsRepository;
+use Base\Repositories\WardsRepository;
 use Cart\Repositories\OrdersRepository;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Repositories\CourseRepository;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Users\Models\Users;
 use Users\Repositories\UsersRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http;
 
 class DashboardController extends BaseController
 {
@@ -29,6 +36,7 @@ class DashboardController extends BaseController
         Request $request
     )
     {
+
         $data = [];
         for ($i = 1; $i <= 12; $i ++) {
             $data[] = $ordersRepository->getProfitByMonth($i);
@@ -143,5 +151,48 @@ class DashboardController extends BaseController
         }
 
         return response()->json($html);
+    }
+
+
+    public function getDistricts(
+        Request $request,
+        DistrictsRepository $districtsRepository
+    )
+    {
+        if (!$request->ajax()) {
+            abort(404);
+        }
+        $html = '';
+        $provinceId = $request->get('provinceId');
+        $districts = $districtsRepository->findWhere([
+            'province_id' =>  $provinceId
+        ]);
+
+        foreach ($districts as $d) {
+            $html .= '<option value="'.$d->id.'">'.$d->district_name.'</option>';
+        }
+
+        return response()->json(['html' => $html]);
+    }
+
+    public function getWards(
+        Request $request,
+        WardsRepository $wardsRepository
+    )
+    {
+        if (!$request->ajax()) {
+            abort(404);
+        }
+        $html = '';
+        $districtId = $request->get('districtId');
+        $wards = $wardsRepository->findWhere([
+            'district_id' =>  $districtId
+        ]);
+
+        foreach ($wards as $w) {
+            $html .= '<option value="'.$w->id.'">'.$w->ward_name.'</option>';
+        }
+
+        return response()->json(['html' => $html]);
     }
 }

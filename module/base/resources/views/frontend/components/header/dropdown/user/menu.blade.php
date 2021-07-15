@@ -29,7 +29,9 @@
 {{--</div>--}}
 
 @if (Auth::check())
-    @php $hardRole = Auth::user()->hard_role @endphp
+    @php
+        $hardRole = Auth::user()->hard_role
+    @endphp
     @if (intval($hardRole) > 1)
         <div class="sign-out clearfix">
             <a href="{{ route('fronts.user.stat.get') }}">

@@ -13,7 +13,7 @@ $moduleRoute = 'advertise';
 
 //Frontend
 Route::group(['namespace' => 'Frontend'], function (Router $router) {
-    $router->group(['prefix' => 'advertise'], function (Router $router) {
+    $router->group(['prefix' => 'advertise', 'middleware' => 'verfiry-admin'], function (Router $router) {
         $router->post('/update', 'AdvertiseController@update')
             ->name('front.advertise.update.post');
     });

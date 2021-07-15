@@ -214,6 +214,7 @@
 									<option value="2" {{$data->hard_role == '2' ? 'selected' : ''}}>Quản lý cấp đơn vị</option>
 									<option value="3" {{$data->hard_role == '3' ? 'selected' : ''}}>Quản lý cấp sở</option>
 									<option value="4" {{$data->hard_role == '4' ? 'selected' : ''}}>Quản lý cấp bộ</option>
+									<option value="4" {{$data->hard_role == '99' ? 'selected' : ''}}>Vận hành viên</option>
 								</select>
 							</div>
 

@@ -12,7 +12,7 @@ $adminRoute = config('base.admin_route');
 $moduleRoute = 'coupon';
 
 Route::group(['prefix' => $adminRoute], function(Router $router) use ($adminRoute, $moduleRoute) {
-    $router->group( [ 'prefix' => $moduleRoute ], function ( Router $router ) use ( $adminRoute, $moduleRoute ) {
+    $router->group( [ 'prefix' => $moduleRoute, 'middleware' => 'verfiry-admin' ], function ( Router $router ) use ( $adminRoute, $moduleRoute ) {
         $router->post( 'create', 'CouponController@postCreate' )
             ->name( 'nqadmin::coupon.create.post' );
         $router->post( 'changeStatus', 'CouponController@changeStatus' )

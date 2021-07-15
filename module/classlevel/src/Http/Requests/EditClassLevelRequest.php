@@ -23,13 +23,24 @@ class EditClassLevelRequest extends FormRequest
 	public function rules()
 	{
 		$id = intval($this->get('current_id'));
-		return [
-			'name' => 'required',
-			'slug' => 'required|unique:classlevel,slug,'.$id.',id',
-			'editor' => 'required',
+		$rule = [
+            'name' => 'required',
+            'slug' => 'required|unique:classlevel,slug,'.$id.',id',
+            'editor' => 'required',
             'email' => 'email',
             'phone' => ['regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
-		];
+            'address' => 'required',
+            'owner_cid' => 'required'
+        ];
+
+        if ($this->has('change_address'))
+        {
+            $rule['ward'] = 'required';
+            $rule['district'] = 'required';
+            $rule['province'] = 'required';
+        }
+
+		return $rule;
 	}
 	
 	/**
@@ -44,6 +55,11 @@ class EditClassLevelRequest extends FormRequest
 			'editor.required' => 'Người chỉnh sửa Công ty không được bỏ trống',
             'phone.regex' => 'Số điện thoại không đúng',
             'email.email' => 'Định dạng Email không đúng',
+            'province.required' => 'Tỉnh / Thành phố không được bỏ trống',
+            'district.required' => 'Quận / Huyện không được bỏ trống',
+            'ward.required' => 'Phường / Xã không được bỏ trống',
+            'address.required' => 'Địa chỉ không được bỏ trống',
+            'owner_cid.required' => 'Người đai diện pháp luạt không đuọc bỏ trống'
 		];
 	}
 }

@@ -32,6 +32,10 @@ class CreateClassLevelRequest extends FormRequest
             'last_name' => 'required',
             'citizen_identification' => 'required|min:9|max:12|unique:users,citizen_identification',
             'dob' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            'ward' => 'required',
+            'address' => 'required',
 		];
 	}
 	
@@ -54,7 +58,11 @@ class CreateClassLevelRequest extends FormRequest
             'citizen_identification.min' => 'Số CMND/CCCD không hợp lệ',
             'citizen_identification.max' => 'Số CMND/CCCD không hợp lệ',
             'citizen_identification.unique' => 'Số CMND/CCCD này đã tồn tại',
-            'dob.requỉed' => 'Ngày sinh không được bỏ trống'
+            'dob.requỉed' => 'Ngày sinh không được bỏ trống',
+            'province.required' => 'Tỉnh / Thành phố không được bỏ trống',
+            'district.required' => 'Quận / Huyện không được bỏ trống',
+            'ward.required' => 'Phường / Xã không được bỏ trống',
+            'address.required' => 'Địa chỉ không được bỏ trống',
 		];
 	}
 }

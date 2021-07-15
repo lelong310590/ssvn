@@ -11,6 +11,7 @@ namespace ClassLevel\Http\Controllers;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Base\Jobs\SendMail;
 use Base\Mail\CreateUserWhenCreateCompany;
+use Base\Repositories\ProvincesRepository;
 use Carbon\Carbon;
 use ClassLevel\Http\Requests\EditClassLevelRequest;
 use ClassLevel\Repositories\ClassLevelRepository;
@@ -35,12 +36,15 @@ class ClassLevelController extends BaseController
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function getIndex()
+	public function getIndex(
+	    ProvincesRepository $provincesRepository
+    )
 	{
 		$data = $this->repository->all();
-		return view('nqadmin-classlevel::backend.index', [
-			'data' => $data
-		]);
+		$provinces = $provincesRepository->all();
+		return view('nqadmin-classlevel::backend.index', compact(
+		    'data', 'provinces'
+        ));
 	}
 	
 	/**
@@ -55,6 +59,7 @@ class ClassLevelController extends BaseController
 	{
 		try {
 			$input = $request->except('_token');
+
 			$citizenIdentification = $request->get('citizen_identification');
 
 			$checkAvaiable = $usersRepository->scopeQuery(function ($q) use ($citizenIdentification) {
@@ -72,15 +77,21 @@ class ClassLevelController extends BaseController
                     'first_name' => $request->get('first_name'),
                     'last_name' => $request->get('last_name'),
                     'password' => $password,
-                    'sex' => 'other',
+                    'sex' => $request->get('sex'),
                     'status' => 'active',
                     'classlevel' => $classLevel->id,
                     'is_enterprise' => 1,
-                    'hard_role' => 2
+                    'hard_role' => 3,
+                    'citizen_identification' => $request->get('citizen_identification'),
+                    'dob' => $request->get('dob')
                 ]);
 
 //			    SendMail::dispatch($user, $password)->delay(Carbon::now()->addMinute(1));
                 Mail::to($user)->send(new CreateUserWhenCreateCompany($user, $password));
+
+                $this->repository->update([
+                    'owner_cid' => $user->id
+                ], $classLevel->id);
             }
 
 			return redirect()->back()->with(FlashMessage::returnMessage('create'));
@@ -94,11 +105,23 @@ class ClassLevelController extends BaseController
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function getEdit($id)
+	public function getEdit(
+	    $id,
+        ProvincesRepository $provincesRepository,
+        UsersRepository $usersRepository
+    )
 	{
 		$classLevel = $this->repository->with(['owner', 'edit'])->find($id);
+        $provinces = $provincesRepository->all();
+        $owner = $usersRepository->findWhere([
+            'status' => 'active',
+            'hard_role' => 3
+        ]);
+
 		return view('nqadmin-classlevel::backend.edit', [
 			'data' => $classLevel,
+            'provinces' => $provinces,
+            'owner' => $owner
 		]);
 	}
 	
@@ -108,10 +131,17 @@ class ClassLevelController extends BaseController
 	 *
 	 * @return $this|\Illuminate\Http\RedirectResponse
 	 */
-	public function postEdit($id, EditClassLevelRequest $request)
+	public function postEdit(
+	    $id,
+        EditClassLevelRequest $request
+    )
 	{
 		try {
-			$input = $request->except(['_token', 'current_id']);
+		    if ($request->has('change_address') && $request->get('change_address') == 'on') {
+                $input = $request->except(['_token', 'current_id']);
+            } else {
+                $input = $request->except(['_token', 'current_id']);
+            }
 			$this->repository->update($input, $id);
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 			

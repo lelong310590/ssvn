@@ -23,10 +23,12 @@ use Illuminate\Support\Facades\DB;
         <div class="page-user">
             <div class="container">
                 <div class="row">
+                    @if (auth('nqadmin')->user()->hard_role <= 3)
                     <div class="left-user col-xs-2">
                         @include('nqadmin-users::frontend.partials.sidebar')
                     </div>
-                    <div class="right-user col-xs-10">
+                    @endif
+                    <div class="{{auth('nqadmin')->user()->hard_role > 3 ? 'col-xs-12' : 'col-xs-10 right-user'}}">
                         <div class="text-center title-page">
                             <h3 class="txt">Thống kê</h3>
                         </div>
@@ -35,10 +37,9 @@ use Illuminate\Support\Facades\DB;
 
                             <div class="content-my-course">
                                 <div class="stats-wrapper">
-                                    @if (Auth::guard('nqadmin')->user()->hard_role > 2)
-                                    <div class="stat-title">Thông số tổng quan</div>
+                                    @if (Auth::guard('nqadmin')->user()->hard_role > 3)
+                                    <div class="stat-title">Thông số tổng quan cả nước</div>
                                     <div class="row">
-
                                         <div class="col-xs-12 col-md-3">
                                             <div class="stats-item">
                                                 <i class="far fa-building"></i>
@@ -68,112 +69,64 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                     </div>
                                     @endif
+                                </div>
+                            </div>
 
-                                    @if (Auth::guard('nqadmin')->user()->hard_role > 2)
-                                        <div class="all-records">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-condensed table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th width="50">Công ty</th>
-                                                        <th width="20%">Tổng lao động</th>
-                                                        <th width="20%">Lao động đạt chứng chỉ</th>
-                                                        <th width="10%" class="text-center">Đạt tỷ lệ</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($allCompany as $ac)
-                                                        <tr>
-                                                            <td>{{$ac->name}}</td>
-                                                            <td>{{$ac->getUsers->count()}}</td>
-                                                            <td>{{$ac->getCertificate->count()}}</td>
-                                                            <td class="text-center">
-                                                                <b>{{$ac->getUsers->count() == 0 ? '0%' : round($ac->getCertificate->count()/$ac->getUsers->count()*100).'%'}}</b>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
+                            <div class="filter">
+                                <div class="stats-wrapper">
+                                    <div class="stat-title">Thông số chi tiết theo từng địa phương</div>
+                                </div>
+                                <div class="filter-box">
+                                    <form method="GET">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label for="province">Tỉnh / Thành phố</label>
+                                                    <select name="province" id="provinces-id" class="form-control">
+                                                        <option value="">-- Chọn Tỉnh / Thành phố</option>
+                                                        @foreach($provinces as $province)
+                                                            <option value="{{$province->id}}">{{$province->province_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label for="province">Quận / Huyện</label>
+                                                    <select name="district" id="district-id" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label for="province">Phường / Xã</label>
+                                                    <select name="ward" id="ward-id" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2">
+                                                <button class="btn btn-primary" type="submit" style="margin-top: 22px">Lấy thông tin</button>
                                             </div>
                                         </div>
-                                    @endif
-                                    
-                                    <div class="stats-tool">
-                                        @if (Auth::guard('nqadmin')->user()->hard_role > 2)
-                                        <div class="stat-title">Thông số chi tiết</div>
-                                        <form action="">
-                                            <div class="row">
-                                                <div class="col-xs-12 col-md-3">
-                                                    <div class="form-group">
-                                                        <select name="company" id="" class="form-control">
-                                                            <option value="">-- Chọn đơn vị --</option>
-                                                            @foreach($company as $c)
-                                                                <option value="{{$c->id}}">{{$c->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                    </form>
+                                </div>
 
-                                                <div class="col-xs-3">
-                                                    <button class="btn btn-primary"><i class="fas fa-search"></i> Lọc thông tin</button>
+                                <div class="result-wrapper">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="chart-age">
+                                                <canvas id="chart-age"></canvas>
+                                                <div class="chart-label text-center" style="margin-top: 15px">
+                                                    <p><b>Độ tuổi lao động</b></p>
                                                 </div>
                                             </div>
-                                        </form>
-                                        @endif
+                                        </div>
 
-                                        <div class="stat-detail-wrapper">
-                                            @if ($selectedCompany)
-                                            <div class="stat-detail-company-info">
-                                                <p>Tên đơn vị: <b><i>{{$selectedCompany->name}}</i></b> - MST: <b>{{$selectedCompany->mst}}</b></p>
-                                                <p>Tổng số lao động đăng ký: <b>{{$selectedCompany->getUsers != null ? $selectedCompany->getUsers->count() : 0}}</b></p>
-                                            </div>
-                                            @endif
-
-                                            @foreach($courseInCompany as $course)
-                                            <div class="stat-detail-item">
-                                                <div class="stat-detail-item-course">
-                                                    <div class="row">
-                                                        <div class="col-xs-3">
-                                                            <div class="stat-detail-item-course-thumbnail">
-                                                                <img src="{{ asset($course->getThumbnail()) }}" alt="" width="" height="">
-                                                                <p>{{ $course->name }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-5">
-                                                            <div class="stat-detail-item-stats">
-                                                                <p>Tổng số lao động tham gia khóa đào tạo:</p>
-                                                                <h4 style="color: red">{{$course->getOrderDetail != null ? $course->getOrderDetail->count() : 0}}</h4>
-                                                                <p>Tổng số lao động đã hoàn thành khóa đạo tạo <i>(đã cấp chứng chỉ)</i>:</p>
-                                                                <h4 style="color: green">{{$course->certificate->count()}}</h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-4">
-                                                            <div class="stat-detail-item-stats">
-                                                                @php
-                                                                    $totalEmployers = $selectedCompany->getUsers->count();
-                                                                    $registeredEmployers = $course->getOrderDetail->count();
-                                                                    $completedEmployers = $course->certificate->count();
-                                                                @endphp
-                                                                <p>Tỷ lệ lao động tham gia khóa đào tạo:</p>
-                                                                <h4>
-                                                                    @if ($totalEmployers == 0)
-                                                                        0%
-                                                                    @elseif (round($registeredEmployers/$totalEmployers * 100, 0) > 100)
-                                                                        100%
-                                                                    @else
-                                                                        {{round($registeredEmployers/$totalEmployers * 100, 0)}}%
-                                                                    @endif
-                                                                </h4>
-                                                                <p>Tỷ lệ lao động hoàn thành khóa đào tạo: </p>
-                                                                <h4>
-                                                                    {{$registeredEmployers == 0 ? 0 : round($completedEmployers/$registeredEmployers * 100, 0).'%'}}
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="chart-age">
+                                                <canvas id="chart-sex"></canvas>
+                                                <div class="chart-label text-center" style="margin-top: 15px">
+                                                    <p><b>Giới tính</b></p>
                                                 </div>
                                             </div>
-                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -188,3 +141,54 @@ use Illuminate\Support\Facades\DB;
     <!--main-page-->
 
 @endsection
+
+@push('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
+@endpush
+
+@push('js-init')
+    <script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			const provinceSelect = $('#provinces-id');
+			const districtSelect = $('#district-id');
+			const wardSelect = $('#ward-id');
+			const body = $('body');
+
+			body.on('change', '#provinces-id', function () {
+				$.ajax({
+					url: '{{route('ajax.get-districts')}}',
+					type: 'GET',
+					data: {
+						provinceId: $(this).val(),
+					},
+					success: function( response ) {
+						districtSelect.html(response.html);
+						wardSelect.empty();
+					},
+					error: function( err ) {
+
+					}
+				});
+			})
+
+			body.on('change', '#district-id', function () {
+				$.ajax({
+					url: '{{route('ajax.get-wards')}}',
+					type: 'GET',
+					data: {
+						districtId: $(this).val(),
+					},
+					success: function( response ) {
+						wardSelect.html(response.html);
+					},
+					error: function( err ) {
+
+					}
+				});
+			})
+		})
+    </script>
+@endpush
+
+@include('nqadmin-users::frontend.partials.stats.chart-age')
+@include('nqadmin-users::frontend.partials.stats.chart-sex')

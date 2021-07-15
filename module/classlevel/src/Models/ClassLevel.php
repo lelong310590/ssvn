@@ -8,6 +8,9 @@
 
 namespace ClassLevel\Models;
 
+use Base\Models\Districts;
+use Base\Models\Provinces;
+use Base\Models\Wards;
 use Course\Models\Certificate;
 use Course\Models\Course;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +24,7 @@ class ClassLevel extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'name', 'slug', 'group', 'seo_title', 'seo_description', 'seo_keywords', 'author', 'editor', 'status', 'publish',
-        'updated_at', 'created_at', 'mst'
+        'updated_at', 'created_at', 'mst', 'province', 'district', 'ward', 'address', 'owner_cid'
     ];
 
     /**
@@ -84,5 +87,29 @@ class ClassLevel extends Model
     public function getCertificate()
     {
         return $this->belongsToMany(Certificate::class, (new Users())->getTable(), 'classlevel', 'id');
+    }
+
+    public function getProvince()
+    {
+        return $this->belongsTo(Provinces::class, 'province', 'id');
+    }
+
+    public function getDistrict()
+    {
+        return $this->belongsTo(Districts::class, 'district', 'id');
+    }
+
+    public function getWard()
+    {
+        return $this->belongsTo(Wards::class, 'ward', 'id');
+    }
+
+    public function getFulladdressAttribute()
+    {
+        $province = $this->getProvince()->get()->count() > 0 ? $this->getProvince()->first()->province_name : '';
+        $district = $this->getDistrict()->get()->count() > 0 ? $this->getDistrict()->first()->district_name : '';
+        $ward = $this->getWard()->get()->count() > 0 ? $this->getWard()->first()->ward_name : '';
+        $fullName = $this->address.' - '.$ward.' - '.$district.' - '.$province;
+        return $fullName;
     }
 }

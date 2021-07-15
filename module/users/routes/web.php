@@ -14,7 +14,7 @@ $moduleRoute = 'users';
 
 //Backend
 Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
-    $router->group(['prefix' => $moduleRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
+    $router->group(['prefix' => $moduleRoute, 'middleware' => 'verfiry-admin'], function (Router $router) use ($adminRoute, $moduleRoute) {
         $router->get('setting', 'UsersController@getSetting')
             ->name('nqadmin::users.setting.get');
 

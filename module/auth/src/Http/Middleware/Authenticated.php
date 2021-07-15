@@ -46,7 +46,7 @@ class Authenticated
 				return redirect()->guest(route($this::LOGIN_ROUTE_NAME_GET));
 			}
 		} else {
-		
+
 		}
 		
 //		if (auth('nqadmin')->check()) {

@@ -9,6 +9,7 @@
 namespace Auth\Providers;
 
 use Auth\Http\Middleware\Authenticated;
+use Auth\Http\Middleware\CheckIsAdmin;
 use Illuminate\Support\ServiceProvider;
 
 class MiddlewareProvider extends ServiceProvider
@@ -22,5 +23,7 @@ class MiddlewareProvider extends ServiceProvider
 	{
 		$this->app['router']->aliasMiddleware('nqadmin', Authenticated::class);
 		$this->app['router']->pushMiddlewareToGroup('web', Authenticated::class);
-	}
+        $this->app['router']->aliasMiddleware('verfiry-admin', CheckIsAdmin::class);
+        $this->app['router']->pushMiddlewareToGroup('verfiry-admin', CheckIsAdmin::class);
+    }
 }

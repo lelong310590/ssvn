@@ -14,5 +14,9 @@ Route::group(['prefix' => $moduleRoute], function(Router $router) use ($moduleRo
     $router->group(['prefix' => 'ajax'], function (Router $router) {
         $router->post('get-course-in-company', 'DashboardController@getCourseInCompany')
             ->name('ajax.get-course-in-company');
+        $router->get('get-districts', 'DashboardController@getDistricts')
+            ->name('ajax.get-districts');
+        $router->get('get-wards', 'DashboardController@getWards')
+            ->name('ajax.get-wards');
     });
 });
