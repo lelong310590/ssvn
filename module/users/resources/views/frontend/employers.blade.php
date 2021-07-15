@@ -31,34 +31,6 @@ use Illuminate\Support\Facades\DB;
                             <h3 class="txt">Danh sách người lao động</h3>
                         </div>
                         <div class="box-my-course box-course">
-                            <div class="employer-tool">
-                                <p><b>Nhập nhân sự</b></p>
-                                <form action="{{route('front.users.employers.post')}}" method="post" role="form" enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <div class="form-group">
-                                                <input
-                                                    type="file"
-                                                    class="form-control"
-                                                    name="excel_file"
-                                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <button type="submit" class="btn btn-primary">Nhập dữ liệu</button>
-                                        </div>
-
-                                        <div class="col-xs-6">
-                                            <div class="text-right download-excel">
-                                                <a href="{{asset('frontend/files/xample_file.xlsx')}}" download=""><i class="far fa-file-excel"></i> Tải file mẫu</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
                             <div class="count-employer mt-4 mb-4">
                                 <p>Số nhân sự dưới quyền quản lý: <b>{{$employers->count()}}</b></p>
                             </div>

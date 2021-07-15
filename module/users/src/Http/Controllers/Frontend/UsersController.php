@@ -13,17 +13,21 @@ use Advertise\Models\AdvertiseCourse;
 use Advertise\Models\AdvertiseUser;
 use Barryvdh\Debugbar\Controllers\BaseController;
 use Base\Models\Provinces;
+use Base\Repositories\DistrictsRepository;
 use Base\Repositories\ProvincesRepository;
+use Base\Repositories\WardsRepository;
 use Base\Supports\FlashMessage;
 use Botble\Ecommerce\Import\ProductImport;
 use Cart\Models\Order;
 use Cart\Models\OrderDetail;
+use ClassLevel\Models\ClassLevel;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Models\Course;
 use Course\Models\CurriculumProgress;
 use Course\Repositories\CertificateRepository;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
 use Users\Import\UsersImport;
 use function GuzzleHttp\Promise\all;
@@ -644,7 +648,9 @@ class UsersController extends BaseController
         CourseRepository $courseRepository,
         CertificateRepository $certificateRepository,
         UsersRepository $usersRepository,
-        ProvincesRepository $provincesRepository
+        ProvincesRepository $provincesRepository,
+        DistrictsRepository $districtsRepository,
+        WardsRepository $wardsRepository
     )
     {
         $user = auth('nqadmin')->user();
@@ -674,8 +680,40 @@ class UsersController extends BaseController
         $district = $request->get('district');
         $ward = $request->get('ward');
 
-        $rangeAge = $this->getRangeAge();
-        $sexGroup = $this->getRangeSex();
+        $wards = [];
+        $districts = [];
+        if ($province != null) {
+            $districts = $districtsRepository->findWhere([
+                'province_id' => $province
+            ]);
+        }
+
+        if ($district != null) {
+            $wards = $wardsRepository->findWhere([
+                'district_id' => $district
+            ]);
+        }
+
+        if (auth('nqadmin')->user()->hard_role <= 3) {
+            $userCompany = auth('nqadmin')->user()->classlevel;
+            $currentCompany = $classLevelRepository->find($userCompany);
+            $province = $currentCompany->province;
+            $district = $currentCompany->district;
+            $ward = $currentCompany->ward;
+        }
+
+        $rangeAge = $province != null ? $this->getRangeAge($province, $district, $ward) : false;
+        $sexGroup = $province  != null ? $this->getRangeSex($province, $district, $ward) : false;
+
+        $unlearnUser = false;
+
+        if (auth('nqadmin')->user()->hard_role <= 3) {
+            $companyId = auth('nqadmin')->user()->classlevel;
+            $companies = ClassLevel::withCount(['getUsers', 'getCertificate'])->where('id', $companyId)->get();
+            $unlearnUser = Users::doesntHave('getCertificate')->where('classlevel', $companyId)->paginate(25);
+        } else {
+            $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
+        }
 
         return view('nqadmin-users::frontend.stat', compact(
             'company',
@@ -685,18 +723,76 @@ class UsersController extends BaseController
             'employers',
             'provinces',
             'rangeAge',
-            'sexGroup'
+            'sexGroup',
+            'companies',
+            'wards',
+            'districts',
+            'unlearnUser'
         ));
     }
 
-    public function getRangeSex()
+    /**
+     * @param $province
+     * @param $district
+     * @param $ward
+     * @return mixed
+     */
+    public function  getCompany($province, $district, $ward)
+    {
+        $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate']);
+        if ($province != null) {
+            if ($district != null) {
+                if ($ward != null) {
+                    $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate'])
+                        ->where('province', $province)
+                        ->where('district', $district)
+                        ->where('ward', $ward);
+                } else {
+                    $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate'])
+                        ->where('province', $province)
+                        ->where('district', $district);
+                }
+            } else {
+                $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate'])
+                    ->where('province', $province);
+            }
+        }
+
+        return $companyModel->get();
+    }
+
+    /**
+     * @return array
+     */
+    public function getRangeSex($province, $district, $ward)
     {
         $filter = [
             'Nam' => 'Nam',
             'Nữ' => 'Nữ',
             'Khác' => 'Khác'
         ];
-        $gender = Users::get()
+
+        $userModel = new Users();
+
+        if ($province != null) {
+            $userModel = Users::with('getClassLevel')
+                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward) {
+                    if ($district != null) {
+                        if ($ward != null) {
+                            return $q->where('classlevel.province', $province)
+                                ->where('classlevel.district', $district)
+                                ->where('classlevel.ward', $ward);
+                        } else {
+                            return $q->where('classlevel.province', $province)
+                                ->where('classlevel.district', $district);
+                        }
+                    } else {
+                        return $q->where('classlevel.province', $province);
+                    }
+                });
+        }
+
+        $gender = $userModel->get()
             ->map(function ($user) use ($filter) {
                 $sex = $user->sex;
                 foreach ($filter as $key => $value) {
@@ -731,7 +827,7 @@ class UsersController extends BaseController
     /**
      * @return array
      */
-    public function getRangeAge()
+    public function getRangeAge($province, $district, $ward)
     {
         $ranges = [
             '18-24' => 24,
@@ -742,7 +838,27 @@ class UsersController extends BaseController
             '60+' => 61
         ];
 
-        $ageGroup = Users::get()
+        $userModel = new Users();
+
+        if ($province != null) {
+            $userModel = Users::with('getClassLevel')
+                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward) {
+                if ($district != null) {
+                    if ($ward != null) {
+                        return $q->where('classlevel.province', $province)
+                                    ->where('classlevel.district', $district)
+                                    ->where('classlevel.ward', $ward);
+                    } else {
+                        return $q->where('classlevel.province', $province)
+                                    ->where('classlevel.district', $district);
+                    }
+                } else {
+                    return $q->where('classlevel.province', $province);
+                }
+            });
+        }
+
+        $ageGroup = $userModel->get()
             ->map(function ($user) use ($ranges) {
                 $age = Carbon::parse($user->dob)->age;
                 foreach($ranges as $key => $breakpoint)
@@ -777,6 +893,10 @@ class UsersController extends BaseController
         return $rangeAge;
     }
 
+    /**
+     * @param UsersRepository $usersRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
     public function getEmployers(
         UsersRepository $usersRepository
     )
@@ -801,6 +921,10 @@ class UsersController extends BaseController
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postEmployers(
         Request $request
     )

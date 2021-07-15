@@ -2020,8 +2020,22 @@ header nav.main {
 	padding: 0 150px;
 }
 
+.chart-sex-no-padding {
+	padding: 0 110px;
+}
+
 header nav a {
 	color: #000;
+}
+
+.list-company-table {
+	height: 350px;
+	overflow-y: scroll;
+}
+
+.list-company-table-single {
+	overflow-y: unset;
+	height: unset;
 }
 
 header nav .user h6 {

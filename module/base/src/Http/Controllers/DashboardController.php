@@ -162,7 +162,7 @@ class DashboardController extends BaseController
         if (!$request->ajax()) {
             abort(404);
         }
-        $html = '';
+        $html = '<option value="">-- Chọn Quận / Huyện --</option>';
         $provinceId = $request->get('provinceId');
         $districts = $districtsRepository->findWhere([
             'province_id' =>  $provinceId
@@ -175,6 +175,11 @@ class DashboardController extends BaseController
         return response()->json(['html' => $html]);
     }
 
+    /**
+     * @param Request $request
+     * @param WardsRepository $wardsRepository
+     * @return Http\JsonResponse
+     */
     public function getWards(
         Request $request,
         WardsRepository $wardsRepository
@@ -183,11 +188,12 @@ class DashboardController extends BaseController
         if (!$request->ajax()) {
             abort(404);
         }
-        $html = '';
+        $html = '<option value="">-- Chọn Phường / Xã --</option>';
         $districtId = $request->get('districtId');
         $wards = $wardsRepository->findWhere([
             'district_id' =>  $districtId
         ]);
+
 
         foreach ($wards as $w) {
             $html .= '<option value="'.$w->id.'">'.$w->ward_name.'</option>';

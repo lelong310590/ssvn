@@ -35,9 +35,9 @@ use Illuminate\Support\Facades\DB;
                         <div class="box-my-course box-course">
                             <!--top-my-course-->
 
+                            @if (Auth::guard('nqadmin')->user()->hard_role > 3)
                             <div class="content-my-course">
                                 <div class="stats-wrapper">
-                                    @if (Auth::guard('nqadmin')->user()->hard_role > 3)
                                     <div class="stat-title">Thông số tổng quan cả nước</div>
                                     <div class="row">
                                         <div class="col-xs-12 col-md-3">
@@ -68,11 +68,12 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                         </div>
                                     </div>
-                                    @endif
                                 </div>
                             </div>
+                            @endif
 
                             <div class="filter">
+                                @if (auth('nqadmin')->user()->hard_role > 3)
                                 <div class="stats-wrapper">
                                     <div class="stat-title">Thông số chi tiết theo từng địa phương</div>
                                 </div>
@@ -85,7 +86,10 @@ use Illuminate\Support\Facades\DB;
                                                     <select name="province" id="provinces-id" class="form-control">
                                                         <option value="">-- Chọn Tỉnh / Thành phố</option>
                                                         @foreach($provinces as $province)
-                                                            <option value="{{$province->id}}">{{$province->province_name}}</option>
+                                                            <option value="{{$province->id}}"
+                                                                    {{$province->id == request()->get('province') ? 'selected' : ''}}>
+                                                                {{$province->province_name}}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -93,13 +97,31 @@ use Illuminate\Support\Facades\DB;
                                             <div class="col-xs-12 col-md-2">
                                                 <div class="form-group">
                                                     <label for="province">Quận / Huyện</label>
-                                                    <select name="district" id="district-id" class="form-control"></select>
+                                                    <select name="district" id="district-id" class="form-control">
+                                                        @forelse($districts as $district)
+                                                            <option value="{{$district->id}}"
+                                                                    {{$district->id == request()->get('district') ? 'selected' : ''}}>
+                                                                {{$district->district_name}}
+                                                            </option>
+                                                        @empty
+                                                            <option value="">-- Chọn Quận / Huyện ---</option>
+                                                        @endforelse
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-md-2">
                                                 <div class="form-group">
                                                     <label for="province">Phường / Xã</label>
-                                                    <select name="ward" id="ward-id" class="form-control"></select>
+                                                    <select name="ward" id="ward-id" class="form-control">
+                                                        @forelse($wards as $ward)
+                                                            <option value="{{$ward->id}}"
+                                                                    {{$ward->id == request()->get('ward') ? 'selected' : ''}}>
+                                                                {{$ward->ward_name}}
+                                                            </option>
+                                                        @empty
+                                                            <option value="">-- Chọn Phường / Xã ---</option>
+                                                        @endforelse
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-md-2">
@@ -108,7 +130,9 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                     </form>
                                 </div>
+                                @endif
 
+                                @if ($rangeAge != false)
                                 <div class="result-wrapper">
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
@@ -121,7 +145,7 @@ use Illuminate\Support\Facades\DB;
                                         </div>
 
                                         <div class="col-xs-12 col-md-6">
-                                            <div class="chart-sex">
+                                            <div class="chart-sex {{auth('nqadmin')->user()->hard_role <= 3 ? 'chart-sex-no-padding' : ''}}">
                                                 <canvas id="chart-sex"></canvas>
                                                 <div class="chart-label text-center" style="margin-top: 15px">
                                                     <p><b>Giới tính</b></p>
@@ -129,7 +153,94 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="list-company">
+                                                @if (auth('nqadmin')->user()->hard_role > 3)
+                                                <p><b>Các doanh nghiệp trong địa phương</b></p>
+                                                @endif
+                                                <div class="list-company-table {{auth('nqadmin')->user()->hard_role <= 3 ? 'list-company-table-single' : ''}}">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover table-bordered table-striped">
+                                                            <thead>
+                                                            <tr>
+                                                                <th width="50">STT</th>
+                                                                <th>Tên doanh nghiệp</th>
+                                                                <th width="100">MST</th>
+                                                                <th class="text-center">Tổng số lao động</th>
+                                                                <th>Lao động đã đào tạo (%)</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @forelse($companies as $cpn)
+                                                                <tr>
+                                                                    <td>{{$loop->iteration}}</td>
+                                                                    <td>{{$cpn->name}}</td>
+                                                                    <td>{{$cpn->mst}}</td>
+                                                                    <td class="text-center">{{$cpn->get_users_count}}</td>
+                                                                    <td class="text-center">
+                                                                        @if ($cpn->get_certificate_count > $cpn->get_users_count)
+                                                                            100%
+                                                                        @elseif ($cpn->get_users_count == 0)
+                                                                            0%
+                                                                        @else
+                                                                            {{round($cpn->get_certificate_count/$cpn->get_users_count, 1)*100}} %
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @empty
+                                                                <tr>
+                                                                    <td colspan="5">Không có dữ liệu</td>
+                                                                </tr>
+                                                            @endforelse
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @if ($unlearnUser != false)
+                                        <div class="col-xs-12">
+                                            <p><b>Danh sách lao động chưa hoàn thành chứng chỉ</b></p>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th width="100">STT</th>
+                                                        <th>Họ và tên</th>
+                                                        <th>Số CMND/CCCD</th>
+                                                        <th>Tuổi</th>
+                                                        <th>Số điện thoại</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @php
+                                                        $i = $unlearnUser->perPage() * ($unlearnUser->currentPage() - 1) + 1
+                                                    @endphp
+                                                    @foreach($unlearnUser as $e)
+                                                        <tr>
+                                                            <td>{{$i++}}</td>
+                                                            <td>{{$e->first_name}} {{$e->last_name}}</td>
+                                                            <td>{{$e->citizen_identification}}</td>
+                                                            <td>{{$e->old}}</td>
+                                                            <td>{{$e->phone}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="vj-paging">
+                                                {{ $unlearnUser->appends(request()->input())->render('vendor.pagination.default') }}
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <!--box-my-course-->
@@ -190,5 +301,7 @@ use Illuminate\Support\Facades\DB;
     </script>
 @endpush
 
-@include('nqadmin-users::frontend.partials.stats.chart-age')
-@include('nqadmin-users::frontend.partials.stats.chart-sex')
+@if ($rangeAge != false)
+    @include('nqadmin-users::frontend.partials.stats.chart-age')
+    @include('nqadmin-users::frontend.partials.stats.chart-sex')
+@endif

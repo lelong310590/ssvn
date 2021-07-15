@@ -172,6 +172,10 @@ class ClassLevelController extends BaseController
 		return changeStatus($id, $this->repository);
 	}
 
+    /**
+     * @param ImportEmployerRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
 	public function importEmployer(
 	    ImportEmployerRequest $request
     )
