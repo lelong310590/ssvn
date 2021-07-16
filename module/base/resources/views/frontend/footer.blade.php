@@ -48,7 +48,7 @@ $classes = ClassLevel::with('subject')->get();
                         <ul>
 {{--                            <li><a href="/danh-sach-khoa-hoc">Danh sách Khóa đào tạo</a></li>--}}
                             <li><a href="{{route('front::post.get', 'cau-hoi-thuong-gap')}}">Câu hỏi thường gặp</a></li>
-                            <li><a href="{{route('front::post.get', 'bai-viet')}}">Thông tin hữu ích</a></li>
+                            <li><a href="{{route('front::post.get', 'thong-tin-huu-ich')}}">Thông tin hữu ích</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
