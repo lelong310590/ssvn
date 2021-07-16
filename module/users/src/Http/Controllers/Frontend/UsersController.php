@@ -921,13 +921,16 @@ class UsersController extends BaseController
 
         if ($hardRole == 2) {
             $employers = $usersRepository->scopeQuery(function ($q) use ($company, $master) {
-                return $q->where('classlevel', $company)->where('manager', $master->id)->where('status', 'active')->where('hard_role', '1');
+                return $q->where('classlevel', $company)
+                    ->where('manager', $master->id)
+                    ->where('status', 'active')
+                    ->where('hard_role', '1');
             })->orderBy('first_name', 'asc')->paginate(20);
         } else {
             $employers = $usersRepository->scopeQuery(function ($q) use ($company) {
                 return $q->where('classlevel', $company)->where('status', 'active')
-                    ->where('hard_role', '<', '2');
-            })->orderBy('first_name', 'asc')->paginate(20);
+                    ->where('hard_role', '<=', '3');
+            })->orderBy('hard_role', 'desc')->paginate(20);
         }
 
         return view('nqadmin-users::frontend.employers', compact(

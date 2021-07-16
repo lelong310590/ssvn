@@ -54,7 +54,12 @@ use Illuminate\Support\Facades\DB;
                                     @foreach($employers as $e)
                                         <tr>
                                             <td>{{$i++}}</td>
-                                            <td>{{$e->first_name}} {{$e->last_name}}</td>
+                                            <td>
+                                                {{$e->first_name}} {{$e->last_name}}
+                                                @if ($e->hard_role == 2)
+                                                    <span class="label label-success">Quản lý</span>
+                                                @endif
+                                            </td>
                                             <td>{{$e->citizen_identification}}</td>
                                             <td>{{$e->old}}</td>
                                             <td>{{$e->phone}}</td>
