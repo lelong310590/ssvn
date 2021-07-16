@@ -93,7 +93,7 @@
                                             @elseif ($d->hard_role == 2)
                                                 <span class="status info">Quản lý</span>
                                             @elseif ($d->hard_role == 3)
-                                                <span class="status default">Chủ doanh nghiệp</span>
+                                                <span class="status primary">Chủ doanh nghiệp</span>
                                             @elseif ($d->hard_role == 4)
                                                 <span class="status warning">Quản lý cấp sở</span>
                                             @elseif ($d->hard_role == 5)
