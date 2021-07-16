@@ -169,7 +169,8 @@ use Illuminate\Support\Facades\DB;
                                                                 <th>Tên doanh nghiệp</th>
                                                                 <th width="100">MST</th>
                                                                 <th class="text-center">Tổng số lao động</th>
-                                                                <th>Lao động đã đào tạo (%)</th>
+                                                                <th>Lao động đã đào tạo</th>
+                                                                <th>Tỷ lệ (%)</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -179,6 +180,7 @@ use Illuminate\Support\Facades\DB;
                                                                     <td>{{$cpn->name}}</td>
                                                                     <td>{{$cpn->mst}}</td>
                                                                     <td class="text-center">{{$cpn->get_users_count}}</td>
+                                                                    <td class="text-center">{{$cpn->get_certificate_count}}</td>
                                                                     <td class="text-center">
                                                                         @if ($cpn->get_certificate_count > $cpn->get_users_count)
                                                                             100%
