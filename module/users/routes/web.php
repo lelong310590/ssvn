@@ -46,6 +46,15 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRou
 
         $router->post('disable', 'Google2FAController@disableTwoFactorPost')
             ->name('nqadmin::2fa.disable.post');
+
+        $router->get('list-employer', 'UsersController@getEmployer')
+            ->name('nqadmin::employer.index.get');
+
+        $router->get('transfer/{id}', 'UsersController@getTransfer')
+            ->name('nqadmin::employer.transfer.get');
+
+        $router->post('transfer/{id}', 'UsersController@postTransfer')
+            ->name('nqadmin::employer.transfer.post');
     });
 });
 

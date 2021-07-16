@@ -35,7 +35,7 @@ class UserEditRequest extends FormRequest
             'email' => 'email',
             'phone' => ['required', 'regex:/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/'],
             'last_name' => 'required',
-            'citizen_identification' => 'required|min:10|max:12|unique:users,citizen_identification,'. $this->id,
+            'citizen_identification' => 'required|min:9|max:12|unique:users,citizen_identification,'. $this->id,
             'dob' => 'required',
 		];
 	}

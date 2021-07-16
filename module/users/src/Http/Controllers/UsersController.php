@@ -130,7 +130,10 @@ class UsersController extends BaseController
 	/**
 	 * @param \Users\Http\Requests\UserEditRequest $request
 	 */
-	public function postEdit($id, UserEditRequest $request)
+	public function postEdit(
+	    $id,
+        UserEditRequest $request
+    )
 	{
 		try {
 			if ($request->get('password') == null) {
@@ -184,6 +187,11 @@ class UsersController extends BaseController
         return $autoplay;
     }
 
+    /**
+     * @param Request $request
+     * @param UsersMetaRepository $usersMetaRepository
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
     public function setAutoplay(Request $request, UsersMetaRepository $usersMetaRepository)
     {
         $data = $request->all();
@@ -196,5 +204,61 @@ class UsersController extends BaseController
         $usersMetaRepository->update([
             'meta_value' => $autoPlay
         ], $metaUser->id);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function getEmployer(
+        Request $request
+    )
+    {
+        if($request->get('keyword')){
+            $keyword = $request->get('keyword');
+            $employers = $this->users->with('getClassLevel')->scopeQuery(function($e) use($keyword){
+                return $e->where('phone', 'LIKE', '%'.$keyword.'%')
+                    ->where('hard_role', '<', 3)
+                    ->orWhere('first_name', 'LIKE', '%'.$keyword.'%')
+                    ->orWhere('citizen_identification', 'LIKE', '%'.$keyword.'%');
+            })->orderBy('created_at', 'desc')->paginate(25);
+        }else {
+            $employers = $this->users
+                ->with('roles')
+                ->with('getClassLevel')
+                ->where('hard_role', '<', 3)
+                ->orderBy('created_at', 'desc')
+                ->paginate(25);
+
+        }
+        return view('nqadmin-users::backend.components.employer', compact('employers'));
+    }
+
+    public function getTransfer(
+        $id,
+        RoleRepository $roleRepository,
+        ClassLevelRepository $classLevelRepository
+    )
+    {
+        $classLevel = $classLevelRepository->findWhere([
+            'status' => 'active'
+        ]);
+        $user = $this->users->with('getClassLevel')->find($id);
+        return view('nqadmin-users::backend.components.transfer', [
+            'data' => $user,
+            'classLevel' => $classLevel
+        ]);
+    }
+
+    public function postTransfer(
+        $id,
+        Request $request
+    )
+    {
+        $this->users->update([
+            'classlevel' => $request->get('classlevel')
+        ], $id);
+
+        return redirect()->back()->with(FlashMessage::returnMessage('edit'));
     }
 }

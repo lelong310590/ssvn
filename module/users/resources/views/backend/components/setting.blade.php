@@ -40,6 +40,21 @@
 			</div>
 
 			<div class="col-md-8 col-lg-8 col-xl-4">
+				<a class="activity-block danger" href="{{route('nqadmin::employer.index.get')}}">
+					<div class="media">
+						<div class="media-body">
+							<h5>Điều chuyển lao động</h5>
+						</div>
+					</div>
+					<br>
+					<div class="media">
+						<div class="media-body"><span class="progress-heading">Chuyển công tác, báo nghỉ </span></div>
+					</div>
+					<i class="bg-icon text-center fa fa-exchange"></i>
+				</a>
+			</div>
+
+			<div class="col-md-8 col-lg-8 col-xl-4">
 				<a class="activity-block warning" href="{{route('nqadmin::classlevel.index.get')}}">
 					<div class="media">
 						<div class="media-body">

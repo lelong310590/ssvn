@@ -65,7 +65,8 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
                         'classlevel' => $this->classlevel,
                         'hard_role' => 1,
                         'status' => 'active',
-                        'manager' => $this->manager
+                        'manager' => $this->manager,
+                        'created_at' => Carbon::now()
                     ]);
                 }
             }

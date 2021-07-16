@@ -3851,6 +3851,14 @@ footer .list-unstyled li {
 
 @media screen and (max-width: 768px) {
 
+	.chart-sex {
+		padding: 0 30px;
+	}
+
+	.chart-sex.chart-sex-no-padding {
+		padding: 0 30px;
+	}
+
 	#previewPromo .modal-dialog {
 		width: 100%!important;
 		margin: 0!important;

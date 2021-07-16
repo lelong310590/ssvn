@@ -189,7 +189,6 @@ class ClassLevelController extends BaseController
                 new UsersImport($classlevel, $manager),
                 $request->file('excel_file')
             );
-
             return redirect()->back()->with(FlashMessage::returnMessage('import-success'));
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Có lỗi xảy ra khi import dữ liệu');
