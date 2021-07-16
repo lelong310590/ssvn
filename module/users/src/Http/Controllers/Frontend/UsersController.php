@@ -912,7 +912,8 @@ class UsersController extends BaseController
             })->orderBy('first_name', 'asc')->paginate(20);
         } else {
             $employers = $usersRepository->scopeQuery(function ($q) use ($company) {
-                return $q->where('classlevel', $company)->where('status', 'active')->where('hard_role', '1');
+                return $q->where('classlevel', $company)->where('status', 'active')
+                    ->where('hard_role', '<', '2');
             })->orderBy('first_name', 'asc')->paginate(20);
         }
 
