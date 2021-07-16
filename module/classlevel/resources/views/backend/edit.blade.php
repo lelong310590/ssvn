@@ -43,6 +43,8 @@
                 @endforeach
             @endif
 
+            {!! \Base\Supports\FlashMessage::renderMessage('import-success') !!}
+
             <div class="card">
                 <div class="card-header">
                     Nhập dữ liệu nhân sự

@@ -190,9 +190,7 @@ class ClassLevelController extends BaseController
                 $request->file('excel_file')
             );
 
-            return redirect()->back()->with([
-                'success' => 'Nhập dữ liệu thành công'
-            ]);
+            return redirect()->back()->with(FlashMessage::returnMessage('import-success'));
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Có lỗi xảy ra khi import dữ liệu');
         }

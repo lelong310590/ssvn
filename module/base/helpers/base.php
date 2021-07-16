@@ -56,6 +56,9 @@ if (!function_exists('convert_flash_message')) {
             case 'success_create_class_level_error_user':
                 $m = config('messages.success_create_class_level_error_user');
                 break;
+            case 'import-success':
+                $m = config('import-success');
+                break;
             default:
                 $m = config('messages.success_create');
         }

@@ -62,7 +62,7 @@ class UsersImport implements ToCollection, WithHeadingRow, WithChunkReading
                         'sex' => $sex,
                         'dob' => Carbon::parse($value[5]),
                         'email' => $value[6],
-                        'classlevel' => $this->classLevel,
+                        'classlevel' => $this->classlevel,
                         'hard_role' => 1,
                         'status' => 'active',
                         'manager' => $this->manager
