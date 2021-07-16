@@ -117,7 +117,8 @@ class ClassLevelController extends BaseController
         $owner = $usersRepository->scopeQuery(function ($q) use ($id) {
             return $q->where('status', 'active')
                 ->where('classlevel', $id)
-                ->where('hard_role',  2);
+                ->where('hard_role',  2)
+                ->orWhere('hard_role', 3);
         })->get();
 
 		return view('nqadmin-classlevel::backend.edit', [
