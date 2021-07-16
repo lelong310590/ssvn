@@ -694,6 +694,7 @@ class UsersController extends BaseController
             ]);
         }
 
+        $userCompany = null;
         if (auth('nqadmin')->user()->hard_role <= 3) {
             $userCompany = auth('nqadmin')->user()->classlevel;
             $currentCompany = $classLevelRepository->find($userCompany);
@@ -702,8 +703,8 @@ class UsersController extends BaseController
             $ward = $currentCompany->ward;
         }
 
-        $rangeAge = $province != null ? $this->getRangeAge($province, $district, $ward) : false;
-        $sexGroup = $province  != null ? $this->getRangeSex($province, $district, $ward) : false;
+        $rangeAge = $province != null ? $this->getRangeAge($province, $district, $ward, $userCompany) : false;
+        $sexGroup = $province  != null ? $this->getRangeSex($province, $district, $ward, $userCompany) : false;
 
         $unlearnUser = false;
 
@@ -764,7 +765,7 @@ class UsersController extends BaseController
     /**
      * @return array
      */
-    public function getRangeSex($province, $district, $ward)
+    public function getRangeSex($province, $district, $ward, $classlevel = null)
     {
         $filter = [
             'Nam' => 'Nam',
@@ -776,19 +777,25 @@ class UsersController extends BaseController
 
         if ($province != null) {
             $userModel = Users::with('getClassLevel')
-                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward) {
+                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward, $classlevel) {
                     if ($district != null) {
                         if ($ward != null) {
-                            return $q->where('classlevel.province', $province)
+                            $query =  $q->where('classlevel.province', $province)
                                 ->where('classlevel.district', $district)
                                 ->where('classlevel.ward', $ward);
                         } else {
-                            return $q->where('classlevel.province', $province)
+                            $query = $q->where('classlevel.province', $province)
                                 ->where('classlevel.district', $district);
                         }
                     } else {
-                        return $q->where('classlevel.province', $province);
+                        $query = $q->where('classlevel.province', $province);
                     }
+
+                    if ($classlevel != null) {
+                        $query->where('classlevel.id', $classlevel);
+                    }
+
+                    return $query;
                 });
         }
 
@@ -827,7 +834,7 @@ class UsersController extends BaseController
     /**
      * @return array
      */
-    public function getRangeAge($province, $district, $ward)
+    public function getRangeAge($province, $district, $ward, $classlevel = null)
     {
         $ranges = [
             '18-24' => 24,
@@ -842,19 +849,25 @@ class UsersController extends BaseController
 
         if ($province != null) {
             $userModel = Users::with('getClassLevel')
-                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward) {
+                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward, $classlevel) {
                 if ($district != null) {
                     if ($ward != null) {
-                        return $q->where('classlevel.province', $province)
+                        $query = $q->where('classlevel.province', $province)
                                     ->where('classlevel.district', $district)
                                     ->where('classlevel.ward', $ward);
                     } else {
-                        return $q->where('classlevel.province', $province)
+                        $query = $q->where('classlevel.province', $province)
                                     ->where('classlevel.district', $district);
                     }
                 } else {
-                    return $q->where('classlevel.province', $province);
+                    $query = $q->where('classlevel.province', $province);
                 }
+
+                if ($classlevel != null) {
+                    $query->where('classlevel.id', $classlevel);
+                }
+
+                return $query;
             });
         }
 
