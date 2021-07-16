@@ -89,7 +89,7 @@
                                         <td>
                                             <p>{{ $d->first_name }} {{$d->last_name}}</p>
                                             @if ($d->hard_role == 1)
-                                                <span class="status success">Người dùng</span>
+                                                <span class="status success">Người lao động</span>
                                             @elseif ($d->hard_role == 2)
                                                 <span class="status info">Quản lý</span>
                                             @elseif ($d->hard_role == 3)
