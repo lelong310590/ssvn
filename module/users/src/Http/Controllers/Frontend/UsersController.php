@@ -711,7 +711,7 @@ class UsersController extends BaseController
         if ($user->hard_role <= 3) {
             $companyId = $user->classlevel;
             $companies = ClassLevel::withCount(['getUsers' => function($q) {
-                $q->where('users.classlevel', 1);
+                $q->where('users.hard_role', 1);
             }, 'getCertificate'])->where('id', $companyId)->get();
             $query = Users::doesntHave('getCertificate')
                 ->where('classlevel', $companyId)
