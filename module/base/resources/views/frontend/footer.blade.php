@@ -11,25 +11,6 @@ $classes = ClassLevel::with('subject')->get();
                 <a href="{{route('front.home.index.get')}}" class="logo pull-left" style="margin-bottom: 25px">
                     <img src="{{asset('frontend/images/logo-white.png')}}" alt="" width="200px" height="">
                 </a>
-                <div class="social-icons-top">
-                    <ul class="social-icons clearfix">
-                        <li class="facebook pull-left">
-                            <a href="" target="_blank" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-                        <li class="googleplus pull-left">
-                            <a href="" target="_blank" data-placement="bottom" title="anticovid @ Google+">
-                                <i class="fab fa-google-plus-g"></i>
-                            </a>
-                        </li>
-                        <li class="youtube pull-left">
-                            <a href="https://goo.gl/Dsf8AE" target="_blank" title="Kênh Youtube anticovid">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
                 <ul class="bottom">
                     <li>
                         <label class="txt">Phone</label>

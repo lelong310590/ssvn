@@ -16,9 +16,12 @@
             <li><a href="{{ route('front.users.my_course.get') }}" class="{{ strpos(url()->full(), route('front.users.my_course.get')) !== false?'active':'' }}">Khóa đào tạo</a></li>
         @endif
 
+        @if (auth('nqadmin')->user()->hard_role > 1)
         <li><a href="{{ route('fronts.user.stat.get') }}" class="{{ strpos(url()->full(), route('fronts.user.stat.get')) !== false?'active':'' }}">Thống kê</a></li>
 {{--        <li><a href="{{ route('front.users.notification.get') }}" class="{{ strpos(url()->full(), route('front.users.notification.get')) !== false?'active':'' }}">Thông báo</a></li>--}}
-        @if (auth('nqadmin')->user()->hard_role < 3)
+        @endif
+
+        @if (auth('nqadmin')->user()->hard_role < 4)
             <li><a href="{{ route('front.users.certificate.get') }}" class="{{ strpos(url()->full(), route('front.users.certificate.get')) !== false?'active':'' }}">Chứng chỉ</a></li>
         @endif
 
