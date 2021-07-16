@@ -114,11 +114,12 @@ class ClassLevelController extends BaseController
 	{
 		$classLevel = $this->repository->with(['owner', 'edit'])->find($id);
         $provinces = $provincesRepository->all();
-        $owner = $usersRepository->findWhere([
-            'status' => 'active',
-            'hard_role' => 3,
-            'classlevel' => $id
-        ]);
+        $owner = $usersRepository->scopeQuery(function ($q) use ($id) {
+            return $q->where('status', 'active')
+                ->where('classlevel', $id)
+                ->where('hard_role', 2)
+                ->orWhere('hard_role', 3);
+        })->get();
 
 		return view('nqadmin-classlevel::backend.edit', [
 			'data' => $classLevel,
