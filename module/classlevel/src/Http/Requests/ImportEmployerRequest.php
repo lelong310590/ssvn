@@ -22,7 +22,7 @@ class ImportEmployerRequest extends FormRequest
     {
         $rule = [
             'manager' => 'required',
-            'excel_file' => 'required|mimes:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            'excel_file' => 'required|mimes:xlsx'
         ];
 
         return $rule;
