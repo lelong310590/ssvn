@@ -199,6 +199,7 @@ use Illuminate\Support\Facades\DB;
 
                                                             </tbody>
                                                         </table>
+                                                        <small><span>*</span> Thống kê ko bao gồm chủ doanh nghiệp và cấp quản lý</small>
                                                     </div>
                                                 </div>
                                             </div>

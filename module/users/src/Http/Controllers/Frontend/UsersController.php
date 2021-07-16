@@ -695,8 +695,8 @@ class UsersController extends BaseController
         }
 
         $userCompany = null;
-        if (auth('nqadmin')->user()->hard_role <= 3) {
-            $userCompany = auth('nqadmin')->user()->classlevel;
+        if ($user->hard_role <= 3) {
+            $userCompany = $user->classlevel;
             $currentCompany = $classLevelRepository->find($userCompany);
             $province = $currentCompany->province;
             $district = $currentCompany->district;
@@ -708,10 +708,20 @@ class UsersController extends BaseController
 
         $unlearnUser = false;
 
-        if (auth('nqadmin')->user()->hard_role <= 3) {
-            $companyId = auth('nqadmin')->user()->classlevel;
-            $companies = ClassLevel::withCount(['getUsers', 'getCertificate'])->where('id', $companyId)->get();
-            $unlearnUser = Users::doesntHave('getCertificate')->where('classlevel', $companyId)->paginate(25);
+        if ($user->hard_role <= 3) {
+            $companyId = $user->classlevel;
+            $companies = ClassLevel::withCount(['getUsers' => function($q) {
+                $q->where('users.classlevel', 1);
+            }, 'getCertificate'])->where('id', $companyId)->get();
+            $query = Users::doesntHave('getCertificate')
+                ->where('classlevel', $companyId)
+                ->where('hard_role', 1);
+
+            if ($user->hard_role == 2) {
+                $query->where('manager', $user->id);
+            }
+
+            $unlearnUser = $query->paginate(25);
         } else {
             $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
         }
