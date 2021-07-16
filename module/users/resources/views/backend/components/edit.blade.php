@@ -217,8 +217,8 @@
 									<option value="2" {{$data->hard_role == '2' ? 'selected' : ''}}>Quản lý</option>
 									<option value="3" {{$data->hard_role == '3' ? 'selected' : ''}}>Chủ doanh nghiệp</option>
 									<option value="4" {{$data->hard_role == '4' ? 'selected' : ''}}>Quản lý cấp sở</option>
-									<option value="4" {{$data->hard_role == '5' ? 'selected' : ''}}>Quản lý cấp bộ</option>
-									<option value="4" {{$data->hard_role == '99' ? 'selected' : ''}}>Vận hành viên</option>
+									<option value="5" {{$data->hard_role == '5' ? 'selected' : ''}}>Quản lý cấp bộ</option>
+									<option value="99" {{$data->hard_role == '99' ? 'selected' : ''}}>Vận hành viên</option>
 								</select>
 							</div>
 

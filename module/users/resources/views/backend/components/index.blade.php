@@ -98,8 +98,8 @@
                                                 <span class="status warning">Quản lý cấp sở</span>
                                             @elseif ($d->hard_role == 5)
                                                 <span class="status danger">Quản lý cấp bộ</span>
-                                            @else
-                                                <span class="status success">Vận hành</span>
+                                            @elseif ($d->hard_role == 99)
+                                                <span class="status danger">Vận hành</span>
                                             @endif
                                         </td>
                                         <td>{{ $d->citizen_identification }}</td>
