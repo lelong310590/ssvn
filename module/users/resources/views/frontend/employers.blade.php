@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\DB;
                         </div>
                         <div class="box-my-course box-course">
                             <div class="count-employer mt-4 mb-4">
-                                <p>Số nhân sự dưới quyền quản lý: <b>{{$employers->count()}}</b></p>
+                                <p>Số nhân sự dưới quyền quản lý: <b>{{$employers->total()}}</b></p>
                             </div>
 
                             <!--top-my-course-->
