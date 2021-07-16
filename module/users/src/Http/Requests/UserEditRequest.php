@@ -57,7 +57,7 @@ class UserEditRequest extends FormRequest
             'citizen_identification.min' => 'Số CMND/CCCD không hợp lệ',
             'citizen_identification.max' => 'Số CMND/CCCD không hợp lệ',
             'citizen_identification.unique' => 'Số CMND/CCCD này đã tồn tại',
-            'dob.requỉed' => 'Ngày sinh không được bỏ trống'
+            'dob.required' => 'Ngày sinh không được bỏ trống'
 		];
 	}
 }

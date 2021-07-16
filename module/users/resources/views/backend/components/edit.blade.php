@@ -150,7 +150,10 @@
 								<div class="col-8">
 									<div class="form-group">
 										<label for="example-date-input" class="form-control-label">Ngày/Tháng/Năm sinh <span class="text-danger">*</span></label>
-										<input class="form-control" type="date" value="{{$data->dob != null ? $data->dob->format('Y-m-d') : ''}}" name="dob">
+										<input class="form-control"
+											   type="date"
+											   value="{{$data->dob != null ? $data->dob->format('Y-m-d') : ''}}"
+											   name="dob">
 									</div>
 								</div>
 								<div class="col-8">
