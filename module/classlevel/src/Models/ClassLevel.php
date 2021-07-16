@@ -11,6 +11,7 @@ namespace ClassLevel\Models;
 use Base\Models\Districts;
 use Base\Models\Provinces;
 use Base\Models\Wards;
+use Cart\Models\OrderDetail;
 use Course\Models\Certificate;
 use Course\Models\Course;
 use Illuminate\Database\Eloquent\Model;
@@ -82,6 +83,17 @@ class ClassLevel extends Model
     public function getUsers()
     {
         return $this->hasMany(Users::class, 'classlevel', 'id');
+    }
+
+    public function getLearnedUser()
+    {
+        return $this->hasManyThrough(
+            OrderDetail::class,
+            Users::class,
+            'classlevel',
+            'customer',
+            'id'
+        );
     }
 
     public function getCertificate()

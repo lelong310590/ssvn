@@ -250,6 +250,12 @@ class UsersController extends BaseController
         ]);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
     public function postTransfer(
         $id,
         Request $request

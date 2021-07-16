@@ -32,6 +32,15 @@
     @php
         $hardRole = Auth::user()->hard_role
     @endphp
+    @if (intval($hardRole) == 99)
+        <div class="sign-out clearfix">
+            <a href="{{ route('nqadmin::dashboard.index.get') }}">
+                <i class="fas fa-tachometer-alt pull-left"></i>
+                <p class="overflow">Bảng điều khiển</p>
+            </a>
+        </div>
+    @endif
+
     @if (intval($hardRole) > 1)
         <div class="sign-out clearfix">
             <a href="{{ route('fronts.user.stat.get') }}">

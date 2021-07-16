@@ -130,7 +130,7 @@
 									<div class="col-8">
 										<div class="form-group">
 											<label for="example-date-input" class="form-control-label">Ngày/Tháng/Năm sinh <span class="text-danger">*</span></label>
-											<input class="form-control" type="date" value="{{old('dob')}}" name="dob" id="example-date-input">
+											<input class="form-control" type="date" value="{{old('dob')}}" name="dob" id="example-date-input" max="{{date('Y-m-d')}}">
 										</div>
 									</div>
 									<div class="col-8">

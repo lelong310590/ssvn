@@ -29,6 +29,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
+use Users\Export\ExportLocal;
 use Users\Import\UsersImport;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
@@ -667,7 +668,7 @@ class UsersController extends BaseController
 
         $courses = $courseRepository->findWhere([
             'status' => 'active'
-        ])->count();
+        ]);
 
         $employers = $usersRepository->findWhere([
             'status' => 'active',
@@ -712,6 +713,7 @@ class UsersController extends BaseController
             $companyId = $user->classlevel;
             $companies = ClassLevel::withCount(['getUsers', 'getCertificate'])
                 ->where('id', $companyId)->get();
+
             $query = Users::doesntHave('getCertificate')
                 ->where('classlevel', $companyId);
 
@@ -723,6 +725,7 @@ class UsersController extends BaseController
         } else {
             $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
         }
+
 
         return view('nqadmin-users::frontend.stat', compact(
             'company',
@@ -746,7 +749,7 @@ class UsersController extends BaseController
      * @param $ward
      * @return mixed
      */
-    public function  getCompany($province, $district, $ward)
+    public function getCompany($province, $district, $ward)
     {
         $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate']);
         if ($province != null) {
@@ -767,7 +770,18 @@ class UsersController extends BaseController
             }
         }
 
-        return $companyModel->get();
+        $result = $companyModel
+                ->with(['getLearnedUser' => function($q) {
+                    $q->selectRaw('vjc_order_details.customer, vjc_order_details.course_id,  COUNT(*) AS total_learned_employer')
+                        ->groupBy('order_details.course_id');
+                }])
+                ->with(['getCertificate' => function($q) {
+                    $q->selectRaw('vjc_certificate.user_id, vjc_certificate.course_id,  COUNT(*) AS total_completed_employer')
+                        ->groupBy('certificate.course_id');
+                }])
+                ->get();
+
+        return $result;
     }
 
     /**
@@ -968,5 +982,29 @@ class UsersController extends BaseController
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Có lỗi xảy ra khi import dữ liệu');
         }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function exportExcel(
+        Request $request
+    )
+    {
+        $user = auth('nqadmin')->user();
+        $company = app(ClassLevelRepository::class)->find($user->classlevel);
+
+        if ($user->hard_role == 2) {
+            $excelObj = new ExportLocal($company, $user->id);
+        } elseif ($user->hard_role == 3) {
+            $excelObj = new ExportLocal($company);
+        } else {
+            $province = $request->get('province');
+            $district = $request->get('district');
+            $ward = $request->get('ward');
+            $excelObj = new ExportLocal($company, false, $province, $district, $ward);
+        }
+
+        return Excel::download($excelObj, 'data.xlsx');
     }
 }

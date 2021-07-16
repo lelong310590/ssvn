@@ -55,6 +55,7 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRou
 
         $router->post('transfer/{id}', 'UsersController@postTransfer')
             ->name('nqadmin::employer.transfer.post');
+
     });
 });
 
@@ -68,6 +69,9 @@ Route::group(['namespace' => 'Frontend'], function (Router $router) {
 
         $router->get('thong-ke', 'UsersController@getStat')
             ->name('fronts.user.stat.get')->middleware('auth');
+
+        $router->get('export-excel', 'UsersController@exportExcel')
+            ->name('front.users.export.get')->middleware('auth');
 
         // POST Lấy thông tin quân huyện, khi thay đổi thành phố Ajax
         $router->post('province', 'UsersController@postProvince')

@@ -153,7 +153,9 @@
 										<input class="form-control"
 											   type="date"
 											   value="{{$data->dob != null ? $data->dob->format('Y-m-d') : ''}}"
-											   name="dob">
+											   name="dob"
+											   max="{{date('Y-m-d')}}"
+										>
 									</div>
 								</div>
 								<div class="col-8">

@@ -34,6 +34,12 @@ use Illuminate\Support\Facades\DB;
                         </div>
                         <div class="box-my-course box-course">
                             <!--top-my-course-->
+                            @if (Auth::guard('nqadmin')->user()->hard_role <= 3)
+                            <a href="{{route('front.users.export.get')}}" class="btn btn-success" style="color: #fff">
+                                <i class="far fa-file-excel"></i>
+                                 Xuất báo cáo
+                            </a>
+                            @endif
 
                             @if (Auth::guard('nqadmin')->user()->hard_role > 3)
                             <div class="content-my-course">
@@ -64,7 +70,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-xs-12 col-md-3">
                                             <div class="stats-item">
                                                 <i class="fab fa-leanpub"></i>
-                                                <p> Các khóa đào tạo: <b>{{$courses}}</b></p>
+                                                <p> Các khóa đào tạo: <b>{{$courses->count()}}</b></p>
                                             </div>
                                         </div>
                                     </div>
@@ -134,6 +140,7 @@ use Illuminate\Support\Facades\DB;
 
                                 @if ($rangeAge != false)
                                 <div class="result-wrapper">
+
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
                                             <div class="chart-age">
@@ -154,6 +161,21 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                     </div>
 
+                                    @if (Auth::guard('nqadmin')->user()->hard_role > 3)
+                                        <a
+                                            href="{{route('front.users.export.get', [
+                                                'province' => request()->get('province'),
+                                                'district' => request()->get('district'),
+                                                'ward' => request()->get('ward')
+                                            ])}}"
+                                            class="btn btn-success"
+                                            style="color: #fff; margin-bottom: 20px"
+                                        >
+                                            <i class="far fa-file-excel"></i>
+                                            Xuất báo cáo
+                                        </a>
+                                    @endif
+
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="list-company">
@@ -164,39 +186,61 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="table-responsive">
                                                         <table class="table table-hover table-bordered table-striped">
                                                             <thead>
-                                                            <tr>
-                                                                <th width="50">STT</th>
-                                                                <th>Tên doanh nghiệp</th>
-                                                                <th width="100">MST</th>
-                                                                <th class="text-center">Tổng số lao động</th>
-                                                                <th>Lao động đã đào tạo</th>
-                                                                <th>Tỷ lệ (%)</th>
-                                                            </tr>
+                                                                <tr>
+                                                                    <th width="50" rowspan="3">STT</th>
+                                                                    <th rowspan="3" width="250">Tên doanh nghiệp</th>
+                                                                    <th width="100" rowspan="3">MST</th>
+                                                                    <th width="100" rowspan="3" class="tex-center">Lao động</th>
+                                                                    <th rowspan="1" colspan="{{$courses->count() * 2}}" class="text-center">
+                                                                        Chứng chỉ
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    @foreach($courses as $c)
+                                                                        <th width="150" rowspan="1" colspan="2" class="text-center">{{$c->name}}</th>
+                                                                    @endforeach
+                                                                </tr>
+                                                                <tr>
+                                                                    @foreach($courses as $c)
+                                                                        <th width="150" rowspan="1" class="text-center">Tỷ lệ tham gia (%)</th>
+                                                                        <th width="150" rowspan="1" class="text-center">Tỷ lệ đạt CC (%)</th>
+                                                                    @endforeach
+                                                                </tr>
                                                             </thead>
                                                             <tbody>
-                                                            @forelse($companies as $cpn)
-                                                                <tr>
-                                                                    <td>{{$loop->iteration}}</td>
-                                                                    <td>{{$cpn->name}}</td>
-                                                                    <td>{{$cpn->mst}}</td>
-                                                                    <td class="text-center">{{$cpn->get_users_count}}</td>
-                                                                    <td class="text-center">{{$cpn->get_certificate_count}}</td>
-                                                                    <td class="text-center">
-                                                                        @if ($cpn->get_certificate_count > $cpn->get_users_count)
-                                                                            100%
-                                                                        @elseif ($cpn->get_users_count == 0)
-                                                                            0%
-                                                                        @else
-                                                                            {{round($cpn->get_certificate_count/$cpn->get_users_count, 4)*100}} %
-                                                                        @endif
-                                                                    </td>
-                                                                </tr>
-                                                            @empty
-                                                                <tr>
-                                                                    <td colspan="5">Không có dữ liệu</td>
-                                                                </tr>
-                                                            @endforelse
-
+                                                                @forelse($companies as $cpn)
+                                                                    @php
+                                                                        $totalEmployers = $cpn->get_users_count;
+                                                                        $learnedEmployers = $cpn->getLearnedUser;
+                                                                        $completedEmployers = $cpn->getCertificate;
+                                                                    @endphp
+                                                                    <tr>
+                                                                        <td>{{$loop->iteration}}</td>
+                                                                        <td>{{$cpn->name}}</td>
+                                                                        <td>{{$cpn->mst}}</td>
+                                                                        <td class="text-center">{{$totalEmployers}} người</td>
+                                                                        @foreach($courses as $c)
+                                                                            <th width="150" rowspan="1" class="text-center">
+                                                                                @foreach($learnedEmployers as $l)
+                                                                                    @if ($l->course_id == $c->id)
+                                                                                        {{round($l->total_learned_employer / $totalEmployers, 4)*100}} %
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </th>
+                                                                            <th width="150" rowspan="1" class="text-center">
+                                                                                @foreach($completedEmployers as $comple)
+                                                                                    @if ($comple->course_id == $c->id)
+                                                                                        {{round($comple->total_completed_employer / $totalEmployers, 4)*100}} %
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </th>
+                                                                        @endforeach
+                                                                    </tr>
+                                                                @empty
+                                                                    <tr>
+                                                                        <td colspan="{{4 + $courses->count() * 2}}">Không có dữ liệu</td>
+                                                                    </tr>
+                                                                @endforelse
                                                             </tbody>
                                                         </table>
 {{--                                                        <small style="color: red; margin: 0 0 15px"><span>*</span> Thống kê ko bao gồm chủ doanh nghiệp và cấp quản lý</small>--}}

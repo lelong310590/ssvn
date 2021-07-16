@@ -21,7 +21,6 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRou
     });
 });
 
-
 //Frontend
 Route::group(['namespace' => 'Frontend'], function (Router $router) {
     $router->get('/', 'HomeController@getIndex')
