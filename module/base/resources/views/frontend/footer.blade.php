@@ -11,7 +11,7 @@ $classes = ClassLevel::with('subject')->get();
                 <a href="{{route('front.home.index.get')}}" class="logo pull-left" style="margin-bottom: 25px">
                     <img src="{{asset('frontend/images/logo-white.png')}}" alt="" width="200px" height="">
                 </a>
-                <ul class="bottom">
+                <ul class="bottom pull-left">
                     <li>
                         <label class="txt">Phone</label>
                         <span class="node">078.223.6969</span>
