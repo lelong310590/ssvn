@@ -57,7 +57,11 @@ use Illuminate\Support\Facades\DB;
                                             <td>
                                                 {{$e->first_name}} {{$e->last_name}}
                                                 @if ($e->hard_role == 2)
-                                                    <span class="label label-success">Quản lý</span>
+                                                    <span class="label label-success" style="margin-left: 5px">Quản lý</span>
+                                                @endif
+
+                                                @if ($e->hard_role == 3)
+                                                    <span class="label label-danger" style="margin-left: 5px">Chủ doanh nghiệp</span>
                                                 @endif
                                             </td>
                                             <td>{{$e->citizen_identification}}</td>

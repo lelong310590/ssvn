@@ -185,7 +185,7 @@ use Illuminate\Support\Facades\DB;
                                                                         @elseif ($cpn->get_users_count == 0)
                                                                             0%
                                                                         @else
-                                                                            {{round($cpn->get_certificate_count/$cpn->get_users_count, 1)*100}} %
+                                                                            {{round($cpn->get_certificate_count/$cpn->get_users_count, 4)*100}} %
                                                                         @endif
                                                                     </td>
                                                                 </tr>
