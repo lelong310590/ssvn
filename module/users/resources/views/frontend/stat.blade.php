@@ -199,7 +199,7 @@ use Illuminate\Support\Facades\DB;
 
                                                             </tbody>
                                                         </table>
-                                                        <small style="color: red; margin: 0 0 15px"><span>*</span> Thống kê ko bao gồm chủ doanh nghiệp và cấp quản lý</small>
+{{--                                                        <small style="color: red; margin: 0 0 15px"><span>*</span> Thống kê ko bao gồm chủ doanh nghiệp và cấp quản lý</small>--}}
                                                     </div>
                                                 </div>
                                             </div>
