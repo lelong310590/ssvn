@@ -154,7 +154,6 @@
 											   type="date"
 											   value="{{$data->dob != null ? $data->dob->format('Y-m-d') : ''}}"
 											   name="dob"
-											   max="{{date('Y-m-d')}}"
 										>
 									</div>
 								</div>

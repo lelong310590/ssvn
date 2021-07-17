@@ -241,9 +241,6 @@
                             <div class="clearfix box-btn text-center">
                                 <button type="submit" class="btn btn-default-yellow btn-small">Đăng nhập</button>
                             </div>
-                            <div class="txt-forgot text-center">
-                                <a href="javascript:;" id="switch-forget-password">Quên mật khẩu?</a>
-                            </div>
                             <div class="bottom text-center">
                                 <p>Bạn chưa có tài khoản? Hãy liên hệ với cơ quan chủ quản để đăng ký</p>
                             </div>
