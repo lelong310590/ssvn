@@ -194,7 +194,6 @@ class DashboardController extends BaseController
             'district_id' =>  $districtId
         ]);
 
-
         foreach ($wards as $w) {
             $html .= '<option value="'.$w->id.'">'.$w->ward_name.'</option>';
         }

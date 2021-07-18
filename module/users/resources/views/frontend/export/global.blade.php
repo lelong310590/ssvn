@@ -50,10 +50,10 @@
             <td>{{$cpn->name}}</td>
             <td>{{$cpn->mst}}</td>
             <td style="text-align: center">{{$totalEmployers}} người</td>
-            @foreach($course as $c)
+            @foreach($registerdSubject as $c)
                 <th width="15" rowspan="1" style="text-align: center">
                     @foreach($learnedEmployers as $l)
-                        @if ($l->course_id == $c->id)
+                        @if ($l->subject_id == $c->id)
                             {{round($l->total_learned_employer / $totalEmployers, 4)*100}} %
                         @endif
                     @endforeach
