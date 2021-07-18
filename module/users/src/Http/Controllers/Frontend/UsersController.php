@@ -752,19 +752,15 @@ class UsersController extends BaseController
             $company = app(ClassLevelRepository::class)->with('subject')->find($user->classlevel);
             $registerdSubject = $company->subject()->get();
 
-            $query = Users::where('classlevel', $company->id)
-                ->where('hard_role', 1);
+            $query = Users::where('classlevel', $company->id);
 
-            if ($user->hard_level == 2) {
-                $query = Users::where('classlevel', $company->id)
-                    ->where('hard_role', 1)
-                    ->where('manager', $user->id);
+            if ($user->hard_role == 2) {
+                $query->where('manager', $user->id);
             }
 
             $employers = $query->with('getCertificate')->paginate(30);
 
         } else {
-
             $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
         }
 
