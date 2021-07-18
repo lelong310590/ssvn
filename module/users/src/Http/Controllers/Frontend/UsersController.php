@@ -735,6 +735,8 @@ class UsersController extends BaseController
         $rangeAge = $province != null ? $this->getRangeAge($province, $district, $ward, $userCompany) : false;
         $sexGroup = $province  != null ? $this->getRangeSex($province, $district, $ward, $userCompany) : false;
 
+        $registerdSubject = app(SubjectRepository::class)->all();
+
         if ($user->hard_role <= 3) {
             $companyId = $user->classlevel;
             $companies = ClassLevel::withCount(['getUsers', 'getCertificate'])
@@ -747,7 +749,8 @@ class UsersController extends BaseController
                 $query->where('manager', $user->id);
             }
 
-            $company = app(ClassLevelRepository::class)->find($user->classlevel);
+            $company = app(ClassLevelRepository::class)->with('subject')->find($user->classlevel);
+            $registerdSubject = $company->subject()->get();
 
             $query = Users::where('classlevel', $company->id)
                 ->where('hard_role', 1)
@@ -775,6 +778,7 @@ class UsersController extends BaseController
             'companies',
             'wards',
             'districts',
+            'registerdSubject'
         ));
     }
 
@@ -811,8 +815,8 @@ class UsersController extends BaseController
                         ->groupBy('order_details.course_id');
                 }])
                 ->with(['getCertificate' => function($q) {
-                    $q->selectRaw('vjc_certificate.user_id, vjc_certificate.course_id,  COUNT(*) AS total_completed_employer')
-                        ->groupBy('certificate.course_id');
+                    $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                        ->groupBy('certificate.subject_id');
                 }])
                 ->get();
 

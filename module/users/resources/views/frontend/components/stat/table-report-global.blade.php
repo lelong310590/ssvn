@@ -32,7 +32,7 @@
                     @foreach($courses as $c)
                         <th width="150" class="text-center">
                             @foreach($completedEmployers as $comple)
-                                @if ($comple->course_id == $c->id)
+                                @if ($comple->subject_id == $c->id)
                                     {{round($comple->total_completed_employer / $totalEmployers, 4)*100}} %
                                 @endif
                             @endforeach

@@ -3,7 +3,7 @@
         <table class="table table-hover table-bordered table-striped">
             <thead>
             <tr>
-                <td colspan="{{5 + $courses->count()}}">
+                <td colspan="{{5 + $registerdSubject->count()}}">
                     Danh sách công nhân
                 </td>
             </tr>
@@ -13,11 +13,11 @@
                 <td rowspan="2" width="100">Số CMND/CCCD</td>
                 <td rowspan="2" width="50">Tuổi</td>
                 <td rowspan="2" width="80">Số điện thoại</td>
-                <td rowspan="1" colspan="{{$courses->count()}}" style="text-align: center">Danh sách chứng chỉ</td>
+                <td rowspan="1" colspan="{{$registerdSubject->count()}}" style="text-align: center">Danh sách chứng chỉ</td>
             </tr>
             <tr>
-                @foreach($courses as $c)
-                    <td width="100">{{$c->name}}</td>
+                @foreach($registerdSubject as $rs)
+                    <td class="text-center">{{$rs->name}}</td>
                 @endforeach
             </tr>
             </thead>
@@ -33,13 +33,13 @@
                     <td>{{\Carbon\Carbon::parse($e->dob)->age}}</td>
                     <td>{{$e->phone}}</td>
                     @php
-                        $completedCourse = $e->getCertificate()->select('course_id')->get()->toArray();
+                        $completedCourse = $e->getCertificate()->select('subject_id')->get()->toArray();
                         $array = [];
                         foreach ($completedCourse as $cc) {
-                            $array[] = $cc['course_id'];
+                            $array[] = $cc['subject_id'];
                         }
                     @endphp
-                    @foreach($courses as $c)
+                    @foreach($registerdSubject as $c)
                         @if (in_array($c->id, $array))
                             <td class="text-center">&#10004;</td>
                         @else
