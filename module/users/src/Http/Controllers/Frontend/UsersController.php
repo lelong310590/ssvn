@@ -662,9 +662,9 @@ class UsersController extends BaseController
 
         $company = app(ClassLevelRepository::class)->with(['subject' => function($q) {
             return $q->with(['getCourseLdp' => function($c) {
-                return $c->whereHas(['getCourse' => function($q) {
+                return $c->whereHas('getCourse', function($q) {
                     return $q->where('status', 'active');
-                }])->get();
+                })->get();
             }])->get();
         }])->find($user->classlevel);
 
