@@ -242,4 +242,21 @@ class Users extends Authenticatable
     {
         return $this->hasMany(Certificate::class, 'user_id', 'id');
     }
+
+    public function getEmployer()
+    {
+        return $this->hasMany(Users::class, 'manager', 'id');
+    }
+
+    public function getEmployerCertificate()
+    {
+        return $this->hasManyThrough(
+            Certificate::class,
+            Users::class,
+            'manager',
+            'user_id',
+            'id'
+        );
+    }
+
 }

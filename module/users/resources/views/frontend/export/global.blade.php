@@ -18,60 +18,47 @@
         </td>
     </tr>
     <tr>
-        <th width="5" rowspan="3">STT</th>
-        <th rowspan="3" width="25">Tên doanh nghiệp</th>
-        <th width="15" rowspan="3">MST</th>
-        <th width="15" rowspan="3" class="tex-center">Lao động</th>
-        <th rowspan="1" colspan="{{$course->count() * 2}}" style="text-align: center">
-            Chứng chỉ
+        <th width="5" rowspan="2">STT</th>
+        @if (request()->get('district') == null)
+            <th rowspan="2" width="25">Đơn vị hành chính <br/>Quận / Huyện</th>
+        @else
+            <th rowspan="2" width="25">Đơn vị hành chính <br/>Phường / Xã</th>
+        @endif
+        <th width="15" rowspan="2">Tổng số doanh nghiệp tham gia</th>
+        <th rowspan="1" colspan="{{$registerdSubject->count()}}" style="text-align: center">
+            Số lượng NLĐ đạt chứng chỉ
         </th>
     </tr>
     <tr>
-        @foreach($course as $c)
-            <th width="10" rowspan="1" colspan="2" style="text-align: center">{{$c->name}}</th>
-        @endforeach
-    </tr>
-    <tr>
-        @foreach($course as $c)
-            <th width="10" rowspan="1" style="text-align: center">Tỷ lệ tham gia (%)</th>
-            <th width="10" rowspan="1" style="text-align: center">Tỷ lệ đạt CC (%)</th>
+        @foreach($registerdSubject as $c)
+            <th width="10" rowspan="1" colspan="1" class="text-center">{{$c->name}}</th>
         @endforeach
     </tr>
     </thead>
     <tbody>
-    @forelse($companies as $cpn)
-        @php
-            $totalEmployers = $cpn->get_users_count;
-            $learnedEmployers = $cpn->getLearnedUser;
-            $completedEmployers = $cpn->getCertificate;
-        @endphp
-        <tr>
-            <td>{{$loop->iteration}}</td>
-            <td>{{$cpn->name}}</td>
-            <td>{{$cpn->mst}}</td>
-            <td style="text-align: center">{{$totalEmployers}} người</td>
-            @foreach($registerdSubject as $c)
-                <th width="15" rowspan="1" style="text-align: center">
-                    @foreach($learnedEmployers as $l)
-                        @if ($l->subject_id == $c->id)
-                            {{round($l->total_learned_employer / $totalEmployers, 4)*100}} %
-                        @endif
-                    @endforeach
-                </th>
-                <th width="15" rowspan="1" style="text-align: center">
-                    @foreach($completedEmployers as $comple)
-                        @if ($comple->course_id == $c->id)
-                            {{round($comple->total_completed_employer / $totalEmployers, 4)*100}} %
-                        @endif
-                    @endforeach
-                </th>
-            @endforeach
-        </tr>
-    @empty
-        <tr>
-            <td colspan="{{4 + $course->count() * 2}}">Không có dữ liệu</td>
-        </tr>
-    @endforelse
+        @forelse($statByArea as $cpn)
+            @php
+                $completedEmployers = $cpn->getCertificate;
+            @endphp
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$cpn->areaname}}</td>
+                <td class="text-center">{{$cpn->get_company_count}}</td>
+                @foreach($registerdSubject as $c)
+                    <th width="15" class="text-center">
+                        @foreach($completedEmployers as $comple)
+                            @if ($comple->subject_id == $c->id)
+                                {{$comple->total_completed_employer}}
+                            @endif
+                        @endforeach
+                    </th>
+                @endforeach
+            </tr>
+        @empty
+            <tr>
+                <td colspan="{{3 + $registerdSubject->count()}}">Không có dữ liệu</td>
+            </tr>
+        @endforelse
     </tbody>
 </table>
 </html>

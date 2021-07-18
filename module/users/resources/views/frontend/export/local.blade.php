@@ -43,11 +43,11 @@
         <td rowspan="2" valign="middle" width="20">Số CMND/CCCD</td>
         <td rowspan="2" valign="middle">Tuổi</td>
         <td rowspan="2" valign="middle" width="20">Số điện thoại</td>
-        <td rowspan="1" colspan="{{$course->count()}}" style="text-align: center">Danh sách chứng chỉ</td>
+        <td rowspan="1" colspan="{{$registerdSubject->count()}}" style="text-align: center">Danh sách chứng chỉ</td>
     </tr>
     <tr>
-        @foreach($course as $c)
-            <td width="20" style="white-space: wrap">{{$c->name}}</td>
+        @foreach($registerdSubject as $rs)
+            <td class="text-center">{{$rs->name}}</td>
         @endforeach
     </tr>
 
@@ -59,17 +59,17 @@
             <td>{{\Carbon\Carbon::parse($e->dob)->age}}</td>
             <td>{{$e->phone}}</td>
             @php
-                $completedCourse = $e->getCertificate()->select('course_id')->get()->toArray();
+                $completedCourse = $e->getCertificate()->select('subject_id')->get()->toArray();
                 $array = [];
                 foreach ($completedCourse as $cc) {
-                    $array[] = $cc['course_id'];
+                    $array[] = $cc['subject_id'];
                 }
             @endphp
-            @foreach($course as $c)
+            @foreach($registerdSubject as $c)
                 @if (in_array($c->id, $array))
-                    <td>&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
                 @else
-                    <td>&nbsp;</td>
+                    <td class="text-center">&nbsp;</td>
                 @endif
             @endforeach
         </tr>

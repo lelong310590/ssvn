@@ -739,6 +739,7 @@ class UsersController extends BaseController
         $registerdSubject = app(SubjectRepository::class)->all();
 
         $statByArea = false;
+        $manager = false;
 
         if ($user->hard_role <= 3) {
             $companyId = $user->classlevel;
@@ -761,12 +762,16 @@ class UsersController extends BaseController
                 $query->where('manager', $user->id);
             }
 
+            if ($user->hard_role == 3) {
+                $manager = $this->getStatByManager($user->id, $company->id);
+            }
+
             $employers = $query->with('getCertificate')->paginate(30);
 
         } else {
             $companies = false;
             if ($ward == null && $province != null) {
-                $statByArea = $this->getStatsByArea($province, $district, $ward);
+                $statByArea = $this->getStatsByArea($province, $district);
             } elseif ($ward != null && $province != null) {
                 $companies = $this->getCompany($province, $district, $ward);
             }
@@ -785,11 +790,32 @@ class UsersController extends BaseController
             'wards',
             'districts',
             'registerdSubject',
-            'statByArea'
+            'statByArea',
+            'manager'
         ));
     }
 
-    public function getStatsByArea($province, $district, $ward)
+    public function getStatByManager($userId, $companyId)
+    {
+        $manager = Users::where('classlevel', $companyId)
+                        ->where('hard_role', 2)
+                        ->withCount('getEmployer')
+                        ->with(['getEmployerCertificate' => function($q) {
+                            return $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                                ->groupBy('certificate.subject_id');
+                        }])
+                        ->get();
+
+        return $manager;
+    }
+
+    /**
+     * @param $province
+     * @param $district
+     * @param $ward
+     * @return mixed
+     */
+    public function getStatsByArea($province, $district)
     {
         if ($district == null) {
             return app(DistrictsRepository::class)

@@ -44,7 +44,7 @@ $classes = ClassLevel::with('subject')->get();
                         <h4>Tải ứng dụng</h4>
                         <ul class="app">
                             <li>
-                                <a href="" target="_blank"><img alt="Tải nội dung trên Google Play" src="https://vietjack.com/git/images/android.svg"></a>
+                                <a href="{{asset('frontend/files/syt-anticovid-release-16-7.apk')}}" target="_blank"><img alt="Tải nội dung trên Google Play" src="https://vietjack.com/git/images/android.svg"></a>
                             </li>
                             <li>
                                 <a href="" target="_blank"><img alt="Tải nội dung trên IOS Store" src="https://vietjack.com/git/images/ios.svg"></a>
@@ -72,8 +72,13 @@ $classes = ClassLevel::with('subject')->get();
     </a>
     @if (Auth::check())
         <a href="{{route('front.users.my-certificate.get')}}">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <span class="text-center">Chứng chỉ</span>
+        </a>
+
+        <a href="{{route('front.users.certificate.get')}}">
             <i class="fa fa-certificate" aria-hidden="true"></i>
-            <span>Chứng chỉ</span>
+            <span>DS chứng chỉ</span>
         </a>
 
         <a href="{{route('front.users.info.get')}}">
@@ -86,8 +91,8 @@ $classes = ClassLevel::with('subject')->get();
         </a>
     @else
         <a href="#login-box" class="btn-popup">
-            <i class="fa fa-certificate" aria-hidden="true"></i>
-            <span>Chứng chỉ</span>
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <span>Chứng chỉ của tôi</span>
         </a>
 
         <a href="#login-box" class="btn-popup">

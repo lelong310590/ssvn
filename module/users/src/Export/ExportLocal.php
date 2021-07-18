@@ -20,6 +20,7 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Subject\Repositories\SubjectRepository;
 use Users\Models\Users;
 
 class ExportLocal implements FromView, WithStyles, WithColumnFormatting
@@ -53,6 +54,10 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
             $province = app(ProvincesRepository::class)->find($this->province);
             $district = false;
             $ward = false;
+
+            $registerdSubject = app(SubjectRepository::class)->all();
+            $statByArea = $this->getStatsByArea($this->province, $this->district);
+
             if ($this->district != false) {
                 $district = app(DistrictsRepository::class)->find($this->district);
             }
@@ -61,7 +66,13 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
             }
 
             return view('nqadmin-users::frontend.export.global', compact(
-                'companies', 'course', 'district', 'ward', 'province'
+                'companies',
+                'course',
+                'district',
+                'ward',
+                'province',
+                'registerdSubject',
+                'statByArea'
             ));
 
         } else {
@@ -77,10 +88,13 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
 
             $employers = $query->get();
 
+            $registerdSubject = $company->subject()->get();
+
             return view('nqadmin-users::frontend.export.local', compact(
                 'company',
                 'course',
-                'employers'
+                'employers',
+                'registerdSubject'
             ));
         }
 
@@ -143,5 +157,33 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
             ->get();
 
         return $result;
+    }
+
+    /**
+     * @param $province
+     * @param $district
+     * @return mixed
+     */
+    public function getStatsByArea($province, $district)
+    {
+        if ($district == null) {
+            return app(DistrictsRepository::class)
+                ->withCount('getCompany')
+                ->with(['getCertificate' => function($q) {
+                    return $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                        ->groupBy('certificate.subject_id');
+                }])
+                ->where('province_id', $province)
+                ->get();
+        } else {
+            return app(WardsRepository::class)
+                ->withCount('getCompany')
+                ->with(['getCertificate' => function($q) {
+                    return $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                        ->groupBy('certificate.subject_id');
+                }])
+                ->where('district_id', $district)
+                ->get();
+        }
     }
 }
