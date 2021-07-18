@@ -65,6 +65,6 @@ class CertificateController extends BaseController
 
         }
 
-        return redirect()->route('front.users.certificate.get');
+        return redirect()->route('front.users.my-certificate.get');
     }
 }
