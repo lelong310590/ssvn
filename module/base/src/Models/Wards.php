@@ -9,6 +9,8 @@
 
 namespace Base\Models;
 
+use ClassLevel\Models\ClassLevel;
+use Course\Models\Certificate;
 use Illuminate\Database\Eloquent\Model;
 
 class Wards extends Model
@@ -20,4 +22,25 @@ class Wards extends Model
     protected $fillable = [
           'ward_id', 'ward_name', 'district_id'
     ];
+
+    public function getCompany()
+    {
+        return $this->hasMany(ClassLevel::class, 'ward', 'id');
+    }
+
+    public function getCertificate()
+    {
+        return $this->hasManyThrough(
+            Certificate::class,
+            ClassLevel::class,
+            'ward',
+            'company_id',
+            'id'
+        );
+    }
+
+    public function getAreanameAttribute()
+    {
+        return $this->attributes['ward_name'];
+    }
 }

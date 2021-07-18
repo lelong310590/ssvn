@@ -22,7 +22,8 @@ class Certificate extends Model
         'created_at',
         'updated_at',
         'image',
-        'subject_id'
+        'subject_id',
+        'company_id'
     ];
 
     public function course()

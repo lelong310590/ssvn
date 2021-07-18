@@ -43,7 +43,8 @@ class CertificateController extends BaseController
             $certificate = $certificateRepository->create([
                 'subject_id' => $subject_id,
                 'user_id' => $user->id,
-                'image' => $imageLink
+                'image' => $imageLink,
+                'company_id' => $user->classlevel
             ]);
 
             $subject = $subjectRepository->find($subject_id);

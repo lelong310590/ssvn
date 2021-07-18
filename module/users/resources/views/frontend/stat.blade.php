@@ -184,7 +184,9 @@ use Illuminate\Support\Facades\DB;
                                                 <p><small style="color: red">Tỷ lệ tính theo số người đạt chứng chỉ trong đơn vị (%)</small></p>
                                                 @endif
 
-                                                @if (auth('nqadmin')->user()->hard_role > 3)
+                                                @if (auth('nqadmin')->user()->hard_role > 3 && request()->get('ward') == null)
+                                                    @include('nqadmin-users::frontend.components.stat.table-report-area')
+                                                @elseif (auth('nqadmin')->user()->hard_role > 3 && request()->get('ward') != null)
                                                     @include('nqadmin-users::frontend.components.stat.table-report-global')
                                                 @elseif (auth('nqadmin')->user()->hard_role > 1 && auth('nqadmin')->user()->hard_role <= 3)
                                                     @include('nqadmin-users::frontend.components.stat.table-report-local')

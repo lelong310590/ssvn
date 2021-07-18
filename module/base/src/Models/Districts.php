@@ -9,6 +9,8 @@
 
 namespace Base\Models;
 
+use ClassLevel\Models\ClassLevel;
+use Course\Models\Certificate;
 use Illuminate\Database\Eloquent\Model;
 
 class Districts extends Model
@@ -24,5 +26,26 @@ class Districts extends Model
     public function getWards()
     {
         return $this->hasMany(Wards::class, 'district_id', 'id');
+    }
+
+    public function getCompany()
+    {
+        return $this->hasMany(ClassLevel::class, 'district', 'id');
+    }
+
+    public function getAreanameAttribute()
+    {
+        return $this->attributes['district_name'];
+    }
+
+    public function getCertificate()
+    {
+        return $this->hasManyThrough(
+            Certificate::class,
+            ClassLevel::class,
+            'district',
+            'company_id',
+            'id'
+        );
     }
 }

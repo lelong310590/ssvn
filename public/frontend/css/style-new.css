@@ -1461,9 +1461,6 @@ footer .list-unstyled li {
 }
 
 @media all and (max-width: 1023px) {
-	header.main .logo {
-		margin-left: auto;
-	}
 
 	header.main nav .user {
 		position: relative;
@@ -2026,11 +2023,6 @@ header nav.main {
 
 header nav a {
 	color: #000;
-}
-
-.list-company-table {
-	height: 350px;
-	overflow-y: scroll;
 }
 
 .list-company-table thead {

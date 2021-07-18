@@ -98,13 +98,7 @@ class ClassLevel extends Model
 
     public function getCertificate()
     {
-        return $this->hasManyThrough(
-            Certificate::class,
-            Users::class,
-            'classlevel',
-            'user_id',
-            'id'
-        );
+        return $this->hasMany(Certificate::class, 'company_id', 'id');
     }
 
     public function getProvince()

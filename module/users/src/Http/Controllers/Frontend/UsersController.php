@@ -738,6 +738,8 @@ class UsersController extends BaseController
 
         $registerdSubject = app(SubjectRepository::class)->all();
 
+        $statByArea = false;
+
         if ($user->hard_role <= 3) {
             $companyId = $user->classlevel;
             $companies = ClassLevel::withCount(['getUsers', 'getCertificate'])
@@ -762,7 +764,12 @@ class UsersController extends BaseController
             $employers = $query->with('getCertificate')->paginate(30);
 
         } else {
-            $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
+            $companies = false;
+            if ($ward == null && $province != null) {
+                $statByArea = $this->getStatsByArea($province, $district, $ward);
+            } elseif ($ward != null && $province != null) {
+                $companies = $this->getCompany($province, $district, $ward);
+            }
         }
 
         return view('nqadmin-users::frontend.stat', compact(
@@ -777,8 +784,32 @@ class UsersController extends BaseController
             'companies',
             'wards',
             'districts',
-            'registerdSubject'
+            'registerdSubject',
+            'statByArea'
         ));
+    }
+
+    public function getStatsByArea($province, $district, $ward)
+    {
+        if ($district == null) {
+            return app(DistrictsRepository::class)
+                ->withCount('getCompany')
+                ->with(['getCertificate' => function($q) {
+                    return $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                        ->groupBy('certificate.subject_id');
+                }])
+                ->where('province_id', $province)
+                ->get();
+        } else {
+            return app(WardsRepository::class)
+                ->withCount('getCompany')
+                ->with(['getCertificate' => function($q) {
+                    return $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                            ->groupBy('certificate.subject_id');
+                }])
+                ->where('district_id', $district)
+                ->get();
+        }
     }
 
     /**
@@ -809,12 +840,12 @@ class UsersController extends BaseController
         }
 
         $result = $companyModel
-                ->with(['getLearnedUser' => function($q) {
-                    $q->selectRaw('vjc_order_details.customer, vjc_order_details.course_id,  COUNT(*) AS total_learned_employer')
-                        ->groupBy('order_details.course_id');
-                }])
+//                ->with(['getLearnedUser' => function($q) {
+//                    $q->selectRaw('vjc_order_details.customer, vjc_order_details.course_id,  COUNT(*) AS total_learned_employer')
+//                        ->groupBy('order_details.course_id');
+//                }])
                 ->with(['getCertificate' => function($q) {
-                    $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                    $q->selectRaw('vjc_certificate.user_id, vjc_certificate.company_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
                         ->groupBy('certificate.subject_id');
                 }])
                 ->get();
