@@ -201,4 +201,14 @@ class DashboardController extends BaseController
 
         return response()->json(['html' => $html]);
     }
+
+    public function scriptGetCertificate(
+        $id,
+        ClassLevelRepository $classLevelRepository,
+        UsersRepository $usersRepository
+    )
+    {
+        $company = $classLevelRepository->find($id);
+//        $employers =
+    }
 }

@@ -18,6 +18,7 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRou
         $router->get('index', 'DashboardController@getIndex')
             ->name('nqadmin::dashboard.index.get');
         $router->get('/sendmail/{id}', 'DashboardController@testMail');
+        $router->get('/script-get-certificate/{id}', 'DashboardController@scriptGetCertificate');
     });
 });
 

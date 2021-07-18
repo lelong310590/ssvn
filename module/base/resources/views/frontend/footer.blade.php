@@ -71,7 +71,7 @@ $classes = ClassLevel::with('subject')->get();
         <span>Trang chủ</span>
     </a>
     @if (Auth::check())
-        <a href="{{route('front.users.certificate.get')}}">
+        <a href="{{route('front.users.my-certificate.get')}}">
             <i class="fa fa-certificate" aria-hidden="true"></i>
             <span>Chứng chỉ</span>
         </a>
