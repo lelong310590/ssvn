@@ -2243,6 +2243,11 @@ header nav .menu .menu-main > li:hover > a {
 	cursor: not-allowed;
 }
 
+.main-course .course .content .txt {
+	height: 73.5px;
+	overflow: hidden;
+}
+
 .get-certificate-item .get-certificate-name {
 	font-size: 16px;
 	font-weight: 700;
