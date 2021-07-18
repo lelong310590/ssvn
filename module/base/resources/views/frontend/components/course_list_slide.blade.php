@@ -11,11 +11,11 @@
                 $description = $item->getLdp->description;
             @endphp
 
-            @if (!empty($subjects))
+            @if (!empty($subjects) || $subjects != null)
                 <span class="btn vj-btn">{{$subjects->name}}</span>
             @endif
 
-            @if (!empty($classLevel))
+            @if (!empty($classLevel) || $classLevel != null)
                 <span class="btn vj-btn">{{$classLevel->name}}</span>
             @endif
         </p>
