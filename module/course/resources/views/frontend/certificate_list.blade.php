@@ -60,7 +60,10 @@ use Illuminate\Support\Facades\DB;
                                         <div class="get-certificate-sub-item">
                                             <p>
                                                 <a href="{{route('front.course.buy.get', $course->getCourse->slug)}}">
-                                                    {{$loop->iteration}} - {{$course->getCourse->name}} - Hoàn thành {{ number_format($course->getCourse->getProcess(),0) }}%
+                                                    {{$loop->iteration}} - {{$course->getCourse->name}} - Hoàn thành
+                                                    @if ($course->getCourse != null)
+                                                    {{ number_format($course->getCourse->getProcess(),0) }}%
+                                                    @endif
                                                 </a>
                                             </p>
                                         </div>
