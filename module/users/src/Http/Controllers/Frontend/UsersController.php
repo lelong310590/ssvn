@@ -742,12 +742,12 @@ class UsersController extends BaseController
             $companies = ClassLevel::withCount(['getUsers', 'getCertificate'])
                 ->where('id', $companyId)->get();
 
-            $query = Users::doesntHave('getCertificate')
-                ->where('classlevel', $companyId);
-
-            if ($user->hard_role == 2) {
-                $query->where('manager', $user->id);
-            }
+//            $query = Users::doesntHave('getCertificate')
+//                ->where('classlevel', $companyId);
+//
+//            if ($user->hard_role == 2) {
+//                $query->where('manager', $user->id);
+//            }
 
             $company = app(ClassLevelRepository::class)->with('subject')->find($user->classlevel);
             $registerdSubject = $company->subject()->get();
@@ -757,13 +757,12 @@ class UsersController extends BaseController
                 ->with('getCertificate');
 
             if ($user->hard_level == 2) {
-                $query->where('manager', $user->manager);
+                $query->where('manager', $user->id);
             }
 
             $employers = $query->paginate(30);
 
         } else {
-
 
             $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
         }

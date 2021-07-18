@@ -98,7 +98,6 @@ class SubjectController extends BaseController
 
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 		} catch (\Exception $e) {
-			Debugbar::addThrowable($e->getMessage());
 			return redirect()->back()->withErrors(config('messages.error'));
 		}
 	}
