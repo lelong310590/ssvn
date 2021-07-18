@@ -732,8 +732,9 @@ class UsersController extends BaseController
             $ward = $currentCompany->ward;
         }
 
-        $rangeAge = $province != null ? $this->getRangeAge($province, $district, $ward, $userCompany) : false;
-        $sexGroup = $province  != null ? $this->getRangeSex($province, $district, $ward, $userCompany) : false;
+        $isManager = $user->hard_role == 2 ? $user : null;
+        $rangeAge = $province != null ? $this->getRangeAge($province, $district, $ward, $userCompany, $isManager) : false;
+        $sexGroup = $province  != null ? $this->getRangeSex($province, $district, $ward, $userCompany, $isManager) : false;
 
         $registerdSubject = app(SubjectRepository::class)->all();
 
@@ -824,7 +825,7 @@ class UsersController extends BaseController
     /**
      * @return array
      */
-    public function getRangeSex($province, $district, $ward, $classlevel = null)
+    public function getRangeSex($province, $district, $ward, $classlevel = null, $user = null)
     {
         $filter = [
             'Nam' => 'Nam',
@@ -836,7 +837,7 @@ class UsersController extends BaseController
 
         if ($province != null) {
             $userModel = Users::with('getClassLevel')
-                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward, $classlevel) {
+                ->whereHas('getClassLevel', function ($q) use ($province, $district, $ward, $classlevel, $user) {
                     if ($district != null) {
                         if ($ward != null) {
                             $query =  $q->where('classlevel.province', $province)
@@ -856,6 +857,12 @@ class UsersController extends BaseController
 
                     return $query;
                 });
+
+            if ($user != null) {
+                if ($user->hard_role == 2) {
+                    $userModel->where('manager', $user->id);
+                }
+            }
         }
 
         $gender = $userModel->get()
@@ -893,7 +900,7 @@ class UsersController extends BaseController
     /**
      * @return array
      */
-    public function getRangeAge($province, $district, $ward, $classlevel = null)
+    public function getRangeAge($province, $district, $ward, $classlevel = null, $user = null)
     {
         $ranges = [
             '18-24' => 24,
@@ -928,6 +935,12 @@ class UsersController extends BaseController
 
                 return $query;
             });
+
+            if ($user != null) {
+                if ($user->hard_role == 2) {
+                    $userModel->where('manager', $user->id);
+                }
+            }
         }
 
         $ageGroup = $userModel->get()

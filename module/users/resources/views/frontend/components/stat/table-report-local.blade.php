@@ -9,7 +9,7 @@
             </tr>
             <tr>
                 <td rowspan="2" width="50">STT</td>
-                <td rowspan="2" width="100">Họ và tên</td>
+                <td rowspan="2" width="150">Họ và tên</td>
                 <td rowspan="2" width="100">Số CMND/CCCD</td>
                 <td rowspan="2" width="50">Tuổi</td>
                 <td rowspan="2" width="80">Số điện thoại</td>
