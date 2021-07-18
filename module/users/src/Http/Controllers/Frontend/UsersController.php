@@ -763,6 +763,8 @@ class UsersController extends BaseController
             $employers = $query->paginate(30);
 
         } else {
+
+
             $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
         }
 

@@ -93,11 +93,9 @@ class SubjectController extends BaseController
 		try {
 			$input = $request->except(['_token', 'current_id', 'subject']);
 			$this->repository->update($input, $id);
-			$subject = $request->subject;
-			if (!empty($subject)) {
-				$this->repository->sync($id, 'classLevel', $subject);
-			}
-			
+			$subject = $request->get('subject');
+            $this->repository->sync($id, 'classLevel', $subject);
+
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
 		} catch (\Exception $e) {
 			Debugbar::addThrowable($e->getMessage());
