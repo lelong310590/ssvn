@@ -754,9 +754,11 @@ class UsersController extends BaseController
 
             $query = Users::where('classlevel', $company->id)
                 ->where('hard_role', 1);
-                
+
             if ($user->hard_level == 2) {
-                $query->where('manager', $user->id);
+                $query = Users::where('classlevel', $company->id)
+                    ->where('hard_role', 1)
+                    ->where('manager', $user->id);
             }
 
             $employers = $query->with('getCertificate')->paginate(30);
