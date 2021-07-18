@@ -7,12 +7,12 @@
                 <th rowspan="2" width="250">Tên doanh nghiệp</th>
                 <th width="100" rowspan="2">MST</th>
                 <th width="100" rowspan="2" class="tex-center">Lao động</th>
-                <th rowspan="1" colspan="{{$courses->count() * 2}}" class="text-center">
+                <th rowspan="1" colspan="{{$registerdSubject->count()}}" class="text-center">
                     Chứng chỉ
                 </th>
             </tr>
             <tr>
-                @foreach($courses as $c)
+                @foreach($registerdSubject as $c)
                     <th width="150" rowspan="1" colspan="1" class="text-center">{{$c->name}}</th>
                 @endforeach
             </tr>
