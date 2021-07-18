@@ -18,6 +18,7 @@ use Course\Repositories\TestResultRepository;
 use Users\Http\Requests\UserCreateRequest;
 use Users\Http\Requests\UserEditRequest;
 use Illuminate\Http\Request;
+use Users\Models\Users;
 use Users\Repositories\UsersMetaRepository;
 use Users\Repositories\UsersRepository;
 
@@ -243,10 +244,20 @@ class UsersController extends BaseController
         $classLevel = $classLevelRepository->findWhere([
             'status' => 'active'
         ]);
+
         $user = $this->users->with('getClassLevel')->find($id);
+        $company = $user->classlevel;
+        $managerInCompany = $this->users->findWhere([
+            'classlevel' => $company,
+            'hard_role' => 2,
+            'status' => 'active',
+            ['id', '!=', $id]
+        ]);
+
         return view('nqadmin-users::backend.components.transfer', [
             'data' => $user,
-            'classLevel' => $classLevel
+            'classLevel' => $classLevel,
+            'managerInCompany' => $managerInCompany
         ]);
     }
 
@@ -261,6 +272,17 @@ class UsersController extends BaseController
         Request $request
     )
     {
+        $newmanager = $request->get('newmanager');
+
+        if ($newmanager != null) {
+            Users::where('status', 'active')
+                ->where('hard_role', 1)
+                ->where('manager', $id)
+                ->update([
+                    'manager' => $newmanager
+                ]);
+        }
+
         $this->users->update([
             'classlevel' => $request->get('classlevel')
         ], $id);

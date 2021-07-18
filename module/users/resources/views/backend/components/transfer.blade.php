@@ -49,6 +49,7 @@
                                             <b><i>{{$data->getClassLevel->name}}</i></b>
                                         @endif
                                     </p>
+                                    <p>Chức vụ: <b><i>{{ $data->hard_role == 2 ? 'Quản lý' : 'Lao động thường' }}</i></b></p>
                                 </div>
                             </div>
                         </div>
@@ -69,6 +70,22 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                @if ($data->hard_role == 2)
+                                <div class="form-group">
+                                    <div class="notes notes-danger">
+                                        <strong>Lưu ý!</strong>
+                                        Chuyển tất cả người lao động dưới quyền quản lý của {{$data->first_name}} {{$data->last_name}} sang cho quản lý mới là:
+                                    </div>
+                                    <select class="custom-select form-control" name="newmanager">
+                                        <option value="">-- Giữ nguyên --</option>
+                                        @foreach($managerInCompany as $m)
+                                            <option value="{{$m->id}}">{{$data->first_name}} {{$data->last_name}} - CMND/CCCD: {{$c->citizen_identification}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @endif
+
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary" style="margin-top: 20px">Lưu lại</button>
                                 </div>

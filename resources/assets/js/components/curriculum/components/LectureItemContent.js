@@ -116,7 +116,6 @@ class LectureItemContent extends Component
                             </div>
                             <div>
                                 <div className="lecture-content-action">
-                                    <button className="btn btn-primary">Xem trước</button>
                                     {value.status === 'disable' &&
                                         <button 
                                             onClick={() => this.changeStatusLecture(value)}

@@ -181,110 +181,16 @@ use Illuminate\Support\Facades\DB;
                                             <div class="list-company">
                                                 @if (auth('nqadmin')->user()->hard_role > 3)
                                                 <p><b>Các doanh nghiệp trong địa phương</b></p>
+                                                <p><small style="color: red">Tỷ lệ tính theo số người đạt chứng chỉ trong đơn vị (%)</small></p>
                                                 @endif
-                                                <div class="list-company-table {{auth('nqadmin')->user()->hard_role <= 3 ? 'list-company-table-single' : ''}}">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover table-bordered table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th width="50" rowspan="3">STT</th>
-                                                                    <th rowspan="3" width="250">Tên doanh nghiệp</th>
-                                                                    <th width="100" rowspan="3">MST</th>
-                                                                    <th width="100" rowspan="3" class="tex-center">Lao động</th>
-                                                                    <th rowspan="1" colspan="{{$courses->count() * 2}}" class="text-center">
-                                                                        Chứng chỉ
-                                                                    </th>
-                                                                </tr>
-                                                                <tr>
-                                                                    @foreach($courses as $c)
-                                                                        <th width="150" rowspan="1" colspan="2" class="text-center">{{$c->name}}</th>
-                                                                    @endforeach
-                                                                </tr>
-                                                                <tr>
-                                                                    @foreach($courses as $c)
-                                                                        <th width="150" rowspan="1" class="text-center">Tỷ lệ tham gia (%)</th>
-                                                                        <th width="150" rowspan="1" class="text-center">Tỷ lệ đạt CC (%)</th>
-                                                                    @endforeach
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @forelse($companies as $cpn)
-                                                                    @php
-                                                                        $totalEmployers = $cpn->get_users_count;
-                                                                        $learnedEmployers = $cpn->getLearnedUser;
-                                                                        $completedEmployers = $cpn->getCertificate;
-                                                                    @endphp
-                                                                    <tr>
-                                                                        <td>{{$loop->iteration}}</td>
-                                                                        <td>{{$cpn->name}}</td>
-                                                                        <td>{{$cpn->mst}}</td>
-                                                                        <td class="text-center">{{$totalEmployers}} người</td>
-                                                                        @foreach($courses as $c)
-                                                                            <th width="150" rowspan="1" class="text-center">
-                                                                                @foreach($learnedEmployers as $l)
-                                                                                    @if ($l->course_id == $c->id)
-                                                                                        {{round($l->total_learned_employer / $totalEmployers, 4)*100}} %
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </th>
-                                                                            <th width="150" rowspan="1" class="text-center">
-                                                                                @foreach($completedEmployers as $comple)
-                                                                                    @if ($comple->course_id == $c->id)
-                                                                                        {{round($comple->total_completed_employer / $totalEmployers, 4)*100}} %
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </th>
-                                                                        @endforeach
-                                                                    </tr>
-                                                                @empty
-                                                                    <tr>
-                                                                        <td colspan="{{4 + $courses->count() * 2}}">Không có dữ liệu</td>
-                                                                    </tr>
-                                                                @endforelse
-                                                            </tbody>
-                                                        </table>
-{{--                                                        <small style="color: red; margin: 0 0 15px"><span>*</span> Thống kê ko bao gồm chủ doanh nghiệp và cấp quản lý</small>--}}
-                                                    </div>
-                                                </div>
+
+                                                @if (auth('nqadmin')->user()->hard_role > 3)
+                                                    @include('nqadmin-users::frontend.components.stat.table-report-global')
+                                                @elseif (auth('nqadmin')->user()->hard_role > 1 && auth('nqadmin')->user()->hard_role <= 3)
+                                                    @include('nqadmin-users::frontend.components.stat.table-report-local')
+                                                @endif
                                             </div>
                                         </div>
-
-                                        @if ($unlearnUser != false)
-                                        <div class="col-xs-12">
-                                            <p><b>Danh sách lao động chưa hoàn thành chứng chỉ</b></p>
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped table-bordered">
-                                                    <thead>
-                                                    <tr>
-                                                        <th width="100">STT</th>
-                                                        <th>Họ và tên</th>
-                                                        <th>Số CMND/CCCD</th>
-                                                        <th>Tuổi</th>
-                                                        <th>Số điện thoại</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @php
-                                                        $i = $unlearnUser->perPage() * ($unlearnUser->currentPage() - 1) + 1
-                                                    @endphp
-                                                    @foreach($unlearnUser as $e)
-                                                        <tr>
-                                                            <td>{{$i++}}</td>
-                                                            <td>{{$e->first_name}} {{$e->last_name}}</td>
-                                                            <td>{{$e->citizen_identification}}</td>
-                                                            <td>{{$e->old}}</td>
-                                                            <td>{{$e->phone}}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="vj-paging">
-                                                {{ $unlearnUser->appends(request()->input())->render('vendor.pagination.default') }}
-                                            </div>
-                                        </div>
-                                        @endif
                                     </div>
                                 </div>
                                 @endif

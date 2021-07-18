@@ -34,7 +34,6 @@
 					<h3>
 						<i class="fa fa-sitemap "></i> {{$course->name}}
 						<button type="submit" class="btn btn-primary float-right course-button">Lưu lại</button>
-						<button type="submit" class="btn btn-primary float-right course-button">Xem trước</button>
 					</h3>
 				</div>
 			</div>

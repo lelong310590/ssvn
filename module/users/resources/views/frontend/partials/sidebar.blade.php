@@ -12,7 +12,7 @@
 <div class="list-menu-user">
     <ul>
         <li><a href="{{ route('front.users.info.get') }}" class="{{ strpos(url()->full(), route('front.users.info.get')) !== false?'active':'' }}">Thông tin cá nhân </a></li>
-        @if (auth('nqadmin')->user()->hard_role < 2)
+        @if (auth('nqadmin')->user()->hard_role < 4)
             <li><a href="{{ route('front.users.my_course.get') }}" class="{{ strpos(url()->full(), route('front.users.my_course.get')) !== false?'active':'' }}">Khóa đào tạo</a></li>
         @endif
 

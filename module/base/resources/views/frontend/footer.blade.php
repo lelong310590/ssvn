@@ -94,7 +94,7 @@ $classes = ClassLevel::with('subject')->get();
             <i class="fa fa-user-circle" aria-hidden="true"></i>
             <span>Tài khoản</span>
         </a>
-        <a href="#login-box" class="btn-popup">
+        <a href="{{route('front::post.get', 'cau-hoi-thuong-gap')}}">
             <i class="fa fa-question" aria-hidden="true"></i>
             <span>Hướng dẫn</span>
         </a>

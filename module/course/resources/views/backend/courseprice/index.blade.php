@@ -36,7 +36,6 @@
                         <input type="hidden" name="price" value="{{ $course->price }}">
                         <input type="hidden" name="approve_sale_system" value="{{ $course->approve_sale_system }}">
                         <button type="submit" class="btn btn-primary float-right course-button">Lưu lại</button>
-                        <button type="submit" class="btn btn-primary float-right course-button">Xem trước</button>
                     </h3>
                 </div>
             </div>

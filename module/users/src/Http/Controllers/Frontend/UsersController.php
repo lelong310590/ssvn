@@ -707,8 +707,6 @@ class UsersController extends BaseController
         $rangeAge = $province != null ? $this->getRangeAge($province, $district, $ward, $userCompany) : false;
         $sexGroup = $province  != null ? $this->getRangeSex($province, $district, $ward, $userCompany) : false;
 
-        $unlearnUser = false;
-
         if ($user->hard_role <= 3) {
             $companyId = $user->classlevel;
             $companies = ClassLevel::withCount(['getUsers', 'getCertificate'])
@@ -721,11 +719,21 @@ class UsersController extends BaseController
                 $query->where('manager', $user->id);
             }
 
-            $unlearnUser = $query->paginate(25);
+            $company = app(ClassLevelRepository::class)->find($user->classlevel);
+
+            $query = Users::where('classlevel', $company->id)
+                ->where('hard_role', 1)
+                ->with('getCertificate');
+
+            if ($user->hard_level == 2) {
+                $query->where('manager', $user->manager);
+            }
+
+            $employers = $query->paginate(30);
+
         } else {
             $companies = $province != null ? $this->getCompany($province, $district, $ward) : false;
         }
-
 
         return view('nqadmin-users::frontend.stat', compact(
             'company',
@@ -739,7 +747,6 @@ class UsersController extends BaseController
             'companies',
             'wards',
             'districts',
-            'unlearnUser'
         ));
     }
 

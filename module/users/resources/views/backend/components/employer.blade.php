@@ -87,7 +87,11 @@
                                         <td>{{ $d->getClassLevel == null ? '' : $d->getClassLevel->name }}</td>
                                         <td>
                                             <p>{{ $d->first_name }} {{$d->last_name}}</p>
-                                            <span class="status success">Người lao động</span>
+                                            @if ($d->hard_role == 2)
+                                                <span class="status warning">Quản lý</span>
+                                            @else
+                                                <span class="status success">Người lao động</span>
+                                            @endif
                                         </td>
                                         <td>{{ $d->citizen_identification }}</td>
                                         <td>{{ $d->phone }}</td>

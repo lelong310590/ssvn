@@ -55,11 +55,7 @@ use Illuminate\Support\Facades\DB;
                                                         </div>
                                                         <div class="clearfix">
                                                             <span class="txt pull-left">Hoàn thành {{ number_format($course->getProcess(),0) }}%</span>
-                                                            <div class="box-star pull-right">
-                                                                @include('nqadmin-course::frontend.components.course.only_star',['item'=>$course->getAverageRating()])
-                                                            </div>
                                                         </div>
-                                                        <p class="text-right">Đánh giá của bạn</p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -2033,6 +2033,14 @@ header nav a {
 	overflow-y: scroll;
 }
 
+.list-company-table thead {
+	background-color: #ccc;
+}
+
+.list-company-table th, .list-company-table td {
+	vertical-align: middle!important;
+}
+
 .list-company-table-single {
 	overflow-y: unset;
 	height: unset;

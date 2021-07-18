@@ -10,7 +10,6 @@
                     <h3>
                         <i class="fa fa-sitemap "></i> {{$course->name}}
                         <button type="submit" class="btn btn-primary float-right course-button">Lưu lại</button>
-                        <a href="" class="btn btn-primary float-right course-button">Xem trước</a>
                     </h3>
                 </div>
             </div>

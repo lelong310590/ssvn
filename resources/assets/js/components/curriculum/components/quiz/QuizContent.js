@@ -193,7 +193,6 @@ class QuizContent extends Component {
                     </div>
                     <div>
                         <div className="lecture-content-action">
-                            <button className="btn btn-primary">Xem trước</button>
                             {curriculum.status === 'disable' &&
                                 <button 
                                     onClick={() => this.changeStatusLecture(curriculum)}
