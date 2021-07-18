@@ -28,7 +28,9 @@ use Course\Repositories\CertificateRepository;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
+use Level\Repositories\LevelRepository;
 use Maatwebsite\Excel\Facades\Excel;
+use Subject\Repositories\SubjectRepository;
 use Users\Export\ExportLocal;
 use Users\Import\UsersImport;
 use function GuzzleHttp\Promise\all;
@@ -635,6 +637,8 @@ class UsersController extends BaseController
     )
     {
         $user = auth('nqadmin')->id();
+
+//        $level = app(SubjectRepository::class)->findWhere(['status' => 'active']);
 
         $certificates = $certificateRepository->with('course')->scopeQuery(function ($q) use ($user) {
             return $q->where('user_id', $user);

@@ -80,7 +80,7 @@
                                     <select class="custom-select form-control" name="newmanager">
                                         <option value="">-- Giữ nguyên --</option>
                                         @foreach($managerInCompany as $m)
-                                            <option value="{{$m->id}}">{{$data->first_name}} {{$data->last_name}} - CMND/CCCD: {{$c->citizen_identification}}</option>
+                                            <option value="{{$m->id}}">{{$m->first_name}} {{$m->last_name}} - CMND/CCCD: {{$m->citizen_identification}}</option>
                                         @endforeach
                                     </select>
                                 </div>
