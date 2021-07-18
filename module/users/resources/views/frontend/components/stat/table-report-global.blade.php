@@ -29,7 +29,7 @@
                     <td>{{$cpn->name}}</td>
                     <td>{{$cpn->mst}}</td>
                     <td class="text-center">{{$totalEmployers}}</td>
-                    @foreach($courses as $c)
+                    @foreach($registerdSubject as $c)
                         <th width="150" class="text-center">
                             @foreach($completedEmployers as $comple)
                                 @if ($comple->subject_id == $c->id)
