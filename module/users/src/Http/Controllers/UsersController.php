@@ -257,7 +257,7 @@ class UsersController extends BaseController
         return view('nqadmin-users::backend.components.transfer', [
             'data' => $user,
             'classLevel' => $classLevel,
-            'managerInCompany' => $managerInCompany
+            'managerInCompany' => $managerInCompany,
         ]);
     }
 

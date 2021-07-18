@@ -241,7 +241,7 @@ class Course extends Model
         return $return;
     }
 
-    function getProcess()
+    public function getProcess()
     {
         $return = 0;
         if (\Auth::check()) {

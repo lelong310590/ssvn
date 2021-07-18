@@ -15,6 +15,7 @@ use Course\Repositories\CourseRepository;
 use Course\Repositories\CertificateRepository;
 use Illuminate\Http\Request;
 use Spatie\Browsershot\Browsershot;
+use Subject\Repositories\SubjectRepository;
 use VerumConsilium\Browsershot\Facades\Screenshot;
 
 class CertificateController extends BaseController
@@ -23,38 +24,36 @@ class CertificateController extends BaseController
         Request $request,
         CertificateRepository $certificateRepository,
         CourseRepository $courseRepository,
-        ClassLevelRepository $classLevelRepository
+        ClassLevelRepository $classLevelRepository,
+        SubjectRepository $subjectRepository
     )
     {
-        $course_id = $request->get('course_id');
+        $subject_id = $request->get('subject_id');
         $user = auth('nqadmin')->user();
 
         $company = $classLevelRepository->find($user->classlevel);
 
         $certificate = $certificateRepository->findWhere([
-            'course_id' => $course_id,
+            'subject_id' => $subject_id,
             'user_id' => $user->id
         ])->first();
 
         if ($certificate == null) {
             $imageLink = '/upload/cert/'.time().base64_encode($user->first_name).'.png';
             $certificate = $certificateRepository->create([
-                'course_id' => $course_id,
+                'subject_id' => $subject_id,
                 'user_id' => $user->id,
                 'image' => $imageLink
             ]);
 
-            $course = $courseRepository->with(['getLdp' => function ($q) {
-                return $q->with('getClassLevel')
-                    ->with('getSubject');
-            }])->find($course_id);
+            $subject = $subjectRepository->find($subject_id);
 
             $borwser = new Browsershot();
 
-            $template = $course->getLdp->getSubject != null ? $course->getLdp->getSubject->template : 'nqadmin-course::frontend.certificate';
+            $template = $subject != null ? $subject->template : 'nqadmin-course::frontend.certificate';
 
             $html = view($template, compact(
-                'user', 'certificate', 'course', 'company'
+                'user', 'certificate', 'subject', 'company'
             ));
 
             $borwser->html($html)

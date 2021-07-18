@@ -2235,6 +2235,23 @@ header nav .menu .menu-main > li:hover > a {
 	color: #fff;
 }
 
+.get-certificate-item {
+	margin-bottom: 15px;
+}
+
+.get-certificate-name a.btn-disabled {
+	cursor: not-allowed;
+}
+
+.get-certificate-item .get-certificate-name {
+	font-size: 16px;
+	font-weight: 700;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 /*.banner {*/
 /*	background: url(../images/banner-bg.jpg) no-repeat center center;*/
 /*	background-size: cover;*/

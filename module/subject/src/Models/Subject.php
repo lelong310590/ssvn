@@ -9,6 +9,8 @@
 namespace Subject\Models;
 
 use ClassLevel\Models\ClassLevel;
+use Course\Models\Course;
+use Course\Models\CourseLdp;
 use Illuminate\Database\Eloquent\Model;
 use Users\Models\Users;
 use Carbon\Carbon;
@@ -57,4 +59,9 @@ class Subject extends Model
 	{
 		return $this->belongsToMany(ClassLevel::class, 'class_subject', 'subject_id', 'class_id');
 	}
+
+	public function getCourseLdp()
+    {
+        return $this->hasMany(CourseLdp::class, 'subject', 'id');
+    }
 }

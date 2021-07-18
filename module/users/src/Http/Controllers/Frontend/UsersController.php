@@ -632,19 +632,43 @@ class UsersController extends BaseController
         }
     }
 
+    /**
+     * @param CertificateRepository $certificateRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function getMyCertificate(
+        CertificateRepository $certificateRepository
+    )
+    {
+        $user = auth('nqadmin')->user();
+        $certificates = $certificateRepository->with('subject')->scopeQuery(function ($q) use ($user) {
+            return $q->where('user_id', $user->id);
+        })->paginate(15);
+
+        return view('nqadmin-course::frontend.my_certificate_list', compact(
+            'certificates'
+        ));
+    }
+
+    /**
+     * @param CertificateRepository $certificateRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
     public function getCertificate(
         CertificateRepository $certificateRepository
     )
     {
-        $user = auth('nqadmin')->id();
+        $user = auth('nqadmin')->user();
 
-//        $level = app(SubjectRepository::class)->findWhere(['status' => 'active']);
+        $company = app(ClassLevelRepository::class)->with(['subject' => function($q) {
+            return $q->with(['getCourseLdp' => function($c) {
+                return $c->with('getCourse')->get();
+            }])->get();
+        }])->find($user->classlevel);
 
-        $certificates = $certificateRepository->with('course')->scopeQuery(function ($q) use ($user) {
-            return $q->where('user_id', $user);
-        })->paginate(15);
-
-        return view('nqadmin-course::frontend.certificate_list', compact('certificates'));
+        return view('nqadmin-course::frontend.certificate_list', compact(
+            'company'
+        ));
     }
 
     public function getStat(

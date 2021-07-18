@@ -101,6 +101,9 @@ Route::group(['namespace' => 'Frontend'], function (Router $router) {
         $router->get('certificate', 'UsersController@getCertificate')
             ->name('front.users.certificate.get')->middleware('auth');
 
+        $router->get('my-certificate', 'UsersController@getMyCertificate')
+            ->name('front.users.my-certificate.get')->middleware('auth');
+
         $router->get('employers', 'UsersController@getEmployers')
             ->name('front.users.employers.get')->middleware('auth');
 

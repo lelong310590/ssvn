@@ -10,6 +10,7 @@
 namespace Course\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Subject\Models\Subject;
 
 class Certificate extends Model
 {
@@ -20,11 +21,17 @@ class Certificate extends Model
         'course_id',
         'created_at',
         'updated_at',
-        'image'
+        'image',
+        'subject_id'
     ];
 
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
 }

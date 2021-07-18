@@ -28,43 +28,78 @@ use Illuminate\Support\Facades\DB;
                     </div>
                     <div class="right-user col-xs-10">
                         <div class="text-center title-page">
-                            <h3 class="txt">Chứng chỉ của tôi</h3>
+                            <h3 class="txt">Các chứng chỉ dành cho người lao động của <br/>{{$company->name}}</h3>
                         </div>
                         <div class="box-my-course box-course">
                         <!--top-my-course-->
-
-                            <div class="content-my-course">
-                                <div class="row list-course">
-                                    @foreach($certificates as $c)
-                                        <div class="col-xs-3 main-course">
-                                            <div class="course">
-                                                <div class="img box-img">
-                                                    <img src="{{ asset($c->image) }}" alt="" width="" height="">
-                                                </div>
-                                                <div class="content">
-                                                    <h4 class="txt">
-                                                        {{$c->course->name}}
-                                                    </h4>
-                                                    <div class="certificate-toolbar">
-                                                        <a href="{{ asset($c->image) }}" download="true">
-                                                            <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                                        </a>
-
-                                                        <a data-fancybox="single" href="{{ asset($c->image) }}">
-                                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class="get-certificate-wrapper">
+                                    @foreach($company->subject as $c)
+                                    <div class="get-certificate-item">
+                                        <div class="get-certificate-name">
+                                            <span>{{$c->name}}</span>
+                                            @php
+                                                $totalCourse = $c->getCourseLdp->count();
+                                                $complateCourse = 0;
+                                                foreach ($c->getCourseLdp as $course) {
+                                                    if (number_format($course->getCourse->getProcess(),0) == 100) {
+                                                        $complateCourse += 1;
+                                                    }
+                                                }
+                                            @endphp
+                                            @if ($totalCourse == $complateCourse)
+                                                <a class="btn btn-success" href="{{route('nqadmin::course.certificate.get', ['subject_id' => $c->id, 'download' => true])}}">Nhận chứng chỉ</a>
+                                            @else
+                                                <a class="btn btn-success btn-disabled" disabled="true" href="#">Nhận chứng chỉ</a>
+                                            @endif
                                         </div>
+                                        <div class="clearfix"></div>
+                                        <p>
+                                            <small>Chứng chỉ bao gồm {{$c->getCourseLdp->count()}} bài học</small>
+                                        </p>
+                                        @foreach($c->getCourseLdp as $course)
+                                        <div class="get-certificate-sub-item">
+                                            <p>
+                                                <a href="{{route('front.course.buy.get', $course->getCourse->slug)}}">
+                                                    {{$loop->iteration}} - {{$course->getCourse->name}} - Hoàn thành {{ number_format($course->getCourse->getProcess(),0) }}%
+                                                </a>
+                                            </p>
+                                        </div>
+                                        @endforeach
+                                    </div>
                                     @endforeach
                                 </div>
-                            </div>
-                            <div class="box-paging clearfix">
-                                <div class="pull-right">
-                                    {{ $certificates->appends($_GET)->render() }}
-                                </div>
-                            </div>
+{{--                            <div class="content-my-course">--}}
+{{--                                <div class="row list-course">--}}
+{{--                                    @foreach($certificates as $c)--}}
+{{--                                        <div class="col-xs-3 main-course">--}}
+{{--                                            <div class="course">--}}
+{{--                                                <div class="img box-img">--}}
+{{--                                                    <img src="{{ asset($c->image) }}" alt="" width="" height="">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="content">--}}
+{{--                                                    <h4 class="txt">--}}
+{{--                                                        {{$c->course->name}}--}}
+{{--                                                    </h4>--}}
+{{--                                                    <div class="certificate-toolbar">--}}
+{{--                                                        <a href="{{ asset($c->image) }}" download="true">--}}
+{{--                                                            <i class="fa fa-cloud-download" aria-hidden="true"></i>--}}
+{{--                                                        </a>--}}
+
+{{--                                                        <a data-fancybox="single" href="{{ asset($c->image) }}">--}}
+{{--                                                            <i class="fa fa-eye" aria-hidden="true"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endforeach--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="box-paging clearfix">--}}
+{{--                                <div class="pull-right">--}}
+{{--                                    {{ $certificates->appends($_GET)->render() }}--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                         <!--box-my-course-->
                     </div>
