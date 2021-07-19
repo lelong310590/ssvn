@@ -42,12 +42,22 @@
                                             <input type="text" name="keyword" class="form-control" aria-label="" placeholder="Nhập SĐT, hoặc tên, CMND/CCCD" value="{{request()->get('keyword')}}">
                                         </div>
                                     </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-sm btn-primary "><i class="fa fa-search"></i> <span class="text">Tìm kiếm</span></button>
+                                    <li class="nav-item ml-2">
+                                        <div class="input-group">
+                                            <select name="company" id="inputID" class="form-control">
+                                                <option value=""> -- Tên công ty --</option>
+                                                @foreach($classlevel as $company)
+                                                    <option value="{{$company->id}}" {{request()->get('company') == $company->id ? 'selected' : ''}}>
+                                                        {{$company->name}} - MST: {{$company->mst}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </li>
-                                    <li class="ml-3"><span class="btn btn-info"> <a style="color:#fff" href="{{route('nqadmin::users.index.get')}}">Làm lại</a> </span></li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-sm btn-primary" style="height: 36px"><i class="fa fa-search"></i> <span class="text">Tìm kiếm</span></button>
+                                    </li>
                                 </ul>
-
                             </form>
                         </div>
                         <div class="card-body">

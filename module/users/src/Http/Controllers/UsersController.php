@@ -39,14 +39,29 @@ class UsersController extends BaseController
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function getIndex(Request $request)
+	public function getIndex(
+	    Request $request,
+        ClassLevelRepository $classLevelRepository
+    )
 	{
-        if($request->get('keyword')){
+	    $classlevel = $classLevelRepository->findWhere(['status' => 'active']);
+        if($request->get('keyword') || $request->get('company')){
             $keyword = $request->get('keyword');
-            $users = $this->users->with('getClassLevel')->scopeQuery(function($e) use($keyword){
-                return $e->where('phone', 'LIKE', '%'.$keyword.'%')
-                    ->orWhere('first_name', 'LIKE', '%'.$keyword.'%')
-                    ->orWhere('citizen_identification', 'LIKE', '%'.$keyword.'%');
+            $company = $request->get('company');
+            $users = $this->users->with('getClassLevel')->scopeQuery(function($e) use($keyword, $company){
+                if ($keyword && $company) {
+                    $query = $e->where('phone', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('first_name', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('citizen_identification', 'LIKE', '%'.$keyword.'%')
+                        ->where('classlevel', $company);
+                } elseif ($keyword) {
+                    $query = $e->where('phone', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('first_name', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('citizen_identification', 'LIKE', '%'.$keyword.'%');
+                } else {
+                    $query = $e->where('classlevel', $company);
+                }
+                return $query;
             })->orderBy('created_at', 'desc')->paginate(25);
         }else {
             $users = $this->users
@@ -54,11 +69,11 @@ class UsersController extends BaseController
                 ->with('getClassLevel')
                 ->orderBy('created_at', 'desc')
                 ->paginate(20);
-
         }
 
 		return view('nqadmin-users::backend.components.index', [
-			'data' => $users
+			'data' => $users,
+            'classlevel' => $classlevel
 		]);
 	}
 	
