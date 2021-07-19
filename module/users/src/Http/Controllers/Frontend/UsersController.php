@@ -1101,17 +1101,18 @@ class UsersController extends BaseController
     )
     {
         $user = auth('nqadmin')->user();
-        $company = app(ClassLevelRepository::class)->find($user->classlevel);
 
         if ($user->hard_role == 2) {
+            $company = app(ClassLevelRepository::class)->find($user->classlevel);
             $excelObj = new ExportLocal($company, $user->id);
         } elseif ($user->hard_role == 3) {
+            $company = app(ClassLevelRepository::class)->find($user->classlevel);
             $excelObj = new ExportLocal($company);
         } else {
             $province = $request->get('province');
             $district = $request->get('district');
             $ward = $request->get('ward');
-            $excelObj = new ExportLocal($company, false, $province, $district, $ward);
+            $excelObj = new ExportLocal(false, false, $province, $district, $ward);
         }
 
         return Excel::download($excelObj, 'data.xlsx');
