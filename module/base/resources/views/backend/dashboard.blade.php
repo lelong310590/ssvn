@@ -1,12 +1,6 @@
 @extends('nqadmin-dashboard::backend.master')
 @section('content')
 
-@php
-	$user = Auth::user();
-	$roles = $user->load('roles.perms');
-	$currentRole = $roles->roles->first()->name;
-@endphp
-
 <div class="wrapper-content">
 	<div class="container">
 		<div class="row  align-items-center justify-content-between">

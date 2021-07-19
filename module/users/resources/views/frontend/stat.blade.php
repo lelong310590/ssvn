@@ -181,7 +181,6 @@ use Illuminate\Support\Facades\DB;
                                             <div class="list-company">
                                                 @if (auth('nqadmin')->user()->hard_role > 3)
                                                 <p><b>Các doanh nghiệp trong địa phương</b></p>
-                                                <p><small style="color: red">Tỷ lệ tính theo số người đạt chứng chỉ trong đơn vị (%)</small></p>
                                                 @endif
 
                                                 @if (auth('nqadmin')->user()->hard_role > 3 && request()->get('ward') == null)
