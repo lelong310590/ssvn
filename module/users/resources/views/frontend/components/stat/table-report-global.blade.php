@@ -41,7 +41,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="{{4 + $courses->count()}}">Không có dữ liệu</td>
+                    <td colspan="{{4 + $registerdSubject->count()}}">Không có dữ liệu</td>
                 </tr>
             @endforelse
             </tbody>

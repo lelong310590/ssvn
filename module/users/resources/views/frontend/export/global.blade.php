@@ -2,10 +2,10 @@
 <table>
     <thead>
     <tr>
-        <td colspan="{{4 + $course->count() * 2}}" style="text-align: center; text-transform: uppercase; font-weight: 700; font-size: 18px">Thống kê các doanh nghiệp trong địa bàn</td>
+        <td colspan="{{3 + $registerdSubject->count()}}" style="text-align: center; text-transform: uppercase; font-weight: 700; font-size: 18px">Thống kê các doanh nghiệp trong địa bàn</td>
     </tr>
     <tr>
-        <td colspan="{{4 + $course->count() * 2}}" style="text-align: center; text-transform: uppercase; font-weight: 700; font-size: 16px">
+        <td colspan="{{3 + $registerdSubject->count()}}" style="text-align: center; text-transform: uppercase; font-weight: 700; font-size: 16px">
             @if ($ward != false)
                 {{$ward->ward_name}}
             @endif

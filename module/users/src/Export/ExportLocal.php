@@ -56,7 +56,6 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
             $ward = false;
 
             $registerdSubject = app(SubjectRepository::class)->all();
-            $statByArea = $this->getStatsByArea($this->province, $this->district);
 
             if ($this->district != false) {
                 $district = app(DistrictsRepository::class)->find($this->district);
@@ -64,6 +63,8 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
             if ($this->ward != false) {
                 $ward = app(WardsRepository::class)->find($this->ward);
             }
+
+            $statByArea = $this->getStatsByArea($this->province, $this->district);
 
             return view('nqadmin-users::frontend.export.global', compact(
                 'companies',
