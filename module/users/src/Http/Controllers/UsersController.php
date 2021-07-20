@@ -15,6 +15,8 @@ use Cart\Repositories\OrdersRepository;
 use ClassLevel\Repositories\ClassLevelRepository;
 use Course\Repositories\CurriculumProgressRepository;
 use Course\Repositories\TestResultRepository;
+use Users\Http\Requests\ManagerRequest;
+use Users\Http\Requests\TransferRequest;
 use Users\Http\Requests\UserCreateRequest;
 use Users\Http\Requests\UserEditRequest;
 use Illuminate\Http\Request;
@@ -52,6 +54,7 @@ class UsersController extends BaseController
                 if ($keyword && $company) {
                     $query = $e->where('phone', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('first_name', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('last_name', 'LIKE', '%'.$keyword.'%')
                         ->orWhere('citizen_identification', 'LIKE', '%'.$keyword.'%')
                         ->where('classlevel', $company);
                 } elseif ($keyword) {
@@ -227,53 +230,73 @@ class UsersController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function getEmployer(
-        Request $request
+        Request $request,
+        ClassLevelRepository $classLevelRepository
     )
     {
         if($request->get('keyword')){
             $keyword = $request->get('keyword');
-            $employers = $this->users->with('getClassLevel')->scopeQuery(function($e) use($keyword){
-                return $e->where('phone', 'LIKE', '%'.$keyword.'%')
-                    ->where('hard_role', '<', 3)
-                    ->orWhere('first_name', 'LIKE', '%'.$keyword.'%')
-                    ->orWhere('citizen_identification', 'LIKE', '%'.$keyword.'%');
-            })->orderBy('created_at', 'desc')->paginate(25);
+            $company = $classLevelRepository->scopeQuery(function($e) use($keyword){
+                return $e->where('name', 'LIKE', '%'.$keyword.'%')
+                    ->orWhere('mst', 'LIKE', '%'.$keyword.'%');
+            })->orderBy('created_at', 'desc')->paginate(30);
         }else {
-            $employers = $this->users
-                ->with('roles')
-                ->with('getClassLevel')
-                ->where('hard_role', '<', 3)
+            $company = $classLevelRepository
                 ->orderBy('created_at', 'desc')
                 ->paginate(25);
 
         }
-        return view('nqadmin-users::backend.components.employer', compact('employers'));
+        return view('nqadmin-users::backend.components.employer', compact('company'));
     }
 
+    /**
+     * @param $id
+     * @param RoleRepository $roleRepository
+     * @param ClassLevelRepository $classLevelRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
     public function getTransfer(
         $id,
-        RoleRepository $roleRepository,
-        ClassLevelRepository $classLevelRepository
+        Request $request,
+        ClassLevelRepository $classLevelRepository,
+        UsersRepository $usersRepository
     )
     {
-        $classLevel = $classLevelRepository->findWhere([
-            'status' => 'active'
-        ]);
+        $company =  $classLevelRepository->find($id);
+        if ($request->get('keyword') != null) {
+            $keyword = $request->get('keyword');
+            $employer = $usersRepository->getModel()
+                ->with('getManager')
+                ->where([
+                    ['status', '=', 'active'],
+                    ['classlevel', '=' , $id],
+                    ['hard_role', '=' ,1]
+                ])
+                ->where(function($query) use ($keyword) {
+                    $query->where('phone', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('first_name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('last_name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('citizen_identification', 'LIKE', '%' . $keyword . '%');
+                })
+                ->paginate(30);
+        } else {
+            $employer = $usersRepository->getModel()
+                ->with('getManager')
+                ->where('status', 'active')
+                ->where('hard_role', 1)
+                ->where('classlevel', $id)
+                ->paginate(30);
+        }
 
-        $user = $this->users->with('getClassLevel')->find($id);
-        $company = $user->classlevel;
-        $managerInCompany = $this->users->findWhere([
-            'classlevel' => $company,
-            'hard_role' => 2,
-            'status' => 'active',
-            ['id', '!=', $id]
-        ]);
+        $manager = $usersRepository->getModel()
+            ->where('status', 'active')
+            ->whereIn('hard_role', [2, 3])
+            ->where('classlevel', $id)
+            ->get();
 
-        return view('nqadmin-users::backend.components.transfer', [
-            'data' => $user,
-            'classLevel' => $classLevel,
-            'managerInCompany' => $managerInCompany,
-        ]);
+        return view('nqadmin-users::backend.components.transfer', compact(
+            'company', 'employer', 'manager'
+        ));
     }
 
     /**
@@ -283,24 +306,130 @@ class UsersController extends BaseController
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function postTransfer(
-        $id,
-        Request $request
+        TransferRequest $request
     )
     {
-        $newmanager = $request->get('newmanager');
+        $action = $request->get('action');
+        $employer = $request->get('employers');
+        switch ($action) {
+            case 'transfer':
+                $manager = $request->get('manager');
+                Users::whereIn('id', $employer)
+                        ->update([
+                            'manager' => $manager
+                        ]);
+                break;
+            case 'fire':
+                Users::whereIn('id', $employer)
+                    ->update([
+                        'classlevel' => null,
+                        'hard_role' => 1
+                    ]);
+                break;
+            case 'up':
+                Users::whereIn('id', $employer)
+                    ->update([
+                        'hard_role' => 2
+                    ]);
+                break;
+            default:
 
-        if ($newmanager != null) {
-            Users::where('status', 'active')
-                ->where('hard_role', 1)
-                ->where('manager', $id)
-                ->update([
-                    'manager' => $newmanager
-                ]);
         }
 
-        $this->users->update([
-            'classlevel' => $request->get('classlevel')
-        ], $id);
+        return redirect()->back()->with(FlashMessage::returnMessage('edit'));
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @param ClassLevelRepository $classLevelRepository
+     * @param UsersRepository $usersRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function getManager(
+        $id,
+        Request $request,
+        ClassLevelRepository $classLevelRepository,
+        UsersRepository $usersRepository
+    )
+    {
+        $company =  $classLevelRepository->find($id);
+        if ($request->get('keyword') != null) {
+            $keyword = $request->get('keyword');
+            $manager = $usersRepository->getModel()
+                ->withCount('getEmployer')
+                ->where([
+                    ['status', '=', 'active'],
+                    ['classlevel', '=' , $id],
+                ])
+                ->whereIn('hard_role', [2, 3])
+                ->where(function($query) use ($keyword) {
+                    $query->where('phone', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('first_name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('last_name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('citizen_identification', 'LIKE', '%' . $keyword . '%');
+                })
+                ->paginate(30);
+        } else {
+            $manager = $usersRepository->getModel()
+                ->withCount('getEmployer')
+                ->where('status', 'active')
+                ->where('classlevel', $id)
+                ->whereIn('hard_role', [2, 3])
+                ->paginate(30);
+        }
+
+        return view('nqadmin-users::backend.components.manager', compact(
+            'company', 'manager'
+        ));
+    }
+
+    public function postManager(
+        $id,
+        ManagerRequest $request
+    )
+    {
+        $action = $request->get('action');
+        $manager = $request->get('manager');
+        $changeManager = $request->get('change_manager');
+        switch ($action) {
+            case 'getall':
+                Users::where('classlevel', $id)
+                    ->where('hard_role', 1)
+                    ->where('manager', null)
+                    ->update([
+                        'manager' => $manager
+                    ]);
+                break;
+            case 'fire':
+                Users::where('id', $manager)
+                    ->update([
+                        'hard_role' => 1,
+                        'classlevel' => null
+                    ]);
+
+                //Change manager
+                Users::where('manager', $manager)
+                    ->update([
+                        'manager' => $changeManager
+                    ]);
+
+                break;
+            case 'down':
+                Users::where('id', $manager)
+                    ->update([
+                        'hard_role' => 1,
+                    ]);
+
+                //Change manager
+                Users::where('manager', $manager)
+                    ->update([
+                        'manager' => $changeManager
+                    ]);
+                
+                break;
+            default:
+        }
 
         return redirect()->back()->with(FlashMessage::returnMessage('edit'));
     }

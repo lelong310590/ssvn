@@ -248,6 +248,11 @@ class Users extends Authenticatable
         return $this->hasMany(Users::class, 'manager', 'id');
     }
 
+    public function getManager()
+    {
+        return $this->belongsTo(Users::class, 'manager', 'id');
+    }
+
     public function getEmployerCertificate()
     {
         return $this->hasManyThrough(
