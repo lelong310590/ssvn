@@ -13,16 +13,11 @@ class CreateCertificateStatTable extends Migration
      */
     public function up()
     {
-        Schema::create('certificate_stat', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('company')->nullable();
-            $table->integer('user')->nullable();
-            $table->integer('subject')->nullable();
+        Schema::table('certificate', function (Blueprint $table) {
             $table->integer('province')->nullable();
             $table->integer('district')->nullable();
             $table->integer('ward')->nullable();
             $table->string('type')->nullable()->default('personal');
-            $table->timestamps();
         });
     }
 
@@ -33,6 +28,11 @@ class CreateCertificateStatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('certificate_stat');
+        Schema::table('certificate', function (Blueprint $table) {
+            $table->dropColumn('province');
+            $table->dropColumn('district');
+            $table->dropColumn('ward');
+            $table->dropColumn('type');
+        });
     }
 }
