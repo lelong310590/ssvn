@@ -47,7 +47,7 @@ use Illuminate\Support\Facades\DB;
                                                 }
                                             @endphp
                                             @if ($totalCourse == $complateCourse)
-                                                <a class="btn btn-success" href="{{route('nqadmin::course.certificate.get', ['subject_id' => $c->id, 'download' => true])}}">Nhận chứng chỉ</a>
+                                                <a class="btn btn-success" href="{{route('nqadmin::course.certificate.get', ['subject_id' => $c->id, 'download' => true, 'type' => 'personal'])}}">Nhận chứng chỉ</a>
                                             @else
                                                 <a class="btn btn-success btn-disabled" disabled="true" href="#">Nhận chứng chỉ</a>
                                             @endif

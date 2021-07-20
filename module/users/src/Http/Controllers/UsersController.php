@@ -13,8 +13,11 @@ use Base\Supports\FlashMessage;
 use Cart\Repositories\OrderDetailsRepository;
 use Cart\Repositories\OrdersRepository;
 use ClassLevel\Repositories\ClassLevelRepository;
+use Course\Models\Certificate;
+use Course\Repositories\CertificateRepository;
 use Course\Repositories\CurriculumProgressRepository;
 use Course\Repositories\TestResultRepository;
+use Users\Events\ChangeUserCompanyEvent;
 use Users\Http\Requests\ManagerRequest;
 use Users\Http\Requests\TransferRequest;
 use Users\Http\Requests\UserCreateRequest;
@@ -162,6 +165,8 @@ class UsersController extends BaseController
 			}
 
 			$this->users->update($data, $id);
+
+            event(new ChangeUserCompanyEvent($id, 'personal', $request->get('classlevel')));
 //			$user->roles()->sync($data['role']);
 
 			return redirect()->back()->with(FlashMessage::returnMessage('edit'));
@@ -325,6 +330,10 @@ class UsersController extends BaseController
                         'classlevel' => null,
                         'hard_role' => 1
                     ]);
+
+                //Change certificate status
+                event(new ChangeUserCompanyEvent($employer, 'personal', null));
+
                 break;
             case 'up':
                 Users::whereIn('id', $employer)
@@ -407,6 +416,9 @@ class UsersController extends BaseController
                         'hard_role' => 1,
                         'classlevel' => null
                     ]);
+
+                //Change certificate status
+                event(new ChangeUserCompanyEvent($manager, 'personal', null));
 
                 //Change manager
                 Users::where('manager', $manager)

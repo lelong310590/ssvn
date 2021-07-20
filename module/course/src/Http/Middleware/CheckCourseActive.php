@@ -10,6 +10,7 @@ namespace Course\Http\Middleware;
 
 use Cart\Models\Order;
 use Cart\Models\OrderDetail;
+use Cart\Models\UserSubject;
 use Closure;
 use Course\Models\Course;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,9 @@ class CheckCourseActive
         }
 
         if (Auth::check()) {
-            $course = Course::find($course->id);
+            $course = Course::with('getSubject')->find($course->id);
+            $subject = $course->getSubject->count() > 0 ? $course->getSubject->first()->id : null;
+            $user = auth('nqadmin')->user();
             if (!$course->checkBought() && $course->price == 0) {
                 $order = Order::create([
                     'customer' => Auth::user()->id,
@@ -39,6 +42,7 @@ class CheckCourseActive
                     'payment_method' => 'direct',
                     'status' => 'done',
                 ]);
+
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'course_id' => $course->id,
@@ -49,6 +53,37 @@ class CheckCourseActive
                     'coupon_id' => null,
                     'status' => 'done',
                 ]);
+
+                //insert to usersubject for stats
+                $registered = UserSubject::where([
+                    ['user', '=', auth('nqamin')->id()],
+                    ['subject', '=', $subject],
+                    ['company', '=', $user->classlevel],
+                    ['type' , '=', 'personal']
+                ]);
+
+                if ($registered->count() == 0) {
+                    UserSubject::create([
+                        'user'  => auth('nqamin')->id(),
+                        'subject' => $subject,
+                        'company' => $user->classlevel,
+                        'type' => 'personal'
+                    ]);
+                }
+
+                $companyRegister = UserSubject::where([
+                    ['subject', '=', $subject],
+                    ['company', '=', $user->classlevel],
+                    ['type' , '=', 'enterprise']
+                ]);
+
+                if ($companyRegister->count() == 0) {
+                    UserSubject::create([
+                        'subject' => $subject,
+                        'company' => $user->classlevel,
+                        'type' => 'enterprise'
+                    ]);
+                }
             }
         }
 

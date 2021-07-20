@@ -28,5 +28,6 @@ class ModuleProvider extends ServiceProvider
         $this->app->register(HookProvider::class);
         $this->app->register(InstallModuleProvider::class);
         $this->app->register(MiddlewareProvider::class);
+        $this->app->register(EventServiceProvider::class);
     }
 }

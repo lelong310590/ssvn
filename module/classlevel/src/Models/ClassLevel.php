@@ -12,6 +12,7 @@ use Base\Models\Districts;
 use Base\Models\Provinces;
 use Base\Models\Wards;
 use Cart\Models\OrderDetail;
+use Cart\Models\UserSubject;
 use Course\Models\Certificate;
 use Course\Models\Course;
 use Illuminate\Database\Eloquent\Model;
@@ -94,6 +95,11 @@ class ClassLevel extends Model
             'customer',
             'id'
         );
+    }
+
+    public function getEnjoynedEmployerInCompany()
+    {
+        return $this->hasMany(UserSubject::class, 'company', 'id');
     }
 
     public function getCertificate()

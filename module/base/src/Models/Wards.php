@@ -9,9 +9,11 @@
 
 namespace Base\Models;
 
+use Cart\Models\UserSubject;
 use ClassLevel\Models\ClassLevel;
 use Course\Models\Certificate;
 use Illuminate\Database\Eloquent\Model;
+use Users\Models\Users;
 
 class Wards extends Model
 {
@@ -28,15 +30,36 @@ class Wards extends Model
         return $this->hasMany(ClassLevel::class, 'ward', 'id');
     }
 
-    public function getCertificate()
+    public function getEnjoynedEmployerInCompany()
     {
         return $this->hasManyThrough(
-            Certificate::class,
+            UserSubject::class,
             ClassLevel::class,
             'ward',
-            'company_id',
+            'company',
             'id'
         );
+    }
+
+    public function getCertificate()
+    {
+        return $this->hasMany(Certificate::class, 'ward', 'id');
+    }
+
+    public function getEnjoynedCompany()
+    {
+        return $this->hasManyThrough(
+            UserSubject::class,
+            ClassLevel::class,
+            'ward',
+            'company',
+            'id'
+        );
+    }
+
+    public function getCompanyCertificate()
+    {
+        return $this->hasMany(Certificate::class, 'ward', 'id');
     }
 
     public function getAreanameAttribute()

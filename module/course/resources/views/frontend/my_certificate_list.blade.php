@@ -38,10 +38,13 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-xs-3 main-course">
                                             <div class="course">
                                                 <div class="img box-img">
+                                                    @if ($c->type == 'enterprise')
+                                                        <div class="certificate-tag">Doanh nghiệp</div>
+                                                    @endif
                                                     <img src="{{ asset($c->image) }}" alt="" width="" height="">
                                                 </div>
                                                 <div class="content">
-                                                    <h4 class="txt">
+                                                    <h4 class="txt certificate-title">
                                                         {{$c->subject->name}}
                                                     </h4>
                                                     <div class="certificate-toolbar">
