@@ -49,38 +49,36 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Danh sách nhân sự</h5>
+                                <h5 class="card-title">Danh sách quản lý</h5>
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered" id="#">
                                     <thead>
                                     <tr>
-                                        <th>
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="checkall" name="checkall">
-                                            </div>
-                                        </th>
+                                        <th></th>
                                         <th width="50">STT</th>
                                         <th width="200">Họ và tên</th>
                                         <th width="200">CMND/CCCD</th>
                                         <th width="150">Số điện thoại</th>
                                         <th width="100">Giới tính</th>
                                         <th width="150">Tuổi</th>
-                                        <th width="100">Quản lý bởi </th>
+                                        <th width="100">Số LĐ đang quản lý </th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     @php
-                                        $i = $employer->perPage() * ($employer->currentPage() - 1) + 1
+                                        $i = $manager->perPage() * ($manager->currentPage() - 1) + 1
                                     @endphp
 
-                                    @foreach($employer as $e)
+                                    @foreach($manager as $e)
                                         <tr class="{{ $loop->index % 2 == 0 ? 'odd' : 'even' }}">
                                             <td>
+                                                @if ($e->hard_role != 3)
                                                 <div class="checkbox">
-                                                    <input type="checkbox" value="{{$e->id}}" name="employers[]"/>
+                                                    <input type="checkbox" value="{{$e->id}}" name="manager"/>
                                                 </div>
+                                                @endif
                                             </td>
                                             <td class="text-center">{{$i++}}</td>
                                             <td>{{ $e->first_name }} {{$e->last_name}}</td>
@@ -92,10 +90,10 @@
                                                 <p>Tuổi: {{ $e->old }}</p>
                                             </td>
                                             <td>
-                                                @if ($e->getManager != null)
-                                                    {{$e->getManager->first_name}} {{$e->getManager->last_name}}
+                                                @if ($e->hard_role == 3)
+                                                    Chủ doanh nghiệp
                                                 @else
-                                                    Không có
+                                                    {{$e->get_employer_count}}
                                                 @endif
                                             </td>
                                         </tr>
@@ -106,7 +104,7 @@
                                 <div class="row">
                                     <div class="container ">
                                         <nav aria-label="..." class="align-self-center">
-                                            @include('nqadmin-dashboard::backend.components.pagination',['paginator'=>$employer])
+                                            @include('nqadmin-dashboard::backend.components.pagination',['paginator'=>$manager])
                                         </nav>
                                     </div>
                                 </div>
@@ -120,28 +118,34 @@
                                 <h5 class="card-title">Thao tác</h5>
                             </div>
                             <div class="card-body">
-                                <select name="action" id="action-list" class="form-control">
-                                    <option value="transfer">Chuyển quyền quản lý</option>
-                                    <option value="fire">Sa thải</option>
-                                    <option value="up">Thăng cấp</option>
-                                </select>
-                                <input type="hidden" name="manager" value="" id="managerId">
-                                <table class="table table-bordered table-hover mt-3 manager-list">
-                                    <tbody>
-                                    @foreach($manager as $m)
-                                        <tr>
-                                            <td style="cursor: pointer" class="select-manager" data-id="{{$m->id}}">
+                                <div class="form-group">
+                                    <select name="action" id="action-list" class="form-control">
+                                        <option value="getall">Quản lý các LĐ còn lại</option>
+                                        <option value="fire">Sa thải</option>
+                                        <option value="down">Hạ cấp</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group manager-action">
+                                    <div class="alert alert-danger">
+                                        Đối với lựa chọn hạ cấp hoặc sa thải quản lý cần phải điều chuyển các nhân sự dưới quyền quản lý đó!
+                                    </div>
+
+                                    <select name="change_manager" class="form-control">
+                                        <option value="">Chưa điều chuyển</option>
+                                        @foreach($manager as $m)
+                                            <option value="{{$m->id}}">
                                                 {{$m->first_name}} {{$m->last_name}} -
                                                 @if ($m->hard_role == 3)
                                                     Chủ doanh nghiệp
                                                 @else
                                                     Quản lý
                                                 @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary" style="margin-top: 20px">Thực hiện</button>
                                 </div>
@@ -152,45 +156,39 @@
             </form>
         </div>
     </div>
-
 @endsection
 
 @push('css')
     <style>
-        .select-manager.active {
-            background-color: #0a6aa1;
-            color: #fff
-        }
+	    .manager-action {
+		    display: none;
+	    }
 
-        .sticky-card {
-	        position: sticky;
-	        position: -webkit-sticky;
-	        position: sticky;
-	        top: 120px;
-        }
+		.sticky-card {
+			position: sticky;
+			position: -webkit-sticky;
+			position: sticky;
+			top: 120px;
+		}
     </style>
 @endpush
 
 @push('js')
     <script type="text/javascript">
-	    $(document).ready(function () {
-	    	$('body').on('click', '.select-manager', function () {
-	    		$('.select-manager').removeClass('active')
-                $(this).addClass('active')
-	    		let value = $(this).attr('data-id');
-	    		$('#managerId').val(value);
-            })
+		$(document).ready(function () {
+			let checkbox = $('input[name="manager"]')
+			checkbox.click(function(){
+				checkbox.prop('checked', false)
+				$(this).prop('checked', true);
+			});
 
-		    $("#checkall").click(function(){
-			    $('input[name="employers[]"]').prop('checked', this.checked);
-		    });
-
-	    	$('#action-list').click(function () {
-	    		let value = $(this).val();
-	    		if (value != 'transfer') {
-	    			$('.manager-list').hide();
-                }
-            })
-        })
+			$('#action-list').click(function () {
+				let value = $(this).val();
+				if (value != 'getall') {
+					$('.manager-action').show();
+				}
+			})
+		})
     </script>
 @endpush
+

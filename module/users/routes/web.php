@@ -56,6 +56,12 @@ Route::group(['prefix' => $adminRoute], function (Router $router) use ($adminRou
         $router->post('transfer/{id}', 'UsersController@postTransfer')
             ->name('nqadmin::employer.transfer.post');
 
+        $router->get('manager/{id}', 'UsersController@getManager')
+            ->name('nqadmin::manager.transfer.get');
+
+        $router->post('manager/{id}', 'UsersController@postManager')
+            ->name('nqadmin::manager.transfer.post');
+
     });
 });
 
