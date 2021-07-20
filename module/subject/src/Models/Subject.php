@@ -9,6 +9,7 @@
 namespace Subject\Models;
 
 use ClassLevel\Models\ClassLevel;
+use Course\Models\Certificate;
 use Course\Models\Course;
 use Course\Models\CourseLdp;
 use Illuminate\Database\Eloquent\Model;
@@ -63,5 +64,10 @@ class Subject extends Model
 	public function getCourseLdp()
     {
         return $this->hasMany(CourseLdp::class, 'subject', 'id');
+    }
+
+    public function getCertificates()
+    {
+        return $this->hasMany(Certificate::class, 'subject_id', 'id');
     }
 }

@@ -5,7 +5,6 @@
 				labels: [
 					'Nam',
 					'Nữ',
-					'Khác'
 				],
 				datasets: [{
 					label: 'My First Dataset',

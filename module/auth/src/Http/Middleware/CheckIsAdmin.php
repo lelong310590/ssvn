@@ -18,6 +18,6 @@ class CheckIsAdmin
             return $next($request);
         }
 
-        return redirect()->back()->with('Bạn không có quyền truy cập nội dung này');
+        return redirect(route('front.home.index.get'));
     }
 }

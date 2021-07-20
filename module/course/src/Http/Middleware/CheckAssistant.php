@@ -26,7 +26,7 @@ class CheckAssistant
         $course = Course::find($course->id);
 
         if ($userId != 1 &&  $userId != $course->assistant && $userId != $course->author) {
-            return redirect()->back()->withErrors('Bạn không có quyền phụ trách Khóa đào tạonày');
+            return redirect()->back()->withErrors('Bạn không có quyền phụ trách Khóa đào tạo này');
         }
 
         return $next($request);

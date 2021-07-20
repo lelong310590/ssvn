@@ -49,7 +49,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-xs-12 col-md-3">
                                             <div class="stats-item">
                                                 <i class="far fa-building"></i>
-                                               <p> Doanh nghiệp tham gia: <b>{{$company->count()}}</b></p>
+                                                <p> Doanh nghiệp tham gia: <b>{{$company->count()}}</b></p>
                                             </div>
                                         </div>
 
@@ -63,7 +63,8 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-xs-12 col-md-3">
                                             <div class="stats-item">
                                                 <i class="fas fa-certificate"></i>
-                                                <p> Chứng chỉ cấp phát: <b>{{$certificates}}</b></p>
+                                                <p> Tổng lao động đạt CC: <b>{{$certificates}} ({{round($certificates/$employers, 4) * 100}}%)</b></p>
+                                                <p> Tổng doanh nghiệp đạt CC: <b>{{0}} ({{round(0/$employers, 4) * 100}}%)</b></p>
                                             </div>
                                         </div>
 

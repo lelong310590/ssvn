@@ -29,35 +29,58 @@ class CertificateController extends BaseController
     )
     {
         $subject_id = $request->get('subject_id');
+        $type = $request->get('type');
+
         $user = auth('nqadmin')->user();
 
         $company = $classLevelRepository->find($user->classlevel);
 
-        $certificate = $certificateRepository->findWhere([
-            'subject_id' => $subject_id,
-            'user_id' => $user->id
-        ])->first();
+        if ($type == 'personal') {
+            $certificate = $certificateRepository->findWhere([
+                'subject_id' => $subject_id,
+                'user_id' => $user->id,
+                'type' => $type
+            ])->first();
+        } else {
+            $certificate = $certificateRepository->findWhere([
+                'subject_id' => $subject_id,
+                'company_id' => $company,
+                'type' => $type
+            ])->first();
+        }
+
 
         if ($certificate == null) {
             $imageLink = '/upload/cert/'.time().base64_encode($user->first_name).'.png';
-            $certificate = $certificateRepository->create([
+
+            $data = [
                 'subject_id' => $subject_id,
                 'user_id' => $user->id,
                 'image' => $imageLink,
-                'company_id' => $user->classlevel
-            ]);
+                'company_id' => $user->classlevel,
+                'type' => $type
+            ];
+
+            if ($user->classlevel != null) {
+                $companyInfo = $classLevelRepository->find($user->classlevel);
+                $data['province'] = $companyInfo->province;
+                $data['district'] = $companyInfo->district;
+                $data['ward'] = $companyInfo->ward;
+            }
+
+            $certificate = $certificateRepository->create($data);
 
             $subject = $subjectRepository->find($subject_id);
 
-            $borwser = new Browsershot();
+            $browser = new Browsershot();
 
             $template = $subject != null ? $subject->template : 'nqadmin-course::frontend.certificate';
 
             $html = view($template, compact(
-                'user', 'certificate', 'subject', 'company'
+                'user', 'certificate', 'subject', 'company', 'type'
             ));
 
-            $borwser->html($html)
+            $browser->html($html)
                 ->ignoreHttpsErrors()
                 ->noSandbox()
                 ->windowSize(1122.52, 793.7)

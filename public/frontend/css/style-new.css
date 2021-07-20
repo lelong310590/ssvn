@@ -3010,6 +3010,7 @@ footer .list-unstyled li {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 10px;
 }
 
 .certificate-toolbar a {
@@ -3373,10 +3374,15 @@ footer .list-unstyled li {
 	margin-bottom: 20px;
 }
 
+.stats-wrapper .stats-item:nth-child(1) i {
+	color: red
+}
+
 .stats-item {
 	border-radius: 4px;
 	padding: 15px;
-	border: 1px solid #d7d7d7
+	border: 1px solid #d7d7d7;
+	min-height: 162px;
 }
 
 .stats-item i {

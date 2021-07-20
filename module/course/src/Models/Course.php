@@ -141,10 +141,10 @@ class Course extends Model
         return $this->belongsToMany(ClassLevel::class, (new CourseLdp())->getTable(), 'course_id', 'classlevel');
     }
 
-//    public function getSubject()
-//    {
-//        return $this->belongsToMany(Subject::class, (new CourseLdp())->getTable(), 'course_id', 'subject');
-//    }
+    public function getSubject()
+    {
+        return $this->belongsToMany(Subject::class, (new CourseLdp())->getTable(), 'course_id', 'subject');
+    }
 
     public function getAdvertise()
     {

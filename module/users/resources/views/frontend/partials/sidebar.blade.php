@@ -21,6 +21,14 @@
 {{--        <li><a href="{{ route('front.users.notification.get') }}" class="{{ strpos(url()->full(), route('front.users.notification.get')) !== false?'active':'' }}">Thông báo</a></li>--}}
         @endif
 
+        @if (auth('nqadmin')->user()->hard_role == 3)
+            <li>
+                <a href="{{ route('front.users.certificate_enterprise.get') }}" class="{{ strpos(url()->full(), route('front.users.certificate_enterprise.get')) !== false?'active':'' }}">
+                    Chứng chỉ doanh nghiệp
+                </a>
+            </li>
+        @endif
+
         @if (auth('nqadmin')->user()->hard_role < 4)
             <li><a href="{{ route('front.users.certificate.get') }}" class="{{ strpos(url()->full(), route('front.users.certificate.get')) !== false?'active':'' }}">Danh sách Chứng chỉ</a></li>
             <li><a href="{{ route('front.users.my-certificate.get') }}" class="{{ strpos(url()->full(), route('front.users.my-certificate.get')) !== false?'active':'' }}">Chứng chỉ của tôi</a></li>

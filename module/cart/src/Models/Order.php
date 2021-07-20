@@ -15,7 +15,14 @@ use Users\Models\Users;
 class Order extends Model
 {
     protected $table = 'orders';
-    protected $fillable = ['customer', 'total_price', 'payment_method ', 'status', 'token'];
+
+    protected $fillable = [
+        'customer',
+        'total_price',
+        'payment_method ',
+        'status',
+        'token',
+    ];
 
     /**
      * Relation 1 - n with Detail
@@ -23,7 +30,7 @@ class Order extends Model
      */
     public function detail()
     {
-        return $this->hasMany(OrderDetail::class, 'order_id');
+        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
     }
 
     public function getCustomer()

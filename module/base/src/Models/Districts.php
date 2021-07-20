@@ -9,9 +9,12 @@
 
 namespace Base\Models;
 
+use Cart\Models\Order;
+use Cart\Models\UserSubject;
 use ClassLevel\Models\ClassLevel;
 use Course\Models\Certificate;
 use Illuminate\Database\Eloquent\Model;
+use Users\Models\Users;
 
 class Districts extends Model
 {
@@ -33,19 +36,40 @@ class Districts extends Model
         return $this->hasMany(ClassLevel::class, 'district', 'id');
     }
 
-    public function getAreanameAttribute()
+    public function getEnjoynedEmployerInCompany()
     {
-        return $this->attributes['district_name'];
+        return $this->hasManyThrough(
+            UserSubject::class,
+            ClassLevel::class,
+            'district',
+            'company',
+            'id'
+        );
+    }
+
+    public function getEnjoynedCompany()
+    {
+        return $this->hasManyThrough(
+            UserSubject::class,
+            ClassLevel::class,
+            'district',
+            'company',
+            'id'
+        );
+    }
+
+    public function getCompanyCertificate()
+    {
+        return $this->hasMany(Certificate::class, 'district', 'id');
     }
 
     public function getCertificate()
     {
-        return $this->hasManyThrough(
-            Certificate::class,
-            ClassLevel::class,
-            'district',
-            'company_id',
-            'id'
-        );
+        return $this->hasMany(Certificate::class, 'district', 'id');
+    }
+
+    public function getAreanameAttribute()
+    {
+        return $this->attributes['district_name'];
     }
 }
