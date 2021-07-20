@@ -1,24 +1,15 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style>
-	#cell {
-		background-color: #000000;
-		color: #ffffff;
+	.text-center {
+		text-align: center;
 	}
-
-	.cell {
-		background-color: #000000;
-		color: #ffffff;
+	.text-left {
+		text-align: left;
 	}
-
-	tr td {
-		background-color: #ffffff;
+	.text-right {
+		text-align: right;
 	}
-
-	tr > td {
-		border-bottom: 1px solid #000000;
-	}
-
 </style>
 <table border="1">
     <tbody>

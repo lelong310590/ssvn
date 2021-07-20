@@ -117,61 +117,32 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
      */
     public function styles(Worksheet $sheet)
     {
-        return [
-            // Style the first row as bold text.
-            3    => ['font' => ['bold' => true]],
-            4    => ['font' => ['bold' => true]],
-            5    => ['font' => ['bold' => true]],
-        ];
+
     }
 
-    public function getCompany($province, $district, $ward)
-    {
-        $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate']);
-        if ($province != null) {
-            if ($district != null) {
-                if ($ward != null) {
-                    $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate'])
-                        ->where('province', $province)
-                        ->where('district', $district)
-                        ->where('ward', $ward);
-                } else {
-                    $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate'])
-                        ->where('province', $province)
-                        ->where('district', $district);
-                }
-            } else {
-                $companyModel = ClassLevel::withCount(['getUsers', 'getCertificate'])
-                    ->where('province', $province);
-            }
-        }
-
-        $result = $companyModel
-            ->with(['getLearnedUser' => function($q) {
-                $q->selectRaw('vjc_order_details.customer, vjc_order_details.course_id,  COUNT(*) AS total_learned_employer')
-                    ->groupBy('order_details.course_id');
-            }])
-            ->with(['getCertificate' => function($q) {
-                $q->selectRaw('vjc_certificate.user_id, vjc_certificate.course_id,  COUNT(*) AS total_completed_employer')
-                    ->groupBy('certificate.course_id');
-            }])
-            ->get();
-
-        return $result;
-    }
-
-    /**
-     * @param $province
-     * @param $district
-     * @return mixed
-     */
     public function getStatsByArea($province, $district)
     {
         if ($district == null) {
             return app(DistrictsRepository::class)
                 ->withCount('getCompany')
+                ->with(['getEnjoynedCompany' => function($q) {
+                    return $q->where('user_subject.type', 'enterprise')
+                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.subject,  COUNT(*) AS total_enjoyed_company');
+                }])
+                ->with(['getCompanyCertificate' => function($q) {
+                    return $q->where('certificate.company_id', '!=', null)
+                        ->where('type', 'enterprise')
+                        ->selectRaw('vjc_certificate.district, vjc_certificate.subject_id,  COUNT(*) AS total_completed_company')
+                        ->groupBy('certificate.subject_id');
+                }])
+                ->with(['getEnjoynedEmployerInCompany' => function($q) {
+                    return $q->where('user_subject.type', 'personal')
+                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.subject,  COUNT(*) AS total_enjoyed_employer');
+                }])
                 ->with(['getCertificate' => function($q) {
-                    return $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                    return $q->where('certificate.company_id', '!=', null)
+                        ->where('type', 'personal')
+                        ->selectRaw('vjc_certificate.district, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
                         ->groupBy('certificate.subject_id');
                 }])
                 ->where('province_id', $province)
@@ -179,12 +150,71 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
         } else {
             return app(WardsRepository::class)
                 ->withCount('getCompany')
+                ->with(['getEnjoynedCompany' => function($q) {
+                    return $q->where('user_subject.type', 'enterprise')
+                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.subject,  COUNT(*) AS total_enjoyed_company');
+                }])
+                ->with(['getCompanyCertificate' => function($q) {
+                    return $q->where('certificate.company_id', '!=', null)
+                        ->where('type', 'enterprise')
+                        ->selectRaw('vjc_certificate.district, vjc_certificate.subject_id,  COUNT(*) AS total_completed_company')
+                        ->groupBy('certificate.subject_id');
+                }])
+                ->with(['getEnjoynedEmployerInCompany' => function($q) {
+                    return $q->where('user_subject.type', 'personal')
+                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.subject,  COUNT(*) AS total_enjoyed_employer');
+                }])
                 ->with(['getCertificate' => function($q) {
-                    return $q->selectRaw('vjc_certificate.user_id, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                    return $q->where('certificate.company_id', '!=', null)
+                        ->where('type', 'personal')
+                        ->selectRaw('vjc_certificate.district, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
                         ->groupBy('certificate.subject_id');
                 }])
                 ->where('district_id', $district)
                 ->get();
         }
+    }
+
+    /**
+     * @param $province
+     * @param $district
+     * @param $ward
+     * @return mixed
+     */
+    public function getCompany($province, $district, $ward)
+    {
+        $companyModel = ClassLevel::withCount(['getUsers']);
+        if ($province != null) {
+            if ($district != null) {
+                if ($ward != null) {
+                    $companyModel = ClassLevel::withCount(['getUsers'])
+                        ->where('province', $province)
+                        ->where('district', $district)
+                        ->where('ward', $ward);
+                } else {
+                    $companyModel = ClassLevel::withCount(['getUsers'])
+                        ->where('province', $province)
+                        ->where('district', $district);
+                }
+            } else {
+                $companyModel = ClassLevel::withCount(['getUsers'])
+                    ->where('province', $province);
+            }
+        }
+
+        $result = $companyModel
+            ->with(['getEnjoynedEmployerInCompany' => function($q) {
+                return $q->where('user_subject.type', 'personal')
+                    ->selectRaw('vjc_user_subject.*, vjc_user_subject.subject,  COUNT(*) AS total_enjoyed_employer');
+            }])
+            ->with(['getCertificate' => function($q) {
+                return $q->where('certificate.company_id', '!=', null)
+                    ->where('type', 'personal')
+                    ->selectRaw('vjc_certificate.*, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                    ->groupBy('certificate.subject_id');
+            }])
+            ->get();
+
+        return $result;
     }
 }
