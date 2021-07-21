@@ -16,14 +16,18 @@ use ClassLevel\Models\ClassLevel;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use DB;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Subject\Repositories\SubjectRepository;
 use Users\Models\Users;
 
-class ExportLocal implements FromView, WithStyles, WithColumnFormatting
+class ExportLocal implements FromView, ShouldAutoSize, WithEvents
 {
     public $company;
 
@@ -111,13 +115,20 @@ class ExportLocal implements FromView, WithStyles, WithColumnFormatting
         ];
     }
 
-    /**
-     * @param Worksheet $sheet
-     * @return \bool[][][]
-     */
-    public function styles(Worksheet $sheet)
-    {
 
+    public function styles(Spreadsheet $spreadsheet)
+    {
+        $spreadsheet->getDefaultStyle()->getFont()->setName('Times New Roman');
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class  => function(AfterSheet $event) {
+                $cellRange = 'A1:W99'; // All headers
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
+            },
+        ];
     }
 
     public function getStatsByArea($province, $district)
