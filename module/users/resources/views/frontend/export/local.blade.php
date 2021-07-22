@@ -15,34 +15,37 @@
     <tbody>
     <tr>
         <td colspan="{{5 + $course->count()}}" style="text-align: center; text-transform: uppercase; font-weight: 700; font-size: 18px">
-            {{$company->name}}
+            {{$company->name}} - MST: {{$company->mst}}
         </td>
     </tr>
     <tr>
         <td colspan="{{5 + $course->count()}}" style="text-align: center; text-transform: uppercase; font-weight: 700; font-size: 18px">
-            {{$company->mst}}
+            Báo cáo thống kê chứng chỉ
         </td>
     </tr>
-    <tr style="border: 1px solid #000000">
-        <td colspan="{{5 + $course->count()}}">
-            Danh sách công nhân
+    <tr>
+        <td colspan="{{5 + $registerdSubject->count()}}">
+            Danh sách người lao động
+            @if (auth()->user()->hard_role == 2)
+                - quản lý bởi {{auth()->user()->first_name}} {{auth()->user()->last_name}}
+            @endif
         </td>
     </tr>
-    <tr style="background-color: #007bff">
-        <td rowspan="2" valign="middle">STT</td>
-        <td rowspan="2" valign="middle" width="20">Họ và tên</td>
-        <td rowspan="2" valign="middle" width="20">Số CMND/CCCD</td>
-        <td rowspan="2" valign="middle">Tuổi</td>
-        <td rowspan="2" valign="middle" width="20">Số điện thoại</td>
+    <tr>
+        <td rowspan="2" width="4.17">STT</td>
+        <td rowspan="2" width="24.67">Họ và tên</td>
+        <td rowspan="2" width="24.67">Số CMND/CCCD</td>
+        <td rowspan="2" width="24.67">Tuổi</td>
+        <td rowspan="2" width="24.67">Số điện thoại</td>
         <td rowspan="1" colspan="{{$registerdSubject->count()}}" style="text-align: center">Danh sách chứng chỉ</td>
     </tr>
     <tr>
         @foreach($registerdSubject as $rs)
-            <td class="text-center">{{$rs->name}}</td>
+            <td class="text-center" width="50">{{$rs->name}}</td>
         @endforeach
     </tr>
 
-    @foreach($employers as $e)
+    @forelse($employers as $e)
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$e->first_name}} {{$e->last_name}}</td>
@@ -58,13 +61,17 @@
             @endphp
             @foreach($registerdSubject as $c)
                 @if (in_array($c->id, $array))
-                    <td style="text-align: center">&#10004;</td>
+                    <td class="text-center">&#10004;</td>
                 @else
                     <td class="text-center">&nbsp;</td>
                 @endif
             @endforeach
         </tr>
-    @endforeach
+    @empty
+        <tr>
+            <td colspan="{{4 + $courses->count()}}">Không có dữ liệu</td>
+        </tr>
+    @endforelse
     </tbody>
 </table>
 </html>

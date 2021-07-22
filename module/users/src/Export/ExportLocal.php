@@ -84,7 +84,7 @@ class ExportLocal implements FromView, ShouldAutoSize, WithEvents
             $company = $this->company;
 
             $query = Users::where('classlevel', $company->id)
-                ->where('hard_role', 1)
+                ->whereIn('hard_role', [1,2,3])
                 ->with('getCertificate');
 
             if ($this->manager != false) {
@@ -111,7 +111,7 @@ class ExportLocal implements FromView, ShouldAutoSize, WithEvents
     public function columnFormats(): array
     {
         return [
-            'C' => NumberFormat::FORMAT_NUMBER,
+            'C' => NumberFormat::FORMAT_TEXT,
         ];
     }
 
