@@ -34,7 +34,7 @@ class CheckCourseActive
         if (Auth::check()) {
             $course = Course::with('getSubject')->find($course->id);
             $subject = $course->getSubject->count() > 0 ? $course->getSubject->first()->id : null;
-            $user = auth('nqadmin')->user();
+            $user = auth()->user();
             if (!$course->checkBought() && $course->price == 0) {
                 $order = Order::create([
                     'customer' => Auth::user()->id,
@@ -56,7 +56,7 @@ class CheckCourseActive
 
                 //insert to usersubject for stats
                 $registered = UserSubject::where([
-                    ['user', '=', auth('nqamin')->id()],
+                    ['user', '=', auth()->id()],
                     ['subject', '=', $subject],
                     ['company', '=', $user->classlevel],
                     ['type' , '=', 'personal']
@@ -64,7 +64,7 @@ class CheckCourseActive
 
                 if ($registered->count() == 0) {
                     UserSubject::create([
-                        'user'  => auth('nqamin')->id(),
+                        'user'  => auth()->id(),
                         'subject' => $subject,
                         'company' => $user->classlevel,
                         'type' => 'personal'
