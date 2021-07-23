@@ -17,12 +17,9 @@
             </tr>
             </thead>
             <tbody>
-            @php
-                $i = $employers->perPage() * ($employers->currentPage() - 1) + 1
-            @endphp
             @forelse($manager as $e)
                 <tr>
-                    <td>{{$i++}}</td>
+                    <td>{{$loop->iteration}}</td>
                     <td>{{$e->first_name}} {{$e->last_name}}</td>
                     <td>{{$e->citizen_identification}}</td>
                     <td>{{$e->phone}}</td>

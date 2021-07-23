@@ -189,7 +189,6 @@ use Illuminate\Support\Facades\DB;
                                                 @elseif (auth('nqadmin')->user()->hard_role > 3 && request()->get('ward') != null)
                                                     @include('nqadmin-users::frontend.components.stat.table-report-global')
                                                 @elseif (auth('nqadmin')->user()->hard_role > 1 && auth('nqadmin')->user()->hard_role <= 3)
-
                                                     @if (auth('nqadmin')->user()->hard_role == 3)
                                                         @include('nqadmin-users::frontend.components.stat.table-report-local-manager')
                                                     @endif
