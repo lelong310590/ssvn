@@ -63,9 +63,7 @@
                                         <div class="form-group row">
                                             <label class="txt-label col-xs-3 text-right">Ngày sinh</label>
                                             <div class="form col-xs-7">
-                                                <input type="date" class="input-form" name="dob" value="
-                                                    {{ $data->dob != null ? $data->dob->format('Y-m-d') : ''}}
-                                                ">
+                                                <input type="date" class="input-form" name="dob" value="{{ $data->dob != null ? $data->dob->format('Y-m-d') : ''}}">
                                             </div>
                                         </div>
 
