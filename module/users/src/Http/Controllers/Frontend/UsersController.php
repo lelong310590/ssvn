@@ -824,8 +824,8 @@ class UsersController extends BaseController
                 ->withCount('getCompany')
                 ->with(['getEnjoynedCompany' => function($q) {
                     return $q->where('user_subject.type', 'enterprise')
-                        ->groupBy('user_subject.company')
-                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.company,  COUNT(*) AS total_enjoyed_company');
+                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.company,  COUNT(*) AS total_enjoyed_company')
+                        ->groupBy('certificate.subject_id');
                 }])
                 ->with(['getCompanyCertificate' => function($q) {
                     return $q->where('certificate.company_id', '!=', null)

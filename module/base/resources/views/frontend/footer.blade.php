@@ -14,7 +14,7 @@ $classes = ClassLevel::with('subject')->get();
                 <ul class="bottom pull-left">
                     <li>
                         <label class="txt">Phone</label>
-                        <span class="node">078.223.6969</span>
+                        <span class="node">024 6327 5268</span>
                     </li>
                     <li>
                         <label class="txt">Email</label>
