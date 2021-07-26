@@ -62,7 +62,7 @@ $classes = ClassLevel::with('subject')->get();
 <!--footer-->
 
 <div class="copyright text-center">
-    Bản quyền thuộc về AntiCovid © 2021
+    Bản quyền thuộc về OneBit VietNam © 2021
 </div>
 
 <div class="mobile-fixed-bar hidden-md hidden-lg">
