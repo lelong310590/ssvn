@@ -18,7 +18,7 @@ $classes = ClassLevel::with('subject')->get();
                     </li>
                     <li>
                         <label class="txt">Email</label>
-                        <a href="mailto:vn.anticovid19@gmail.com" class="node">vn.anticovid19@gmail.com</a>
+                        <a href="mailto:vn.anticovid19@gmail.com" class="node">vndayluidaidich@gmail.com</a>
                     </li>
                 </ul>
             </div>
