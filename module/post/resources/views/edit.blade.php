@@ -192,7 +192,7 @@
                             </div>
                         </div>
 
-                        @include('nqadmin-dashboard::components.thumbnail', ['data' => $post])
+{{--                        @include('nqadmin-dashboard::components.thumbnail', ['data' => $post])--}}
                     </div>
                 </div>
             </form>

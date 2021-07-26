@@ -192,9 +192,9 @@
                         </div>
                     </div>
 
-                    @if ($type == 'post')
-                    @include('nqadmin-dashboard::backend.components.thumbnail')
-                    @endif
+{{--                    @if ($type == 'post')--}}
+{{--                    @include('nqadmin-dashboard::backend.components.thumbnail')--}}
+{{--                    @endif--}}
                 </div>
             </div>
         </form>
