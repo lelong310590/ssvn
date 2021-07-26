@@ -91,7 +91,6 @@ class PostController extends BaseController
     {
         try {
             $data = $request->except('_token');
-            dd($data);
             $this->post->update($data, $id);
             return redirect()->back()->with(FlashMessage::returnMessage('edit'));
         } catch (\Exception $e) {
