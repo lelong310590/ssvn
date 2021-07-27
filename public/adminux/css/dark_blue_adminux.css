@@ -2212,12 +2212,12 @@ header.navbar-fixed {
 }
 
 .navbar-brand.imglogo {
-  height: 42px;
+  height: 80px;
   width: 166px;
   background: url("../img/logo_header.png") no-repeat center left;
-  background-size: auto 40px;
   margin-bottom: -5px;
   margin-top: -4px;
+  background-size: contain;
 }
 
 /*=======================*/
