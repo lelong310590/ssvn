@@ -6,9 +6,9 @@
         </a>
         <p class="pro-lbl">
             @php
-                $classLevel = $item->getLdp->getClassLevel;
-                $subjects = $item->getLdp->getSubject;
-                $description = $item->getLdp->description;
+                $classLevel = $item->getLdp != null ? $item->getLdp->getClassLevel : null;
+                $subjects = $item->getLdp != null ? $item->getLdp->getSubject : null;
+                $description = $item->getLdp != null ? $item->getLdp->description : null;
             @endphp
 
             @if (!empty($subjects) || $subjects != null)
