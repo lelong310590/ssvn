@@ -824,14 +824,13 @@ class UsersController extends BaseController
                 ->withCount('getCompany')
                 ->with(['getEnjoynedCompany' => function($q) {
                     return $q->where('user_subject.type', 'enterprise')
-                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.company,  COUNT(*) AS total_enjoyed_company')
-                        ->groupBy('certificate.subject_id');
+                        ->selectRaw('vjc_user_subject.*, vjc_user_subject.company,  COUNT(*) AS total_enjoyed_company');
                 }])
                 ->with(['getCompanyCertificate' => function($q) {
                     return $q->where('certificate.company_id', '!=', null)
                         ->where('type', 'enterprise')
                         ->distinct('company')
-                        ->selectRaw('vjc_certificate.district, vjc_certificate.subject_id,  COUNT(*) AS total_completed_company')
+                        ->selectRaw('vjc_certificate.*, vjc_certificate.subject_id,  COUNT(*) AS total_completed_company')
                         ->groupBy('certificate.subject_id');
                 }])
                 ->with(['getEnjoynedEmployerInCompany' => function($q) {
@@ -841,7 +840,7 @@ class UsersController extends BaseController
                 ->with(['getCertificate' => function($q) {
                     return $q->where('certificate.company_id', '!=', null)
                         ->where('type', 'personal')
-                        ->selectRaw('vjc_certificate.district, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
+                        ->selectRaw('vjc_certificate.*, vjc_certificate.subject_id,  COUNT(*) AS total_completed_employer')
                         ->groupBy('certificate.subject_id');
                 }])
                 ->where('province_id', $province)
