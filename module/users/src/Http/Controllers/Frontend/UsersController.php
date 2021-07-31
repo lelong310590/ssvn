@@ -660,13 +660,17 @@ class UsersController extends BaseController
     {
         $user = auth('nqadmin')->user();
 
-        $company = app(ClassLevelRepository::class)->with(['subject' => function($q) {
-            return $q->with(['getCourseLdp' => function($c) {
-                return $c->whereHas('getCourse', function($q) {
-                    return $q->where('status', 'active');
-                })->get();
-            }])->get();
-        }])->find($user->classlevel);
+        if ($user->classlevel != null) {
+            $company = app(ClassLevelRepository::class)->with(['subject' => function($q) {
+                return $q->with(['getCourseLdp' => function($c) {
+                    return $c->whereHas('getCourse', function($q) {
+                        return $q->where('status', 'active');
+                    })->get();
+                }])->get();
+            }])->find($user->classlevel);
+        } else {
+            $company = [];
+        }
 
         return view('nqadmin-course::frontend.certificate_list', compact(
             'company'

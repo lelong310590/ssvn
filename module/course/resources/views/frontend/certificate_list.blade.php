@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\DB;
                         @include('nqadmin-users::frontend.partials.sidebar')
                     </div>
                     <div class="right-user col-xs-10">
+                        @if (!empty($company))
                         <div class="text-center title-page">
                             <h3 class="txt">Các chứng chỉ dành cho người lao động của <br/>{{$company->name}}</h3>
                         </div>
@@ -105,6 +106,11 @@ use Illuminate\Support\Facades\DB;
 {{--                            </div>--}}
                         </div>
                         <!--box-my-course-->
+                        @else
+                            <div class="text-center title-page">
+                                <h3 class="txt">Không có chứng chỉ dành cho tài khoản vận hành viên</h3>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
