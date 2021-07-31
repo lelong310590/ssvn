@@ -44,7 +44,7 @@ $classes = ClassLevel::with('subject')->get();
                         <h4>Tải ứng dụng</h4>
                         <ul class="app">
                             <li>
-                                <a href="{{asset('frontend/files/syt-anticovid-release-16-7.apk')}}" target="_blank"><img alt="Tải nội dung trên Google Play" src="https://vietjack.com/git/images/android.svg"></a>
+                                <a href="https://play.google.com/store/apps/details?id=com.syt.dayluidaidich" target="_blank"><img alt="Tải nội dung trên Google Play" src="https://vietjack.com/git/images/android.svg"></a>
                             </li>
                             <li>
                                 <a href="" target="_blank"><img alt="Tải nội dung trên IOS Store" src="https://vietjack.com/git/images/ios.svg"></a>
