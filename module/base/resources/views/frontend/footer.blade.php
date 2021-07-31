@@ -71,6 +71,7 @@ $classes = ClassLevel::with('subject')->get();
         <span>Trang chủ</span>
     </a>
     @if (Auth::check())
+        @if (auth()->user()->hard_role != 99)
         <a href="{{route('front.users.my-certificate.get')}}">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
             <span class="text-center">Chứng chỉ</span>
@@ -80,6 +81,7 @@ $classes = ClassLevel::with('subject')->get();
             <i class="fa fa-certificate" aria-hidden="true"></i>
             <span>DS chứng chỉ</span>
         </a>
+        @endif
 
         <a href="{{route('front.users.info.get')}}">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
