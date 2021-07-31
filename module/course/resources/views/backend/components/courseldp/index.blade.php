@@ -142,19 +142,20 @@
             <label class="form-control-label"><b>Phim quảng cáo</b></label>
         </div>
         <div class="col-sm-8">
+            @if ($ldp != null)
+                @if($ldp->getOriginal('video_promo') != null)
+                    @php
+                        $convertVideo = str_replace('/index.m3u8', '', $ldp->video_promo);
+                    @endphp
+                    <video width="100%" controls>
+                        <source src="{{asset($convertVideo)}}" type="video/mp4">
+                    </video>
 
-            @if($ldp->getOriginal('video_promo') != null)
-                @php
-                    $convertVideo = str_replace('/index.m3u8', '', $ldp->video_promo);
-                @endphp
-                <video width="100%" controls>
-                    <source src="{{asset($convertVideo)}}" type="video/mp4">
-                </video>
-
-                <br>
-                <a class="btn btn-xs btn-danger" href="{{route('nqadmin::course.removepromovideo', $ldp->id)}}" style="color: #fff">
-                    <i class="fa fa-trash-o "></i> Xoá Video
-                </a>
+                    <br>
+                    <a class="btn btn-xs btn-danger" href="{{route('nqadmin::course.removepromovideo', $ldp->id)}}" style="color: #fff">
+                        <i class="fa fa-trash-o "></i> Xoá Video
+                    </a>
+                @endif
             @else
                 <img src="{{asset('adminux/img/video-placeholder.png')}}" alt="" class="img-fluid" style="width: 100%">
             @endif
