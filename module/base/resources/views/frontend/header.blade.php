@@ -11,9 +11,9 @@
     <div class="container">
         <div class="header-wrapper">
             @if (Agent::isMobile())
-            <a href="{{ url()->previous() }}" class="mobile-back">
-                <i class="fas fa-chevron-left"></i>
-            </a>
+                <a href="{{ url()->previous() }}" class="mobile-back">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
             @endif
 
             <a href="{{route('front.home.index.get')}}" class="logo">
@@ -96,12 +96,6 @@
                         </div>
                     </div>
                     <!--box-user-->
-                @else
-                    <h6 class="not-login"><i class="fal fa-user"></i></h6>
-                    <ul>
-{{--                        <li><a href="#register-box" type="button" class="btn vj-btn btn-popup">Đăng ký</a></li>--}}
-                        <li><a href="#login-box" type="button" class="btn vj-btn btn-popup">Đăng nhập</a></li>
-                    </ul>
                 @endif
             </div>
         </nav>
