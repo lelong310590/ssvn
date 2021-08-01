@@ -10,6 +10,12 @@
 <header class="main">
     <div class="container">
         <div class="header-wrapper">
+            @if (Agent::isMobile())
+            <a href="{{ url()->previous() }}" class="mobile-back">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            @endif
+
             <a href="{{route('front.home.index.get')}}" class="logo">
                 <img src="{{asset('frontend/images/icons/logo.png')}}" alt="anticovid" title="Khóa đào tạo" />
             </a>
