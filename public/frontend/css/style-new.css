@@ -3529,7 +3529,7 @@ footer .list-unstyled li {
 
 @media all and (max-width: 1023px) {
 	header.main .logo img {
-		width: 150px;
+		width: 120px;
 	}
 
 	header.main nav .user {
@@ -3879,12 +3879,15 @@ footer .list-unstyled li {
 
 @media screen and (max-width: 768px) {
 	.logo {
-		margin: 0 30px 0 0 !important
+		margin: 0 10px!important;
+		display: flex!important;
+		justify-content: center;
 	}
 
 	.mobile-back {
 		margin-left: 15px;
-		font-size: 25px
+		font-weight: 700;
+		white-space: nowrap;
 	}
 
 	.chart-sex {
@@ -3938,10 +3941,10 @@ footer .list-unstyled li {
 
 	.mobile-action a {
 		color: #fff;
-		padding: 10px 15px;
+		padding: 5px 8px;
 		border-radius: 4px;
 		background-color: #048AC9;
-		font-size: 15px;
+		font-size: 13px;
 		font-weight: 700;
 	}
 

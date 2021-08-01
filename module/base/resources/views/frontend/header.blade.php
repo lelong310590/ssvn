@@ -12,7 +12,7 @@
         <div class="header-wrapper">
             @if (Agent::isMobile())
                 <a href="{{ url()->previous() }}" class="mobile-back">
-                    <i class="fas fa-chevron-left"></i>
+                    <i class="fas fa-chevron-left"></i> <span>Quay lại</span>
                 </a>
             @endif
 
