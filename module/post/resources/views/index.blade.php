@@ -52,7 +52,6 @@
                                     <th width="80">Ảnh đại diện</th>
                                     @endif
                                     <th>Tiêu đề</th>
-                                    <th>Tác giả</th>
                                     <th>Ngày khởi tạo</th>
                                     <th width="100">Thao tác</th>
                                 </tr>
@@ -65,14 +64,13 @@
                                         @if ($type == 'post')
                                         <td>
                                             @if (!empty($d->thumbnail))
-                                                <img src="{{ asset($d->thumbnail) }}" alt="{{ $d->email }}" class="img-fluid">
+                                                <img src="{{ asset($d->thumbnail) }}" alt="{{ $d->name }}" class="img-fluid">
                                             @else
-                                                <img src="{{ asset('adminux/img/advertise_maxartkiller_ui-ux.png') }}" alt="{{ $d->email }}" class="img-fluid">
+                                                <img src="{{ asset('adminux/img/advertise_maxartkiller_ui-ux.png') }}" alt="{{ $d->name }}" class="img-fluid">
                                             @endif
                                         </td>
                                         @endif
                                         <td>{{$d->name}}</td>
-                                        <td class="center">{{ $d->getAuthor->email }}</td>
                                         <td class="center">
                                             {!! conver_status($d->status) !!}
                                         </td>

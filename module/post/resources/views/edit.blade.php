@@ -19,9 +19,6 @@
 @section('content')
 
     @php
-        $user = Auth::user();
-        $roles = $user->load('roles.perms');
-        $permissions = $roles->roles->first()->perms;
         $type = Request::get('type');
     @endphp
 
@@ -54,17 +51,13 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Edit {{$type == 'post' ? 'post' : 'page'}}
-                                    @if ($permissions->contains('name','post_index'))
-                                        <a href="{{route('nqadmin::post.index.get', ['type' => $type])}}" class="btn btn-primary pull-right">
-                                            <i class="fa fa-list-ol" aria-hidden="true"></i> List {{$type == 'post' ? 'post' : 'page'}}
-                                        </a>
-                                    @endif
+                                    <a href="{{route('nqadmin::post.index.get', ['type' => $type])}}" class="btn btn-primary pull-right">
+                                        <i class="fa fa-list-ol" aria-hidden="true"></i> List {{$type == 'post' ? 'post' : 'page'}}
+                                    </a>
 
-                                    @if ($permissions->contains('name', 'post_create'))
-                                        <a href="{{route('nqadmin::post.create.get', ['type' => $type])}}" class="btn btn-primary pull-right">
-                                            <i class="fa fa-plus" aria-hidden="true"></i> Add new post
-                                        </a>
-                                    @endif
+                                    <a href="{{route('nqadmin::post.create.get', ['type' => $type])}}" class="btn btn-primary pull-right">
+                                        <i class="fa fa-plus" aria-hidden="true"></i> Add new post
+                                    </a>
                                 </h5>
                             </div>
                             <div class="card-body">

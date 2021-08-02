@@ -19,9 +19,6 @@
 @section('content')
 
 @php
-    $user = Auth::user();
-    $roles = $user->load('roles.perms');
-    $permissions = $roles->roles->first()->perms;
     $type = Request::get('type');
 @endphp
 
@@ -53,11 +50,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Create new {{$type == 'post' ? 'Bài viết' : 'Trang tĩnh'}}
-                                @if ($permissions->contains('name','post_index'))
-                                    <a href="{{route('nqadmin::post.index.get', ['type' => $type])}}" class="btn btn-primary pull-right">
-                                        <i class="fa fa-list-ol" aria-hidden="true"></i> List {{$type == 'post' ? 'Bài viết' : 'Trang tĩnh'}}
-                                    </a>
-                                @endif
+                                <a href="{{route('nqadmin::post.index.get', ['type' => $type])}}" class="btn btn-primary pull-right">
+                                    <i class="fa fa-list-ol" aria-hidden="true"></i> List {{$type == 'post' ? 'Bài viết' : 'Trang tĩnh'}}
+                                </a>
                             </h5>
                         </div>
                         <div class="card-body">
@@ -179,7 +174,6 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary" style="margin-top: 20px">Lưu lại</button>
 
-                                @if ($permissions->contains('name','post_edit'))
                                 <button class="btn btn-secondary"
                                         type="submit"
                                         name="continue_edit" value="1"
@@ -187,7 +181,6 @@
                                 >
                                     Lưu và tiếp tục
                                 </button>
-                                @endif
                             </div>
                         </div>
                     </div>

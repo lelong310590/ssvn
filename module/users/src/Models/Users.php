@@ -52,6 +52,11 @@ class Users extends Authenticatable
         $this->attributes['dob'] = Carbon::parse($value);
     }
 
+    public function getFullnameAttribute()
+    {
+        return $this->attributes['first_name'].' '.$this->attributes['last_name'];
+    }
+
     public function getSexAttribute($value)
     {
         $sex = 'Khác';
