@@ -29,15 +29,15 @@ $classes = ClassLevel::with('subject')->get();
                         <ul>
 {{--                            <li><a href="/danh-sach-khoa-hoc">Danh sách Khóa đào tạo</a></li>--}}
                             <li><a href="{{route('front::post.get', 'cau-hoi-thuong-gap')}}">Câu hỏi thường gặp</a></li>
-                            <li><a href="{{route('front::post.get', 'thong-tin-huu-ich')}}">Thông tin hữu ích</a></li>
+                            <li><a href="{{route('front::post.get', 'huong-dan-su-dung-phan-mem')}}">Hướng dẫn sử dụng</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
                         <h4>Giới thiệu</h4>
                         <ul>
-                            <li><a href="{{route('front::post.get', 'gioi-thieu')}}" class="hover-color-green">Giới thiệu</a></li>
+                            <li><a href="{{route('front::post.get', 'dieu-khoan-su-dung')}}" class="hover-color-green">Điều khoản & Điề kiện</a></li>
 {{--                            <li><a href="/tuyen-dung" class="hover-color-green">Tuyển dụng</a></li>--}}
-                            <li><a href="{{route('front::post.get', 'dao-tao-doanh-nghiep')}}" class="hover-color-green">Đào tạo doanh nghiệp</a></li>
+                            <li><a href="{{route('front::post.get', 'lien-he')}}" class="hover-color-green">Liên hệ</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
