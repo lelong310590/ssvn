@@ -109,6 +109,16 @@
                                               value="{{old('excerpt')}}"
                                     >{{$post->excerpt}}</textarea>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Thứ tự (Ưu tiên từ thấp đến cao)</label>
+                                    <input type="number"
+                                           class="form-control"
+                                           autocomplete="off"
+                                           name="order"
+                                           value="{{$post->order}}"
+                                    >
+                                </div>
                             </div>
                         </div>
 

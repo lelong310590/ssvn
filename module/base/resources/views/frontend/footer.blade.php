@@ -35,7 +35,7 @@ $classes = ClassLevel::with('subject')->get();
                     <div class="col-md-4">
                         <h4>Giới thiệu</h4>
                         <ul>
-                            <li><a href="{{route('front::post.get', 'dieu-khoan-su-dung')}}" class="hover-color-green">Điều khoản & Điề kiện</a></li>
+                            <li><a href="{{route('front::post.get', 'dieu-khoan-su-dung')}}" class="hover-color-green">Điều khoản & Điều kiện</a></li>
 {{--                            <li><a href="/tuyen-dung" class="hover-color-green">Tuyển dụng</a></li>--}}
                             <li><a href="{{route('front::post.get', 'lien-he')}}" class="hover-color-green">Liên hệ</a></li>
                         </ul>

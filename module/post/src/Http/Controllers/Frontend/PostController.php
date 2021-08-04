@@ -34,9 +34,9 @@ class PostController extends BaseController
             return abort(404);
         }
 
-        $sidePost = $this->postRepository->findWhere([
-            'status' => 'active',
-        ]);
+        $sidePost = $this->postRepository->scopeQuery(function ($q) {
+            return $q->where('status', 'active');
+        })->orderBy('order', 'asc')->get();
 
         return view('nqadmin-post::frontend.post', compact('post', 'sidePost'));
     }
